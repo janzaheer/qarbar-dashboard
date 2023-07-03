@@ -84,15 +84,15 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="../../assets/homeImage/h1.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h2.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h4.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                     </div>
@@ -181,15 +181,15 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="../../assets/homeImage/h3.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h4.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h5.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                     </div>
@@ -279,15 +279,15 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="../../assets/homeImage/h5.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h3.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h4.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                     </div>
@@ -376,15 +376,15 @@
                                     </div>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="../../assets/homeImage/h2.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h3.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h1.jpg" class="d-block w-100 card-img"
+                                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="d-block w-100 card-img"
                                                 alt="...">
                                         </div>
                                     </div>

@@ -8,7 +8,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h1.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/bbcfe4e68a.marina.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">Marina</p>
@@ -23,7 +23,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h2.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/bbcfe4e68a.marina.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">Downtown</p>
@@ -37,7 +37,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h3.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/bbcfe4e68a.marina.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">The Palm jumeriah</p>
@@ -51,7 +51,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h4.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/bbcfe4e68a.marina.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Abu Dhabi</span>
                             <p class="card-text text-white">AL Reem Island</p>
@@ -65,7 +65,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h5.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/bbcfe4e68a.marina.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">Business Bey</p>
@@ -79,7 +79,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h7.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/bbcfe4e68a.marina.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Abu Dhabi</span>
                             <p class="card-text text-white">Jumeriah Village</p>
@@ -96,7 +96,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h7.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">Marina</p>
@@ -110,7 +110,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h5.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">Downtown</p>
@@ -124,7 +124,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h4.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">The Palm jumeriah</p>
@@ -138,7 +138,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h3.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Abu Dhabi</span>
                             <p class="card-text text-white">AL Reem Island</p>
@@ -152,7 +152,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h2.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Dubai</span>
                             <p class="card-text text-white">Business Bey</p>
@@ -166,7 +166,7 @@
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card text-dark productBg">
-                        <img src="../../assets/homeImage/h1.jpg" class="card-img" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <span class="badge text-bg-secondary card-title">Abu Dhabi</span>
                             <p class="card-text text-white">Jumeriah Village</p>
