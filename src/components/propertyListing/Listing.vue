@@ -96,7 +96,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="../../assets/homeImage/h4.jpg" class="img-fluid rounded-start h-100"
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
                                         alt="...">
                                     <div class="card-img-overlay">
                                         <!-- <div class="">
@@ -190,7 +190,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="../../assets/homeImage/h1.jpg" class="img-fluid rounded-start h-100"
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
                                         alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">
@@ -267,7 +267,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="../../assets/homeImage/h5.jpg" class="img-fluid rounded-start h-100"
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
                                         alt="...">
                                     <div class="card-img-overlay">
                                         <div>
@@ -340,7 +340,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="../../assets/homeImage/h3.jpg" class="img-fluid rounded-start h-100"
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
                                         alt="...">
                                     <div class="card-img-overlay">
                                         <div>
@@ -412,7 +412,7 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="../../assets/homeImage/h2.jpg" class="img-fluid rounded-start h-100"
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
                                         alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">

@@ -43,7 +43,7 @@ export default {
         <div class="row my-5">
             <div class="col-md-12">
                 <div class="card">
-                    <img src="../../assets/homeImage/h7.jpg" class="card-img-top" style="height: 600px;" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img-top" style="height: 600px;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Overview</h5>
                         <h6 class="card-title">APARTMENT FOR SALE IN SKYCOURTS TOWER F, SKYCOURTS TOWERS</h6>

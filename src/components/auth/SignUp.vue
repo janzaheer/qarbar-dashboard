@@ -5,7 +5,7 @@
             <div className="card shadow-2-strong shadow">
                 <div className="card-body p-5 text-center">
                     <div className="mb-5">
-                        <img className="mb-1" src={logo} alt='' width={110} />
+                        <img className="mb-1" src='' alt='' width='' />
                         <h3>Welcome to Qaarbar! Please Register Now.</h3>
                     </div>
                     <form className="row g-3 " onSubmit={handleRegister}>

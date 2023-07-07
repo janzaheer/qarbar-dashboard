@@ -49,7 +49,8 @@
                     </div>
                 </div>
                 <div class="col-4 col-md-4">
-                    <img src="../../assets/avatar/av1.jpg" class="img-fluid rounded-end w-100" style="height:16rem;"
+                   
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-end w-100" style="height:16rem;"
                         alt="...">
                 </div>
             </div>
