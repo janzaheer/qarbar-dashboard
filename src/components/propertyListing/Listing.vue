@@ -174,7 +174,7 @@
             </div>
             <div class="col-md-3 d-md-none d-lg-block">
                 <div class="card text-dark">
-                    <img src="../../assets/advertise/AD1.jpg" class="card-img" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
                     <div class="card-img-overlay text-dark">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text text-wrap">This is a wider card with supporting text below as a natural lead-in
