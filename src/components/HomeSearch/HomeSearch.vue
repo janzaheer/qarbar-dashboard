@@ -19,7 +19,7 @@
                 </div> -->
                 <div class="card mb-3">
                     <div class="img-wrapper">
-                        <img src="../../assets/avatar/av1.jpg" class="card-img-top inner-img" height="375px" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/26b8290d90.data-guru-illustration.svg" class="card-img-top inner-img" height="375px" alt="...">
                     </div>
                     <div class="card-body bg-body-tertiary">
                         <span class="badge text-bg-secondary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png" class="" style="height: 15px;" alt=""> SUPERAGENT</span>
@@ -44,7 +44,7 @@
                 </div> -->
                 <div class="card mb-3">
                     <div class="img-wrapper">
-                        <img src="../../assets/avatar/av2.jpg" class="card-img-top inner-img" height="400px" alt="...">
+                        <img src="https://www.propertyfinder.ae/dist/common/assets/3eaf83707e.superagent_illustration.svg" class="card-img-top inner-img" height="400px" alt="...">
                     </div>
                     <div class="card-body bg-body-tertiary">
                         <span class="badge text-bg-success card-title"><img src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;" alt="" /> VERIFIED</span>
