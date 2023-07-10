@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-        <h1>Something New Everyday</h1>
+        <h1>Qarbar Projects</h1>
         <!-- row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4  -->
         <!-- col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 -->
         <div class="row g-2">
