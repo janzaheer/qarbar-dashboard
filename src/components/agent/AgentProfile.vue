@@ -1,14 +1,17 @@
 <script>
+// import 'vue3-carousel/dist/carousel.css'
+// import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
 import { RouterLink } from 'vue-router';
 export default {
     name: 'AgentProfile',
-    components:{
+    components: {
         Header,
-        Footer
+        Footer,
+       
     },
-    
+
 };
 </script>
 
@@ -19,7 +22,7 @@ export default {
 </style>
 
 <template>
-    <Header/>
+    <Header />
     <div class="container agentprofile">
 
         <div class="row g-2 mt-5">
@@ -63,7 +66,7 @@ export default {
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-8">
                 <hr>
@@ -116,7 +119,7 @@ export default {
                 </div>
             </div>
         </div>
-       
+
         <div class="row">
             <div class="col-md-8">
                 <hr>
@@ -173,7 +176,7 @@ export default {
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-8">
                 <hr>
@@ -198,7 +201,7 @@ export default {
             <div class="col-md-8">
                 <hr>
             </div>
-                <div class="d-flex my-4">
+            <div class="d-flex my-4">
                 <div class="me-4">
                     <select class="form-select" aria-label="Default select example">
                         <option selected value="1">Property Type</option>
@@ -226,8 +229,8 @@ export default {
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                                        class="img-fluid rounded-start h-100" alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">
                                             <span class="badge text-bg-success card-title">
@@ -303,8 +306,8 @@ export default {
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                                        class="img-fluid rounded-start h-100" alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">
                                             <span class="badge text-bg-success card-title">
@@ -380,8 +383,8 @@ export default {
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                                        class="img-fluid rounded-start h-100" alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">
                                             <span class="badge text-bg-success card-title">
@@ -457,8 +460,8 @@ export default {
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                                        class="img-fluid rounded-start h-100" alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">
                                             <span class="badge text-bg-success card-title">
@@ -534,8 +537,8 @@ export default {
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
+                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                                        class="img-fluid rounded-start h-100" alt="...">
                                     <div class="card-img-overlay">
                                         <div class="">
                                             <span class="badge text-bg-success card-title">
@@ -605,11 +608,12 @@ export default {
                     </div>
                 </RouterLink>
             </div>
+
             <div class="my-4">
                 <button class="btn btn-primary me-2">Previous</button>
-            <button class="btn btn-primary">Next</button>
+                <button class="btn btn-primary">Next</button>
             </div>
         </div>
     </div>
-    <Footer/>
+    <Footer />
 </template>

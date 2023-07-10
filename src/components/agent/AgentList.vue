@@ -49,8 +49,8 @@
                     </div>
                 </div>
                 <div class="col-4 col-md-4">
-                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-end w-100" style="height:16rem;"
-                        alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                        class="img-fluid rounded-end w-100" style="height:16rem;" alt="...">
                 </div>
             </div>
         </div>
@@ -104,270 +104,7 @@
                 </RouterLink>
 
             </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Atif Badini</h5>
-                            <p class="card-text">Owner Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>202</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <div>
-                                <p>210</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <div>
-                                <p>150</p>
-                                <small class="text-muted">Commercial</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Ali Akbar</h5>
-                            <p class="card-text">Co Owner Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Punjabi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>200</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <div>
-                                <p>200</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <div>
-                                <p>100</p>
-                                <small class="text-muted">Commercial</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Shehroz Jan</h5>
-                            <p class="card-text">Manager Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>190</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <div>
-                                <p>150</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <div>
-                                <p>70</p>
-                                <small class="text-muted">Commercial</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Shaid Kha Kan</h5>
-                            <p class="card-text">Employee Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>60</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <div>
-                                <p>40</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <div>
-                                <p>21</p>
-                                <small class="text-muted">Commercial</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Atif Badini</h5>
-                            <p class="card-text">Owner Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>202</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <div>
-                                <p>210</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <div>
-                                <p>150</p>
-                                <small class="text-muted">Commercial</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Ali Akbar</h5>
-                            <p class="card-text">Co Owner Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Punjabi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>200</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <!-- <div>
-                                <p>200</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <div>
-                                <p>100</p>
-                                <small class="text-muted">Commercial</small>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Shehroz Jan</h5>
-                            <p class="card-text">Manager Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>190</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <!-- <div>
-                                <p>150</p>
-                                <small class="text-muted">For Sale</small>
-                            </div> -->
-                            <div>
-                                <p>70</p>
-                                <small class="text-muted">Commercial</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card agentListBox">
-                    <img src="https://github.com/mdo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <h5 class="card-title">Shaid Kha Kan</h5>
-                            <p class="card-text">Employee Real Estate</p>
-                            <span class="badge text-bg-primary card-title"><img src="../../assets/tropyBadgeIcon/pngegg.png"
-                                    class="" style="height: 15px;" alt=""> SUPERAGENT</span>
-                        </div>
-                        <div class="mt-1">
-                            <p class="card-text text-muted">NATIONALITY : <span>Pakistan</span></p>
-                            <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between text-center">
-                            <div class="">
-                                <p>60</p>
-                                <small class="text-muted">For Rent</small>
-                            </div>
-                            <div>
-                                <p>40</p>
-                                <small class="text-muted">For Sale</small>
-                            </div>
-                            <!-- <div>
-                                <p>21</p>
-                                <small class="text-muted">Commercial</small>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="text-center">
                 <button class="btn btn-primary me-2">Previous</button>
                 <button class="btn btn-primary">Next</button>
@@ -401,12 +138,12 @@ export default {
     name: 'AgentList',
     components: {
         Header,
-        Footer
+        Footer,
     },
     data() {
         return {
             userList: [],
-            userListCount: []
+            userListCount: [],
         };
     },
     methods: {

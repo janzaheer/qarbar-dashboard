@@ -18,8 +18,8 @@ import { RouterView } from 'vue-router';
     <!-- <RouterView/> -->
     <Slider/>
     <NewProject/>
-    <HomeSearch/>
     <Home/>
+    <HomeSearch/>
     <Agent/>
     <Advertise/>
     <Blog/>
