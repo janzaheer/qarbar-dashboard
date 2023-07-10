@@ -1,6 +1,12 @@
 <template>
     <Header/>
     <div class="container listingPage">
+        <div class="my-5">
+            <i class="fa-brands fa-whatsapp"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-pencil"></i>
+    <i class="fas fa-phone"></i>
+        </div>
         <div class="border-bottom border-top p-2 sticky-top">
             <div class="row g-1">
                 <div class="col-4">
@@ -132,8 +138,11 @@
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <p class="card-text"><img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt=""> Badini,Nushki Balochistan
+                                        <p class="card-text">
+                                            <!-- <img src="../../assets/icons/location.png"
+                                                style="width: 30px; height: 20px;" alt="">  -->
+                                                <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
+                                                Badini,Nushki Balochistan
                                             Pakistan
                                         </p>
                                     </div>
@@ -147,18 +156,25 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="">
-                                            <button class="btn btn-outline-info btn-sm"><img
+                                            <button class="btn btn-outline-info btn-sm">
+                                                <!-- <img
                                                     src="../../assets/icons/phone.png" style="width: 30px; height: 20px;"
-                                                    alt=""></button>
-                                            <button class="btn btn-outline-info btn-sm mx-2"><img
+                                                    alt=""> -->
+                                                    <i class="fas fa-phone fa-lg"></i>
+                                                </button>
+                                            <button class="btn btn-outline-info btn-sm mx-2">
+                                                <!-- <img
                                                     src="../../assets/icons/email.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
+                                                    alt="">  -->
+                                                    <i class="fas fa-message fa-lg"></i>
+                                                </button>
                                             <button class="btn btn-outline-info btn-sm"><img
                                                     src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
                                                     alt=""> </button>
                                             <button class="btn btn-outline-info btn-sm mx-2">
-                                                <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
-                                                    alt="">
+                                                <!-- <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
+                                                    alt=""> -->
+                                                    <i class="fas fa-heart fa-lg"></i>
                                             </button>
                                         </div>
                                         <div>

@@ -40,6 +40,7 @@ export default {
             <img class="image" v-for="(image, i) in images" :src="image" :key="i" @click="index = i">
             <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
         </div> -->
+        
         <div class="row my-5">
             <div class="col-md-12">
                 <div class="card">

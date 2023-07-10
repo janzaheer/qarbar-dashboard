@@ -1,11 +1,11 @@
 <template>
     <div class="container my-4">
         <div class="card text-dark" style="height: 12rem;" >
-            <img src="../../assets/banner/banner.jpg" class="card-img" height="190px" alt="...">
+            <img src="../../assets/slider/s1.webp" class="card-img" height="190px" alt="...">
             <div class="card-img-overlay text-dark">
                 <div class="">
-                    <h2 class="card-title">New Projects in UAE</h2>
-                    <p class="card-text">New projects, verified by our quality control teams.</p>
+                    <h2 class="card-title text-white">New Projects in Turkiye</h2>
+                    <p class="card-text text-white">New projects, verified by our quality control teams.</p>
                 </div>
                 <div class="mt-5">
                     <a href="/newProjectsList" class="btn btn-light"> View new projects</a>

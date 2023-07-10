@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="card p-3">
-            <div class="d-flex my-2">
-                <button class="btn btn-secondary mx-3">Buy</button><button class="btn btn-secondary">Rent</button>
+            <div class="d-flex my-2 justify-content-center">
+                <button class="btn btn-secondary mx-2">Buy</button><button class="btn btn-secondary">Rent</button><button class="btn btn-secondary ms-2">Projects</button>
             </div>
             <div class="row g-1">
                 <div class="col-4 col-md-12 col-lg-6 ">
