@@ -3,7 +3,7 @@
         <div class="row g-2">
             <div class="col-6 col-md-6 col-lg-4">
                 <div class="card text-dark">
-                    <img src="../../assets/advertise/AD1.jpg" class="card-img" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" height="300px" class="card-img" alt="...">
                     <div class="card-img-overlay text-dark">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text text-wrap">This is a wider card with supporting text below as a natural lead-in to
@@ -14,7 +14,7 @@
             </div>
             <div class="col-6 col-md-6 col-lg-4">
                 <div class="card text-dark">
-                    <img src="../../assets/advertise/ad2.jpg" class="card-img" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" height="300px" class="card-img" alt="...">
                     <div class="card-img-overlay text-dark">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
@@ -25,7 +25,7 @@
             </div>
             <div class="col-12 col-md-12 col-lg-4">
                 <div class="card text-white">
-                    <img src="../../assets/advertise/ad3.jpg" class="card-img agentHubImg" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img agentHubImg" style="height: 300px;" alt="...">
                     <div class="card-img-overlay p-md-5 p-lg-3">
                         <h5 class="card-title">Agent Hub:</h5>
                         <h3 class="card-text text-wrap">List your property with us.</h3>
@@ -49,7 +49,8 @@
                             </div>
                         </div>
                         <div class="col-4 col-md-4">
-                            <img src="../../assets/advertise/ad4.jpg" class="img-fluid rounded-start h-100" alt="...">
+                            <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
+                                        alt="...">
                         </div>
                     </div>
                 </div>
@@ -63,7 +64,7 @@
             </div>
             <div class="col-12 col-md-12 col-lg-4 d-sm-none d-md-block">
                 <div class="card text-dark">
-                    <img src="../../assets/advertise/ad5.jpg" class="card-img" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" height="300px" class="card-img" alt="...">
                     <div class="card-img-overlay">
                         <h5 class="card-title">Market Watch 2023.</h5>
                         <p class="card-text">Real Estate Report for Abu Dhabi and Dubai.</p>
