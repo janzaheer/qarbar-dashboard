@@ -1,12 +1,7 @@
 <template>
-    <Header/>
+    <Header />
+
     <div class="container listingPage">
-        <div class="my-5">
-            <i class="fa-brands fa-whatsapp"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-pencil"></i>
-    <i class="fas fa-phone"></i>
-        </div>
         <div class="border-bottom border-top p-2 sticky-top">
             <div class="row g-1">
                 <div class="col-4">
@@ -76,7 +71,8 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <h6>Properties for sale in Turkiye</h6>
-                    <p>123456 results <span class="badge rounded-pill text-bg-danger">2344 new</span></p>
+                    <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
+                            new</span></p>
                     <!-- <button class="btn btn-outline-info me-2"><img src="../../assets/icons/location.png"
                             style="width: 30px; height: 20px;" alt=""> Map view</button>
                     <button class="btn btn-outline-info">save Search</button> -->
@@ -96,14 +92,13 @@
         </div>
 
         <div class="row g-2 my-2">
-            <div class="col-md-9">
+            <div class="col-md-9" v-for="items in properties" :key="items?.id">
                 <RouterLink to="/detailPage" class="text-decoration-none">
                     <div class="card mb-3 listPageHover">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
+                                    <img :src="items.media[0].image_url" class="img-fluid rounded-start h-100" alt="...">
                                     <div class="card-img-overlay">
                                         <!-- <div class="">
                                         <span class="badge text-bg-success card-title">
@@ -123,58 +118,50 @@
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                            <span class="badge text-bg-secondary card-title">Apartment</span>
-                                            <h6>200000 Rs</h6>
-                                            <h6>1 Bed / Study / Address View / 1,043 SqFt</h6>
+                                            <span class="badge text-bg-secondary card-title">{{ items?.property_type
+                                            }}</span>
+                                            <h6>200000 Rs </h6>
+                                            <!-- <h6>1 Bed / Study / Address View / 1,043 SqFt</h6> -->
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <!-- <div>
                                                 <p>PREMIUM</p>
                                             </div>
                                             <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt=""> -->
-                                            <small class="text-body-secondary me-2">Last updated 3 mins ago</small>
+                                            <small class="text-body-secondary me-2">{{ moment(items?.updated_at).startOf(items?.updated_at).fromNow()}}</small>
                                             <img src="https://github.com/mdo.png" alt="" width="50" height="50"
                                                 class="rounded-circle border border-2 border-primary p-1">
                                         </div>
                                     </div>
                                     <div class="mb-2">
                                         <p class="card-text">
-                                            <!-- <img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt="">  -->
-                                                <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
-                                                Badini,Nushki Balochistan
-                                            Pakistan
+                                            <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
+                                            {{ items?.area.area }}
                                         </p>
                                     </div>
                                     <div class="d-flex ">
                                         <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bedroom</p>
+                                                style="width: 30px; height: 30px;" alt=""> {{ items?.bedrooms }} Bedroom</p>
                                         <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
+                                                style="width: 30px; height: 30px;" alt=""> {{ items?.bathrooms }} Bathrooms
+                                        </p>
                                         <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> 888 sqft</p>
+                                                style="width: 30px; height: 30px;" alt=""> {{ items?.size_sqf }}</p>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="">
                                             <button class="btn btn-outline-info btn-sm">
-                                                <!-- <img
-                                                    src="../../assets/icons/phone.png" style="width: 30px; height: 20px;"
-                                                    alt=""> -->
-                                                    <i class="fas fa-phone fa-lg"></i>
-                                                </button>
+                                                <i class="fas fa-phone fa-lg"></i>
+                                            </button>
                                             <button class="btn btn-outline-info btn-sm mx-2">
-                                                <!-- <img
-                                                    src="../../assets/icons/email.png" style="width: 30px; height: 20px;"
-                                                    alt="">  -->
-                                                    <i class="fas fa-message fa-lg"></i>
-                                                </button>
+                                                <i class="fas fa-message fa-lg"></i>
+                                            </button>
                                             <button class="btn btn-outline-info btn-sm"><img
                                                     src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
                                                     alt=""> </button>
                                             <button class="btn btn-outline-info btn-sm mx-2">
-                                                <!-- <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
-                                                    alt=""> -->
-                                                    <i class="fas fa-heart fa-lg"></i>
+
+                                                <i class="fas fa-heart fa-lg"></i>
                                             </button>
                                         </div>
                                         <div>
@@ -188,427 +175,16 @@
                     </div>
                 </RouterLink>
             </div>
-            <div class="col-md-3 d-md-none d-lg-block">
+            <!-- <div class="col-md-3 d-md-none d-lg-block">
                 <div class="card text-dark">
-                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
+                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                        class="card-img" alt="...">
                     <div class="card-img-overlay text-dark">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text text-wrap">This is a wider card with supporting text below as a natural lead-in
                             to
                             additional content. This content is a little bit longer.</p>
                         <p class="card-text"><small>Enquire Now</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card mb-3 listPageHover">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
-                                    <div class="card-img-overlay">
-                                        <div class="">
-                                            <span class="badge text-bg-success card-title">
-                                                <img src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;"
-                                                    alt="" /> VERIFIED</span>
-                                        </div>
-                                        <div>
-                                            <span class="badge text-bg-secondary card-title">
-                                                <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                    style="height: 15px;" alt=""> SUPERAGENT</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body bg-white rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <!-- <span class="badge text-bg-warning card-title me-1">PREMIUM</span> -->
-                                            <span class="badge text-bg-secondary card-title">Apartment</span>
-                                            <h6>200000 Rs</h6>
-                                            <h6>1 Bed / Study / Address View / 1,043 SqFt</h6>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-body-secondary me-2">Last updated 3 mins ago</small>
-                                            <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                                class="rounded-circle border border-2 border-primary p-1">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <p class="card-text"><img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt=""> Badini,Nushki Balochistan
-                                            Pakistan
-                                        </p>
-                                    </div>
-                                    <div class="d-flex ">
-                                        <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bedroom</p>
-                                        <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
-                                        <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> 888 sqft</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="">
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/phone.png" style="width: 30px; height: 20px;"
-                                                    alt=""></button>
-                                            <button class="btn btn-outline-info btn-sm mx-2"><img
-                                                    src="../../assets/icons/email.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm mx-2">
-                                                <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
-                                                    alt="">
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-md-9">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card mb-3 listPageHover">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
-                                    <div class="card-img-overlay">
-                                        <div>
-                                            <span class="badge text-bg-secondary card-title">
-                                                <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                    style="height: 15px;" alt=""> SUPERAGENT</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body bg-white rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                            <span class="badge text-bg-secondary card-title">Apartment</span>
-                                            <h6>200000 Rs</h6>
-                                            <h6>1 Bed / Study / Address View / 1,043 SqFt</h6>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-body-secondary me-2">Last updated 3 mins ago</small>
-                                            <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                                class="rounded-circle border border-2 border-primary p-1">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <p class="card-text"><img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt=""> Badini,Nushki Balochistan
-                                            Pakistan
-                                        </p>
-                                    </div>
-                                    <div class="d-flex ">
-                                        <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bedroom</p>
-                                        <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
-                                        <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> 888 sqft</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="">
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/phone.png" style="width: 30px; height: 20px;"
-                                                    alt=""></button>
-                                            <button class="btn btn-outline-info btn-sm mx-2"><img
-                                                    src="../../assets/icons/email.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm mx-2">
-                                                <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
-                                                    alt="">
-                                            </button>
-                                        </div>
-                                        <div>
-
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-md-9">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card mb-3 listPageHover">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
-                                    <div class="card-img-overlay">
-                                        <div>
-                                            <span class="badge text-bg-secondary card-title">
-                                                <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                    style="height: 15px;" alt=""> SUPERAGENT</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body bg-white rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <!-- <span class="badge text-bg-warning card-title me-1">PREMIUM</span> -->
-                                            <span class="badge text-bg-secondary card-title">Apartment</span>
-                                            <h6>200000 Rs</h6>
-                                            <h6>1 Bed / Study / Address View / 1,043 SqFt</h6>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-body-secondary me-2">Last updated 3 mins ago</small>
-                                            <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                                class="rounded-circle border border-2 border-primary p-1">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <p class="card-text"><img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt=""> Badini,Nushki Balochistan
-                                            Pakistan
-                                        </p>
-                                    </div>
-                                    <div class="d-flex ">
-                                        <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bedroom</p>
-                                        <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
-                                        <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> 888 sqft</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="">
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/phone.png" style="width: 30px; height: 20px;"
-                                                    alt=""></button>
-                                            <button class="btn btn-outline-info btn-sm mx-2"><img
-                                                    src="../../assets/icons/email.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm mx-2">
-                                                <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
-                                                    alt="">
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-md-9">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card mb-3 listPageHover">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="img-fluid rounded-start h-100"
-                                        alt="...">
-                                    <div class="card-img-overlay">
-                                        <div class="">
-                                            <span class="badge text-bg-success card-title">
-                                                <img src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;"
-                                                    alt="" /> VERIFIED</span>
-                                        </div>
-                                        <div>
-                                            <span class="badge text-bg-secondary card-title">
-                                                <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                    style="height: 15px;" alt=""> SUPERAGENT</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body bg-white rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                            <span class="badge text-bg-secondary card-title">Apartment</span>
-                                            <h6>200000 Rs</h6>
-                                            <h6>1 Bed / Study / Address View / 1,043 SqFt</h6>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <small class="text-body-secondary me-2">Last updated 3 mins ago</small>
-                                            <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                                class="rounded-circle border border-2 border-primary p-1">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <p class="card-text"><img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt=""> Badini,Nushki Balochistan
-                                            Pakistan
-                                        </p>
-                                    </div>
-                                    <div class="d-flex ">
-                                        <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bedroom</p>
-                                        <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
-                                        <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> 888 sqft</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="">
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/phone.png" style="width: 30px; height: 20px;"
-                                                    alt=""></button>
-                                            <button class="btn btn-outline-info btn-sm mx-2"><img
-                                                    src="../../assets/icons/email.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm mx-2">
-                                                <img src="../../assets/icons/heart.png" style="width: 30px; height: 20px;"
-                                                    alt="">
-                                            </button>
-                                        </div>
-                                        <div>
-
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <!-- <div class="col-md-9">
-                <div class="card text-dark listPageHover">
-                    <div class="row g-0">
-                        <div class="col-4">
-                            <div class="card">
-                                <div id="carouselExampleIndicators4" class="carousel slide" data-bs-ride="true">
-                                    <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#carouselExampleIndicators4"
-                                            data-bs-slide-to="0" class="active" aria-current="true"
-                                            aria-label="Slide 1"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators4"
-                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators4"
-                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                    </div>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="../../assets/homeImage/h2.jpg" class="d-block w-100 card-img"
-                                                alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h1.jpg" class="d-block w-100 card-img"
-                                                alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="../../assets/homeImage/h5.jpg" class="d-block w-100 card-img"
-                                                alt="...">
-                                        </div>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button"
-                                        data-bs-target="#carouselExampleIndicators4" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button"
-                                        data-bs-target="#carouselExampleIndicators4" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
-                                <div class="card-img-overlay">
-                                    <div class="">
-                                        <span class="badge text-bg-success card-title">
-                                            <img src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;"
-                                                alt="" /> VERIFIED</span>
-                                    </div>
-                                    <div>
-                                        <span class="badge text-bg-secondary card-title">
-                                            <img src="../../assets/tropyBadgeIcon/pngegg.png" class="" style="height: 15px;"
-                                                alt=""> SUPERAGENT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <div class="">
-                                <div class="card-body bg-white text-dark rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <span class="badge text-bg-secondary card-title">Apartment</span>
-                                            <h6>200000 Rs</h6>
-                                            <h6>1 Bed / Study / Address View / 1,043 SqFt</h6>
-                                        </div>
-                                        <div>
-                                            <div>
-                                                <p>PREMIUM</p>
-                                            </div>
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <p class="card-text"><img src="../../assets/icons/location.png"
-                                                style="width: 30px; height: 20px;" alt=""> Badini,Nushki Balochistan
-                                            Pakistan
-                                        </p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bedroom</p>
-                                        <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
-                                        <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> 888 sqft</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                    class="rounded-circle border border-2 border-primary p-1">
-                                <small class="text-body-secondary ms-2">Last updated 30 mins ago</small>
-                            </div>
-                            <div class="mt-2">
-                                <button class="btn btn-outline-info"><img src="../../assets/icons/phone.png"
-                                        style="width: 30px; height: 20px;" alt="">call</button>
-                                <button class="btn btn-outline-info mx-2"><img src="../../assets/icons/email.png"
-                                        style="width: 30px; height: 20px;" alt=""> Email</button>
-                                <button class="btn btn-outline-info"><img src="../../assets/icons/whatsapp.png"
-                                        style="width: 30px; height: 25px;" alt=""> WhatsApp</button>
-                                <button class="btn btn-outline-info mx-2"><img src="../../assets/icons/heart.png"
-                                        style="width: 30px; height: 25px;" alt=""></button>
-                                <button class="btn btn-outline-info"><img src="../../assets/icons/dots.png"
-                                        style="width: 30px; height: 25px;" alt=""></button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div> -->
@@ -618,49 +194,84 @@
             <button class="btn btn-primary">Next</button>
         </div>
     </div>
-    <Footer/>
+    <Footer />
 </template>
 
 <script>
 import { RouterLink } from 'vue-router';
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
+import moment from 'moment'
+import axios from 'axios';
 export default {
     name: 'Listing',
-    components:{
+    components: {
         Header,
         Footer,
     },
     data() {
         return {
-            list: []
+            list: [],
+            properties: [],
+            propertiesCount: []
         }
     },
+    created: function () {
+        this.moment = moment;
+    },
+    methods: {
+        async getProperties() {
+            console.log('=========11111111111=============')
+            let res = await axios.get('http://13.127.231.16/api/v1/properties/')
+            console.log(res.data.results)
+            this.properties = res.data.results
+            this.propertiesCount = res.data
+            //     let finalURL = `http://13.127.231.16/api/v1/properties/`
+            // await axios.get(finalURL, {
+            //      headers: {
+            //          'Content-Type': "application/json",
+            //      }
+            //  }).then((res) => {
+            //      console.log('sellerorderList',res.data)
+            //  }).catch(error => {
+            //      console.log(error)
+            //  })
+            console.log('=========2222222=============')
+            // try {
+            //     const response = await axios.get('http://13.127.231.16/api/v1/properties/');
+            //     console.log(response);
+            // } catch (error) {
+            //     console.error(error);
+            // }
+        }
+
+    },
     mounted() {
-        const queryParams = new URLSearchParams(window.location.search)
-        let category_name = queryParams.get("Buy");
-        let rent_name = queryParams.get("Rent");
-        let commercial_name = queryParams.get("Commercial");
-        let newproject_name = queryParams.get("newProject");
-        if (category_name) {
-            console.log(category_name)
-            console.log('-------------111111----------------------')
-        }
+        this.getProperties();
+        // const queryParams = new URLSearchParams(window.location.search)
+        // let category_name = queryParams.get("Buy");
+        // let rent_name = queryParams.get("Rent");
+        // let commercial_name = queryParams.get("Commercial");
+        // let newproject_name = queryParams.get("newProject");
+        // if (category_name) {
+        //     console.log(category_name)
+        //     console.log('-------------111111----------------------')
+        // }
 
-        if (rent_name) {
-            console.log(rent_name)
-            console.log('-------------22222222222222----------------------')
-        }
+        // if (rent_name) {
+        //     console.log(rent_name)
+        //     console.log('-------------22222222222222----------------------')
+        // }
 
-        if (commercial_name) {
-            console.log(commercial_name)
-            console.log('------------3333333----------------------')
-        }
+        // if (commercial_name) {
+        //     console.log(commercial_name)
+        //     console.log('------------3333333----------------------')
+        // }
 
-        if (newproject_name) {
-            console.log(newproject_name)
-            console.log('-----------444444----------------------')
-        }
+        // if (newproject_name) {
+        //     console.log(newproject_name)
+        //     console.log('-----------444444----------------------')
+        // }
 
         // console.log(category_name)
 

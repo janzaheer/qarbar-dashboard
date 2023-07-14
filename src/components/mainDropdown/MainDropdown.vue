@@ -2,39 +2,72 @@
     <div class="container">
         <div class="card p-3">
             <div class="d-flex my-2 justify-content-center">
-                <button class="btn btn-secondary mx-2">Buy</button><button class="btn btn-secondary">Rent</button><button class="btn btn-secondary ms-2">Projects</button>
+                <!-- <button type="button" class="btn btn-outline-secondary mx-2 mainButton">Buy</button>
+                <button type="button" class="btn btn-outline-secondary mainButton">Rent</button>
+                <button type="button" class="btn btn-outline-secondary ms-2 mainButton">New Projects</button> -->
+                <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off"
+                    checked>
+                <label class="btn btn-outline-secondary" for="success-outlined">Buy</label>
+
+                <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary mx-2" for="danger-outlined">Rent</label>
+                <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="warning-outlined">New Projects</label>
             </div>
             <div class="row g-1">
                 <div class="col-4 col-md-12 col-lg-6 ">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                    <!-- <Multiselect v-model="value" mode="tags" :close-on-select="false" :searchable="true"
-                        :create-option="true" :options="[
-                            { value: 'batman', label: 'Batman' },
-                            { value: 'robin', label: 'Robin' },
-                            { value: 'joker', label: 'Joker' },
-                        ]" /> -->
-                    
+                    <Multiselect v-model="value" mode="tags" :close-on-select="false" :searchable="true"
+                        :create-option="true" placeholder='Select Location' :options="[
+                            { value: 'Quetta', label: 'Quetta' },
+                            { value: 'Islamabad', label: 'Islamabad' },
+                            { value: 'Lahore', label: 'Lahore' },
+                            { value: 'Karachi', label: 'Karachi' },
+                            { value: 'Nushki', label: 'Nushki' },
+                        ]" />
                 </div>
                 <div class="col-2 col-md-3 col-lg-2 mt-sm-1 mt-lg-1 ">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Property type</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">Apartment</option>
+                        <option value="2">Villa</option>
+                        <option value="3">Penthouse</option>
+                        <option value="4">Duplex</option>
+                        <option value="5">Land</option>
+                        <option value="6">Bungalow</option>
                     </select>
                 </div>
                 <div class="col-2 col-md-3 col-lg-2 mt-lg-1 mt-1">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Beds & Baths</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+
+
+                    <div class="">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Beds & Baths
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-items">
+                                <div class="m-2">
+                                    <h6>bathrooms</h6>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary mx-1">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary mx-1">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary ms-1">6+</button>
+                                </div>
+                                <div class=" m-2">
+                                    <h6>bedrooms</h6>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary mx-1">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary mx-1">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary ms-1">6+</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-2 col-md-5 col-lg-1 mt-lg-1 mt-1">
                     <select class="form-select" aria-label="Default select example">
@@ -119,13 +152,18 @@ export default {
     data() {
         return {
             value: [],
-            placeholder: 'Select employees',
         }
     }
 }
 </script>
-
+<style src="@vueform/multiselect/themes/default.css"></style>
 <style>
+.mainButton:focus {
+    /* Add your active button styles here */
+    background-color: #5C636A;
+    color: white;
+}
+
 .multiselect-tag.is-user {
     padding: 5px 8px;
     border-radius: 22px;
