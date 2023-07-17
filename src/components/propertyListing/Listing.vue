@@ -92,102 +92,118 @@
         </div>
 
         <div class="row g-2 my-2">
-            <div class="col-md-9" v-for="items in properties" :key="items?.id">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card mb-3 listPageHover">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img :src="items.media[0].image_url" class="img-fluid rounded-start h-100" alt="...">
-                                    <div class="card-img-overlay">
-                                        <!-- <div class="">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-12" v-for="items in properties" :key="items.id">
+                        <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
+                            <div class="card mb-3 listPageHover">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <div class="card h-100">
+                                            <img :src="items.media[0].image_url" class="img-fluid rounded-start h-100"
+                                                alt="...">
+                                            <div class="card-img-overlay">
+                                                <!-- <div class="">
                                         <span class="badge text-bg-success card-title">
                                             <img src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;"
                                                 alt="" /> VERIFIED</span>
                                     </div> -->
-                                        <div>
-                                            <span class="badge text-bg-secondary card-title">
-                                                <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                    style="height: 15px;" alt=""> SUPERAGENT</span>
+                                                <div v-if="items.agent">
+                                                    <span class="badge text-bg-secondary card-title">
+                                                        <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
+                                                            style="height: 15px;" alt=""> SUPERAGENT</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body bg-white rounded">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
+                                                    <span class="badge text-bg-secondary card-title">{{ items?.property_type
+                                                    }}</span>
+                                                    <h4>200000 Rs </h4>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <a type="button" className="text-success" data-bs-toggle="popover"
+                                                        :title="items?.agent?.name" data-bs-content=""><img
+                                                            v-if="items.agent" src="https://github.com/mdo.png" alt=""
+                                                            width="60" height="60" class="rounded-circle"></a>
+
+                                                </div>
+                                            </div>
+                                            <div class="mb-2">
+                                                <p class="card-text">
+                                                    <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
+                                                    {{ items?.area.area }}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex ">
+                                                <p class="card-text">
+                                                    {{ items?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i> Bedroom
+                                                </p>
+                                                <p class="card-text mx-2">
+                                                    {{ items?.bathrooms }} <i class="fa-solid fa-bath"></i> Bathrooms
+                                                </p>
+                                                <p class="card-text"><img src="../../assets/icons/sqft.png"
+                                                        style="width: 30px; height: 30px;" alt=""> {{ items?.size_sqf }}</p>
+                                            </div>
+                                            <div class="mb-2">
+                                                <small class="text-body-secondary">Added: {{
+                                                    moment(items?.created_at).startOf('hour').fromNow()
+                                                }} ({{ moment(items?.updated_at).startOf('day').fromNow() }})</small>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="">
+                                                    <button class="btn btn-outline-info btn-sm">
+                                                        <i class="fas fa-phone fa-lg"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info btn-sm mx-2">
+                                                        <i class="fas fa-message fa-lg"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info btn-sm"><img
+                                                            src="../../assets/icons/whatsapp.png"
+                                                            style="width: 30px; height: 20px;" alt=""> </button>
+                                                    <button class="btn btn-outline-info btn-sm mx-2">
+
+                                                        <i class="fas fa-heart fa-lg"></i>
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <img v-if="items.company_agent"
+                                                        src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
+                                                        style="width: 60px; height: 60px;" alt="">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card-body bg-white rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                            <span class="badge text-bg-secondary card-title">{{ items?.property_type
-                                            }}</span>
-                                            <h6>200000 Rs </h6>
-                                            <!-- <h6>1 Bed / Study / Address View / 1,043 SqFt</h6> -->
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <!-- <div>
-                                                <p>PREMIUM</p>
-                                            </div>
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt=""> -->
-                                            <small class="text-body-secondary me-2">{{ moment(items?.updated_at).startOf(items?.updated_at).fromNow()}}</small>
-                                            <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                                class="rounded-circle border border-2 border-primary p-1">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <p class="card-text">
-                                            <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
-                                            {{ items?.area.area }}
-                                        </p>
-                                    </div>
-                                    <div class="d-flex ">
-                                        <p class="card-text"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> {{ items?.bedrooms }} Bedroom</p>
-                                        <p class="card-text mx-2"><img src="../../assets/icons/bed.png"
-                                                style="width: 30px; height: 30px;" alt=""> {{ items?.bathrooms }} Bathrooms
-                                        </p>
-                                        <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                style="width: 30px; height: 30px;" alt=""> {{ items?.size_sqf }}</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="">
-                                            <button class="btn btn-outline-info btn-sm">
-                                                <i class="fas fa-phone fa-lg"></i>
-                                            </button>
-                                            <button class="btn btn-outline-info btn-sm mx-2">
-                                                <i class="fas fa-message fa-lg"></i>
-                                            </button>
-                                            <button class="btn btn-outline-info btn-sm"><img
-                                                    src="../../assets/icons/whatsapp.png" style="width: 30px; height: 20px;"
-                                                    alt=""> </button>
-                                            <button class="btn btn-outline-info btn-sm mx-2">
-
-                                                <i class="fas fa-heart fa-lg"></i>
-                                            </button>
-                                        </div>
-                                        <div>
-
-                                            <img src="../../assets/icons/bed.png" style="width: 60px; height: 60px;" alt="">
-                                        </div>
-                                    </div>
+                        </RouterLink>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-12 d-md-none d-lg-block">
+                        <div class="">
+                            <div class="card text-dark">
+                                <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
+                                    class="card-img" alt="...">
+                                <div class="card-img-overlay text-dark">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text text-wrap">This is a wider card with supporting text below as a
+                                        natural lead-in
+                                        to
+                                        additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small>Enquire Now</small></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </RouterLink>
-            </div>
-            <!-- <div class="col-md-3 d-md-none d-lg-block">
-                <div class="card text-dark">
-                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
-                        class="card-img" alt="...">
-                    <div class="card-img-overlay text-dark">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text text-wrap">This is a wider card with supporting text below as a natural lead-in
-                            to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small>Enquire Now</small></p>
-                    </div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="my-4">
             <button class="btn btn-primary me-2">Previous</button>
@@ -213,43 +229,36 @@ export default {
         return {
             list: [],
             properties: [],
-            propertiesCount: []
+            propertiesCount: [],
         }
     },
     created: function () {
         this.moment = moment;
     },
     methods: {
+        // handleProfile(agent){
+        //     if (agent == null) {
+        //         return ''
+        //     } else {
+        //         return "<img src='https://github.com/mdo.png' alt='' width={50} height={50}  />"
+        //     }
+        // },
         async getProperties() {
             console.log('=========11111111111=============')
             let res = await axios.get('http://13.127.231.16/api/v1/properties/')
             console.log(res.data.results)
             this.properties = res.data.results
             this.propertiesCount = res.data
-            //     let finalURL = `http://13.127.231.16/api/v1/properties/`
-            // await axios.get(finalURL, {
-            //      headers: {
-            //          'Content-Type': "application/json",
-            //      }
-            //  }).then((res) => {
-            //      console.log('sellerorderList',res.data)
-            //  }).catch(error => {
-            //      console.log(error)
-            //  })
-            console.log('=========2222222=============')
-            // try {
-            //     const response = await axios.get('http://13.127.231.16/api/v1/properties/');
-            //     console.log(response);
-            // } catch (error) {
-            //     console.error(error);
-            // }
         }
 
     },
     mounted() {
+        // this.handleProfile();
         this.getProperties();
         // const queryParams = new URLSearchParams(window.location.search)
         // let category_name = queryParams.get("Buy");
+        // console.log(category_name)
+        console.log('-------------111111----------------------')
         // let rent_name = queryParams.get("Rent");
         // let commercial_name = queryParams.get("Commercial");
         // let newproject_name = queryParams.get("newProject");
@@ -298,5 +307,4 @@ export default {
 
 .listPageHover:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-</style>
+}</style>

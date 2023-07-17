@@ -3,6 +3,8 @@
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue'
 import { RouterLink } from 'vue-router';
+import axios from 'axios';
+import moment from 'moment';
 export default {
     name: 'DetailPage',
     components: {
@@ -10,20 +12,27 @@ export default {
         Footer,
         // VueGallerySlideshow
     },
-//     data: {
-//     images: [
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//       'https://github.com/mdo.png',
-//     ],
-//     index: null
-//   }
+    data(){
+        return {
+            productDetail: []
+        }
+    },
+    methods:{
+        async getSingleProduct() {
+            try {
+                let res = await axios.get('http://13.127.231.16/api/v1/properties/' + this.$route.params.id + '/detail_property/')
+                console.log('==========================00')
+                console.log(res.data)
+                this.productDetail = res.data
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    },
+    mounted(){
+        console.log(this.$route.params.id)
+        this.getSingleProduct();
+    }   
 };
 </script>
 
@@ -50,11 +59,11 @@ export default {
                         <h6 class="card-title">APARTMENT FOR SALE IN SKYCOURTS TOWER F, SKYCOURTS TOWERS</h6>
                         <div class="d-flex align-items-center">
                             <p class="card-text"><img src="../../assets/icons/bed.png" style="width: 30px; height: 30px;"
-                                    alt=""> 5 Bedroom</p>
+                                    alt=""> {{ productDetail.bedrooms }} Bedroom</p>
                             <p class="card-text mx-5"><img src="../../assets/icons/bed.png"
-                                    style="width: 30px; height: 30px;" alt=""> 5 Bathrooms</p>
+                                    style="width: 30px; height: 30px;" alt=""> {{ productDetail.bathrooms }} Bathrooms</p>
                             <p class="card-text"><img src="../../assets/icons/sqft.png" style="width: 30px; height: 30px;"
-                                    alt=""> 888 sqft</p>
+                                    alt=""> {{ productDetail.size_sqf }} sqft</p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +81,7 @@ export default {
                                         <thead>
                                             <tr>
                                                 <th scope="col">Type</th>
-                                                <th scope="col">House</th>
+                                                <th scope="col">{{ productDetail.property_type }}</th>
 
                                             </tr>
                                         </thead>
@@ -83,11 +92,11 @@ export default {
                                             </tr>
                                             <tr>
                                                 <th scope="row">Bath's</th>
-                                                <td>5</td>
+                                                <td>{{ productDetail.bathrooms }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Location</th>
-                                                <td>Nushki, Balochistan</td>
+                                                <td>{{ productDetail?.area?.area }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -99,21 +108,22 @@ export default {
                                         <thead>
                                             <tr>
                                                 <th scope="col">Area</th>
-                                                <th scope="col">990 Sqft</th>
+                                                <th scope="col">{{ productDetail.size_sqf }} Sqft</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Bed's</th>
-                                                <td>5</td>
+                                                <td>{{ productDetail.bedrooms  }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Listed</th>
-                                                <td>5 hours ago</td>
+                                                <!-- <td>{{ moment(productDetail?.updated_at).startOf(productDetail?.updated_at).fromNow()}}</td> -->
+                                                <td>{{ productDetail.updated_at }} </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Purpose</th>
-                                                <td>For sale</td>
+                                                <td>For {{ productDetail.R_B_type }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -146,7 +156,7 @@ export default {
                             <div class="mt-2">
                                 <img src="https://github.com/mdo.png" alt="" width="50" height="50"
                                     class="rounded-circle border border-2 border-primary p-1">
-                                <p class="card-text">Atif Badini usually responds.</p>
+                                <p class="card-text">{{ productDetail?.agent?.name }}</p>
                                 <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                             </div>
 
@@ -173,7 +183,7 @@ export default {
                                 <p>Central A/C</p>
                                 <p>Children's Pool</p>
                                 <p>Pets Allowed</p>
-                                <p> Shared Gym</p>
+                                <p>Floor {{ productDetail.floors }}</p>
                             </div>
                         </div>
                     </div>
@@ -204,11 +214,11 @@ export default {
                                         class="rounded-circle border border-2 border-primary p-1">
                                 </div>
                                 <div>
-                                    <h5 class="card-title text-muted">Atif Badini</h5>
+                                    <h5 class="card-title text-muted">{{ productDetail?.agent?.name }}</h5>
                                     <p class="card-text text-wrap">Sales and Leasing Consultant at Edwards and Towers Real
                                         Estate Brokers
                                         (304 properties) </p>
-                                    <p class="card-text">Speaks English, Urdu, Balochi</p>
+                                    <p class="card-text">Speaks {{ productDetail?.agent?.languages }}</p>
                                 </div>
                             </div>
                         </div>

@@ -74,6 +74,25 @@
 </template>
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+// import axios from 'axios';
+// export default {
+//     name: 'Header',
+//     data() {
+//         return {
+//             list: []
+//         }
+//     },
+//     methods: {
+//         async getPro(){
+//             let res = await axios.get('http://13.127.231.16/api/v1/properties/')
+//             console.log(res.data.results)
+//             this.list = res.data.results
+//         }
+//     },
+//     mounted() {
+//         this.getPro();
+//     }
+// }
 </script>
 <style>
 /* .header {
