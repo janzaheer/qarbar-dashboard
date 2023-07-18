@@ -3,7 +3,7 @@
         <div class="row g-2 bg-light">
             <div class="col-md-6">
                 <div class="textRight">
-                    <h4>Get The App</h4>
+                    <h2>Get The App</h2>
                     <p class="text-wrap">
                         Search hundreds of thousands of up to date listings with powerful filters to find your perfect home
                         and real estate investment. Find properties and opportunities exclusive and unique to Qarbar.com.
