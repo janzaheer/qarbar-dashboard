@@ -12,12 +12,15 @@ export default {
         Footer,
         // VueGallerySlideshow
     },
-    data(){
+    created: function () {
+        this.moment = moment;
+    },
+    data() {
         return {
             productDetail: []
         }
     },
-    methods:{
+    methods: {
         async getSingleProduct() {
             try {
                 let res = await axios.get('http://13.127.231.16/api/v1/properties/' + this.$route.params.id + '/detail_property/')
@@ -29,10 +32,10 @@ export default {
             }
         }
     },
-    mounted(){
+    mounted() {
         console.log(this.$route.params.id)
         this.getSingleProduct();
-    }   
+    }
 };
 </script>
 
@@ -49,19 +52,20 @@ export default {
             <img class="image" v-for="(image, i) in images" :src="image" :key="i" @click="index = i">
             <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
         </div> -->
-        
+
         <div class="row my-5">
             <div class="col-md-12">
                 <div class="card">
-                    <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img-top" style="height: 600px;" alt="...">
+                    <img src="https://www.propertyfinder.ae/property/78721e7b589%E2%80%A679/856/550/MODE/de47c7/9907514-a55cdo.webp?ctr=ae"
+                        class="card-img-top" style="height: 600px;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Overview</h5>
                         <h6 class="card-title">APARTMENT FOR SALE IN SKYCOURTS TOWER F, SKYCOURTS TOWERS</h6>
                         <div class="d-flex align-items-center">
-                            <p class="card-text"><img src="../../assets/icons/bed.png" style="width: 30px; height: 30px;"
-                                    alt=""> {{ productDetail.bedrooms }} Bedroom</p>
-                            <p class="card-text mx-5"><img src="../../assets/icons/bed.png"
-                                    style="width: 30px; height: 30px;" alt=""> {{ productDetail.bathrooms }} Bathrooms</p>
+                            <p class="card-text"><i class="fa-sharp fa-solid fa-bed"></i> {{ productDetail?.bedrooms }}
+                                Bedroom</p>
+                            <p class="card-text mx-5"> <i class="fa-solid fa-bath"></i> {{ productDetail.bathrooms }}
+                                Bathrooms</p>
                             <p class="card-text"><img src="../../assets/icons/sqft.png" style="width: 30px; height: 30px;"
                                     alt=""> {{ productDetail.size_sqf }} sqft</p>
                         </div>
@@ -70,164 +74,168 @@ export default {
             </div>
         </div>
         <div class="row g-2">
-            <div class="col-8">
-                <div class="card text-bg-light mb-3">
-                    <div class="card-header">Details</div>
-                    <div class="card-body">
-                        <div class="row g-1">
-                            <div class="col-6">
-                                <div class="card-body">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">{{ productDetail.property_type }}</th>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card text-bg-light mb-3">
+                            <div class="card-header">Details</div>
+                            <div class="card-body">
+                                <div class="row g-1">
+                                    <div class="col-6">
+                                        <div class="card-body">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">{{ productDetail.property_type }}</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">price</th>
-                                                <td>77 Crore PKR</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Bath's</th>
-                                                <td>{{ productDetail.bathrooms }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Location</th>
-                                                <td>{{ productDetail?.area?.area }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">price</th>
+                                                        <td>77 Crore PKR</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Bath's</th>
+                                                        <td>{{ productDetail.bathrooms }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Location</th>
+                                                        <td>{{ productDetail?.area?.area }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-body">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Area</th>
+                                                        <th scope="col">{{ productDetail.size_sqf }} Sqft</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Bed's</th>
+                                                        <td>{{ productDetail.bedrooms }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Listed</th>
+                                                        <!-- <td>{{ moment(productDetail?.updated_at).startOf(productDetail?.updated_at).fromNow()}}</td> -->
+                                                        <td>{{ moment(productDetail?.created_at).startOf('hour').fromNow()
+                                                        }} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Purpose</th>
+                                                        <td>For {{ productDetail.R_B_type }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h5>Description</h5>
+                                <p>{{ productDetail?.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">Amenities</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Amenities</h5>
+                                <div class="d-flex justify-content-around">
+                                    <div>
+                                        <p>Unfurnished</p>
+                                        <p>Built in Wardrobes</p>
+                                        <p>Children's Play Area</p>
+                                        <p>Covered Parking</p>
+                                        <p>Security</p>
+                                        <p>Shared Pool</p>
+                                    </div>
+                                    <div>
+                                        <p>Balcony</p>
+                                        <p>Central A/C</p>
+                                        <p>Children's Pool</p>
+                                        <p>Pets Allowed</p>
+                                        <p>Floor {{ productDetail.floors }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="card-body">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Area</th>
-                                                <th scope="col">{{ productDetail.size_sqf }} Sqft</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Bed's</th>
-                                                <td>{{ productDetail.bedrooms  }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Listed</th>
-                                                <!-- <td>{{ moment(productDetail?.updated_at).startOf(productDetail?.updated_at).fromNow()}}</td> -->
-                                                <td>{{ productDetail.updated_at }} </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Purpose</th>
-                                                <td>For {{ productDetail.R_B_type }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row g-2 my-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header"><img src="../../assets/icons/location.png" height="30" alt="">
+                                        Location</div>
+                                    <div class="card-body">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6940.621364062964!2d65.97918749545015!3d29.565562450672537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ed21b11a9de7ca1%3A0x4b4f7595a43e99ab!2sKilli%20Sharif%20Khan%20Badini%2C%20Nushki%2C%20Balochistan%2C%20Pakistan!5e0!3m2!1sen!2s!4v1686139844821!5m2!1sen!2s"
+                                            width="830" height="330" allowfullscreen="" loading="lazy"
+                                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <h5>Description</h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                            the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                            of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                            but also the leap into electronic typesetting.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam inventore itaque eveniet
-                            cupiditate tempora, a tenetur, animi fugiat at, labore dolore. Quos asperiores tempore, culpa
-                            eos totam ullam delectus! Esse ullam, excepturi possimus distinctio eum minus quam ipsam nam
-                            fuga deleniti quia, voluptatem explicabo, doloremque eius hic sit eligendi enim!</p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque quasi, culpa expedita deserunt
-                            corporis illum repellat ducimus perferendis asperiores aliquam.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card mb-3 sticky-top">
-                        <div class="card-header">
-                            <h5 class="card-title">PKR 7.7 Core</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <button class="btn btn-outline-success me-2">Call</button>
-                            <button class="btn btn-outline-success">WhatsApp</button>
-                            <div class="mt-2">
-                                <img src="https://github.com/mdo.png" alt="" width="50" height="50"
-                                    class="rounded-circle border border-2 border-primary p-1">
-                                <p class="card-text">{{ productDetail?.agent?.name }}</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                            </div>
-
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-8">
-                <div class="card">
-                    <div class="card-header">Amenities</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Amenities</h5>
-                        <div class="d-flex justify-content-around">
-                            <div>
-                                <p>Unfurnished</p>
-                                <p>Built in Wardrobes</p>
-                                <p>Children's Play Area</p>
-                                <p>Covered Parking</p>
-                                <p>Security</p>
-                                <p>Shared Pool</p>
-                            </div>
-                            <div>
-                                <p>Balcony</p>
-                                <p>Central A/C</p>
-                                <p>Children's Pool</p>
-                                <p>Pets Allowed</p>
-                                <p>Floor {{ productDetail.floors }}</p>
+                            <div class="col-12">
+                                <RouterLink to="/agentprofile" class="text-decoration-none">
+                                    <div class="card">
+                                        <div class="card-header">Agent Info</div>
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="me-4">
+                                                    <img src="https://github.com/mdo.png" alt="" width="200" height="200"
+                                                        class="rounded-circle border border-2 border-primary p-1">
+                                                </div>
+                                                <div>
+                                                    <h5 class="card-title text-muted">{{ productDetail?.agent?.name }}</h5>
+                                                    <p class="card-text text-wrap">Sales and Leasing Consultant at Edwards
+                                                        and Towers Real
+                                                        Estate Brokers
+                                                        (304 properties) </p>
+                                                    <p class="card-text">Speaks {{ productDetail?.agent?.languages }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </RouterLink>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row g-2 my-4">
-            <div class="col-8">
-                <div class="card">
-                    <div class="card-header"><img src="../../assets/icons/location.png" height="30" alt=""> Location</div>
-                    <div class="card-body">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6940.621364062964!2d65.97918749545015!3d29.565562450672537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ed21b11a9de7ca1%3A0x4b4f7595a43e99ab!2sKilli%20Sharif%20Khan%20Badini%2C%20Nushki%2C%20Balochistan%2C%20Pakistan!5e0!3m2!1sen!2s!4v1686139844821!5m2!1sen!2s"
-                            width="830" height="330" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-8">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card">
-                        <div class="card-header">Agent Info</div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="me-4">
-                                    <img src="https://github.com/mdo.png" alt="" width="200" height="200"
+            <div class="col-md-4">
+                <div class="row sticky-top">
+                    <div class="col-12">
+                        <div class="card mb-3 ">
+                            <div class="card-header">
+                                <h5 class="card-title">PKR 7.7 Core</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <button class="btn btn-outline-success me-2">Call</button>
+                                <button class="btn btn-outline-success">WhatsApp</button>
+                                <div class="mt-2">
+                                    <img src="https://github.com/mdo.png" alt="" width="50" height="50"
                                         class="rounded-circle border border-2 border-primary p-1">
+                                    <p class="card-text">{{ productDetail?.agent?.name }}</p>
+                                    <p class="card-text"><small class="text-body-secondary">Last updated {{
+                                        moment(productDetail?.updated_at).startOf('day').fromNow() }}</small></p>
                                 </div>
-                                <div>
-                                    <h5 class="card-title text-muted">{{ productDetail?.agent?.name }}</h5>
-                                    <p class="card-text text-wrap">Sales and Leasing Consultant at Edwards and Towers Real
-                                        Estate Brokers
-                                        (304 properties) </p>
-                                    <p class="card-text">Speaks {{ productDetail?.agent?.languages }}</p>
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                </RouterLink>
+                </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-8">
+            <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-header">Prices & Trends</div>
                     <div class="card-body">

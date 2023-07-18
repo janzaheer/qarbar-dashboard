@@ -8,7 +8,8 @@ import Popular from '../components/popularArea/Popular.vue';
 import NewProject from '../components/newProject/NewProject.vue';
 import HomeSearch from '../components/HomeSearch/HomeSearch.vue';
 import Header from '../components/common/header/Header.vue';
-import Footer from '../components/common/footer/Footer.vue'
+import Footer from '../components/common/footer/Footer.vue';
+import Mobile from '../components/mobileDownload/Mobile.vue';
 import { RouterView } from 'vue-router';
 </script>
 
@@ -23,6 +24,7 @@ import { RouterView } from 'vue-router';
     <Agent/>
     <!-- <Advertise/> -->
     <Blog/>
+    <Mobile/>
     <Popular/>
     <Footer/>
   </body>

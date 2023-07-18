@@ -99,8 +99,8 @@
                             <div class="card mb-3 listPageHover">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <div class="card h-100">
-                                            <img :src="items.media[0].image_url" class="img-fluid rounded-start h-100"
+                                        <div class="card">
+                                            <img :src="items.media[0].image_url" class="img-fluid rounded-start cardImage"
                                                 alt="...">
                                             <div class="card-img-overlay">
                                                 <!-- <div class="">
@@ -236,13 +236,7 @@ export default {
         this.moment = moment;
     },
     methods: {
-        // handleProfile(agent){
-        //     if (agent == null) {
-        //         return ''
-        //     } else {
-        //         return "<img src='https://github.com/mdo.png' alt='' width={50} height={50}  />"
-        //     }
-        // },
+ 
         async getProperties() {
             console.log('=========11111111111=============')
             let res = await axios.get('http://13.127.231.16/api/v1/properties/')
@@ -293,6 +287,9 @@ export default {
 </script>
 
 <style>
+.cardImage{
+    height: 30vh !important;
+}
 .card-images {
     height: 50vh !important;
 }
