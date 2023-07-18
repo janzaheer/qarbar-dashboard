@@ -45,7 +45,7 @@ const router = createRouter({
       component: Listing
     },
     {
-      path: '/detailPage',
+      path: '/detailPage/:id',
       name: 'DetailPage',
       component: DetailPage
     },

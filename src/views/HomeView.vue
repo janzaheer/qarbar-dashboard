@@ -2,13 +2,14 @@
 import Home from '../components/homePage/Home.vue';
 import Slider from '../components/mainSlide/Slider.vue';
 import Agent from '../components/agent/Agent.vue';
-import Advertise from '../components/advertise/Advertise.vue';
+// import Advertise from '../components/advertise/Advertise.vue';
 import Blog from '../components/newsBlog/Blog.vue';
 import Popular from '../components/popularArea/Popular.vue';
 import NewProject from '../components/newProject/NewProject.vue';
 import HomeSearch from '../components/HomeSearch/HomeSearch.vue';
 import Header from '../components/common/header/Header.vue';
-import Footer from '../components/common/footer/Footer.vue'
+import Footer from '../components/common/footer/Footer.vue';
+import Mobile from '../components/mobileDownload/Mobile.vue';
 import { RouterView } from 'vue-router';
 </script>
 
@@ -21,8 +22,9 @@ import { RouterView } from 'vue-router';
     <Home/>
     <HomeSearch/>
     <Agent/>
-    <Advertise/>
+    <!-- <Advertise/> -->
     <Blog/>
+    <Mobile/>
     <Popular/>
     <Footer/>
   </body>
