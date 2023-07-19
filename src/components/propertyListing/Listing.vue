@@ -100,7 +100,7 @@
                                 <div class="row g-0">
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <img :src="items.media[0].image_url" class="img-fluid rounded-start cardImage"
+                                            <img :src="items?.media[0]?.image_url" class="img-fluid rounded-start cardImage"
                                                 alt="...">
                                             <div class="card-img-overlay">
                                                 <!-- <div class="">

@@ -37,11 +37,9 @@
                     </select>
                 </div>
                 <div class="col-2 col-md-3 col-lg-2 mt-lg-1 mt-1">
-
-
                     <div class="">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Beds & Baths
                         </button>
 
@@ -77,7 +75,7 @@
                         <option value="3">$4000</option>
                     </select>
                 </div>
-                <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1">
+                <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1 text-center">
                     <button class="btn btn-outline-light"><img src="../../assets/searchIcon/icons8-search.gif"
                             class="text-danger" style="height: 20px;" alt="img" /> </button>
 
@@ -110,12 +108,9 @@
                                 </select>
                             </div>
                             <div class="col-6">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                                <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Search like a any place" aria-label="Search">
+                                </form>
                             </div>
                         </div>
                     </div>
