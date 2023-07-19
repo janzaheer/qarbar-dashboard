@@ -123,7 +123,7 @@
                                                     <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
                                                     <span class="badge text-bg-secondary card-title">{{ items?.property_type
                                                     }}</span>
-                                                    <h4>200000 Rs </h4>
+                                                    <h4>{{ items?.total_price }} Rs </h4>
                                                 </div>
                                                 <div class="d-flex align-items-center">
                                                     <a type="button" className="text-success" data-bs-toggle="popover"

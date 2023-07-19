@@ -27,4 +27,10 @@
     margin-left: 400px;
     margin-top: 100px;
 }
+@media (max-width: 1199.98px) { 
+    .textRight {
+    margin-left: 100px;
+    margin-top: 100px;
+}
+}
 </style>

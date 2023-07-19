@@ -1,6 +1,6 @@
 <script>
 // import VueGallerySlideshow from 'vue-gallery-slideshow';
-import VuePictureSwipe from 'vue3-picture-swipe';
+// import VuePictureSwipe from 'vue3-picture-swipe';
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue'
 import { RouterLink } from 'vue-router';
@@ -11,7 +11,7 @@ export default {
     components: {
         Header,
         Footer,
-        VuePictureSwipe
+        // VuePictureSwipe
         // VueGallerySlideshow
     },
     created: function () {
@@ -20,7 +20,8 @@ export default {
     data() {
         return {
             productDetail: [],
-            image: null
+            singleImage:[],
+            ThumbnailImage: this.productDetail?.media && this.productDetail?.media[0].image_url,
         }
     },
     methods: {
@@ -28,11 +29,17 @@ export default {
             try {
                 let res = await axios.get('http://13.127.231.16/api/v1/properties/' + this.$route.params.id + '/detail_property/')
                 this.productDetail = res.data
-                this.image = res.data.media[0].image_url
+                // this.image = res.data.media[0].image_url
+                this.singleImage = res.data.media
+                console.log(res.data)
             } catch (error) {
                 console.log(error)
             }
-        }
+        },
+        selectimage(i){
+            this.ThumbnailImage = i
+            console.log('imageSelect',this.ThumbnailImage = i)
+        },
     },
     mounted() {
         console.log(this.$route.params.id)
@@ -50,17 +57,18 @@ export default {
 <template>
     <Header />
     <div class="container detailPage">
-        <!-- <div class="my-5">
-            <img class="image" v-for="(image, i) in images" :src="image" :key="i" @click="index = i">
-            <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
-        </div> -->
-
         <div class="row my-5">
             <div class="col-md-12">
                 <div class="card">
-                    <img :src="image"
+                    <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
                         class="card-img-top" style="height: 600px;" alt="...">
                     <div class="card-body">
+                        <div class="d-flex justify-content-center mt-1">
+                                <div class="thumbnail text-center mx-1" v-for="item in singleImage">
+                                    <img :src="item.image_url" class="img-thumbnail" style="height: 50px; width: 60px;"
+                                        v-on:click="selectimage(item)" />
+                                </div>
+                            </div>
                         <h5 class="card-title">Overview</h5>
                         <h6 class="card-title">APARTMENT FOR SALE IN SKYCOURTS TOWER F, SKYCOURTS TOWERS</h6>
                         <div class="d-flex align-items-center">
@@ -96,7 +104,7 @@ export default {
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">price</th>
-                                                        <td>77 Crore PKR</td>
+                                                        <td>{{ productDetail?.total_price }} PKR</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Bath's</th>
@@ -235,12 +243,12 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="my-3">
+        <!-- <div class="my-3">
             <vue-picture-swipe :items="[
                 { src: 'https://www.propertyfinder.ae/property/78721e7b589%E2%80%A679/856/550/MODE/de47c7/9907514-a55cdo.webp?ctr=ae', thumbnail: 'http://example.org/sm1.jpg', w: 1200, h: 900, title: 'Will be used for caption' },
                 { src: 'https://www.propertyfinder.ae/property/78721e7b589%E2%80%A679/856/550/MODE/de47c7/9907514-a55cdo.webp?ctr=ae', thumbnail: 'http://example.org/sm1.jpg', w: 1200, h: 900 }
             ]"></vue-picture-swipe>
-        </div>
+        </div> -->
     </div>
     <Footer />
 </template>
