@@ -2,21 +2,21 @@
     <div class="container mt-5">
         <h1>Qarbar Projects</h1>
         <div class="row g-2">
-            <p>New properties for rent</p>
+            <p>New properties for {{ propertiesList[0]?.R_B_type }}</p>
             <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2" v-for="item in propertiesList.slice(0, 6)"
                 :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">
                     <div class="card text-dark productBg">
                         <img :src="item?.media[0].image_url" class="card-img w-100" width="180" height="180" alt="...">
                         <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">{{ item.property_type }}</span>
+                            <span class="badge text-bg-secondary card-title">{{ item?.property_type }}</span>
                             <!-- <p class="card-text text-white">{{ item.property_type }}</p> -->
                         </div>
                         <div class="card-body bg-white text-dark rounded">
                             <div class="d-flex justify-content-between">
                                 <!-- <span class="badge text-bg-secondary">{{ item.property_type }}</span> -->
-                                <h6 class="card-text">Rs {{ item.total_price }}</h6>
-                                <small class="text-body-secondary">{{ item.property_type }}</small>
+                                <h6 class="card-text">Rs {{ item?.total_price }}</h6>
+                                <small class="text-body-secondary">{{ item?.property_type }}</small>
                             </div>
 
                             <div class="d-flex">
@@ -37,7 +37,7 @@
 
             </div>
             <div class="d-flex justify-content-center mt-2">
-                <RouterLink to="/listing" class="btn btn-secondary">view more</RouterLink>
+                <RouterLink to="/listing/?R_B_type=rent" class="btn btn-secondary">view more</RouterLink>
             </div>
             <!-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
@@ -111,23 +111,23 @@
             </div> -->
         </div>
         <div class="row mt-4 g-2">
-            <p>New properties for sale</p>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in propertiesList.slice(0, 6)"
+            <p>New properties for {{ propertiesSaleList[0]?.R_B_type }}</p>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in propertiesSaleList.slice(0, 6)"
                 :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">
                     <div class="card text-dark productBg">
                         <img :src="item?.media[0].image_url" class="card-img w-100" width="180" height="180" alt="...">
                         <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">{{ item.property_type }}</span>
+                            <span class="badge text-bg-secondary card-title">{{ item?.property_type }}</span>
                             <!-- <p class="card-text text-white">{{ item.property_type }}</p> -->
                         </div>
                         <div class="card-body bg-white text-dark rounded">
                             <div class="d-flex justify-content-between">
                                 <!-- <span class="badge text-bg-secondary">{{ item.property_type }}</span> -->
-                                <h6 class="card-text">Rs {{ item.total_price }}</h6>
+                                <h6 class="card-text">Rs {{ item?.total_price }}</h6>
                                 <div>
                                     
-                                    <small class="text-body-secondary">{{ item.property_type }}</small>
+                                    <small class="text-body-secondary">{{ item?.property_type }}</small>
                                 </div>
                                 
                             </div>
@@ -148,7 +148,7 @@
                 </RouterLink>
             </div>
             <div class="d-flex justify-content-center mt-2">
-                <RouterLink to="/listing" class="btn btn-secondary">view more</RouterLink>
+                <RouterLink to="/listing/?R_B_type=sale" class="btn btn-secondary">view more</RouterLink>
             </div>
         </div>
     </div>
@@ -161,30 +161,26 @@ export default {
     name: 'Home',
     data() {
         return {
-            // cityList: [],
-            propertiesList: []
+            propertiesList: [],
+            propertiesSaleList: [],
         }
     },
     created: function () {
         this.moment = moment;
     },
     methods: {
-        // async geyCity() {
-        //     let res = await axios.get('http://13.127.231.16/api/v1/cities/')
-        //     console.log('--------------')
-        //     this.cityList = res.data
-        //     console.log(res.data)
-        // },
-        async getProperties() {
-            let res = await axios.get('http://13.127.231.16/api/v1/properties/')
-            console.log('======================')
+        async getPropertiesRent() {
+            let res = await axios.get('http://13.127.231.16/api/v1/properties/?R_B_type=rent')
             this.propertiesList = res.data.results
-            console.log(res.data)
+        },
+        async getPropertiesSale() {
+            let res = await axios.get('http://13.127.231.16/api/v1/properties/?R_B_type=sale')
+            this.propertiesSaleList = res.data.results
         }
     },
     mounted() {
-        // this.geyCity();
-        this.getProperties();
+        this.getPropertiesSale();
+        this.getPropertiesRent();
     }
 }
 </script>

@@ -70,7 +70,7 @@
 
             <div class="d-flex justify-content-between">
                 <div>
-                    <h6>Properties for sale in Turkiye</h6>
+                    <h6>Properties for {{ properties[0]?.R_B_type }} in Turkiye</h6>
                     <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
                             new</span></p>
                     <!-- <button class="btn btn-outline-info me-2"><img src="../../assets/icons/location.png"
@@ -92,7 +92,7 @@
         </div>
 
         <div class="row g-2 my-2">
-            <div class="col-md-9">
+            <div class="col-md-12 mx-5">
                 <div class="row">
                     <div class="col-12" v-for="items in properties" :key="items.id">
                         <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
@@ -162,9 +162,9 @@
                                                     <button class="btn btn-outline-info btn-sm mx-2">
                                                         <i class="fas fa-message fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-info btn-sm"><img
-                                                            src="../../assets/icons/whatsapp.png"
-                                                            style="width: 30px; height: 20px;" alt=""> </button>
+                                                    <button class="btn btn-outline-info btn-sm">
+                                                        <i class="fa-brands fa-whatsapp"></i>
+                                                    </button>
                                                     <button class="btn btn-outline-info btn-sm mx-2">
 
                                                         <i class="fas fa-heart fa-lg"></i>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <div class="row">
                     <div class="col-12 d-md-none d-lg-block">
                         <div class="">
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="my-4">
             <button class="btn btn-primary me-2">Previous</button>
@@ -236,47 +236,30 @@ export default {
         this.moment = moment;
     },
     methods: {
- 
+
         async getProperties() {
-            console.log('=========11111111111=============')
-            let res = await axios.get('http://13.127.231.16/api/v1/properties/')
-            console.log(res.data.results)
-            this.properties = res.data.results
-            this.propertiesCount = res.data
-        }
+            const queryParams = new URLSearchParams(window.location.search);
+            let category_name = queryParams.get("R_B_type");
+            if (!category_name) {
+                category_name = ''
+            }
+            
+            try {
+                let res = await axios.get(`http://13.127.231.16/api/v1/properties/?R_B_type=${category_name}`);
+                // console.log(res.data.results);
+                this.properties = res.data.results
+                this.propertiesCount = res.data
+                console.log(category_name)
+            } catch (error) {
+                console.error('Error fetching properties:', error);
+            }
+        },
 
     },
     mounted() {
+        // this.getCategory();
         // this.handleProfile();
         this.getProperties();
-        // const queryParams = new URLSearchParams(window.location.search)
-        // let category_name = queryParams.get("Buy");
-        // console.log(category_name)
-        console.log('-------------111111----------------------')
-        // let rent_name = queryParams.get("Rent");
-        // let commercial_name = queryParams.get("Commercial");
-        // let newproject_name = queryParams.get("newProject");
-        // if (category_name) {
-        //     console.log(category_name)
-        //     console.log('-------------111111----------------------')
-        // }
-
-        // if (rent_name) {
-        //     console.log(rent_name)
-        //     console.log('-------------22222222222222----------------------')
-        // }
-
-        // if (commercial_name) {
-        //     console.log(commercial_name)
-        //     console.log('------------3333333----------------------')
-        // }
-
-        // if (newproject_name) {
-        //     console.log(newproject_name)
-        //     console.log('-----------444444----------------------')
-        // }
-
-        // console.log(category_name)
 
         // console.log(category_name)
         // console.log(this.$route.params.id)
@@ -287,9 +270,10 @@ export default {
 </script>
 
 <style>
-.cardImage{
+.cardImage {
     height: 30vh !important;
 }
+
 .card-images {
     height: 50vh !important;
 }
@@ -304,4 +288,5 @@ export default {
 
 .listPageHover:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}</style>
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
     <div class="container my-4">
         <div class="card text-dark" style="height: 12rem;" >
-            <img src="../../assets/slider/s1.webp" class="card-img" height="190px" alt="...">
+            <img src="https://static.rdc.moveaws.com/images/sell/sell-landing-hero/sell-hero-1440.webp" class="card-img" height="190px" alt="...">
             <div class="card-img-overlay text-dark">
                 <div class="">
                     <h2 class="card-title text-white">New Projects in Turkiye</h2>

@@ -71,7 +71,7 @@ export default {
     methods: {
         async getUsers() {
             let res = await axios.get('https://dummyjson.com/users')
-            console.log(res.data)
+            // console.log(res.data)
             // this.list = res.data.products
             this.userList = res.data.users
         },

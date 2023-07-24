@@ -224,7 +224,7 @@ export default {
                     <div class="col-12">
                         <div class="card mb-3 ">
                             <div class="card-header">
-                                <h5 class="card-title">PKR 7.7 Core</h5>
+                                <h5 class="card-title">PKR {{ productDetail.total_price }}</h5>
                             </div>
                             <div class="card-body text-center">
                                 <button class="btn btn-outline-success me-2">Call</button>

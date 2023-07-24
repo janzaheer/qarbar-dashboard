@@ -1,5 +1,13 @@
 <template>
     <div class="header">
+        <div class="bg-secondary d-flex py-2">
+            <div class="mx-4">
+                <h6 class="text-white" ><i class="fa-solid fa-phone"></i> +92-346-123456</h6>
+            </div>
+            <div>
+                <h6 class="text-white"><i class="fa-solid fa-envelope"></i> support@qarbar.com</h6>
+            </div>
+        </div>
         <nav class="navbar navbar-expand-lg">
             <div class="container headerCLass">
                 <div class="d-flex justify-content-end">
@@ -17,14 +25,14 @@
                                 <RouterLink class="nav-link active" to="/">Home</RouterLink>
                             </li>
                             <li class="nav-item">
-                                <RouterLink class="nav-link" to="/Listing/?Buy=buy">Buy</RouterLink>
+                                <RouterLink class="nav-link" :to="'/Listing/?R_B_type=sale' ">Buy</RouterLink>
                             </li>
                             <li class="nav-item">
-                                <RouterLink class="nav-link" to="/Listing/?Rent=rent">Rent</RouterLink>
+                                <RouterLink class="nav-link" to="/Listing/?R_B_type=rent">Rent</RouterLink>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <RouterLink class="nav-link" to="/Listing/?Commercial=commercial">Commercial</RouterLink>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
                             </li>
@@ -74,25 +82,34 @@
 </template>
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-// import axios from 'axios';
-// export default {
-//     name: 'Header',
-//     data() {
-//         return {
-//             list: []
-//         }
-//     },
-//     methods: {
-//         async getPro(){
-//             let res = await axios.get('http://13.127.231.16/api/v1/properties/')
-//             console.log(res.data.results)
-//             this.list = res.data.results
-//         }
-//     },
-//     mounted() {
-//         this.getPro();
-//     }
-// }
+import axios from 'axios';
+export default {
+    name: 'Header',
+    data() {
+        return {
+            list: [],
+            saleList: [],
+        }
+    },
+    methods: {
+        async getProductRent(){
+            let res = await axios.get('http://13.127.231.16/api/v1/properties/?R_B_type=rent')
+            // console.log(res.data.results)
+            // this.list = res.data.results
+        },
+        async getProductSell(){
+            let res = await axios.get('http://13.127.231.16/api/v1/properties/?R_B_type=sale')
+            // console.log('sale-------------------',res.data.results[0]?.R_B_type)
+              this.saleList = res.data.results[0]?.R_B_type
+            //   console.log('-11111111111111111-----------')
+            //   console.log('--------33333-------------')
+        },
+    },
+    mounted() {
+        this.getProductRent();
+        this.getProductSell();
+    }
+}
 </script>
 <style>
 /* .header {
