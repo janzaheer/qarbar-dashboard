@@ -11,6 +11,8 @@ import SignUp from '../components/auth/SignUp.vue';
 import PageNotFound from '../router/PageNotFound.vue';
 // agent panel 
 import AgentView from '../views/AgentView.vue'
+import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
+import AddAdvertisement from '../agentpanel/addAdvertisement/AddAdvertisement.vue';
 // import Dashboard from '../agentpanel/Dashboard.vue';
 
 const router = createRouter({
@@ -82,6 +84,16 @@ const router = createRouter({
         agentPanel: AgentView,
       }
     },
+    {
+      path: '/agentDashboard',
+      name: 'AgentDashboard',
+      component: AgentDashboard
+    },
+    {
+      path: '/addAdvertisement',
+      name: 'AddAdvertisement',
+      component: AddAdvertisement
+    }
     // {
     //   path : '/agentdashboard',
     //   name: 'Dashboard',

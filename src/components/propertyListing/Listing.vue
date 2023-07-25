@@ -91,8 +91,8 @@
             </div>
         </div>
 
-        <div class="row g-2 my-2">
-            <div class="col-md-12 mx-5">
+        <div class="row g-2 my-2 mx-5">
+            <div class="col-md-12">
                 <div class="row">
                     <div class="col-12" v-for="items in properties" :key="items.id">
                         <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
@@ -156,24 +156,31 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="">
-                                                    <button class="btn btn-outline-info btn-sm">
+                                                    <button class="btn btn-outline-secondary btn-sm">
                                                         <i class="fas fa-phone fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-info btn-sm mx-2">
+                                                    <button class="btn btn-outline-secondary btn-sm mx-2">
                                                         <i class="fas fa-message fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-info btn-sm">
+                                                    <button class="btn btn-outline-secondary btn-sm">
                                                         <i class="fa-brands fa-whatsapp"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-info btn-sm mx-2">
+                                                    <button class="btn btn-outline-secondary btn-sm mx-2">
 
                                                         <i class="fas fa-heart fa-lg"></i>
                                                     </button>
                                                 </div>
-                                                <div>
+                                                <div class="dropdown-image">
                                                     <img v-if="items.company_agent"
                                                         src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
                                                         style="width: 60px; height: 60px;" alt="">
+                                                    <div class="dropdown-content">
+                                                        <img v-if="items.company_agent"
+                                                        src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
+                                                        alt="Cinque Terre" width="300"
+                                                            height="200">
+                                                        <div class="desc">company agent name</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -243,7 +250,7 @@ export default {
             if (!category_name) {
                 category_name = ''
             }
-            
+
             try {
                 let res = await axios.get(`http://13.127.231.16/api/v1/properties/?R_B_type=${category_name}`);
                 // console.log(res.data.results);
@@ -288,5 +295,27 @@ export default {
 
 .listPageHover:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.dropdown-image {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-image:hover .dropdown-content {
+  display: block;
+}
+
+.desc {
+  padding: 15px;
+  text-align: center;
 }
 </style>
