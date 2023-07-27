@@ -214,7 +214,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><img src="	https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
+                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
                                                     class=" rounded-circle mr-3" alt=""> Doris
                                                 R.</td>
                                             <td>Moto Z2</td>
@@ -233,7 +233,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><img src="	https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
+                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
                                                     class=" rounded-circle mr-3" alt="">Elizabeth W.</td>
                                             <td>Notebook Asus</td>
                                             <td><span>China</span></td>
