@@ -5,13 +5,14 @@ import { RouterLink } from 'vue-router';
 <style></style>
 
 <template>
-    <div>
-        <nav class="navbar bg-light">
-  <div class="container">
-    <RouterLink class="navbar-brand" to="/agentDashboard">
-      <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
-    </RouterLink>
-    <div class="nav-item dropdown">
+  <div>
+    <nav class="navbar bg-light">
+      <div class="container">
+        <RouterLink class="navbar-brand" to="/agentDashboard">
+          <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24"> -->
+          <h4>Portfolio</h4>
+        </RouterLink>
+        <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Atif Badini
           </a>
@@ -21,7 +22,7 @@ import { RouterLink } from 'vue-router';
             <li><a class="dropdown-item" href="#">Sign Out</a></li>
           </ul>
         </div>
+      </div>
+    </nav>
   </div>
-</nav>
-    </div>
 </template>

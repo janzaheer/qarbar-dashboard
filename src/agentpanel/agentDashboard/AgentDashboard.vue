@@ -4,6 +4,9 @@ import AgentDashboardFooter from '../agentDashboardFooter/AgentDashboardFooter.v
 import AgentCredit from '../agentCredits/AgentCredit.vue';
 import Add from '../addAdvertisement/Add.vue';
 import AgentPropertyListing from '../agentPropertyListing/AgentPropertyListing.vue';
+import Social from '../socialMedia/Social.vue';
+import OneGraph from '../graph/OneGraph.vue';
+import TwoGraph from '../graph/TwoGraph.vue';
 export default {
     name: 'AgentDashboard',
     components: {
@@ -11,7 +14,10 @@ export default {
         AgentDashboardFooter,
         AgentCredit,
         Add,
-        AgentPropertyListing
+        AgentPropertyListing,
+        Social,
+        OneGraph,
+        TwoGraph
     }
 }
 </script>
@@ -31,11 +37,21 @@ export default {
         <div class="my-3">
             <AgentCredit />
         </div>
-        <div class="">
+        <div class="my-3">
             <Add />
         </div>
+        <div class="my-3">
+            <OneGraph />
+        </div>
+
+        <div class="my-3">
+            <TwoGraph />
+        </div>
         <div class="my-5">
-            <AgentPropertyListing/>
+            <AgentPropertyListing />
+        </div>
+        <div class="my-5">
+            <Social />
         </div>
     </div>
     <AgentDashboardFooter />

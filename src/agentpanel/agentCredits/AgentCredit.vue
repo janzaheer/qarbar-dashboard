@@ -4,64 +4,56 @@
 
 <style></style>
 <template>
-    <div class='payment-box p-5 bg-white rounded shadow'>
-        <h3 class='mb-3'>Quota and Credits</h3>
-        <div>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                        Listing Quota
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                        type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">REfresh
-                        Property</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
-                        type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">
-
-                        Hot Listing
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
-                        type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false">
-                        Super Hot
-
-                    </button>
-                </li>
-            </ul>
-            <div class="tab-content mt-4" id="myTabContent">
-                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
-                    tabIndex="0">
-                    <p>You can pay cash to your courier when you received the good at your doorstep.</p>
-                    <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
+    <div class=' p-5 bg-white rounded shadow'>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-success">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">Properties Sold</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">4565</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                    </div>
                 </div>
-                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, magni!</p>
-                    <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                </div>
-                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabIndex="0">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur provident dolor animi.
-                    </p>
-                    <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                </div>
-                <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
-                    tabIndex="0">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, cupiditate!</p>
-                    <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                </div>
-
             </div>
-
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-success">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">Views</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">8541</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa-solid fa-eye"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-success">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">New Customers</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">4565</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card bg-success">
+                    <div class="card-body">
+                        <h3 class="card-title text-white">Satisfaction</h3>
+                        <div class="d-inline-block">
+                            <h2 class="text-white">99%</h2>
+                            <p class="text-white mb-0">Jan - March 2019</p>
+                        </div>
+                        <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 </template>
