@@ -59,7 +59,7 @@ export default {
     <div class="container detailPage">
         <div class="row my-5">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card shadow-sm">
                     <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
                         class="card-img-top" style="height: 600px;" alt="...">
                     <div class="card-body">
@@ -87,7 +87,7 @@ export default {
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card text-bg-light mb-3">
+                        <div class="card text-bg-light mb-3 shadow-sm">
                             <div class="card-header">Details</div>
                             <div class="card-body">
                                 <div class="row g-1">
@@ -153,7 +153,7 @@ export default {
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-header">Amenities</div>
                             <div class="card-body">
                                 <h5 class="card-title">Main Features</h5>
@@ -180,7 +180,7 @@ export default {
                     <div class="col-12">
                         <div class="row g-2 my-4">
                             <div class="col-12">
-                                <div class="card">
+                                <div class="card shadow-sm">
                                     <div class="card-header"><img src="../../assets/icons/location.png" height="30" alt="">
                                         Location</div>
                                     <div class="card-body">
@@ -194,7 +194,7 @@ export default {
                             </div>
                             <div class="col-12">
                                 <RouterLink to="/agentprofile" class="text-decoration-none">
-                                    <div class="card">
+                                    <div class="card shadow-sm">
                                         <div class="card-header">Agent Info</div>
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -222,13 +222,13 @@ export default {
             <div class="col-md-4">
                 <div class="row sticky-top">
                     <div class="col-12">
-                        <div class="card mb-3 ">
+                        <div class="card mb-3 shadow-sm">
                             <div class="card-header">
                                 <h5 class="card-title">PKR {{ productDetail.total_price }}</h5>
                             </div>
                             <div class="card-body text-center">
-                                <button class="btn btn-outline-success me-2">Call</button>
-                                <button class="btn btn-outline-success">WhatsApp</button>
+                                <button class="mainBtnColor bg-white me-2"><i class="fas fa-phone fa-lg"></i> Call</button>
+                                <button class="mainBtnColor bg-white"><i class="fa-brands fa-whatsapp fa-xl"></i> WhatsApp</button>
                                 <div class="mt-2">
                                     <img src="https://github.com/mdo.png" alt="" width="50" height="50"
                                         class="rounded-circle border border-2 border-primary p-1">

@@ -50,7 +50,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <button class="btn btn-danger">Find</button>
+                    <button class="SearchBtnColor">Find</button>
                 </div>
             </div>
             <!-- <div class="d-flex my-2">
@@ -213,8 +213,8 @@
             </div> -->
         </div>
         <div class="my-4">
-            <button class="btn btn-primary me-2">Previous</button>
-            <button class="btn btn-primary">Next</button>
+            <button class="mainBtnColor bg-white me-2">Previous</button>
+            <button class="mainBtnColor bg-white">Next</button>
         </div>
     </div>
     <Footer />

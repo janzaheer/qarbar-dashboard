@@ -2,17 +2,8 @@
     <div class="container">
         <div class="card p-3">
             <div class="d-flex my-2 justify-content-center">
-                <!-- <button type="button" class="btn btn-outline-secondary mx-2 mainButton">Buy</button>
-                <button type="button" class="btn btn-outline-secondary mainButton">Rent</button>
-                <button type="button" class="btn btn-outline-secondary ms-2 mainButton">New Projects</button> -->
-                <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off"
-                    checked>
-                <label class="btn btn-outline-secondary" for="success-outlined">Buy</label>
-
-                <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary mx-2" for="danger-outlined">Rent</label>
-                <!-- <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary" for="warning-outlined">New Projects</label> -->
+               <button class="mainBtnColor me-2">Buy</button>
+               <button class="unSelectedButtonColor ButtonColor">Rent</button>
             </div>
             <div class="row g-1">
                 <div class="col-4 col-md-12 col-lg-6 ">
@@ -76,8 +67,7 @@
                     </select>
                 </div> -->
                 <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1 text-center">
-                    <button class="btn btn-outline-secondary"><img src="../../assets/searchIcon/icons8-search.gif"
-                            class="text-danger" style="height: 20px;" alt="img" /> </button>
+                    <button class="SearchBtnColor">Find </button>
 
                 </div>
                 <div class="mt-2">
@@ -142,36 +132,11 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
-.mainButton:focus {
-    /* Add your active button styles here */
-    background-color: #5C636A;
+.SearchBtnColor{
+    padding: 5px 20px 5px 20px;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 69, 0);
+    background-color: rgb(255, 69, 0);
     color: white;
-}
-
-.multiselect-tag.is-user {
-    padding: 5px 8px;
-    border-radius: 22px;
-    background: #35495e;
-    margin: 3px 3px 8px;
-}
-
-.multiselect-tag.is-user img {
-    width: 18px;
-    border-radius: 50%;
-    height: 18px;
-    margin-right: 8px;
-    border: 2px solid #ffffffbf;
-}
-
-.multiselect-tag.is-user i:before {
-    color: #ffffff;
-    border-radius: 50%;
-    ;
-}
-
-.user-image {
-    margin: 0 6px 0 0;
-    border-radius: 50%;
-    height: 22px;
 }
 </style>
