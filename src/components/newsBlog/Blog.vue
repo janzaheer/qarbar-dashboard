@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2 class="display-6 text-center mb-4">News from the blog</h2>
+        <h2 class="display-6 text-center mb-4">News from the Qarbar blog</h2>
         <div class="table-responsive">
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-start align-items-center">

@@ -11,8 +11,8 @@
 
                 <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
                 <label class="btn btn-outline-secondary mx-2" for="danger-outlined">Rent</label>
-                <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary" for="warning-outlined">New Projects</label>
+                <!-- <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary" for="warning-outlined">New Projects</label> -->
             </div>
             <div class="row g-1">
                 <div class="col-4 col-md-12 col-lg-6 ">
@@ -25,7 +25,7 @@
                             { value: 'Nushki', label: 'Nushki' },
                         ]" />
                 </div>
-                <div class="col-2 col-md-3 col-lg-2 mt-sm-1 mt-lg-1 ">
+                <div class="col-2 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Property type</option>
                         <option value="1">Apartment</option>
@@ -37,11 +37,9 @@
                     </select>
                 </div>
                 <div class="col-2 col-md-3 col-lg-2 mt-lg-1 mt-1">
-
-
                     <div class="">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Beds & Baths
                         </button>
 
@@ -69,67 +67,51 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-2 col-md-5 col-lg-1 mt-lg-1 mt-1">
+                <!-- <div class="col-2 col-md-5 col-lg-1 mt-lg-1 mt-1">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Price</option>
                         <option value="1">$1000</option>
                         <option value="2">$2000</option>
                         <option value="3">$4000</option>
                     </select>
-                </div>
-                <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1">
-                    <button class="btn btn-outline-light"><img src="../../assets/searchIcon/icons8-search.gif"
+                </div> -->
+                <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1 text-center">
+                    <button class="btn btn-outline-secondary"><img src="../../assets/searchIcon/icons8-search.gif"
                             class="text-danger" style="height: 20px;" alt="img" /> </button>
 
                 </div>
                 <div class="mt-2">
                     <div class="collapse" id="collapseExample">
                         <div class="row g-1">
-                            <div class="col-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                            <div class="col-3">
+                                
+                                <input type="range" class="form-range" id="customRange1">
+                                <label for="customRange1" class="form-label">Price range</label>
                             </div>
-                            <div class="col-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="col-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                            <div class="col-3">
+                                  
+                                <input type="range" class="form-range" id="customRange2">
+                                <label for="customRange2" class="form-label">Area</label>
                             </div>
                             <div class="col-6">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
+                                <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Search like a any place"
+                                        aria-label="Search">
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-between mt-1 mx-md-5">
-                <div>
+            <div class="d-flex justify-content-center mt-1 mx-md-5">
+                <!-- <div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                         <label class="form-check-label" for="defaultCheck1">
                             Show commercial properties only
                         </label>
                     </div>
-                </div>
+                </div> -->
                 <div>
                     <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                         aria-controls="collapseExample">

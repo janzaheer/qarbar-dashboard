@@ -1,5 +1,6 @@
 <script>
 // import VueGallerySlideshow from 'vue-gallery-slideshow';
+// import VuePictureSwipe from 'vue3-picture-swipe';
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue'
 import { RouterLink } from 'vue-router';
@@ -10,6 +11,7 @@ export default {
     components: {
         Header,
         Footer,
+        // VuePictureSwipe
         // VueGallerySlideshow
     },
     created: function () {
@@ -17,20 +19,27 @@ export default {
     },
     data() {
         return {
-            productDetail: []
+            productDetail: [],
+            singleImage:[],
+            ThumbnailImage: this.productDetail?.media && this.productDetail?.media[0].image_url,
         }
     },
     methods: {
         async getSingleProduct() {
             try {
                 let res = await axios.get('http://13.127.231.16/api/v1/properties/' + this.$route.params.id + '/detail_property/')
-                console.log('==========================00')
-                console.log(res.data)
                 this.productDetail = res.data
+                // this.image = res.data.media[0].image_url
+                this.singleImage = res.data.media
+                console.log(res.data)
             } catch (error) {
                 console.log(error)
             }
-        }
+        },
+        selectimage(i){
+            this.ThumbnailImage = i
+            console.log('imageSelect',this.ThumbnailImage = i)
+        },
     },
     mounted() {
         console.log(this.$route.params.id)
@@ -48,17 +57,18 @@ export default {
 <template>
     <Header />
     <div class="container detailPage">
-        <!-- <div class="my-5">
-            <img class="image" v-for="(image, i) in images" :src="image" :key="i" @click="index = i">
-            <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
-        </div> -->
-
         <div class="row my-5">
             <div class="col-md-12">
                 <div class="card">
-                    <img src="https://www.propertyfinder.ae/property/78721e7b589%E2%80%A679/856/550/MODE/de47c7/9907514-a55cdo.webp?ctr=ae"
+                    <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
                         class="card-img-top" style="height: 600px;" alt="...">
                     <div class="card-body">
+                        <div class="d-flex justify-content-center mt-1">
+                                <div class="thumbnail text-center mx-1" v-for="item in singleImage">
+                                    <img :src="item.image_url" class="img-thumbnail" style="height: 50px; width: 60px;"
+                                        v-on:click="selectimage(item)" />
+                                </div>
+                            </div>
                         <h5 class="card-title">Overview</h5>
                         <h6 class="card-title">APARTMENT FOR SALE IN SKYCOURTS TOWER F, SKYCOURTS TOWERS</h6>
                         <div class="d-flex align-items-center">
@@ -94,7 +104,7 @@ export default {
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">price</th>
-                                                        <td>77 Crore PKR</td>
+                                                        <td>{{ productDetail?.total_price }} PKR</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Bath's</th>
@@ -146,7 +156,7 @@ export default {
                         <div class="card">
                             <div class="card-header">Amenities</div>
                             <div class="card-body">
-                                <h5 class="card-title">Amenities</h5>
+                                <h5 class="card-title">Main Features</h5>
                                 <div class="d-flex justify-content-around">
                                     <div>
                                         <p>Unfurnished</p>
@@ -176,7 +186,7 @@ export default {
                                     <div class="card-body">
                                         <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6940.621364062964!2d65.97918749545015!3d29.565562450672537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ed21b11a9de7ca1%3A0x4b4f7595a43e99ab!2sKilli%20Sharif%20Khan%20Badini%2C%20Nushki%2C%20Balochistan%2C%20Pakistan!5e0!3m2!1sen!2s!4v1686139844821!5m2!1sen!2s"
-                                            width="830" height="330" allowfullscreen="" loading="lazy"
+                                            width="500" height="330" allowfullscreen="" loading="lazy"
                                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
 
@@ -214,7 +224,7 @@ export default {
                     <div class="col-12">
                         <div class="card mb-3 ">
                             <div class="card-header">
-                                <h5 class="card-title">PKR 7.7 Core</h5>
+                                <h5 class="card-title">PKR {{ productDetail.total_price }}</h5>
                             </div>
                             <div class="card-body text-center">
                                 <button class="btn btn-outline-success me-2">Call</button>
@@ -233,92 +243,11 @@ export default {
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 col-md-8">
-                <div class="card">
-                    <div class="card-header">Prices & Trends</div>
-                    <div class="card-body">
-                        <h6 class="card-title">6 bedrooms villas sold in Aseel and Arabian Ranches</h6>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In possimus facilis
-                            odit sed, eaque inventore dolor consequuntur cum beatae vero.</p>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In possimus facilis
-                            odit sed, eaque inventore dolor consequuntur cum beatae vero.</p>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In possimus facilis
-                            odit sed, eaque inventore dolor consequuntur cum beatae vero.</p>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In possimus facilis
-                            odit sed, eaque inventore dolor consequuntur cum beatae vero.</p>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In possimus facilis
-                            odit sed, eaque inventore dolor consequuntur cum beatae vero.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="">
-            <div class='container payment-method mt-5 w-50'>
-                <div class='payment-box p-5 bg-white rounded shadow'>
-                    <h3 class='mb-3'>Select Payment Method Please</h3>
-                    <div>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
-                                    aria-selected="true">
-                                    trrrtytryrty
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                    data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                    aria-controls="profile-tab-pane" aria-selected="false">gggggggg</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                    data-bs-target="#contact-tab-pane" type="button" role="tab"
-                                    aria-controls="contact-tab-pane" aria-selected="false">rttrtrttr</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
-                                    data-bs-target="#disabled-tab-pane" type="button" role="tab"
-                                    aria-controls="disabled-tab-pane" aria-selected="false">
-                                    hhhhhh
-                                </button>
-                            </li>
-                        </ul>
-                        <div class="tab-content mt-4" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                aria-labelledby="home-tab" tabIndex={0}>
-                                <p>You can pay cash to your courier when you received the good at your doorstep.</p>
-                                <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                            </div>
-                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
-                                tabIndex={0}>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, magni!</p>
-                                <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                            </div>
-                            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
-                                tabIndex={0}>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur provident dolor
-                                    animi.</p>
-                                <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                            </div>
-                            <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
-                                tabIndex={0}>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, cupiditate!</p>
-                                <button class='btn btn-outline-warning w-20'>Confirm Order</button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
+        <!-- <div class="my-3">
+            <vue-picture-swipe :items="[
+                { src: 'https://www.propertyfinder.ae/property/78721e7b589%E2%80%A679/856/550/MODE/de47c7/9907514-a55cdo.webp?ctr=ae', thumbnail: 'http://example.org/sm1.jpg', w: 1200, h: 900, title: 'Will be used for caption' },
+                { src: 'https://www.propertyfinder.ae/property/78721e7b589%E2%80%A679/856/550/MODE/de47c7/9907514-a55cdo.webp?ctr=ae', thumbnail: 'http://example.org/sm1.jpg', w: 1200, h: 900 }
+            ]"></vue-picture-swipe>
         </div> -->
     </div>
     <Footer />

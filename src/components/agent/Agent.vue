@@ -23,78 +23,6 @@
                     <Navigation />
                 </template>
             </Carousel>
-            <!-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card text-center border-0 agentBg">
-                        <div class="card-body">
-                            <img src="https://github.com/mdo.png" alt="" width="150" height="150"
-                                class="rounded-circle border border-2 border-primary p-1">
-                            <h4 class="card-title mt-2">Atif Badini</h4>
-                            <p class="card-text">Owner Real Estate</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div> -->
-            <!-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card text-center border-0 agentBg">
-                        <div class="card-body">
-                            <img src="https://github.com/mdo.png" alt="" width="150" height="150"
-                                class="rounded-circle border border-2 border-primary p-1">
-                            <h4 class="card-title mt-2">Ali Akbar</h4>
-                            <p class="card-text">Co Owner Real Estate</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card text-center border-0 agentBg">
-                        <div class="card-body">
-                            <img src="https://github.com/mdo.png" alt="" width="150" height="150"
-                                class="rounded-circle border border-2 border-primary p-1">
-                            <h4 class="card-title mt-2">Shehroz Jan</h4>
-                            <p class="card-text">Manager Real Estate</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card text-center border-0 agentBg">
-                        <div class="card-body">
-                            <img src="https://github.com/mdo.png" alt="" width="150" height="150"
-                                class="rounded-circle border border-2 border-primary p-1">
-                            <h4 class="card-title mt-2">Shaid Kha Kan</h4>
-                            <p class="card-text">Employee Real Estate</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card text-center border-0 agentBg">
-                        <div class="card-body">
-                            <img src="https://github.com/mdo.png" alt="" width="150" height="150"
-                                class="rounded-circle border border-2 border-primary p-1">
-                            <h4 class="card-title mt-2">Jamal ud Din</h4>
-                            <p class="card-text">Employee Real Estate</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/agentprofile" class="text-decoration-none">
-                    <div class="card text-center border-0 agentBg">
-                        <div class="card-body">
-                            <img src="https://github.com/mdo.png" alt="" width="150" height="150"
-                                class="rounded-circle border border-2 border-primary p-1">
-                            <h4 class="card-title mt-2">Kamal Khan</h4>
-                            <p class="card-text">Employee Real Estate</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div> -->
         </div>
     </div>
 </template>
@@ -143,7 +71,7 @@ export default {
     methods: {
         async getUsers() {
             let res = await axios.get('https://dummyjson.com/users')
-            console.log(res.data)
+            // console.log(res.data)
             // this.list = res.data.products
             this.userList = res.data.users
         },

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="card text-dark">
-            <img src="../../assets/slider/s1.webp" class="card-img imge-card d-block w-100" alt="...">
+            <img src="https://static.rdc.moveaws.com/images/hero/default/2021-11/webp/hp-hero-desktop-xl.webp" class="card-img imge-card d-block w-100" alt="...">
             <div class="card-img-overlay ">
                 <div class="sliderTop">
                     <div class="d-flex justify-content-center align-items-center my-md-1">
