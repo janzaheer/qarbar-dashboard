@@ -6,21 +6,29 @@ import Footer from '../common/footer/Footer.vue'
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
+import { GoogleMap, Marker } from "vue3-google-map";
 export default {
     name: 'DetailPage',
     components: {
         Header,
         Footer,
+        GoogleMap, Marker
         // VuePictureSwipe
         // VueGallerySlideshow
     },
     created: function () {
         this.moment = moment;
     },
+    setup() {
+        const center = { lat: 30.188650, lng: -82.637150 };
+        const markerOptions = { position: center, label: "L", title: "LADY LIBERTY" };
+
+        return { center, markerOptions };
+    },
     data() {
         return {
             productDetail: [],
-            singleImage:[],
+            singleImage: [],
             ThumbnailImage: this.productDetail?.media && this.productDetail?.media[0].image_url,
         }
     },
@@ -36,9 +44,9 @@ export default {
                 console.log(error)
             }
         },
-        selectimage(i){
+        selectimage(i) {
             this.ThumbnailImage = i
-            console.log('imageSelect',this.ThumbnailImage = i)
+            console.log('imageSelect', this.ThumbnailImage = i)
         },
     },
     mounted() {
@@ -64,11 +72,11 @@ export default {
                         class="card-img-top" style="height: 600px;" alt="...">
                     <div class="card-body">
                         <div class="d-flex justify-content-center mt-1">
-                                <div class="thumbnail text-center mx-1" v-for="item in singleImage">
-                                    <img :src="item.image_url" class="img-thumbnail" style="height: 50px; width: 60px;"
-                                        v-on:click="selectimage(item)" />
-                                </div>
+                            <div class="thumbnail text-center mx-1" v-for="item in singleImage">
+                                <img :src="item.image_url" class="img-thumbnail" style="height: 50px; width: 60px;"
+                                    v-on:click="selectimage(item)" />
                             </div>
+                        </div>
                         <h5 class="card-title">Overview</h5>
                         <h6 class="card-title">APARTMENT FOR SALE IN SKYCOURTS TOWER F, SKYCOURTS TOWERS</h6>
                         <div class="d-flex align-items-center">
@@ -184,10 +192,17 @@ export default {
                                     <div class="card-header"><img src="../../assets/icons/location.png" height="30" alt="">
                                         Location</div>
                                     <div class="card-body">
+
+                                        <GoogleMap api-key="YOUR_GOOGLE_MAPS_API_KEY" style="width: 100%; height: 500px"
+                                            :center="center" :zoom="15">
+                                            <Marker :options="markerOptions" />
+                                        </GoogleMap>
+                                        <!-- https://goo.gl/maps/wz1RtcpA2V5Bsw7R9 -->
                                         <iframe
                                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6940.621364062964!2d65.97918749545015!3d29.565562450672537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ed21b11a9de7ca1%3A0x4b4f7595a43e99ab!2sKilli%20Sharif%20Khan%20Badini%2C%20Nushki%2C%20Balochistan%2C%20Pakistan!5e0!3m2!1sen!2s!4v1686139844821!5m2!1sen!2s"
                                             width="500" height="330" allowfullscreen="" loading="lazy"
                                             referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                                     </div>
 
                                 </div>
@@ -228,7 +243,8 @@ export default {
                             </div>
                             <div class="card-body text-center">
                                 <button class="mainBtnColor bg-white me-2"><i class="fas fa-phone fa-lg"></i> Call</button>
-                                <button class="mainBtnColor bg-white"><i class="fa-brands fa-whatsapp fa-xl"></i> WhatsApp</button>
+                                <button class="mainBtnColor bg-white"><i class="fa-brands fa-whatsapp fa-xl"></i>
+                                    WhatsApp</button>
                                 <div class="mt-2">
                                     <img src="https://github.com/mdo.png" alt="" width="50" height="50"
                                         class="rounded-circle border border-2 border-primary p-1">

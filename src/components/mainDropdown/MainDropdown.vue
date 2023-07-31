@@ -2,8 +2,13 @@
     <div class="container">
         <div class="card p-3">
             <div class="d-flex my-2 justify-content-center">
-               <button class="mainBtnColor me-2">Buy</button>
-               <button class="unSelectedButtonColor ButtonColor">Rent</button>
+                <button
+                    :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
+                    v-on:click="handleSellView">
+                    <i class="fa-solid fa-house-circle-check"></i> Sell</button>
+                <button :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                    v-on:click="handleRentView">
+                    <i class="fa-solid fa-house-lock"></i> Rent</button>
             </div>
             <div class="row g-1">
                 <div class="col-4 col-md-12 col-lg-6 ">
@@ -74,20 +79,62 @@
                     <div class="collapse" id="collapseExample">
                         <div class="row g-1">
                             <div class="col-3">
-                                
-                                <input type="range" class="form-range" id="customRange1">
-                                <label for="customRange1" class="form-label">Price range</label>
+                                <div class="">
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Price 0 to Any
+                                    </button>
+
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-items">
+                                        
+                                               
+                                                    <div class="m-2">
+                                                        <!-- <div class="d-flex form-inputs">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Min Price(PKR)" />
+                                                        </div> -->
+                                                        <h6>"Min Price(PKR)</h6>
+                                                        <button class="btn btn-secondary">10,000</button>
+                                                        <button class="btn btn-secondary mx-1">20,000</button>
+                                                        <button class="btn btn-secondary">30,000</button>
+                                                        <button class="btn btn-secondary mx-1">40,000</button>
+                                                        <button class="btn btn-secondary">50,000</button>
+                                                        <button class="btn btn-secondary ms-1">60,000</button>
+                                                        
+                                                    </div>
+                                             
+                                                
+                                                    <div class=" m-2">
+                                                        <h6>"Max Price(PKR)</h6>
+                                                        <button class="btn btn-secondary">1</button>
+                                                        <button class="btn btn-secondary mx-1">2</button>
+                                                        <button class="btn btn-secondary">3</button>
+                                                        <button class="btn btn-secondary mx-1">4</button>
+                                                        <button class="btn btn-secondary">5</button>
+                                                        <button class="btn btn-secondary ms-1">6+</button>
+                                                    </div>
+                                              
+                                            
+
+
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col-3">
-                                  
-                                <input type="range" class="form-range" id="customRange2">
-                                <label for="customRange2" class="form-label">Area</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Area</option>
+                                    <option value="1">$1000</option>
+                                    <option value="2">$2000</option>
+                                    <option value="3">$4000</option>
+                                </select>
                             </div>
                             <div class="col-6">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Search like a any place"
-                                        aria-label="Search">
-                                </form>
+                                <div class="d-flex form-inputs">
+                                    <input class="form-control" type="text" placeholder="Search any product..."
+                                        v-on:keyup="(e) => handleSearch(e)" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,6 +171,31 @@ export default {
     data() {
         return {
             value: [],
+            sellChecked: true,
+            rentChecked: false
+        }
+    },
+    methods: {
+        handleSellView() {
+            this.sellChecked = true;
+            this.rentChecked = false;
+        },
+        handleRentView() {
+            this.sellChecked = false;
+            this.rentChecked = true;
+        },
+        handleSearch(e) {
+            // e.preventDefault();
+            e.preventDefault();
+            /* eslint eqeqeq: 0 */
+            if (e.key == 'Enter') {
+                let value = e.target.value
+                //   navigate(`/search/?search=${value}`)
+                // this.$router.push({ path: '/listing/?search=', query: { search: value } });
+                console.log('-------------------------------------')
+                console.log('search-value', value)
+                console.log('-------------------------------------')
+            }
         }
     }
 }
@@ -132,7 +204,7 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
-.SearchBtnColor{
+.SearchBtnColor {
     padding: 5px 20px 5px 20px;
     border-radius: 10px;
     border: 1px solid rgb(255, 69, 0);
