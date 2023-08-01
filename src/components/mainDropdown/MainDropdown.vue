@@ -80,46 +80,55 @@
                         <div class="row g-1">
                             <div class="col-3">
                                 <div class="">
-                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Price 0 to Any
-                                    </button>
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Dropdown</button>
+                                        <div class="dropdown-content">
+                                            <a href="#">Link 1</a>
+                                            <a href="#">Link 2</a>
+                                            <a href="#">Link 3</a>
+                                        </div>
+                                    </div>
 
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-items">
-                                        
-                                               
-                                                    <div class="m-2">
-                                                        <!-- <div class="d-flex form-inputs">
-                                                            <input class="form-control" type="text"
-                                                                placeholder="Min Price(PKR)" />
-                                                        </div> -->
-                                                        <h6>"Min Price(PKR)</h6>
-                                                        <button class="btn btn-secondary">10,000</button>
-                                                        <button class="btn btn-secondary mx-1">20,000</button>
-                                                        <button class="btn btn-secondary">30,000</button>
-                                                        <button class="btn btn-secondary mx-1">40,000</button>
-                                                        <button class="btn btn-secondary">50,000</button>
-                                                        <button class="btn btn-secondary ms-1">60,000</button>
-                                                        
+                                    <!-- <div class="dropdown">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Price 0 to Any
+                                        </button>
+
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item"> -->
+
+                                    <!-- <div class="row">
+                                                    <div class="col-6 my-2">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>0</option>
+                                                            <option value="1">$1000</option>
+                                                            <option value="2">$2000</option>
+                                                            <option value="3">$4000</option>
+                                                            <option value="4">$4000</option>
+                                                            <option value="5">$4000</option>
+                                                            <option value="6">$4000</option>
+                                                            <option value="7">$4000</option>
+                                                            <option value="8">$4000</option>
+                                                        </select>
                                                     </div>
-                                             
-                                                
-                                                    <div class=" m-2">
-                                                        <h6>"Max Price(PKR)</h6>
-                                                        <button class="btn btn-secondary">1</button>
-                                                        <button class="btn btn-secondary mx-1">2</button>
-                                                        <button class="btn btn-secondary">3</button>
-                                                        <button class="btn btn-secondary mx-1">4</button>
-                                                        <button class="btn btn-secondary">5</button>
-                                                        <button class="btn btn-secondary ms-1">6+</button>
+                                                    <div class="col-6 my-2">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>0</option>
+                                                            <option value="1">$1000</option>
+                                                            <option value="2">$2000</option>
+                                                            <option value="3">$4000</option>
+                                                            <option value="4">$4000</option>
+                                                            <option value="5">$4000</option>
+                                                            <option value="6">$4000</option>
+                                                            <option value="7">$4000</option>
+                                                            <option value="8">$4000</option>
+                                                        </select>
                                                     </div>
-                                              
-                                            
-
-
-                                        </li>
-                                    </ul>
+                                                </div> -->
+                                    <!-- </li>
+                                        </ul>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-3">
@@ -211,4 +220,45 @@ export default {
     background-color: rgb(255, 69, 0);
     color: white;
 }
-</style>
+
+.dropbtn {
+    background-color: rgb(255, 69, 0);
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(221, 124, 89);
+}</style>

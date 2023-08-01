@@ -253,7 +253,7 @@ export default {
 
             try {
                 this.loading = true;
-                let res = await axios.get(`http://13.127.231.16/api/v1/properties/?R_B_type=${category_name}`);
+                let res = await axios.get(`https://apidev.qarbar.com/api/v1/properties/?R_B_type=${category_name}`);
                 // console.log(res.data.results);
                 this.properties = res.data.results
                 this.propertiesCount = res.data

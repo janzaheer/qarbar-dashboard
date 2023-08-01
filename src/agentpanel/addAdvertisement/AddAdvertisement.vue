@@ -25,6 +25,23 @@ export default {
                 isPenthouse: false,
                 isApartment: false
             },
+            plotPropertyVal: 'plot',
+            plotProperty: {
+                isResidential: true,
+                isCommercial: false,
+                isIndustrial: false,
+                isAgricultural: false,
+                isPlotFarm: false,
+                isPlotFile: false
+            },
+            commercialPropertyVal: 'commercial',
+            commercialProperty: {
+                isOffice: true,
+                isSHop: false,
+                isWherehouse: false,
+                isFactory: false,
+                isBuilding: false
+            },
             // houseChecked: false,
             // flatChecked: false,
             // upperChecked: false,
@@ -34,17 +51,17 @@ export default {
             // penthouseChecked: false,
             // villaChecked: false,
             // apartmentChecked: false,
-            residentialChecked: false,
-            commercialChecked: false,
-            industrialChecked: false,
-            agriculturalChecked: false,
-            plotFileChecked: false,
-            plotFormChecked: false,
-            officeChecked: false,
-            shopChecked: false,
-            wherehouseChecked: false,
-            factoryChecked: false,
-            buildingChecked: false,
+            // residentialChecked: false,
+            // commercialChecked: false,
+            // industrialChecked: false,
+            // agriculturalChecked: false,
+            // plotFileChecked: false,
+            // plotFormChecked: false,
+            // officeChecked: false,
+            // shopChecked: false,
+            // wherehouseChecked: false,
+            // factoryChecked: false,
+            // buildingChecked: false,
             buyCHecked: true,
             loanCHecked: false,
 
@@ -135,7 +152,62 @@ export default {
                 this.homePropertyVal = 'penthouse'
             }
 
-        }
+        },
+        handlePlotProperty(e) {
+            Object.entries(this.plotProperty).forEach(([key, val]) => {
+                this.plotProperty[key] = false
+            })
+            if (e == 'residential') {
+                this.plotProperty.isResidential = true;
+                this.plotPropertyVal = 'residential'
+            }
+            if (e == 'commercial') {
+                this.plotProperty.isCommercial = true;
+                this.plotPropertyVal = 'commercial'
+            }
+            if (e == 'industiral') {
+                this.plotProperty.isIndustrial = true;
+                this.plotPropertyVal = 'industiral'
+            }
+            if (e == 'agricultural') {
+                this.plotProperty.isAgricultural = true;
+                this.plotPropertyVal = 'agricultural'
+            }
+            if (e == 'plotFile') {
+                this.plotProperty.isPlotFile = true;
+                this.plotPropertyVal = 'plotFile'
+            }
+            if (e == 'plotFarm') {
+                this.plotProperty.isPlotFarm = true;
+                this.plotPropertyVal = 'plotFarm'
+            }
+
+        },
+        handleCommercialProperty(e) {
+            Object.entries(this.commercialProperty).forEach(([key, val]) => {
+                this.commercialProperty[key] = false
+            })
+            if (e == 'office') {
+                this.commercialProperty.isOffice = true;
+                this.commercialPropertyVal = 'office'
+            }
+            if (e == 'shop') {
+                this.commercialProperty.isSHop = true;
+                this.commercialPropertyVal = 'shop'
+            }
+            if (e == 'wherehouse') {
+                this.commercialProperty.isWherehouse = true;
+                this.commercialPropertyVal = 'wherehouse'
+            }
+            if (e == 'factory') {
+                this.commercialProperty.isFactory = true;
+                this.commercialPropertyVal = 'factory'
+            }
+            if (e == 'building') {
+                this.commercialProperty.isBuilding = true;
+                this.commercialPropertyVal = 'building'
+            }
+        },
     },
 }
 </script>
@@ -147,6 +219,7 @@ export default {
     border-radius: 13px;
     padding: 8px 20px 8px 20px;
 }
+
 .mainBtnColor:hover {
     background-color: white;
     border: 1px solid rgb(221, 221, 221);
@@ -157,6 +230,7 @@ export default {
     border-radius: 15px;
     padding: 8px 20px 8px 20px;
 }
+
 .ButtonColor:hover {
     background-color: white;
     border: 1px solid rgb(221, 221, 221);
@@ -268,23 +342,51 @@ export default {
                                         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
                                             aria-labelledby="profile-tab" tabIndex="0">
                                             <div>
-                                                <button class="mainBtnColor">Residential Plot</button>
-                                                <button class="mainBtnColor mx-2">Commercial Plot</button>
-                                                <button class="mainBtnColor">Industiral Land</button>
-                                                <button class="mainBtnColor mt-2">Agricultural Land</button>
-                                                <button class="mainBtnColor mx-2">Plot File</button>
-                                                <button class="mainBtnColor">Plot Form</button>
+                                                <button
+                                                    :class="plotProperty.isResidential ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                                                    v-on:click="handlePlotProperty('residential')">Residential Plot</button>
+                                                <button
+                                                    :class="plotProperty.isCommercial ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
+                                                    v-on:click="handlePlotProperty('commercial')">Commercial Plot</button>
+                                                <button
+                                                    :class="plotProperty.isIndustrial ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                                                    v-on:click="handlePlotProperty('industiral')">Industiral Land</button>
+                                                <button
+                                                    :class="plotProperty.isAgricultural ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
+                                                    v-on:click="handlePlotProperty('agricultural')">Agricultural
+                                                    Land</button>
+                                                <button
+                                                    :class="plotProperty.isPlotFile ? 'selectedButtonColor ButtonColor mt-2 mx-2' : 'unSelectedButtonColor ButtonColor mt-2 mx-2'"
+                                                    v-on:click="handlePlotProperty('plotFile')">Plot File</button>
+                                                <button
+                                                    :class="plotProperty.isPlotFarm ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
+                                                    v-on:click="handlePlotProperty('plotFarm')">Plot Farm</button>
                                             </div>
 
                                         </div>
                                         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
                                             aria-labelledby="contact-tab" tabIndex="0">
                                             <div>
-                                                <button class="mainBtnColor"><i class="fa-solid fa-house"></i> Office</button>
-                                                <button class="mainBtnColor mx-2"><i class="fa-solid fa-house"></i> Shop</button>
-                                                <button class="mainBtnColor"><i class="fa-solid fa-house"></i> Wherehouse</button>
-                                                <button class="mainBtnColor mx-2"><i class="fa-solid fa-house"></i> Factory</button>
-                                                <button class="mainBtnColor mt-2"><i class="fa-solid fa-building"></i> Building</button>
+                                                <button :class="commercialProperty.isOffice ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                                                v-on:click="handleCommercialProperty('office')"
+                                                ><i class="fa-solid fa-house"></i>
+                                                    Office</button>
+                                                <button :class="commercialProperty.isSHop ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
+                                                v-on:click="handleCommercialProperty('shop')"
+                                                ><i class="fa-solid fa-house"></i>
+                                                    Shop</button>
+                                                <button :class="commercialProperty.isWherehouse ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                                                v-on:click="handleCommercialProperty('wherehouse')"
+                                                ><i class="fa-solid fa-house"></i>
+                                                    Wherehouse</button>
+                                                <button :class="commercialProperty.isFactory ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
+                                                v-on:click="handleCommercialProperty('factory')"
+                                                ><i class="fa-solid fa-house"></i>
+                                                    Factory</button>
+                                                <button :class="commercialProperty.isBuilding ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
+                                                v-on:click="handleCommercialProperty('building')"
+                                                ><i class="fa-solid fa-building"></i>
+                                                    Building</button>
                                             </div>
                                         </div>
                                     </div>
@@ -481,11 +583,10 @@ export default {
                     </div>
                 </div>
             </div>
-            <div class="my-1">
-                <button class="btn btn-secondary" v-on:click="logCheckboxValues">Add Submit Advertisement</button>
-            </div>
+        <div class="my-1">
+            <button class="btn btn-secondary" v-on:click="logCheckboxValues">Add Submit Advertisement</button>
         </div>
-
     </div>
-    <AgentDashboardFooter />
-</template>
+
+</div>
+<AgentDashboardFooter /></template>

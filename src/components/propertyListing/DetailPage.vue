@@ -35,7 +35,7 @@ export default {
     methods: {
         async getSingleProduct() {
             try {
-                let res = await axios.get('http://13.127.231.16/api/v1/properties/' + this.$route.params.id + '/detail_property/')
+                let res = await axios.get('https://apidev.qarbar.com/api/v1/properties/' + this.$route.params.id + '/detail_property/')
                 this.productDetail = res.data
                 // this.image = res.data.media[0].image_url
                 this.singleImage = res.data.media

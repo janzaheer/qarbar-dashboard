@@ -113,7 +113,7 @@
         </div>
         <div class="row mt-4 g-2">
             <p>New properties for {{ propertiesSaleList[0]?.R_B_type }}</p>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="item in propertiesSaleList.slice(0, 6)"
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2" v-for="item in propertiesSaleList.slice(0, 6)"
                 :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">
                     <div class="card text-dark productBg">
@@ -171,11 +171,11 @@ export default {
     },
     methods: {
         async getPropertiesRent() {
-            let res = await axios.get('http://13.127.231.16/api/v1/properties/?R_B_type=rent')
+            let res = await axios.get('https://apidev.qarbar.com/api/v1/properties/?R_B_type=rent')
             this.propertiesList = res.data.results
         },
         async getPropertiesSale() {
-            let res = await axios.get('http://13.127.231.16/api/v1/properties/?R_B_type=sale')
+            let res = await axios.get('https://apidev.qarbar.com/api/v1/properties/?R_B_type=sale')
             this.propertiesSaleList = res.data.results
         }
     },
