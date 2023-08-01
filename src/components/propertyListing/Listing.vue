@@ -50,7 +50,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <button class="btn btn-danger">Find</button>
+                    <button class="SearchBtnColor">Find</button>
                 </div>
             </div>
             <!-- <div class="d-flex my-2">
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-
+        <div v-if="loading">Loading...</div>
         <div class="row g-2 my-2 mx-5">
             <div class="col-md-12">
                 <div class="row">
@@ -156,19 +156,19 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="">
-                                                    <button class="btn btn-outline-secondary btn-sm">
+                                                    <button class="btn btn-outline-success btn-sm">
                                                         <i class="fas fa-phone fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-secondary btn-sm mx-2">
+                                                    <button class="btn btn-outline-success btn-sm mx-2">
                                                         <i class="fas fa-message fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-secondary btn-sm">
-                                                        <i class="fa-brands fa-whatsapp"></i>
+                                                    <button class="btn btn-outline-success btn-sm">
+                                                        <i class="fa-brands fa-whatsapp fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-secondary btn-sm mx-2">
+                                                    <!-- <button class="btn btn-outline-secondary btn-sm mx-2">
 
                                                         <i class="fas fa-heart fa-lg"></i>
-                                                    </button>
+                                                    </button> -->
                                                 </div>
                                                 <div class="dropdown-image">
                                                     <img v-if="items.company_agent"
@@ -176,9 +176,8 @@
                                                         style="width: 60px; height: 60px;" alt="">
                                                     <div class="dropdown-content">
                                                         <img v-if="items.company_agent"
-                                                        src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
-                                                        alt="Cinque Terre" width="300"
-                                                            height="200">
+                                                            src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
+                                                            alt="Cinque Terre" width="300" height="200">
                                                         <div class="desc">company agent name</div>
                                                     </div>
                                                 </div>
@@ -213,8 +212,8 @@
             </div> -->
         </div>
         <div class="my-4">
-            <button class="btn btn-primary me-2">Previous</button>
-            <button class="btn btn-primary">Next</button>
+            <button class="mainBtnColor bg-white me-2">Previous</button>
+            <button class="mainBtnColor bg-white">Next</button>
         </div>
     </div>
     <Footer />
@@ -234,9 +233,9 @@ export default {
     },
     data() {
         return {
-            list: [],
             properties: [],
             propertiesCount: [],
+            loading: false,
         }
     },
     created: function () {
@@ -247,27 +246,47 @@ export default {
         async getProperties() {
             const queryParams = new URLSearchParams(window.location.search);
             let category_name = queryParams.get("R_B_type");
+
             if (!category_name) {
                 category_name = ''
             }
 
             try {
-                let res = await axios.get(`http://13.127.231.16/api/v1/properties/?R_B_type=${category_name}`);
+                this.loading = true;
+                let res = await axios.get(`https://apidev.qarbar.com/api/v1/properties/?R_B_type=${category_name}`);
                 // console.log(res.data.results);
                 this.properties = res.data.results
                 this.propertiesCount = res.data
                 console.log(category_name)
+                // console.log('Query parameter search:', searchValue)
             } catch (error) {
                 console.error('Error fetching properties:', error);
+            } finally {
+                this.loading = false;
             }
         },
+        // async getSearch() {
+        //      const searchValue = this.$route.query.search;
+        //     try {
+        //         let res = await axios.get(`http://13.127.231.16/api/v1/properties/?search=${searchValue}` );
+        //         // console.log(res.data.results);
+        //         this.properties = res.data.results
+        //         this.propertiesCount = res.data
+        //         // console.log(category_name)
+        //         console.log('Query parameter search:', searchValue)
+        //     } catch (error) {
+        //         console.error('Error fetching properties:', error);
+        //     }
+        // },
 
     },
     mounted() {
         // this.getCategory();
         // this.handleProfile();
         this.getProperties();
-
+        // this.getSearch();
+        // const searchValue = this.$route.query.search;
+        // console.log('Query parameter search:', searchValue);
         // console.log(category_name)
         // console.log(this.$route.params.id)
 
@@ -296,26 +315,27 @@ export default {
 .listPageHover:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .dropdown-image {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .dropdown-image:hover .dropdown-content {
-  display: block;
+    display: block;
 }
 
 .desc {
-  padding: 15px;
-  text-align: center;
+    padding: 15px;
+    text-align: center;
 }
 </style>

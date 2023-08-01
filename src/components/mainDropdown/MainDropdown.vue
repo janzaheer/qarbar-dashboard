@@ -2,17 +2,13 @@
     <div class="container">
         <div class="card p-3">
             <div class="d-flex my-2 justify-content-center">
-                <!-- <button type="button" class="btn btn-outline-secondary mx-2 mainButton">Buy</button>
-                <button type="button" class="btn btn-outline-secondary mainButton">Rent</button>
-                <button type="button" class="btn btn-outline-secondary ms-2 mainButton">New Projects</button> -->
-                <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off"
-                    checked>
-                <label class="btn btn-outline-secondary" for="success-outlined">Buy</label>
-
-                <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary mx-2" for="danger-outlined">Rent</label>
-                <!-- <input type="radio" class="btn-check" name="options-outlined" id="warning-outlined" autocomplete="off">
-                <label class="btn btn-outline-secondary" for="warning-outlined">New Projects</label> -->
+                <button
+                    :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
+                    v-on:click="handleSellView">
+                    <i class="fa-solid fa-house-circle-check"></i> Sell</button>
+                <button :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                    v-on:click="handleRentView">
+                    <i class="fa-solid fa-house-lock"></i> Rent</button>
             </div>
             <div class="row g-1">
                 <div class="col-4 col-md-12 col-lg-6 ">
@@ -76,28 +72,78 @@
                     </select>
                 </div> -->
                 <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1 text-center">
-                    <button class="btn btn-outline-secondary"><img src="../../assets/searchIcon/icons8-search.gif"
-                            class="text-danger" style="height: 20px;" alt="img" /> </button>
+                    <button class="SearchBtnColor">Find </button>
 
                 </div>
                 <div class="mt-2">
                     <div class="collapse" id="collapseExample">
                         <div class="row g-1">
                             <div class="col-3">
-                                
-                                <input type="range" class="form-range" id="customRange1">
-                                <label for="customRange1" class="form-label">Price range</label>
+                                <div class="">
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Dropdown</button>
+                                        <div class="dropdown-content">
+                                            <a href="#">Link 1</a>
+                                            <a href="#">Link 2</a>
+                                            <a href="#">Link 3</a>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="dropdown">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Price 0 to Any
+                                        </button>
+
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item"> -->
+
+                                    <!-- <div class="row">
+                                                    <div class="col-6 my-2">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>0</option>
+                                                            <option value="1">$1000</option>
+                                                            <option value="2">$2000</option>
+                                                            <option value="3">$4000</option>
+                                                            <option value="4">$4000</option>
+                                                            <option value="5">$4000</option>
+                                                            <option value="6">$4000</option>
+                                                            <option value="7">$4000</option>
+                                                            <option value="8">$4000</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-6 my-2">
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option selected>0</option>
+                                                            <option value="1">$1000</option>
+                                                            <option value="2">$2000</option>
+                                                            <option value="3">$4000</option>
+                                                            <option value="4">$4000</option>
+                                                            <option value="5">$4000</option>
+                                                            <option value="6">$4000</option>
+                                                            <option value="7">$4000</option>
+                                                            <option value="8">$4000</option>
+                                                        </select>
+                                                    </div>
+                                                </div> -->
+                                    <!-- </li>
+                                        </ul>
+                                    </div> -->
+                                </div>
                             </div>
                             <div class="col-3">
-                                  
-                                <input type="range" class="form-range" id="customRange2">
-                                <label for="customRange2" class="form-label">Area</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Area</option>
+                                    <option value="1">$1000</option>
+                                    <option value="2">$2000</option>
+                                    <option value="3">$4000</option>
+                                </select>
                             </div>
                             <div class="col-6">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Search like a any place"
-                                        aria-label="Search">
-                                </form>
+                                <div class="d-flex form-inputs">
+                                    <input class="form-control" type="text" placeholder="Search any product..."
+                                        v-on:keyup="(e) => handleSearch(e)" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,6 +180,31 @@ export default {
     data() {
         return {
             value: [],
+            sellChecked: true,
+            rentChecked: false
+        }
+    },
+    methods: {
+        handleSellView() {
+            this.sellChecked = true;
+            this.rentChecked = false;
+        },
+        handleRentView() {
+            this.sellChecked = false;
+            this.rentChecked = true;
+        },
+        handleSearch(e) {
+            // e.preventDefault();
+            e.preventDefault();
+            /* eslint eqeqeq: 0 */
+            if (e.key == 'Enter') {
+                let value = e.target.value
+                //   navigate(`/search/?search=${value}`)
+                // this.$router.push({ path: '/listing/?search=', query: { search: value } });
+                console.log('-------------------------------------')
+                console.log('search-value', value)
+                console.log('-------------------------------------')
+            }
         }
     }
 }
@@ -142,36 +213,52 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
-.mainButton:focus {
-    /* Add your active button styles here */
-    background-color: #5C636A;
+.SearchBtnColor {
+    padding: 5px 20px 5px 20px;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 69, 0);
+    background-color: rgb(255, 69, 0);
     color: white;
 }
 
-.multiselect-tag.is-user {
-    padding: 5px 8px;
-    border-radius: 22px;
-    background: #35495e;
-    margin: 3px 3px 8px;
+.dropbtn {
+    background-color: rgb(255, 69, 0);
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
-.multiselect-tag.is-user img {
-    width: 18px;
-    border-radius: 50%;
-    height: 18px;
-    margin-right: 8px;
-    border: 2px solid #ffffffbf;
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-.multiselect-tag.is-user i:before {
-    color: #ffffff;
-    border-radius: 50%;
-    ;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
-.user-image {
-    margin: 0 6px 0 0;
-    border-radius: 50%;
-    height: 22px;
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
-</style>
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: rgb(221, 124, 89);
+}</style>
