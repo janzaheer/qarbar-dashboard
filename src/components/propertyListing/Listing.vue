@@ -225,6 +225,7 @@ import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
 import moment from 'moment'
 import axios from 'axios';
+import { BASE_URL,PROPERTY_END_POINT } from '../../utils/api';
 export default {
     name: 'Listing',
     components: {
@@ -253,7 +254,8 @@ export default {
 
             try {
                 this.loading = true;
-                let res = await axios.get(`https://apidev.qarbar.com/api/v1/properties/?R_B_type=${category_name}`);
+                let finalUrl = BASE_URL + PROPERTY_END_POINT() + `?R_B_type=${category_name}`
+                let res = await axios.get(finalUrl);
                 // console.log(res.data.results);
                 this.properties = res.data.results
                 this.propertiesCount = res.data

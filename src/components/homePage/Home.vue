@@ -158,6 +158,7 @@
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
+import { BASE_URL, PROPERTY_END_POINT } from '../../utils/api'; 
 export default {
     name: 'Home',
     data() {
@@ -171,11 +172,13 @@ export default {
     },
     methods: {
         async getPropertiesRent() {
-            let res = await axios.get('https://apidev.qarbar.com/api/v1/properties/?R_B_type=rent')
+            let finalUrl = BASE_URL + PROPERTY_END_POINT() +`?R_B_type=rent`;
+            let res = await axios.get(finalUrl)
             this.propertiesList = res.data.results
         },
         async getPropertiesSale() {
-            let res = await axios.get('https://apidev.qarbar.com/api/v1/properties/?R_B_type=sale')
+            let finalUrl = BASE_URL + PROPERTY_END_POINT() +`?R_B_type=sale`;
+            let res = await axios.get(finalUrl)
             this.propertiesSaleList = res.data.results
         }
     },

@@ -6,6 +6,7 @@ import Footer from '../common/footer/Footer.vue'
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
+import { BASE_URL,PROPERTY_END_POINT } from '../../utils/api';
 import { GoogleMap, Marker } from "vue3-google-map";
 export default {
     name: 'DetailPage',
@@ -35,9 +36,9 @@ export default {
     methods: {
         async getSingleProduct() {
             try {
-                let res = await axios.get('https://apidev.qarbar.com/api/v1/properties/' + this.$route.params.id + '/detail_property/')
+                let finalUrl = BASE_URL + PROPERTY_END_POINT() + this.$route.params.id + `/detail_property/`
+                let res = await axios.get(finalUrl)
                 this.productDetail = res.data
-                // this.image = res.data.media[0].image_url
                 this.singleImage = res.data.media
                 console.log(res.data)
             } catch (error) {

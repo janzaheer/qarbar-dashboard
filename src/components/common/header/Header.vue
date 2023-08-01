@@ -56,7 +56,7 @@
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <RouterLink class="btn btn-outline-danger btn-sm mt-1" to="/agentpanel">Add Property
+                    <RouterLink class="btn btn-outline-danger btn-sm mt-1" to="/agentDashboard">Add Property
                     </RouterLink>
                     <RouterLink class="btn btn-outline-warning btn-sm mt-1" to="/login">Login</RouterLink>
                     <ul class="navbar-nav">
