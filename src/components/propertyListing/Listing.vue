@@ -246,7 +246,7 @@ export default {
 
         async getProperties() {
             const queryParams = new URLSearchParams(window.location.search);
-            let category_name = queryParams.get("R_B_type");
+            let category_name = queryParams.get("rent_sale_type");
 
             if (!category_name) {
                 category_name = ''
@@ -254,7 +254,7 @@ export default {
 
             try {
                 this.loading = true;
-                let finalUrl = BASE_URL + PROPERTY_END_POINT() + `?R_B_type=${category_name}`
+                let finalUrl = BASE_URL + PROPERTY_END_POINT() + `?rent_sale_type=${category_name}`
                 let res = await axios.get(finalUrl);
                 // console.log(res.data.results);
                 this.properties = res.data.results
