@@ -38,25 +38,8 @@
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
-                        </li>
                     </ul>
-                    <RouterLink class="btn btn-outline-danger btn-sm mt-1" to="/agentDashboard">Add Property
+                    <RouterLink class="addPropertyBtnColor mt-1 mx-2" to="/agentDashboard">Add Property
                     </RouterLink>
                     <RouterLink class="btn btn-outline-warning btn-sm mt-1" to="/login">Login</RouterLink>
                     <ul class="navbar-nav">
@@ -135,5 +118,16 @@ import { RouterLink, RouterView } from 'vue-router'
     flex-wrap: inherit !important;
     align-items: center !important;
     justify-content: center !important;
+}
+.addPropertyBtnColor{
+    color: rgb(255, 69, 0);
+    border: 1px solid rgb(255, 69, 0);
+    border-radius: 10px;
+    padding: 5px 20px;
+    text-decoration: none;
+}
+.addPropertyBtnColor:hover{
+    color: rgb(221, 221, 221);
+    border: 1px solid rgb(221, 221, 221);
 }
 </style>

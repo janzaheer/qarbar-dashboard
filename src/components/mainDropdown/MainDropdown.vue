@@ -22,15 +22,15 @@
                         ]" />
                 </div>
                 <div class="col-2 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Property type</option>
-                        <option value="1">Apartment</option>
-                        <option value="2">Villa</option>
-                        <option value="3">Penthouse</option>
-                        <option value="4">Duplex</option>
-                        <option value="5">Land</option>
-                        <option value="6">Bungalow</option>
-                    </select>
+                    <div class="">
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
+                            data-bs-toggle="dropdown" aria-expanded="false">Property Type</button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">Home Type</li>
+                            <li class="dropdown-item"> Commercial Type</li>
+                            <li class="dropdown-item">Plot Type </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-2 col-md-3 col-lg-2 mt-lg-1 mt-1">
                     <div class="">
@@ -38,7 +38,6 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Beds & Baths
                         </button>
-
                         <ul class="dropdown-menu">
                             <li class="dropdown-items">
                                 <div class="m-2">
@@ -63,14 +62,6 @@
                         </ul>
                     </div>
                 </div>
-                <!-- <div class="col-2 col-md-5 col-lg-1 mt-lg-1 mt-1">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Price</option>
-                        <option value="1">$1000</option>
-                        <option value="2">$2000</option>
-                        <option value="3">$4000</option>
-                    </select>
-                </div> -->
                 <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1 text-center">
                     <button class="SearchBtnColor">Find </button>
 
@@ -81,11 +72,36 @@
                             <div class="col-3">
                                 <div class="">
                                     <div class="dropdown">
-                                        <button class="dropbtn">Dropdown</button>
+                                        <button class="btn btn-outline-secondary w-100">Price</button>
                                         <div class="dropdown-content">
-                                            <a href="#">Link 1</a>
-                                            <a href="#">Link 2</a>
-                                            <a href="#">Link 3</a>
+                                            <div class="row g-2">
+                                                <div class="col-6 my-2">
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>0</option>
+                                                        <option value="1">$1000</option>
+                                                        <option value="2">$2000</option>
+                                                        <option value="3">$4000</option>
+                                                        <option value="4">$4000</option>
+                                                        <option value="5">$4000</option>
+                                                        <option value="6">$4000</option>
+                                                        <option value="7">$4000</option>
+                                                        <option value="8">$4000</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 my-2">
+                                                    <select class="form-select" aria-label="Default select example">
+                                                        <option selected>0</option>
+                                                        <option value="1">$1000</option>
+                                                        <option value="2">$2000</option>
+                                                        <option value="3">$4000</option>
+                                                        <option value="4">$4000</option>
+                                                        <option value="5">$4000</option>
+                                                        <option value="6">$4000</option>
+                                                        <option value="7">$4000</option>
+                                                        <option value="8">$4000</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -132,12 +148,54 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Area</option>
-                                    <option value="1">$1000</option>
-                                    <option value="2">$2000</option>
-                                    <option value="3">$4000</option>
-                                </select>
+                                <div class="">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Area
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <div class="row g-2">
+                                                <div class="col-6 my-2">
+                                                    <div class="">
+                                                        <form action="#">
+                                                            <label for="lang">Min Price</label>
+                                                            <select name="languages" id="lang">
+                                                                <option value="javascript">JavaScript</option>
+                                                                <option value="php">PHP</option>
+                                                                <option value="java">Java</option>
+                                                                <option value="golang">Golang</option>
+                                                                <option value="python">Python</option>
+                                                                <option value="c#">C#</option>
+                                                                <option value="C++">C++</option>
+                                                                <option value="erlang">Erlang</option>
+                                                            </select>
+                                                            <input type="submit" value="Submit" />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 my-2">
+                                                    <div class="">
+                                                        <form action="#">
+                                                            <label for="lang">Max Price</label>
+                                                            <select name="languages" id="lang">
+                                                                <option value="javascript">JavaScript</option>
+                                                                <option value="php">PHP</option>
+                                                                <option value="java">Java</option>
+                                                                <option value="golang">Golang</option>
+                                                                <option value="python">Python</option>
+                                                                <option value="c#">C#</option>
+                                                                <option value="C++">C++</option>
+                                                                <option value="erlang">Erlang</option>
+                                                            </select>
+                                                            <input type="submit" value="Submit" />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex form-inputs">
@@ -233,6 +291,7 @@ export default {
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 100%;
 }
 
 .dropdown-content {
@@ -261,4 +320,12 @@ export default {
 
 .dropdown:hover .dropbtn {
     background-color: rgb(221, 124, 89);
-}</style>
+}
+
+input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+</style>

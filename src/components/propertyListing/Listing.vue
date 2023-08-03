@@ -121,8 +121,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <div>
                                                     <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                                    <span class="badge text-bg-secondary card-title">{{ items?.property_type
-                                                    }}</span>
+                                                    <span class="badge text-bg-secondary card-title">property type</span>
                                                     <h4>{{ items?.total_price }} Rs </h4>
                                                 </div>
                                                 <div class="d-flex align-items-center">
@@ -141,13 +140,13 @@
                                             </div>
                                             <div class="d-flex ">
                                                 <p class="card-text">
-                                                    {{ items?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i> Bedroom
+                                                    {{ items?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i> Bedroom
                                                 </p>
                                                 <p class="card-text mx-2">
-                                                    {{ items?.bathrooms }} <i class="fa-solid fa-bath"></i> Bathrooms
+                                                    {{ items?.amenties?.bathrooms }} <i class="fa-solid fa-bath"></i> Bathrooms
                                                 </p>
                                                 <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                        style="width: 30px; height: 30px;" alt=""> {{ items?.size_sqf }}</p>
+                                                        style="width: 30px; height: 30px;" alt=""> {{ items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types }}</p>
                                             </div>
                                             <div class="mb-2">
                                                 <small class="text-body-secondary">Added: {{
