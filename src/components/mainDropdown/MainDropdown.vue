@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="card p-3">
-            <div class="d-flex my-2 justify-content-center">
+        <div class="card p-2 p-md-3 maindropdownwidth">
+            <div class="d-flex my-1 my-md-2 justify-content-center">
                 <button
                     :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
                     v-on:click="handleSellView">
@@ -11,7 +11,7 @@
                     <i class="fa-solid fa-house-lock"></i> Rent</button>
             </div>
             <div class="row g-1">
-                <div class="col-4 col-md-12 col-lg-6 ">
+                <div class="col-9 col-md-12 col-lg-6 ">
                     <Multiselect v-model="value" mode="tags" :close-on-select="false" :searchable="true"
                         :create-option="true" placeholder='Select Location' :options="[
                             { value: 'Quetta', label: 'Quetta' },
@@ -21,7 +21,7 @@
                             { value: 'Nushki', label: 'Nushki' },
                         ]" />
                 </div>
-                <div class="col-2 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
+                <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
                     <div class="">
                         <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
                             data-bs-toggle="dropdown" aria-expanded="false">Property Type</button>
@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-2 col-md-3 col-lg-2 mt-lg-1 mt-1">
+                <div class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
                     <div class="">
                         <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,156 +66,221 @@
                     <button class="SearchBtnColor">Find </button>
 
                 </div>
-                <div class="mt-2">
-                    <div class="collapse" id="collapseExample">
-                        <div class="row g-1">
-                            <div class="col-3">
-                                <div class="">
-                                    <div class="dropdown">
-                                        <button class="btn btn-outline-secondary w-100">Price</button>
-                                        <div class="dropdown-content">
-                                            <div class="row g-2">
-                                                <div class="col-6 my-2">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>0</option>
-                                                        <option value="1">$1000</option>
-                                                        <option value="2">$2000</option>
-                                                        <option value="3">$4000</option>
-                                                        <option value="4">$4000</option>
-                                                        <option value="5">$4000</option>
-                                                        <option value="6">$4000</option>
-                                                        <option value="7">$4000</option>
-                                                        <option value="8">$4000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6 my-2">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>0</option>
-                                                        <option value="1">$1000</option>
-                                                        <option value="2">$2000</option>
-                                                        <option value="3">$4000</option>
-                                                        <option value="4">$4000</option>
-                                                        <option value="5">$4000</option>
-                                                        <option value="6">$4000</option>
-                                                        <option value="7">$4000</option>
-                                                        <option value="8">$4000</option>
-                                                    </select>
-                                                </div>
+            </div>
+            <div class="mt-2">
+                <div class="collapse" id="collapseExample">
+                    <div class="row g-1">
+                        <div class="col-6 col-md-3">
+                            <div class="">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Min (Price) & Max (Price)
+                                    </button>
+                                    <!-- <div class="dropdown-content">
+                                        <div class="row g-2">
+                                            <div class="col-6 my-2">
+                                                <label for="pri">Min Price</label>
+                                                <select class="form-select" id="pri" aria-label="Default select example">
+                                                    <option selected>0</option>
+                                                    <option value="1">$1000</option>
+                                                    <option value="2">$2000</option>
+                                                    <option value="3">$4000</option>
+                                                    <option value="4">$4000</option>
+                                                    <option value="5">$4000</option>
+                                                    <option value="6">$4000</option>
+                                                    <option value="7">$4000</option>
+                                                    <option value="8">$4000</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6 my-2">
+                                                <label for="maxpri">Max Price</label>
+                                                <select class="form-select" id="maxpri" aria-label="Default select example">
+                                                    <option selected>0</option>
+                                                    <option value="1">$1000</option>
+                                                    <option value="2">$2000</option>
+                                                    <option value="3">$4000</option>
+                                                    <option value="4">$4000</option>
+                                                    <option value="5">$4000</option>
+                                                    <option value="6">$4000</option>
+                                                    <option value="7">$4000</option>
+                                                    <option value="8">$4000</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- <div class="dropdown">
-                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Price 0 to Any
-                                        </button>
-
-                                        <ul class="dropdown-menu">
-                                            <li class="dropdown-item"> -->
-
-                                    <!-- <div class="row">
-                                                    <div class="col-6 my-2">
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>0</option>
-                                                            <option value="1">$1000</option>
-                                                            <option value="2">$2000</option>
-                                                            <option value="3">$4000</option>
-                                                            <option value="4">$4000</option>
-                                                            <option value="5">$4000</option>
-                                                            <option value="6">$4000</option>
-                                                            <option value="7">$4000</option>
-                                                            <option value="8">$4000</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-6 my-2">
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>0</option>
-                                                            <option value="1">$1000</option>
-                                                            <option value="2">$2000</option>
-                                                            <option value="3">$4000</option>
-                                                            <option value="4">$4000</option>
-                                                            <option value="5">$4000</option>
-                                                            <option value="6">$4000</option>
-                                                            <option value="7">$4000</option>
-                                                            <option value="8">$4000</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
-                                    <!-- </li>
-                                        </ul>
                                     </div> -->
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="">
-                                    <div class="dropdown">
-                                        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Area
-                                        </button>
-                                        <div class="dropdown-menu">
+
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-menu-item-boxPrice" role="listbox">
                                             <div class="row g-2">
-                                                <div class="col-6 my-2">
-                                                    <div class="">
-                                                        <form action="#">
-                                                            <label for="lang">Min Price</label>
-                                                            <select name="languages" id="lang">
-                                                                <option value="javascript">JavaScript</option>
-                                                                <option value="php">PHP</option>
-                                                                <option value="java">Java</option>
-                                                                <option value="golang">Golang</option>
-                                                                <option value="python">Python</option>
-                                                                <option value="c#">C#</option>
-                                                                <option value="C++">C++</option>
-                                                                <option value="erlang">Erlang</option>
-                                                            </select>
-                                                            <input type="submit" value="Submit" />
-                                                        </form>
+                                                <div class="col-6">
+                                                    <div role="listbox" class="dropdown-menu-item-box2">
+                                                        <div class="mt-2 mb-4">
+                                                            <label for="exampleFormControlInput3"
+                                                                class="form-label lableText">Min Price</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleFormControlInput3" placeholder="Min Price">
+                                                        </div>
+                                                        <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
+                                                        <button aria-label="1"
+                                                            class="dropdownSelectBtnPrice">100000</button>
+                                                        <button aria-label="2"
+                                                            class="dropdownSelectBtnPrice">200000</button>
+                                                        <button aria-label="3"
+                                                            class="dropdownSelectBtnPrice">300000</button>
+                                                        <button aria-label="4"
+                                                            class="dropdownSelectBtnPrice">400000</button>
+                                                        <button aria-label="5"
+                                                            class="dropdownSelectBtnPrice">500000</button>
+                                                        <button aria-label="6"
+                                                            class="dropdownSelectBtnPrice">600000</button>
+                                                        <button aria-label="7"
+                                                            class="dropdownSelectBtnPrice">700000</button>
+                                                        <button aria-label="8"
+                                                            class="dropdownSelectBtnPrice">800000</button>
+                                                        <button aria-label="9"
+                                                            class="dropdownSelectBtnPrice">900000</button>
+                                                        <button aria-label="10+"
+                                                            class="dropdownSelectBtnPrice">1000000+</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6 my-2">
-                                                    <div class="">
-                                                        <form action="#">
-                                                            <label for="lang">Max Price</label>
-                                                            <select name="languages" id="lang">
-                                                                <option value="javascript">JavaScript</option>
-                                                                <option value="php">PHP</option>
-                                                                <option value="java">Java</option>
-                                                                <option value="golang">Golang</option>
-                                                                <option value="python">Python</option>
-                                                                <option value="c#">C#</option>
-                                                                <option value="C++">C++</option>
-                                                                <option value="erlang">Erlang</option>
-                                                            </select>
-                                                            <input type="submit" value="Submit" />
-                                                        </form>
+                                                <div class="col-6">
+                                                    <div role="listbox" class="dropdown-menu-item-box2">
+                                                        <div class="mt-2 mb-4">
+                                                            <label for="exampleFormControlInput4"
+                                                                class="form-label lableText">Max Price</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleFormControlInput4" placeholder="Max Price">
+                                                        </div>
+                                                        <button aria-label="All" class="dropdownSelectBtn">0</button>
+                                                        <button aria-label="1"
+                                                            class="dropdownSelectBtnPrice">100000</button>
+                                                        <button aria-label="2"
+                                                            class="dropdownSelectBtnPrice">200000</button>
+                                                        <button aria-label="3"
+                                                            class="dropdownSelectBtnPrice">300000</button>
+                                                        <button aria-label="4"
+                                                            class="dropdownSelectBtnPrice">400000</button>
+                                                        <button aria-label="5"
+                                                            class="dropdownSelectBtnPrice">500000</button>
+                                                        <button aria-label="6"
+                                                            class="dropdownSelectBtnPrice">600000</button>
+                                                        <button aria-label="7"
+                                                            class="dropdownSelectBtnPrice">700000</button>
+                                                        <button aria-label="8"
+                                                            class="dropdownSelectBtnPrice">800000</button>
+                                                        <button aria-label="9"
+                                                            class="dropdownSelectBtnPrice">900000</button>
+                                                        <button aria-label="10+"
+                                                            class="dropdownSelectBtnPrice">1000000+</button>
                                                     </div>
                                                 </div>
+
+                                            </div>
+                                            <div class="dropdownCloseBox">
+                                                <button class="dropdownCloseBtn" aria-label="Close">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="d-flex form-inputs">
-                                    <input class="form-control" type="text" placeholder="Search any product..."
-                                        v-on:keyup="(e) => handleSearch(e)" />
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Area
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-menu-item-boxPrice" role="listbox">
+                                            <div class="row g-2">
+                                                <div class="col-6">
+                                                    <div role="listbox" class="dropdown-menu-item-box2">
+                                                        <div class="mt-2 mb-4">
+                                                            <label for="exampleFormControlInput1"
+                                                                class="form-label lableText">Min Area</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleFormControlInput1" placeholder="Min Area">
+                                                        </div>
+                                                        <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
+                                                        <button aria-label="1" class="dropdownSelectBtnPrice">10</button>
+                                                        <button aria-label="2" class="dropdownSelectBtnPrice">20</button>
+                                                        <button aria-label="3" class="dropdownSelectBtnPrice">30</button>
+                                                        <button aria-label="4" class="dropdownSelectBtnPrice">40</button>
+                                                        <button aria-label="5" class="dropdownSelectBtnPrice">50</button>
+                                                        <button aria-label="6" class="dropdownSelectBtnPrice">60</button>
+                                                        <button aria-label="7" class="dropdownSelectBtnPrice">70</button>
+                                                        <button aria-label="8" class="dropdownSelectBtnPrice">80</button>
+                                                        <button aria-label="9" class="dropdownSelectBtnPrice">90</button>
+                                                        <button aria-label="10+" class="dropdownSelectBtnPrice">10</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div role="listbox" class="dropdown-menu-item-box2">
+                                                        <div class="mt-2 mb-4">
+                                                            <label for="exampleFormControlInput2"
+                                                                class="form-label lableText">Max Area</label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleFormControlInput2" placeholder="Max Area">
+                                                        </div>
+                                                        <button aria-label="All" class="dropdownSelectBtn">0</button>
+                                                        <button aria-label="1" class="dropdownSelectBtnPrice">10</button>
+                                                        <button aria-label="2" class="dropdownSelectBtnPrice">20</button>
+                                                        <button aria-label="3" class="dropdownSelectBtnPrice">30</button>
+                                                        <button aria-label="4" class="dropdownSelectBtnPrice">40</button>
+                                                        <button aria-label="5" class="dropdownSelectBtnPrice">50</button>
+                                                        <button aria-label="6" class="dropdownSelectBtnPrice">60</button>
+                                                        <button aria-label="7" class="dropdownSelectBtnPrice">70</button>
+                                                        <button aria-label="8" class="dropdownSelectBtnPrice">80</button>
+                                                        <button aria-label="9" class="dropdownSelectBtnPrice">90</button>
+                                                        <button aria-label="10+" class="dropdownSelectBtnPrice">10</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="dropdownCloseBox">
+                                                <button class="dropdownCloseBtn" aria-label="Close">Close</button>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="">
+                                                <div class="dropdown-menu-item-box" role="listbox">
+                                                    <div>
+                                                        <div role="listbox" class="dropdown-menu-item-box2">
+                                                            <button aria-label="All" class="dropdownSelectBtn">All</button>
+                                                            <button aria-label="1" class="dropdownSelectBtn">1</button>
+                                                            <button aria-label="2" class="dropdownSelectBtn">2</button>
+                                                            <button aria-label="3" class="dropdownSelectBtn">3</button>
+                                                            <button aria-label="4" class="dropdownSelectBtn">4</button>
+                                                            <button aria-label="5" class="dropdownSelectBtn">5</button>
+                                                            <button aria-label="6" class="dropdownSelectBtn">6</button>
+                                                            <button aria-label="7" class="dropdownSelectBtn">7</button>
+                                                            <button aria-label="8" class="dropdownSelectBtn">8</button>
+                                                            <button aria-label="9" class="dropdownSelectBtn">9</button>
+                                                            <button aria-label="10+" class="dropdownSelectBtn">10+</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdownCloseBox">
+                                                        <button class="dropdownCloseBtn" aria-label="Close">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex form-inputs">
+                                <input class="form-control" type="text" placeholder="Search any product..."
+                                    v-on:keyup="(e) => handleSearch(e)" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="d-flex justify-content-center mt-1 mx-md-5">
-                <!-- <div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                            Show commercial properties only
-                        </label>
-                    </div>
-                </div> -->
                 <div>
                     <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                         aria-controls="collapseExample">
@@ -268,31 +333,39 @@ export default {
 }
 </script>
 
-
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
+@media screen and (max-width: 1024px) {
+    .maindropdownwidth {
+        margin: 0 50px;
+    }
+}
+
+@media screen and (min-width: 1080px) {
+    .maindropdownwidth {
+        margin: 0 150px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .maindropdownwidth {
+        margin: -5px;
+    }
+}
+
 .SearchBtnColor {
-    padding: 5px 20px 5px 20px;
+    padding: 5px 20px;
     border-radius: 10px;
     border: 1px solid rgb(255, 69, 0);
     background-color: rgb(255, 69, 0);
     color: white;
 }
 
-.dropbtn {
-    background-color: rgb(255, 69, 0);
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
+/* .dropdown {
     position: relative;
     display: inline-block;
     width: 100%;
-}
+} */
 
 .dropdown-content {
     display: none;
@@ -301,25 +374,14 @@ export default {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1
+    /* height: 100px; */
+    /* min-height: 100px;
+    overflow-y: auto; */
+    padding: 10px;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: rgb(221, 124, 89);
 }
 
 input {
@@ -327,5 +389,105 @@ input {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+}
+
+.dropdown-menu-item-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    margin-top: 0.2rem;
+    padding: 1rem;
+    -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+.dropdown-menu-item-box2 {
+    max-height: 14rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* button */
+.dropdownSelectBtn {
+    min-height: 2.5rem;
+    width: 100%;
+    border-radius: 0;
+    font-size: 1.0rem;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    color: #222;
+    border: 1px solid #dedede;
+    border-radius: 0.4rem;
+    background-color: #fff;
+}
+
+.dropdownSelectBtn:hover {
+    background-color: rgb(213, 220, 218);
+}
+
+/* button */
+/* close button */
+.dropdownCloseBox {
+    margin-left: auto;
+    margin-top: 0.9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dropdownCloseBtn {
+    font-size: 1.0rem;
+    padding: 0.3rem 0.6rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #444;
+}
+
+/* close button */
+.dropdown-menu-item-boxPrice {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    margin-top: 0.2rem;
+    padding: 6px;
+    -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    width: 250px;
+}
+
+.dropdownSelectBtnPrice {
+    min-height: 2.5rem;
+    width: 100%;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    color: #222;
+    border: 1px solid #dedede;
+    border-radius: 0.4rem;
+    background-color: #fff;
+}
+
+.dropdownSelectBtnPrice:hover {
+    background-color: rgb(213, 220, 218)
+}
+
+.lableText {
+    font-size: 15px;
+    color: orangered;
+    margin-left: 5px;
 }
 </style>

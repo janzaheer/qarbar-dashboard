@@ -3,7 +3,7 @@
         <!-- <h1>Qarbar Projects</h1> -->
         <div class="row g-2">
             <h5>Recent properties for {{ propertiesList[0]?.rent_sale_type }}</h5>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2" v-for="item in propertiesList.slice(0, 6)"
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2 mx-md-block" v-for="item in propertiesList.slice(0, 6)"
                 :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">
                     <div class="card text-dark productBg">

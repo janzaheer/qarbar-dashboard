@@ -7,7 +7,7 @@
                     <h2 class="card-title text-white">New Projects in Turkiye</h2>
                     <p class="card-text text-white">New projects, verified by our quality control teams.</p>
                 </div>
-                <div class="mt-5">
+                <div class="mt-3 mt-md-5">
                     <a href="/newProjectsList" class="btn btn-light"> View new projects</a>
                 </div>
             </div>

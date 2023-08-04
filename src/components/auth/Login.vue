@@ -3,17 +3,14 @@
         <div class="card text-bg-dark">
             <img src="https://qarbar.netlify.app/assets/img/qarbar-background.jpg" class="card-img" alt="...">
             <div class="card-img-overlay">
-                <section className="login me-5">
+                <section className="login">
                     <div class="container py-2">
                         <div class="row d-flex justify-content-start align-items-center">
                             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                                 <div class="card shadow-2-strong shadow">
                                     <div class="card-body p-5 text-center">
                                         <form ref="LoginForm" @submit.prevent="loginForm" autoComplete="on">
-                                            <div class="d-flex">
-                                                <button class="btn btn-primary me-2 w-50">Facebook</button>
-                                                <button class="btn btn-danger w-50">Google</button>
-                                            </div>
+                                            
                                             <div class="mb-5 mt-2">
                                                 <h3>Welcome to Qaarbar! Please login.</h3>
                                             </div>
@@ -30,6 +27,11 @@
                                             <button class="btn btn-success w-50" type="submit">Login</button>
                                             <hr class="my-3" />
                                             <RouterLink to='/signUp' class='btn btn-success w-100'>Register Now</RouterLink>
+                                            <hr class="my-3" />
+                                            <div class="d-flex mt-2">
+                                                <button class="btn btn-primary me-2 w-50">Facebook</button>
+                                                <button class="btn btn-danger w-50">Google</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -157,6 +159,7 @@ export default {
 <style>
 .loginPage {
     min-height: 100vh;
+    
 }
 
 .login {
@@ -164,6 +167,7 @@ export default {
     margin-bottom: 100px !important;
     /* height: 900px; */
     min-height: 45vh;
-    opacity: 0.8;
+    opacity: 0.9;
+    margin-right: 140px;
 }
 </style>

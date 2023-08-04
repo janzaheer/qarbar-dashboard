@@ -91,7 +91,7 @@
             </div>
         </div>
         <div v-if="loading">Loading...</div>
-        <div class="row g-2 my-2 mx-5">
+        <div class="row g-2 my-2 mx-md-5">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-12" v-for="items in properties" :key="items.id">

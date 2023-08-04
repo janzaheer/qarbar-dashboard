@@ -4,12 +4,12 @@
             <img src="https://qarbar.netlify.app/assets/img/qarbar-background.jpg" class="card-img" alt="...">
             <div class="card-img-overlay">
                 <section className="container login">
-                    <div className="card shadow-2-strong shadow">
+                    <div className="card shadow-2-strong shadow sigupForm">
                         <div className="card-body p-5 text-center">
                             <div className="mb-5">
                                 <h3>Welcome to Qaarbar! Please Register Now.</h3>
                             </div>
-                            <form className="row g-3 " onSubmit={handleRegister}>
+                            <form className="row g-2 " onSubmit={handleRegister}>
                                 <div className="col-md-6 form-floating">
                                     <input type="text" className="form-control"
                                         id="floatingInputFirstName validationServer01" name='first_name'
@@ -53,7 +53,7 @@
                                     <label htmlFor="floatingInputConfirmPassword" className='ms-3'>Confirm Password</label>
                                 </div>
                                 <div className="col-12">
-                                    <button className="btn btn-success mt-2" type="submit">Register Now</button>
+                                    <button className="btn btn-warning mt-2" type="submit">Register Now</button>
                                 </div>
                             </form>
                         </div>
@@ -117,6 +117,17 @@
 
 </script>
 
-<style>.signUp {
+<style>
+.signUp {
     min-height: 100vh;
-}</style>
+}
+.sigupForm{
+    margin-right: 150px;
+    margin-left: 150px;
+}
+@media screen and (max-width: 420px) {
+    .sigupForm {
+        margin: 0;
+    }
+}
+</style>
