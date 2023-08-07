@@ -70,7 +70,7 @@
 
             <div class="d-flex justify-content-between">
                 <div>
-                    <h6>Properties for {{ properties[0]?.R_B_type }} in Turkiye</h6>
+                    <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
                     <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
                             new</span></p>
                     <!-- <button class="btn btn-outline-info me-2"><img src="../../assets/icons/location.png"
@@ -121,7 +121,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <div>
                                                     <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                                    <span class="badge text-bg-secondary card-title">property type</span>
+                                                    <span class="badge text-bg-secondary card-title">{{ items?.property_type?.home_types  }}</span>
                                                     <h4>{{ items?.total_price }} Rs </h4>
                                                 </div>
                                                 <div class="d-flex align-items-center">

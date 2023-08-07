@@ -1,7 +1,8 @@
 <template>
     <div class="loginPage">
         <div class="card text-bg-dark">
-            <img src="https://qarbar.netlify.app/assets/img/qarbar-background.jpg" class="card-img" alt="...">
+            <!-- <img src="https://qarbar.netlify.app/assets/img/qarbar-background.jpg" class="card-img" alt="..."> -->
+            <div class="card-img loginImage"></div>
             <div class="card-img-overlay">
                 <section className="login">
                     <div class="container py-2">
@@ -10,7 +11,7 @@
                                 <div class="card shadow-2-strong shadow">
                                     <div class="card-body p-5 text-center">
                                         <form ref="LoginForm" @submit.prevent="loginForm" autoComplete="on">
-                                            
+
                                             <div class="mb-5 mt-2">
                                                 <h3>Welcome to Qaarbar! Please login.</h3>
                                             </div>
@@ -159,7 +160,7 @@ export default {
 <style>
 .loginPage {
     min-height: 100vh;
-    
+
 }
 
 .login {
@@ -169,5 +170,27 @@ export default {
     min-height: 45vh;
     opacity: 0.9;
     margin-right: 140px;
+}
+.loginImage{
+    background: url("https://qarbar.netlify.app/assets/img/qarbar-background.jpg") top center;
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        position: relative;
+        /* margin-top: -80px; */
+        /* z-index: 9; */
+}
+
+@media screen and (max-width: 420px) {
+    .login {
+        margin: 0;
+    }
+    .loginImage{
+        background: url("./Mobile3.png") top center;
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        position: relative;
+    }
 }
 </style>

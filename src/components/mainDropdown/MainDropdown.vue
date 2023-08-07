@@ -77,38 +77,6 @@
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Min (Price) & Max (Price)
                                     </button>
-                                    <!-- <div class="dropdown-content">
-                                        <div class="row g-2">
-                                            <div class="col-6 my-2">
-                                                <label for="pri">Min Price</label>
-                                                <select class="form-select" id="pri" aria-label="Default select example">
-                                                    <option selected>0</option>
-                                                    <option value="1">$1000</option>
-                                                    <option value="2">$2000</option>
-                                                    <option value="3">$4000</option>
-                                                    <option value="4">$4000</option>
-                                                    <option value="5">$4000</option>
-                                                    <option value="6">$4000</option>
-                                                    <option value="7">$4000</option>
-                                                    <option value="8">$4000</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-6 my-2">
-                                                <label for="maxpri">Max Price</label>
-                                                <select class="form-select" id="maxpri" aria-label="Default select example">
-                                                    <option selected>0</option>
-                                                    <option value="1">$1000</option>
-                                                    <option value="2">$2000</option>
-                                                    <option value="3">$4000</option>
-                                                    <option value="4">$4000</option>
-                                                    <option value="5">$4000</option>
-                                                    <option value="6">$4000</option>
-                                                    <option value="7">$4000</option>
-                                                    <option value="8">$4000</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div> -->
 
                                     <div class="dropdown-menu">
                                         <div class="dropdown-menu-item-boxPrice" role="listbox">
@@ -152,7 +120,7 @@
                                                             <input type="text" class="form-control"
                                                                 id="exampleFormControlInput4" placeholder="Max Price">
                                                         </div>
-                                                        <button aria-label="All" class="dropdownSelectBtn">0</button>
+                                                        <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
                                                         <button aria-label="1"
                                                             class="dropdownSelectBtnPrice">100000</button>
                                                         <button aria-label="2"
@@ -194,6 +162,9 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <div class="dropdown-menu-item-boxPrice" role="listbox">
+                                            <div class="text-center bg-light mb-1">
+                                                change area (unit)
+                                            </div>
                                             <div class="row g-2">
                                                 <div class="col-6">
                                                     <div role="listbox" class="dropdown-menu-item-box2">
@@ -243,29 +214,6 @@
                                                 <button class="dropdownCloseBtn" aria-label="Close">Close</button>
                                             </div>
                                         </div>
-                                        <!-- <div class="">
-                                                <div class="dropdown-menu-item-box" role="listbox">
-                                                    <div>
-                                                        <div role="listbox" class="dropdown-menu-item-box2">
-                                                            <button aria-label="All" class="dropdownSelectBtn">All</button>
-                                                            <button aria-label="1" class="dropdownSelectBtn">1</button>
-                                                            <button aria-label="2" class="dropdownSelectBtn">2</button>
-                                                            <button aria-label="3" class="dropdownSelectBtn">3</button>
-                                                            <button aria-label="4" class="dropdownSelectBtn">4</button>
-                                                            <button aria-label="5" class="dropdownSelectBtn">5</button>
-                                                            <button aria-label="6" class="dropdownSelectBtn">6</button>
-                                                            <button aria-label="7" class="dropdownSelectBtn">7</button>
-                                                            <button aria-label="8" class="dropdownSelectBtn">8</button>
-                                                            <button aria-label="9" class="dropdownSelectBtn">9</button>
-                                                            <button aria-label="10+" class="dropdownSelectBtn">10+</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dropdownCloseBox">
-                                                        <button class="dropdownCloseBtn" aria-label="Close">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-
                                     </div>
                                 </div>
                             </div>
@@ -442,12 +390,12 @@ input {
 }
 
 .dropdownCloseBtn {
-    font-size: 1.0rem;
-    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.6rem;
     color: #ffffff;
     border: none;
     border-radius: 0.4rem;
-    background-color: #444;
+    background-color: rgb(255, 69, 0);
 }
 
 /* close button */
@@ -458,18 +406,18 @@ input {
     right: 0;
     z-index: 4;
     margin-top: 0.2rem;
-    padding: 6px;
+    padding: 10px;
     -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
     box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border-radius: 0.5rem;
     background-color: #fff;
-    width: 250px;
+    width: 200px;
 }
 
 .dropdownSelectBtnPrice {
-    min-height: 2.5rem;
+    min-height: 2rem;
     width: 100%;
     font-size: 14px;
     display: block;
@@ -486,8 +434,28 @@ input {
 }
 
 .lableText {
-    font-size: 15px;
+    font-size: 13px;
     color: orangered;
-    margin-left: 5px;
+    /* margin-left: 5px; */
+    margin: 0 10px;
+    margin-bottom: 0 !important;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 </style>

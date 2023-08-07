@@ -9,12 +9,11 @@
                     <div class="card text-dark productBg">
                         <img :src="item?.media[0].image_url" class="card-img w-100" width="180" height="180" alt="...">
                         <div class="card-img-overlay">
-                            <span class="badge badgeColor card-title">property-Type</span>
-                            <!-- <p class="card-text text-white">{{ item.property_type }}</p> -->
+                            <span class="badge badgeColor card-title">{{ item?.property_type?.home_types }}</span>
                         </div>
                         <div class="card-body bg-white text-dark rounded">
                             <h6 class="card-text">Rs {{ item?.total_price }}</h6>
-                            <small class="text-body-secondary">{{ item?.title }}</small>
+                            <small class="text-body-secondary">{{ item?.title.substring(1, 15) }}</small>
 
                             <div class="d-flex">
                                 <p class="card-text">{{ item?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i>
@@ -114,12 +113,11 @@
                     <div class="card text-dark productBg">
                         <img :src="item?.media[0].image_url" class="card-img w-100" width="180" height="180" alt="...">
                         <div class="card-img-overlay">
-                            <span class="badge badgeColor card-title">property-Type</span>
-                            <!-- <p class="card-text text-white">{{ item.property_type }}</p> -->
+                            <span class="badge badgeColor card-title">{{ item?.property_type?.commercial_types }}</span>
                         </div>
                         <div class="card-body bg-white text-dark rounded">
                             <h6 class="card-text">Rs {{ item?.total_price }}</h6>
-                            <small class="text-body-secondary"> {{ item?.title }}</small>
+                            <small class="text-body-secondary"> {{ item?.title.substring(1, 15) }}</small>
                             <div class="d-flex">
                                 <p class="card-text">
                                     {{ item?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i>

@@ -42,7 +42,7 @@
                     <RouterLink class="addPropertyBtnColor mt-1 mx-2" to="/agentDashboard">Add Property
                     </RouterLink>
                    
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav me-md-5">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -50,7 +50,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white">
                                 <li> <RouterLink class="dropdown-item btn btn-outline-warning btn-sm mt-1" to="/login">Login</RouterLink></li>
-                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Add Property</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
