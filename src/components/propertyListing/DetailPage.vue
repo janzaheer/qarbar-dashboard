@@ -10,7 +10,7 @@ import AgentInfo from './AgentInfo.vue';
 import Location from './Location.vue';
 import axios from 'axios';
 import moment from 'moment';
-import { BASE_URL, PROPERTY_END_POINT } from '../../utils/api';
+import { BASE_URL, PROPERTY_END_POINT,API_VERSION } from '../../utils/api';
 import { GoogleMap, Marker } from "vue3-google-map";
 export default {
     name: 'DetailPage',
@@ -45,7 +45,7 @@ export default {
     methods: {
         async getSingleProduct() {
             try {
-                let finalUrl = BASE_URL + PROPERTY_END_POINT() + this.$route.params.id + `/detail_property/`
+                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + this.$route.params.id + `/detail_property/`
                 let res = await axios.get(finalUrl)
                 this.productDetail = res.data
                 this.singleImage = res.data.media

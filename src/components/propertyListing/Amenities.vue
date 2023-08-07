@@ -32,7 +32,7 @@
                         <p v-if="productDetail?.amenties?.balcony">Balcony</p>
                         <p v-if="productDetail?.amenties?.internet">Internet</p>
                         <p v-if="productDetail?.amenties?.lower_portion">Lower Portion</p>
-                        <p v-if="productDetail?.amenties?.floors">Floor {{ productDetail.floors
+                        <p>Floor {{ productDetail?.amenties?.floors
                         }}</p>
                         <p v-if="productDetail?.amenties?.kitchen">Kitchen {{ productDetail.amenties.kitchen
                         }}</p>
