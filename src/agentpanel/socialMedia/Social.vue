@@ -35,7 +35,7 @@
 <template>
     <div class=" ">
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 my-2 m-md-block">
                 <div class="card shadow">
                     <div class="social-graph-wrapper widget-facebook">
                         <i class="fa-brands fa-facebook-f fa-2xl" style="color: #ffffff;"></i>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 my-2 m-md-block">
                 <div class="card shadow">
                     <div class="social-graph-wrapper widget-linkedin">
                         <i class="fa-brands fa-linkedin-in fa-2xl" style="color: #ffffff;"></i>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 my-2 m-md-block">
                 <div class="card shadow">
                     <div class="social-graph-wrapper widget-googleplus">
                         <i class="fa-brands fa-google-plus-g fa-2xl" style="color: #ffffff;"></i>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6 my-2 m-md-block">
                 <div class="card shadow">
                     <div class="social-graph-wrapper widget-twitter">
                         <i class="fa-brands fa-twitter fa-2xl" style="color: #ffffff;"></i>

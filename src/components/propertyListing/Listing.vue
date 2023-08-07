@@ -70,7 +70,7 @@
 
             <div class="d-flex justify-content-between">
                 <div>
-                    <h6>Properties for {{ properties[0]?.R_B_type }} in Turkiye</h6>
+                    <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
                     <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
                             new</span></p>
                     <!-- <button class="btn btn-outline-info me-2"><img src="../../assets/icons/location.png"
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div v-if="loading">Loading...</div>
-        <div class="row g-2 my-2 mx-5">
+        <div class="row g-2 my-2 mx-md-5">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-12" v-for="items in properties" :key="items.id">
@@ -121,8 +121,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <div>
                                                     <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                                    <span class="badge text-bg-secondary card-title">{{ items?.property_type
-                                                    }}</span>
+                                                    <span class="badge text-bg-secondary card-title">{{ items?.property_type?.home_types  }}</span>
                                                     <h4>{{ items?.total_price }} Rs </h4>
                                                 </div>
                                                 <div class="d-flex align-items-center">
@@ -141,13 +140,13 @@
                                             </div>
                                             <div class="d-flex ">
                                                 <p class="card-text">
-                                                    {{ items?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i> Bedroom
+                                                    {{ items?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i> Bedroom
                                                 </p>
                                                 <p class="card-text mx-2">
-                                                    {{ items?.bathrooms }} <i class="fa-solid fa-bath"></i> Bathrooms
+                                                    {{ items?.amenties?.bathrooms }} <i class="fa-solid fa-bath"></i> Bathrooms
                                                 </p>
                                                 <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                        style="width: 30px; height: 30px;" alt=""> {{ items?.size_sqf }}</p>
+                                                        style="width: 30px; height: 30px;" alt=""> {{ items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types }}</p>
                                             </div>
                                             <div class="mb-2">
                                                 <small class="text-body-secondary">Added: {{
@@ -225,6 +224,7 @@ import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
 import moment from 'moment'
 import axios from 'axios';
+import { BASE_URL,PROPERTY_END_POINT } from '../../utils/api';
 export default {
     name: 'Listing',
     components: {
@@ -245,7 +245,7 @@ export default {
 
         async getProperties() {
             const queryParams = new URLSearchParams(window.location.search);
-            let category_name = queryParams.get("R_B_type");
+            let category_name = queryParams.get("rent_sale_type");
 
             if (!category_name) {
                 category_name = ''
@@ -253,7 +253,8 @@ export default {
 
             try {
                 this.loading = true;
-                let res = await axios.get(`https://apidev.qarbar.com/api/v1/properties/?R_B_type=${category_name}`);
+                let finalUrl = BASE_URL + PROPERTY_END_POINT() + `?rent_sale_type=${category_name}`
+                let res = await axios.get(finalUrl);
                 // console.log(res.data.results);
                 this.properties = res.data.results
                 this.propertiesCount = res.data
