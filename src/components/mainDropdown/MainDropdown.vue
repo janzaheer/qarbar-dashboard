@@ -23,8 +23,8 @@
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
                     <div class="">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
-                            data-bs-toggle="dropdown" aria-expanded="false">Property Type</button>
+                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">Property Type</button>
                         <ul class="dropdown-menu">
                             <li class="dropdown-item">Home Type</li>
                             <li class="dropdown-item"> Commercial Type</li>
@@ -34,8 +34,8 @@
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
                     <div class="">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle w-100"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Beds & Baths
                         </button>
                         <ul class="dropdown-menu">
@@ -73,7 +73,7 @@
                         <div class="col-6 col-md-3">
                             <div class="">
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                    <button class="mainDropBtn dropdown-toggle w-100" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Min (Price) & Max (Price)
                                     </button>
@@ -156,7 +156,7 @@
                         <div class="col-6 col-md-3">
                             <div class="">
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                    <button class="mainDropBtn dropdown-toggle w-100" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Area
                                     </button>
@@ -219,10 +219,12 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <div class="d-flex form-inputs">
+                            <input type="text" class="form-control h-100" placeholder=" Search any property..."
+                                aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
+                            <!-- <div class="d-flex form-inputs">
                                 <input class="form-control" type="text" placeholder="Search any product..."
                                     v-on:keyup="(e) => handleSearch(e)" />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -283,6 +285,18 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
+.mainDropBtn {
+    color: darkgray;
+    border: 1px solid darkgray;
+    background-color: #ffffff;
+    padding: 8px 0;
+}
+
+.mainDropBtn:hover {
+    color: #888;
+    border: 1px solid #888;
+}
+
 @media screen and (max-width: 1024px) {
     .maindropdownwidth {
         margin: 0 50px;
@@ -302,11 +316,15 @@ export default {
 }
 
 .SearchBtnColor {
-    padding: 5px 20px;
-    border-radius: 10px;
+    padding: 8px 20px;
+    border-radius: 1px;
     border: 1px solid rgb(255, 69, 0);
     background-color: rgb(255, 69, 0);
     color: white;
+}
+.SearchBtnColor:hover{
+    color: rgb(255, 69, 0);
+    background-color: white;
 }
 
 /* .dropdown {
@@ -440,22 +458,22 @@ input {
     margin: 0 10px;
     margin-bottom: 0 !important;
 }
+
 ::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+    background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+    background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-</style>
+    background: #555;
+}</style>

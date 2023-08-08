@@ -2,14 +2,15 @@
     <Header />
 
     <div class="container listingPage">
+    
         <div class="border-bottom border-top p-2 mt-2 sticky-top">
             <div class="row g-1">
                 <div class="col-4">
-                    <input type="text" class="form-control" placeholder="search Community ot building ..."
+                    <input type="text" class="form-control h-100" placeholder="search Community ot building ..."
                         aria-label="First name">
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class=" mainDropBtn h-100" aria-label="Default select example">
                         <option selected value="1">Buy</option>
                         <option value="2">Rent</option>
                         <option value="3">Commercial for Rent</option>
@@ -17,37 +18,108 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> Property type</option>
-                        <option value="1">Apartment</option>
-                        <option value="2">VIlla</option>
-                        <option value="3">Penthhouse</option>
-                        <option value="4">Townhouse</option>
-                    </select>
+                    <div class="">
+                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">Property Type</button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">Home Type</li>
+                            <li class="dropdown-item"> Commercial Type</li>
+                            <li class="dropdown-item">Plot Type </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> Beds & Baths</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="">
+                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Beds & Baths
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-items">
+                                <div class="m-2">
+                                    <h6>bathrooms</h6>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary mx-1">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary mx-1">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary ms-1">6+</button>
+                                </div>
+                                <div class=" m-2">
+                                    <h6>bedrooms</h6>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary mx-1">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary mx-1">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary ms-1">6+</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> Price</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> More Filters</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="">
+                        <div class="dropdown">
+                            <button class="mainDropBtn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Min (Price) & Max (Price)
+                            </button>
+
+                            <div class="dropdown-menu">
+                                <div class="dropdown-menu-item-boxPrice" role="listbox">
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <div role="listbox" class="dropdown-menu-item-box2">
+                                                <div class="mt-2 mb-4">
+                                                    <label for="exampleFormControlInput3" class="form-label lableText">Min
+                                                        Price</label>
+                                                    <input type="text" class="form-control" id="exampleFormControlInput3"
+                                                        placeholder="Min Price">
+                                                </div>
+                                                <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
+                                                <button aria-label="1" class="dropdownSelectBtnPrice">100000</button>
+                                                <button aria-label="2" class="dropdownSelectBtnPrice">200000</button>
+                                                <button aria-label="3" class="dropdownSelectBtnPrice">300000</button>
+                                                <button aria-label="4" class="dropdownSelectBtnPrice">400000</button>
+                                                <button aria-label="5" class="dropdownSelectBtnPrice">500000</button>
+                                                <button aria-label="6" class="dropdownSelectBtnPrice">600000</button>
+                                                <button aria-label="7" class="dropdownSelectBtnPrice">700000</button>
+                                                <button aria-label="8" class="dropdownSelectBtnPrice">800000</button>
+                                                <button aria-label="9" class="dropdownSelectBtnPrice">900000</button>
+                                                <button aria-label="10+" class="dropdownSelectBtnPrice">1000000+</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div role="listbox" class="dropdown-menu-item-box2">
+                                                <div class="mt-2 mb-4">
+                                                    <label for="exampleFormControlInput4" class="form-label lableText">Max
+                                                        Price</label>
+                                                    <input type="text" class="form-control" id="exampleFormControlInput4"
+                                                        placeholder="Max Price">
+                                                </div>
+                                                <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
+                                                <button aria-label="1" class="dropdownSelectBtnPrice">100000</button>
+                                                <button aria-label="2" class="dropdownSelectBtnPrice">200000</button>
+                                                <button aria-label="3" class="dropdownSelectBtnPrice">300000</button>
+                                                <button aria-label="4" class="dropdownSelectBtnPrice">400000</button>
+                                                <button aria-label="5" class="dropdownSelectBtnPrice">500000</button>
+                                                <button aria-label="6" class="dropdownSelectBtnPrice">600000</button>
+                                                <button aria-label="7" class="dropdownSelectBtnPrice">700000</button>
+                                                <button aria-label="8" class="dropdownSelectBtnPrice">800000</button>
+                                                <button aria-label="9" class="dropdownSelectBtnPrice">900000</button>
+                                                <button aria-label="10+" class="dropdownSelectBtnPrice">1000000+</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="dropdownCloseBox">
+                                        <button class="dropdownCloseBtn" aria-label="Close">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     <button class="SearchBtnColor">Find</button>
@@ -193,7 +265,7 @@
                 </div>
             </div>
             <div class="d-none d-sm-block col-md-4">
-               <Advertise />
+                <Advertise />
             </div>
         </div>
         <div class="my-4 text-center">
@@ -202,6 +274,7 @@
             <button class="mainBtnColor bg-white" :disabled="nextUrlPage === null"
                 v-on:click="handleNextPage(nextUrlPage)">Next</button>
         </div>
+        <ScrollButton />
     </div>
     <Footer />
 </template>
@@ -214,7 +287,8 @@ import Advertise from '../advertise/Advertise.vue'
 import moment from 'moment'
 import axios from 'axios';
 import { BASE_URL, PROPERTY_END_POINT, changeUrl, API_VERSION } from '../../utils/api';
-import { VueSpinner, VueSpinnerHourglass } from 'vue3-spinners'
+import { VueSpinner, VueSpinnerHourglass } from 'vue3-spinners';
+import ScrollButton from '../../scrollComponent/ScrollButton.vue';
 export default {
     name: 'Listing',
     components: {
@@ -223,6 +297,7 @@ export default {
         Advertise,
         VueSpinner,
         VueSpinnerHourglass,
+        ScrollButton,
     },
     data() {
         return {
@@ -309,18 +384,20 @@ export default {
 </script>
 
 <style>
-.iconBtn{
+.iconBtn {
     color: rgb(255, 69, 0);
     border: 1px solid rgb(255, 69, 0);
     background-color: white;
     border-radius: 5px;
     padding: 3px 9px;
 }
-.iconBtn:hover{
+
+.iconBtn:hover {
     background-color: white;
     border: 1px solid rgb(221, 221, 221);
     color: darkgray;
 }
+
 button:disabled,
 button[disabled] {
     border: 1px solid #999999;
@@ -376,6 +453,7 @@ button[disabled] {
         height: 200px;
     }
 }
+
 @media screen and (min-width: 768px) {
     .cardImage {
         height: 50px;
