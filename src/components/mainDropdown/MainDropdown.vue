@@ -221,10 +221,6 @@
                         <div class="col-12 col-md-6">
                             <input type="text" class="form-control h-100" placeholder=" Search any property..."
                                 aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
-                            <!-- <div class="d-flex form-inputs">
-                                <input class="form-control" type="text" placeholder="Search any product..."
-                                    v-on:keyup="(e) => handleSearch(e)" />
-                            </div> -->
                         </div>
                     </div>
                 </div>
