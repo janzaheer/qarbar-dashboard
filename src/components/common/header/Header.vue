@@ -41,12 +41,11 @@
                     </ul>
                     <RouterLink class="addPropertyBtnColor mt-1 mx-2" to="/agentDashboard">Add Property
                     </RouterLink>
-                   
                     <ul class="navbar-nav me-md-5">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Dropdown
+                                <i class="fa-solid fa-circle-user fa-2xl"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white">
                                 <li> <RouterLink class="dropdown-item btn btn-outline-warning btn-sm mt-1" to="/login">Login</RouterLink></li>
@@ -114,11 +113,8 @@ import { RouterLink, RouterView } from 'vue-router'
 /* .header {
     margin-bottom: 80px;
 } */
-.headerCLass {
-    display: flex !important;
-    flex-wrap: inherit !important;
-    align-items: center !important;
-    justify-content: center !important;
+.active {
+  color: yellow;
 }
 .addPropertyBtnColor{
     color: rgb(255, 69, 0);

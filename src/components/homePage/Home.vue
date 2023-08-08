@@ -144,7 +144,7 @@
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
-import { BASE_URL, PROPERTY_END_POINT } from '../../utils/api'; 
+import { BASE_URL, PROPERTY_END_POINT,API_VERSION } from '../../utils/api'; 
 export default {
     name: 'Home',
     data() {
@@ -158,7 +158,7 @@ export default {
     },
     methods: {
         async getPropertiesRent() {
-            let finalUrl = BASE_URL + PROPERTY_END_POINT() +`?rent_sale_type=rent`;
+            let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=rent`;
             let res = await axios.get(finalUrl)
             this.propertiesList = res.data.results
             console.log('-----------------------------------')
@@ -166,7 +166,7 @@ export default {
             console.log('-----------------------------------')
         },
         async getPropertiesSale() {
-            let finalUrl = BASE_URL + PROPERTY_END_POINT() +`?rent_sale_type=sale`;
+            let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=sale`;
             let res = await axios.get(finalUrl)
             this.propertiesSaleList = res.data.results
             console.log('-------------11111-----------------')

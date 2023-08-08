@@ -18,7 +18,7 @@
                     <button class="btn btn-primary">App Store</button>
                     <button class="btn btn-primary mx-1">Google Play</button>
                     <button class="btn btn-primary">App Gallery</button>
-                    © 2023  Badini Company, Inc</p>
+                    © 2023  Partum Solutions Company, Inc</p>
             </footer>
         </div>
     </div>

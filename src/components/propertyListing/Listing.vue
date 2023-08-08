@@ -2,14 +2,15 @@
     <Header />
 
     <div class="container listingPage">
-        <div class="border-bottom border-top p-2 sticky-top">
+    
+        <div class="border-bottom border-top p-2 mt-2 sticky-top">
             <div class="row g-1">
                 <div class="col-4">
-                    <input type="text" class="form-control" placeholder="search Community ot building ..."
+                    <input type="text" class="form-control h-100" placeholder="search Community ot building ..."
                         aria-label="First name">
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class=" mainDropBtn h-100" aria-label="Default select example">
                         <option selected value="1">Buy</option>
                         <option value="2">Rent</option>
                         <option value="3">Commercial for Rent</option>
@@ -17,37 +18,108 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> Property type</option>
-                        <option value="1">Apartment</option>
-                        <option value="2">VIlla</option>
-                        <option value="3">Penthhouse</option>
-                        <option value="4">Townhouse</option>
-                    </select>
+                    <div class="">
+                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">Property Type</button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">Home Type</li>
+                            <li class="dropdown-item"> Commercial Type</li>
+                            <li class="dropdown-item">Plot Type </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> Beds & Baths</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="">
+                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Beds & Baths
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-items">
+                                <div class="m-2">
+                                    <h6>bathrooms</h6>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary mx-1">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary mx-1">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary ms-1">6+</button>
+                                </div>
+                                <div class=" m-2">
+                                    <h6>bedrooms</h6>
+                                    <button class="btn btn-secondary">1</button>
+                                    <button class="btn btn-secondary mx-1">2</button>
+                                    <button class="btn btn-secondary">3</button>
+                                    <button class="btn btn-secondary mx-1">4</button>
+                                    <button class="btn btn-secondary">5</button>
+                                    <button class="btn btn-secondary ms-1">6+</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> Price</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected> More Filters</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <div class="">
+                        <div class="dropdown">
+                            <button class="mainDropBtn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Min (Price) & Max (Price)
+                            </button>
+
+                            <div class="dropdown-menu">
+                                <div class="dropdown-menu-item-boxPrice" role="listbox">
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <div role="listbox" class="dropdown-menu-item-box2">
+                                                <div class="mt-2 mb-4">
+                                                    <label for="exampleFormControlInput3" class="form-label lableText">Min
+                                                        Price</label>
+                                                    <input type="text" class="form-control" id="exampleFormControlInput3"
+                                                        placeholder="Min Price">
+                                                </div>
+                                                <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
+                                                <button aria-label="1" class="dropdownSelectBtnPrice">100000</button>
+                                                <button aria-label="2" class="dropdownSelectBtnPrice">200000</button>
+                                                <button aria-label="3" class="dropdownSelectBtnPrice">300000</button>
+                                                <button aria-label="4" class="dropdownSelectBtnPrice">400000</button>
+                                                <button aria-label="5" class="dropdownSelectBtnPrice">500000</button>
+                                                <button aria-label="6" class="dropdownSelectBtnPrice">600000</button>
+                                                <button aria-label="7" class="dropdownSelectBtnPrice">700000</button>
+                                                <button aria-label="8" class="dropdownSelectBtnPrice">800000</button>
+                                                <button aria-label="9" class="dropdownSelectBtnPrice">900000</button>
+                                                <button aria-label="10+" class="dropdownSelectBtnPrice">1000000+</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div role="listbox" class="dropdown-menu-item-box2">
+                                                <div class="mt-2 mb-4">
+                                                    <label for="exampleFormControlInput4" class="form-label lableText">Max
+                                                        Price</label>
+                                                    <input type="text" class="form-control" id="exampleFormControlInput4"
+                                                        placeholder="Max Price">
+                                                </div>
+                                                <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
+                                                <button aria-label="1" class="dropdownSelectBtnPrice">100000</button>
+                                                <button aria-label="2" class="dropdownSelectBtnPrice">200000</button>
+                                                <button aria-label="3" class="dropdownSelectBtnPrice">300000</button>
+                                                <button aria-label="4" class="dropdownSelectBtnPrice">400000</button>
+                                                <button aria-label="5" class="dropdownSelectBtnPrice">500000</button>
+                                                <button aria-label="6" class="dropdownSelectBtnPrice">600000</button>
+                                                <button aria-label="7" class="dropdownSelectBtnPrice">700000</button>
+                                                <button aria-label="8" class="dropdownSelectBtnPrice">800000</button>
+                                                <button aria-label="9" class="dropdownSelectBtnPrice">900000</button>
+                                                <button aria-label="10+" class="dropdownSelectBtnPrice">1000000+</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="dropdownCloseBox">
+                                        <button class="dropdownCloseBtn" aria-label="Close">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     <button class="SearchBtnColor">Find</button>
@@ -90,9 +162,11 @@
                 </div>
             </div>
         </div>
-        <div v-if="loading">Loading...</div>
-        <div class="row g-2 my-2 mx-md-5">
-            <div class="col-md-12">
+        <div class="text-center m-5" v-if="loading">
+            <VueSpinnerHourglass size="100" color="rgb(255, 69, 0)" />
+        </div>
+        <div class="row g-2 my-2 mx-lg-2">
+            <div class="col-12 col-md-8">
                 <div class="row">
                     <div class="col-12" v-for="items in properties" :key="items.id">
                         <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
@@ -121,7 +195,8 @@
                                             <div class="d-flex justify-content-between">
                                                 <div>
                                                     <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                                    <span class="badge text-bg-secondary card-title">{{ items?.property_type?.home_types  }}</span>
+                                                    <span class="badge text-bg-secondary card-title">{{
+                                                        items?.property_type?.home_types }}</span>
                                                     <h4>{{ items?.total_price }} Rs </h4>
                                                 </div>
                                                 <div class="d-flex align-items-center">
@@ -140,13 +215,17 @@
                                             </div>
                                             <div class="d-flex ">
                                                 <p class="card-text">
-                                                    {{ items?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i> Bedroom
+                                                    {{ items?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i>
+                                                    Bedroom
                                                 </p>
                                                 <p class="card-text mx-2">
-                                                    {{ items?.amenties?.bathrooms }} <i class="fa-solid fa-bath"></i> Bathrooms
+                                                    {{ items?.amenties?.bathrooms }} <i class="fa-solid fa-bath"></i>
+                                                    Bathrooms
                                                 </p>
                                                 <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                        style="width: 30px; height: 30px;" alt=""> {{ items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types }}</p>
+                                                        style="width: 30px; height: 30px;" alt=""> {{
+                                                            items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types }}
+                                                </p>
                                             </div>
                                             <div class="mb-2">
                                                 <small class="text-body-secondary">Added: {{
@@ -155,19 +234,15 @@
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="">
-                                                    <button class="btn btn-outline-success btn-sm">
+                                                    <button class="iconBtn">
                                                         <i class="fas fa-phone fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-success btn-sm mx-2">
+                                                    <button class="iconBtn mx-2">
                                                         <i class="fas fa-message fa-lg"></i>
                                                     </button>
-                                                    <button class="btn btn-outline-success btn-sm">
+                                                    <button class="iconBtn">
                                                         <i class="fa-brands fa-whatsapp fa-lg"></i>
                                                     </button>
-                                                    <!-- <button class="btn btn-outline-secondary btn-sm mx-2">
-
-                                                        <i class="fas fa-heart fa-lg"></i>
-                                                    </button> -->
                                                 </div>
                                                 <div class="dropdown-image">
                                                     <img v-if="items.company_agent"
@@ -189,31 +264,17 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-3">
-                <div class="row">
-                    <div class="col-12 d-md-none d-lg-block">
-                        <div class="">
-                            <div class="card text-dark">
-                                <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp"
-                                    class="card-img" alt="...">
-                                <div class="card-img-overlay text-dark">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text text-wrap">This is a wider card with supporting text below as a
-                                        natural lead-in
-                                        to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small>Enquire Now</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <div class="d-none d-sm-block col-md-4">
+                <Advertise />
+            </div>
         </div>
-        <div class="my-4">
-            <button class="mainBtnColor bg-white me-2">Previous</button>
-            <button class="mainBtnColor bg-white">Next</button>
+        <div class="my-4 text-center">
+            <button class="mainBtnColor bg-white me-2" :disabled="preUrlPage === null"
+                v-on:click="handleNextPage(preUrlPage)">Previous</button>
+            <button class="mainBtnColor bg-white" :disabled="nextUrlPage === null"
+                v-on:click="handleNextPage(nextUrlPage)">Next</button>
         </div>
+        <ScrollButton />
     </div>
     <Footer />
 </template>
@@ -222,20 +283,30 @@
 import { RouterLink } from 'vue-router';
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
+import Advertise from '../advertise/Advertise.vue'
 import moment from 'moment'
 import axios from 'axios';
-import { BASE_URL,PROPERTY_END_POINT } from '../../utils/api';
+import { BASE_URL, PROPERTY_END_POINT, changeUrl, API_VERSION } from '../../utils/api';
+import { VueSpinner, VueSpinnerHourglass } from 'vue3-spinners';
+import ScrollButton from '../../scrollComponent/ScrollButton.vue';
 export default {
     name: 'Listing',
     components: {
         Header,
         Footer,
+        Advertise,
+        VueSpinner,
+        VueSpinnerHourglass,
+        ScrollButton,
     },
     data() {
         return {
             properties: [],
             propertiesCount: [],
             loading: false,
+            nextUrlPage: null,
+            preUrlPage: null,
+
         }
     },
     created: function () {
@@ -253,11 +324,15 @@ export default {
 
             try {
                 this.loading = true;
-                let finalUrl = BASE_URL + PROPERTY_END_POINT() + `?rent_sale_type=${category_name}`
+                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?rent_sale_type=${category_name}`
                 let res = await axios.get(finalUrl);
-                // console.log(res.data.results);
-                this.properties = res.data.results
+                console.log(res.data);
+                const apiRes = [...this.properties, ...res.data.results]
+                // this.properties = res.data.results
+                this.properties = apiRes
                 this.propertiesCount = res.data
+                this.nextUrlPage = res?.data?.next
+                this.preUrlPage = res?.data?.previous
                 console.log(category_name)
                 // console.log('Query parameter search:', searchValue)
             } catch (error) {
@@ -266,6 +341,18 @@ export default {
                 this.loading = false;
             }
         },
+        async handleNextPage(url) {
+            url = url.replace(changeUrl(), BASE_URL);
+            window.scrollTo(0, 0);
+            return await axios.get(url)
+                .then((res) => {
+                    this.properties = res.data.results
+                    this.nextUrlPage = res?.data?.next
+                    this.preUrlPage = res?.data?.previous
+                })
+                .catch((err) => console.log(err))
+        },
+
         // async getSearch() {
         //      const searchValue = this.$route.query.search;
         //     try {
@@ -297,8 +384,29 @@ export default {
 </script>
 
 <style>
+.iconBtn {
+    color: rgb(255, 69, 0);
+    border: 1px solid rgb(255, 69, 0);
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px 9px;
+}
+
+.iconBtn:hover {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    color: darkgray;
+}
+
+button:disabled,
+button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+
 .cardImage {
-    height: 30vh !important;
+    height: 225px !important;
 }
 
 .card-images {
@@ -338,5 +446,17 @@ export default {
 .desc {
     padding: 15px;
     text-align: center;
+}
+
+@media screen and (min-width: 1080px) {
+    .cardImage {
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .cardImage {
+        height: 50px;
+    }
 }
 </style>
