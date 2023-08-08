@@ -290,6 +290,7 @@ export default {
     border: 1px solid darkgray;
     background-color: #ffffff;
     padding: 8px 0;
+    border-radius: 5px;
 }
 
 .mainDropBtn:hover {
@@ -317,7 +318,7 @@ export default {
 
 .SearchBtnColor {
     padding: 8px 20px;
-    border-radius: 1px;
+    border-radius: 5px;
     border: 1px solid rgb(255, 69, 0);
     background-color: rgb(255, 69, 0);
     color: white;
