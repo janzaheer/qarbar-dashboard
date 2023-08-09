@@ -12,14 +12,8 @@
             </div>
             <div class="row g-1">
                 <div class="col-9 col-md-12 col-lg-6 ">
-                    <Multiselect v-model="value" mode="tags" :close-on-select="false" :searchable="true"
-                        :create-option="true" placeholder='Select Location' :options="[
-                            { value: 'Quetta', label: 'Quetta' },
-                            { value: 'Islamabad', label: 'Islamabad' },
-                            { value: 'Lahore', label: 'Lahore' },
-                            { value: 'Karachi', label: 'Karachi' },
-                            { value: 'Nushki', label: 'Nushki' },
-                        ]" />
+                    <Multiselect v-model="selectedCities" mode="tags" :close-on-select="false" :searchable="true"
+                        :create-option="true" placeholder='Select Location' :options="cityOptions" />
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
                     <div class="">
@@ -34,36 +28,99 @@
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
                     <div class="">
-                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <button class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
                             Beds & Baths
                         </button>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-items">
-                                <div class="m-2">
-                                    <h6>bathrooms</h6>
-                                    <button class="btn btn-secondary">1</button>
-                                    <button class="btn btn-secondary mx-1">2</button>
-                                    <button class="btn btn-secondary">3</button>
-                                    <button class="btn btn-secondary mx-1">4</button>
-                                    <button class="btn btn-secondary">5</button>
-                                    <button class="btn btn-secondary ms-1">6+</button>
+                            <li class="bedBathDropdown">
+                                <h6 class="ms-2">bathrooms</h6>
+                                <div class="m-2 d-flex">
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1" v-on:click="selectedBed('bath 1')"><span>1</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="2" v-on:click="selectedBed('bath 2')"><span>2</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="3" v-on:click="selectedBed('bath 3')"><span>3</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="4" v-on:click="selectedBed('bath 4')"><span>4</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="5" v-on:click="selectedBed('bath 5')"><span>5</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="6" v-on:click="selectedBed('bath 6')"><span>6</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="7" v-on:click="selectedBed('bath 7')"> <span>7</span>
+                                        </label>
+                                    </div>
+
                                 </div>
-                                <div class=" m-2">
-                                    <h6>bedrooms</h6>
-                                    <button class="btn btn-secondary">1</button>
-                                    <button class="btn btn-secondary mx-1">2</button>
-                                    <button class="btn btn-secondary">3</button>
-                                    <button class="btn btn-secondary mx-1">4</button>
-                                    <button class="btn btn-secondary">5</button>
-                                    <button class="btn btn-secondary ms-1">6+</button>
+                                <h6 class="ms-2">bedrooms</h6>
+                                <div class=" m-2 d-flex">
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>1</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>2</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>3</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>4</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>5</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>6</span>
+                                        </label>
+                                    </div>
+                                    <div class="cat action">
+                                        <label>
+                                            <input type="checkbox" value="1"><span>7</span>
+                                        </label>
+                                    </div>
                                 </div>
+
                             </li>
                         </ul>
                     </div>
+
+
+
+
                 </div>
-                <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1 text-center">
-                    <button class="SearchBtnColor">Find </button>
+                <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1">
+                    <button class="SearchBtnColor" v-on:click="handleValue">Find </button>
 
                 </div>
             </div>
@@ -71,7 +128,33 @@
                 <div class="collapse" id="collapseExample">
                     <div class="row g-1">
                         <div class="col-6 col-md-3">
+
                             <div class="">
+                                <div class="dropdown">
+                                    <button class="mainDropBtn dropdown-toggle  w-100" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Min (Price) - Max (Price)
+                                    </button>
+                                    <ul class="dropdown-menu ">
+                                        <div class="menuBox">
+                                            <div class="row g-3">
+                                                <div class="col-6">
+                                                    <div class="lableText">Min Price</div>
+                                                    <input v-model="minPrice" type="number" class="form-control h-100"
+                                                        placeholder=" Min Price" aria-label="First name" name="minPrice">
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="lableText">Max Price</div>
+                                                    <input v-model="maxPrice" type="number" class="form-control h-100"
+                                                        placeholder=" Max Price" aria-label="First name" name="maxPrice">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- <div class="">
                                 <div class="dropdown">
                                     <button class="mainDropBtn dropdown-toggle w-100" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -151,10 +234,41 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-6 col-md-3">
                             <div class="">
+                                <div class="dropdown">
+                                    <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Min (Area) - Max (Area)
+                                    </button>
+                                    <ul class="dropdown-menu ">
+                                        <div class="menuBox">
+
+                                            <div class="row g-3">
+                                                <div class="col-6">
+                                                    <div class="lableText">Min Area</div>
+                                                    <input type="number" class="form-control h-100" placeholder=" Min Area"
+                                                        aria-label="First name" name="minArea" v-model="minArea">
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="lableText">Max Area</div>
+                                                    <input v-model="maxArea" type="number" class="form-control h-100"
+                                                        placeholder=" Max Area" aria-label="First name" name="maxArea">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="dropdownCloseBox">
+                                            <button class="dropdownCloseBtn" data-bs-toggle="modal"
+                                                data-bs-target="#areaModal">Change Area unit</button>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- <div class="">
                                 <div class="dropdown">
                                     <button class="mainDropBtn dropdown-toggle w-100" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -216,17 +330,53 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="areaModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-center" id="areaModalLabel">Change Area</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <select class="form-select" aria-label="Default select example">
+                                                <option selected>Select area unit</option>
+                                                <option value="1">Marla</option>
+                                                <option value="2">Square feet</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success w-100"
+                                                data-bs-dismiss="modal">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <input type="text" class="form-control h-100" placeholder=" Search any property..."
-                                aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
+                            <!-- <input type="text" class="form-control h-100" placeholder=" Search any property..."
+                                aria-label="First name"> -->
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{ selectedOption }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" @click="selectOption('Option 1')">Option 1</a>
+                                    <a class="dropdown-item" href="#" @click="selectOption('Option 2')">Option 2</a>
+                                    <a class="dropdown-item" href="#" @click="selectOption('Option 3')">Option 3</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="d-flex justify-content-center mt-1 mx-md-5">
+
                 <div>
                     <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                         aria-controls="collapseExample">
@@ -240,6 +390,8 @@
 
 <script>
 import Multiselect from '@vueform/multiselect'
+import axios from 'axios';
+import { BASE_URL, API_VERSION, CITY_END_POINT, PROPERTY_END_POINT } from '../../utils/api';
 
 export default {
     mode: 'tags',
@@ -248,9 +400,20 @@ export default {
     },
     data() {
         return {
+            // areaUnit: [],
             value: [],
             sellChecked: true,
-            rentChecked: false
+            rentChecked: false,
+            selectedCities: [], // Holds the selected cities
+            cityOptions: [], // Holds the city options for the Multiselect
+            minPrice: null,
+            maxPrice: null,
+            minArea: null,
+            maxArea: null,
+            selectedOption: '',
+            selectedBeds: '',
+
+
         }
     },
     methods: {
@@ -262,31 +425,125 @@ export default {
             this.sellChecked = false;
             this.rentChecked = true;
         },
-        handleSearch(e) {
-            // e.preventDefault();
-            e.preventDefault();
-            /* eslint eqeqeq: 0 */
-            if (e.key == 'Enter') {
-                let value = e.target.value
-                //   navigate(`/search/?search=${value}`)
-                // this.$router.push({ path: '/listing/?search=', query: { search: value } });
-                console.log('-------------------------------------')
-                console.log('search-value', value)
-                console.log('-------------------------------------')
+        async handleCity() {
+            try {
+                let finalUrl = BASE_URL + API_VERSION() + CITY_END_POINT();
+                let res = await axios.get(finalUrl);
+                this.cityOptions = res.data.map(city => ({
+                    value: city.city_name,
+                    label: city.city_name
+                }));
+                console.log('city')
+            } catch (error) {
+                console.error('Error fetching city data:', error);
             }
-        }
-    }
+
+        },
+        selectedBed(v){
+            this.selectedBeds = v
+            console.log('value',this.selectedBeds = v)
+        },
+        selectOption(option) {
+            this.selectedOption = option;
+            console.log('value',this.selectedOption = option)
+        },
+        // async handleAreaUnit() {
+        //     let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT();
+        //     try {
+        //         let res = await axios.get(finalUrl);
+        //         console.log('=============================')
+        //         console.log(res.data)
+        //         console.log('=============================')
+        //     } catch (error) {
+        //         console.error('Error fetching area data:', error);
+        //     }
+        // },
+        handleValue() {
+            console.log('----')
+            console.log('click')
+            console.log(this.minArea, this.maxArea, this.minPrice, this.maxPrice, this.selectedCities)
+            this.$refs.handleValue.reset();
+        },
+        // handleSearch2() {
+        //     // Handle your search logic here, if needed
+        // },
+        // handleCityChange() {
+        //     console.log('Selected Cities:', this.selectedCities);
+        // },
+        // handlePriceChange() {
+        //     console.log('Min Price:', this.minPrice);
+        //     console.log('Max Price:', this.maxPrice);
+        // },
+        // handleAreaChange() {
+        //     console.log('Min Area:', this.minArea);
+        //     console.log('Max Area:', this.maxArea);
+        // },
+
+    },
+    mounted() {
+        // this.handleAreaUnit();
+        this.handleCity();
+    },
 }
 </script>
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
+.cat {
+    margin: 4px;
+    background-color: darkgray;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    /* float: left; */
+}
+
+.cat label {
+    /* float: left; */
+    /* line-height: 3.0em; */
+    /* width: 8.0em;
+   height: 3.0em; */
+    /* padding: 6px 9px; */
+    width: 50px;
+}
+
+.cat label span {
+    text-align: center;
+    padding: 3px 0;
+    display: block;
+}
+
+.cat label input {
+    position: absolute;
+    display: none;
+    color: #fff !important;
+}
+
+/* selects all of the text within the input element and changes the color of the text */
+.cat label input+span {
+    color: #fff;
+}
+
+/* This will declare how a selected input will look giving generic properties */
+.cat input:checked+span {
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.action input:checked+span {
+    background-color: #F75A1B;
+}
+
+
 .mainDropBtn {
     color: darkgray;
-    border: 1px solid darkgray;
+    border: 1px solid rgb(210, 208, 208);
     background-color: #ffffff;
     padding: 8px 0;
     border-radius: 5px;
+    text-align: start;
+    padding-left: 10px;
+
 }
 
 .mainDropBtn:hover {
@@ -319,16 +576,11 @@ export default {
     background-color: rgb(255, 69, 0);
     color: white;
 }
-.SearchBtnColor:hover{
+
+.SearchBtnColor:hover {
     color: rgb(255, 69, 0);
     background-color: white;
 }
-
-/* .dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-} */
 
 .dropdown-content {
     display: none;
@@ -337,9 +589,6 @@ export default {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    /* height: 100px; */
-    /* min-height: 100px;
-    overflow-y: auto; */
     padding: 10px;
 }
 
@@ -352,6 +601,30 @@ input {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+}
+
+.bedBathDropdown {
+    background-color: #fff;
+    height: 10rem;
+    width: 350px;
+}
+
+.menuBox {
+    /* position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    margin-top: 0.2rem; */
+    padding: 10px;
+    /* -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; */
+    /* border-radius: 0.5rem; */
+    background-color: #fff;
+    height: 7rem;
+    width: 350px;
 }
 
 .dropdown-menu-item-box {
@@ -449,10 +722,9 @@ input {
 }
 
 .lableText {
-    font-size: 13px;
-    color: orangered;
-    /* margin-left: 5px; */
-    margin: 0 10px;
+    font-size: 16px;
+    color: rgb(255, 69, 0);
+    text-align: center;
     margin-bottom: 0 !important;
 }
 
@@ -473,4 +745,5 @@ input {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
-}</style>
+}
+</style>

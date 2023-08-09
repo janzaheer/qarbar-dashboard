@@ -161,17 +161,17 @@ export default {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=rent`;
             let res = await axios.get(finalUrl)
             this.propertiesList = res.data.results
-            console.log('-----------------------------------')
-            console.log(res.data.results)
-            console.log('-----------------------------------')
+            // console.log('-----------------------------------')
+            // console.log(res.data.results)
+            // console.log('-----------------------------------')
         },
         async getPropertiesSale() {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=sale`;
             let res = await axios.get(finalUrl)
             this.propertiesSaleList = res.data.results
-            console.log('-------------11111-----------------')
-            console.log(res.data.results)
-            console.log('------------1111111---------------')
+            // console.log('-------------11111-----------------')
+            // console.log(res.data.results)
+            // console.log('------------1111111---------------')
         }
     },
     mounted() {
