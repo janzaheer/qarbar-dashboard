@@ -37,37 +37,44 @@
                                 <div class="m-2 d-flex">
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1" v-on:click="selectedBed('bath 1')"><span>1</span>
+                                            <input type="checkbox" value="1"
+                                                v-on:click="handleSelectedBath(1, $event)"><span>1</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="2" v-on:click="selectedBed('bath 2')"><span>2</span>
+                                            <input type="checkbox" value="2"
+                                                v-on:click="handleSelectedBath(2, $event)"><span>2</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="3" v-on:click="selectedBed('bath 3')"><span>3</span>
+                                            <input type="checkbox" value="3"
+                                                v-on:click="handleSelectedBath(3, $event)"><span>3</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="4" v-on:click="selectedBed('bath 4')"><span>4</span>
+                                            <input type="checkbox" value="4"
+                                                v-on:click="handleSelectedBath(4, $event)"><span>4</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="5" v-on:click="selectedBed('bath 5')"><span>5</span>
+                                            <input type="checkbox" value="5"
+                                                v-on:click="handleSelectedBath(5, $event)"><span>5</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="6" v-on:click="selectedBed('bath 6')"><span>6</span>
+                                            <input type="checkbox" value="6"
+                                                v-on:click="handleSelectedBath(6, $event)"><span>6</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="7" v-on:click="selectedBed('bath 7')"> <span>7</span>
+                                            <input type="checkbox" value="7" v-on:click="handleSelectedBath(7, $event)">
+                                            <span>7</span>
                                         </label>
                                     </div>
 
@@ -76,37 +83,44 @@
                                 <div class=" m-2 d-flex">
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>1</span>
+                                            <input type="checkbox" value="1"
+                                                v-on:click="handleSelectedBed(1, $event)"><span>1</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>2</span>
+                                            <input type="checkbox" value="2"
+                                                v-on:click="handleSelectedBed(2, $event)"><span>2</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>3</span>
+                                            <input type="checkbox" value="3"
+                                                v-on:click="handleSelectedBed(3, $event)"><span>3</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>4</span>
+                                            <input type="checkbox" value="4"
+                                                v-on:click="handleSelectedBed(4, $event)"><span>4</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>5</span>
+                                            <input type="checkbox" value="5"
+                                                v-on:click="handleSelectedBed(5, $event)"><span>5</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>6</span>
+                                            <input type="checkbox" value="6"
+                                                v-on:click="handleSelectedBed(6, $event)"><span>6</span>
                                         </label>
                                     </div>
                                     <div class="cat action">
                                         <label>
-                                            <input type="checkbox" value="1"><span>7</span>
+                                            <input type="checkbox" value="7"
+                                                v-on:click="handleSelectedBed(7, $event)"><span>7</span>
                                         </label>
                                     </div>
                                 </div>
@@ -245,7 +259,9 @@
                                     </button>
                                     <ul class="dropdown-menu ">
                                         <div class="menuBox">
-
+                                            <div class=" text-center unitMeterCLass">
+                                                {{ this.unitMeter }}
+                                            </div>
                                             <div class="row g-3">
                                                 <div class="col-6">
                                                     <div class="lableText">Min Area</div>
@@ -258,6 +274,7 @@
                                                         placeholder=" Max Area" aria-label="First name" name="maxArea">
                                                 </div>
                                             </div>
+                                           
 
                                         </div>
                                         <div class="dropdownCloseBox">
@@ -342,10 +359,12 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Select area unit</option>
-                                                <option value="1">Marla</option>
-                                                <option value="2">Square feet</option>
+                                            <select class="form-select" aria-label="Default select example" v-on:change="handleMeterUnit" :value="unitMeter" >
+                                                <option value="marla" selected>Marla</option>
+                                                <option value="sqft">Sq.Ft</option>
+                                                <option value="sqm">Sq.M</option>
+                                                <option value="sqyd">Sq.Yd</option>
+                                                <option value="kanal">Kanal</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
@@ -357,19 +376,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <!-- <input type="text" class="form-control h-100" placeholder=" Search any property..."
-                                aria-label="First name"> -->
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{ selectedOption }}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" @click="selectOption('Option 1')">Option 1</a>
-                                    <a class="dropdown-item" href="#" @click="selectOption('Option 2')">Option 2</a>
-                                    <a class="dropdown-item" href="#" @click="selectOption('Option 3')">Option 3</a>
-                                </div>
-                            </div>
+                            <input type="text" class="form-control h-100" placeholder=" Search any property..."
+                                aria-label="First name" v-on:keyup="(e) => handleSearchTerm(e)">
                         </div>
                     </div>
                 </div>
@@ -400,18 +408,20 @@ export default {
     },
     data() {
         return {
-            // areaUnit: [],
             value: [],
             sellChecked: true,
             rentChecked: false,
             selectedCities: [], // Holds the selected cities
             cityOptions: [], // Holds the city options for the Multiselect
-            minPrice: null,
-            maxPrice: null,
-            minArea: null,
-            maxArea: null,
+            minPrice: '',
+            maxPrice: '',
+            minArea: '',
+            maxArea: '',
             selectedOption: '',
-            selectedBeds: '',
+            selectedBeds: [],
+            selectedBaths: [],
+            searchValue: '',
+            unitMeter: 'marla'
 
 
         }
@@ -439,49 +449,51 @@ export default {
             }
 
         },
-        selectedBed(v){
-            this.selectedBeds = v
-            console.log('value',this.selectedBeds = v)
+        handleSelectedBath(val, event) {
+            console.log('e', event.target.checked)
+            if (event.target.checked) {
+                this.selectedBaths.push(val)
+            } else {
+                const index = this.selectedBaths.indexOf(val)
+                this.selectedBaths.splice(index, 1)
+            }
         },
-        selectOption(option) {
-            this.selectedOption = option;
-            console.log('value',this.selectedOption = option)
+        handleSelectedBed(val, event) {
+            console.warn('e', event.target.checked)
+            if (event.target.checked) {
+                this.selectedBeds.push(val)
+            } else {
+                const index = this.selectedBeds.indexOf(val)
+                this.selectedBeds.splice(index, 1)
+            }
         },
-        // async handleAreaUnit() {
-        //     let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT();
-        //     try {
-        //         let res = await axios.get(finalUrl);
-        //         console.log('=============================')
-        //         console.log(res.data)
-        //         console.log('=============================')
-        //     } catch (error) {
-        //         console.error('Error fetching area data:', error);
-        //     }
-        // },
+        handleSearchTerm(e) {
+            if (e.key == 'Enter') {
+                let value = e.target.value
+                console.log('search',value)
+                this.searchValue = value
+            }
+            
+        },
+        handleMeterUnit(e){
+            let val = e.target.value;
+            console.log('----0',val)
+            this.unitMeter = val
+        },
         handleValue() {
             console.log('----')
             console.log('click')
-            console.log(this.minArea, this.maxArea, this.minPrice, this.maxPrice, this.selectedCities)
-            this.$refs.handleValue.reset();
+            console.log(this.minArea, this.maxArea, this.minPrice, this.maxPrice)
+            console.log('selectedBath', this.selectedBaths)
+            console.log('selectedBed', this.selectedBeds)
+            console.log('searchInput', this.searchValue)
+            // this.$refs.handleValue.reset();
         },
-        // handleSearch2() {
-        //     // Handle your search logic here, if needed
-        // },
-        // handleCityChange() {
-        //     console.log('Selected Cities:', this.selectedCities);
-        // },
-        // handlePriceChange() {
-        //     console.log('Min Price:', this.minPrice);
-        //     console.log('Max Price:', this.maxPrice);
-        // },
-        // handleAreaChange() {
-        //     console.log('Min Area:', this.minArea);
-        //     console.log('Max Area:', this.maxArea);
-        // },
+
 
     },
     mounted() {
-        // this.handleAreaUnit();
+
         this.handleCity();
     },
 }
@@ -489,8 +501,14 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
+.unitMeterCLass{
+    color: rgb(255, 69, 0);
+    background-color: #EAEAEA;
+    padding: 1px 0;
+    border-radius: 5px;
+}
 .cat {
-    margin: 4px;
+    margin: 2px;
     background-color: darkgray;
     border-radius: 4px;
     border: 1px solid #fff;
@@ -500,17 +518,19 @@ export default {
 
 .cat label {
     /* float: left; */
-    /* line-height: 3.0em; */
-    /* width: 8.0em;
-   height: 3.0em; */
-    /* padding: 6px 9px; */
-    width: 50px;
+    line-height: 3.0em;
+    /* width: 8.0em; */
+   height: 2.0em;
+    /* padding: 6px 5px; */
+    /* width: 50px; */
+    width: 100px;
 }
 
 .cat label span {
     text-align: center;
-    padding: 3px 0;
-    display: block;
+    /* padding: 3px 0; */
+    padding: 0px 15px;
+    /* display: block; */
 }
 
 .cat label input {
@@ -522,6 +542,8 @@ export default {
 /* selects all of the text within the input element and changes the color of the text */
 .cat label input+span {
     color: #fff;
+    /* text-align: start; */
+    /* margin-left: 15px;   */
 }
 
 /* This will declare how a selected input will look giving generic properties */
@@ -745,5 +767,4 @@ input {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
-</style>
+}</style>

@@ -24,10 +24,12 @@
                             <RouterLink class="nav-link active" to="/">Home</RouterLink>
                         </li>
                         <li class="nav-item">
-                            <RouterLink class="nav-link" :to="'/Listing/?rent_sale_type=sale'">Buy</RouterLink>
+                            <!-- <RouterLink class="nav-link" :to="'/Listing/buy?rent_sale_type=sale'">Buy</RouterLink> -->
+                            <a href="/Listing/?rent_sale_type=sale" class="nav-link">Buy</a>
                         </li>
                         <li class="nav-item">
-                            <RouterLink class="nav-link" to="/Listing/?rent_sale_type=rent">Rent</RouterLink>
+                            <!-- <RouterLink class="nav-link" to="/Listing/rent?rent_sale_type=rent">Rent</RouterLink> -->
+                            <a href="/Listing/?rent_sale_type=rent" class="nav-link">Rent</a>
                         </li>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
