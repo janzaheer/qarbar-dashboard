@@ -19,10 +19,29 @@
                     <div class="">
                         <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
                             aria-expanded="false">Property Type</button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item">Home Type</li>
-                            <li class="dropdown-item"> Commercial Type</li>
-                            <li class="dropdown-item">Plot Type </li>
+                        <ul class="dropdown-menu propertyTypeDp">
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('house')">House</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('flat')">Flat</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('room')">Room</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('upper_portion')">Uper Portion'</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('lower_portion')">Lower Portion</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('farm_house')">Farm House</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('pent_house')">Pent House</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('residetial_plot')">Residential Plot
+                            </li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('commercial_plot')">Commercial Plot'
+                            </li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('agricultural_land')">Agricultural
+                                Land</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('Industrial_land')">Industrial_Land
+                            </li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('plot_file')">Plot File</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('plot_form')">Plot Form</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('office')">Office</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('shop')">Shop</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('warehouse')">WareHouse</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('factory')">Factory</li>
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('building')">Building</li>
                         </ul>
                     </div>
                 </div>
@@ -274,7 +293,7 @@
                                                         placeholder=" Max Area" aria-label="First name" name="maxArea">
                                                 </div>
                                             </div>
-                                           
+
 
                                         </div>
                                         <div class="dropdownCloseBox">
@@ -359,7 +378,8 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <select class="form-select" aria-label="Default select example" v-on:change="handleMeterUnit" :value="unitMeter" >
+                                            <select class="form-select" aria-label="Default select example"
+                                                v-on:change="handleMeterUnit" :value="unitMeter">
                                                 <option value="marla" selected>Marla</option>
                                                 <option value="sqft">Sq.Ft</option>
                                                 <option value="sqm">Sq.M</option>
@@ -421,7 +441,8 @@ export default {
             selectedBeds: [],
             selectedBaths: [],
             searchValue: '',
-            unitMeter: 'marla'
+            unitMeter: 'marla',
+            selectedPropertyType: ''
 
 
         }
@@ -443,7 +464,6 @@ export default {
                     value: city.city_name,
                     label: city.city_name
                 }));
-                console.log('city')
             } catch (error) {
                 console.error('Error fetching city data:', error);
             }
@@ -470,30 +490,68 @@ export default {
         handleSearchTerm(e) {
             if (e.key == 'Enter') {
                 let value = e.target.value
-                console.log('search',value)
+                console.log('search', value)
                 this.searchValue = value
             }
-            
+
         },
-        handleMeterUnit(e){
+        handleMeterUnit(e) {
             let val = e.target.value;
-            console.log('----0',val)
+            console.log('----', val)
             this.unitMeter = val
         },
         handleValue() {
-            console.log('----')
-            console.log('click')
-            console.log(this.minArea, this.maxArea, this.minPrice, this.maxPrice)
-            console.log('selectedBath', this.selectedBaths)
-            console.log('selectedBed', this.selectedBeds)
-            console.log('searchInput', this.searchValue)
-            // this.$refs.handleValue.reset();
-        },
+            // console.log('----')
+            // console.log('click')
+            // console.log(this.minArea, this.maxArea, this.minPrice, this.maxPrice)
+            // console.log('selectedBath', this.selectedBaths)
+            // console.log('selectedBed', this.selectedBeds)
+            // console.log('searchInput', this.searchValue)
+            // console.log('selectPtype', this.selectedPropertyType)
 
+            const params = new URLSearchParams()
+            if (this.searchValue) {
+                params.append("search", this.searchValue)
+            }
+            if (this.minPrice) {
+                params.append("min_price", this.minPrice)
+            }
+            if (this.maxPrice) {
+                params.append("max_price", this.maxPrice)
+            }
+            if (this.minArea) {
+                params.append("min_area", this.minArea)
+            }
+            if (this.maxArea) {
+                params.append("max_area", this.maxArea)
+            }
+            if (this.selectedBeds) {
+                this.selectedBeds.forEach((s_bed) => params.append("beds", s_bed))
+            }
+            if (this.selectedBaths) {
+                this.selectedBaths.forEach((s_bath) => params.append("baths", s_bath))
+            }
+
+            if (this.selectedCities) {
+                this.selectedCities.forEach((s_cities) => params.append("cities", s_cities))
+            }
+            if (this.unitMeter) {
+                params.append("unit_types", this.unitMeter)
+            }
+            
+            console.log(params.toString())
+            // this.$refs.handleValue.reset();
+           
+        },
+        handlePropertyTypes(val) {
+            this.selectedPropertyType = val
+            console.warn('property', this.selectedPropertyType = val)
+
+
+        },
 
     },
     mounted() {
-
         this.handleCity();
     },
 }
@@ -501,270 +559,10 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style>
-.unitMeterCLass{
-    color: rgb(255, 69, 0);
-    background-color: #EAEAEA;
-    padding: 1px 0;
-    border-radius: 5px;
-}
-.cat {
-    margin: 2px;
-    background-color: darkgray;
-    border-radius: 4px;
-    border: 1px solid #fff;
-    overflow: hidden;
-    /* float: left; */
-}
+@import './mainDropDown.css';
 
-.cat label {
-    /* float: left; */
-    line-height: 3.0em;
-    /* width: 8.0em; */
-   height: 2.0em;
-    /* padding: 6px 5px; */
-    /* width: 50px; */
-    width: 100px;
-}
-
-.cat label span {
-    text-align: center;
-    /* padding: 3px 0; */
-    padding: 0px 15px;
-    /* display: block; */
-}
-
-.cat label input {
-    position: absolute;
-    display: none;
-    color: #fff !important;
-}
-
-/* selects all of the text within the input element and changes the color of the text */
-.cat label input+span {
+.active {
+    background-color: #007bff;
     color: #fff;
-    /* text-align: start; */
-    /* margin-left: 15px;   */
 }
-
-/* This will declare how a selected input will look giving generic properties */
-.cat input:checked+span {
-    color: #ffffff;
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
-}
-
-.action input:checked+span {
-    background-color: #F75A1B;
-}
-
-
-.mainDropBtn {
-    color: darkgray;
-    border: 1px solid rgb(210, 208, 208);
-    background-color: #ffffff;
-    padding: 8px 0;
-    border-radius: 5px;
-    text-align: start;
-    padding-left: 10px;
-
-}
-
-.mainDropBtn:hover {
-    color: #888;
-    border: 1px solid #888;
-}
-
-@media screen and (max-width: 1024px) {
-    .maindropdownwidth {
-        margin: 0 50px;
-    }
-}
-
-@media screen and (min-width: 1080px) {
-    .maindropdownwidth {
-        margin: 0 150px;
-    }
-}
-
-@media screen and (max-width: 420px) {
-    .maindropdownwidth {
-        margin: -5px;
-    }
-}
-
-.SearchBtnColor {
-    padding: 8px 20px;
-    border-radius: 5px;
-    border: 1px solid rgb(255, 69, 0);
-    background-color: rgb(255, 69, 0);
-    color: white;
-}
-
-.SearchBtnColor:hover {
-    color: rgb(255, 69, 0);
-    background-color: white;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    padding: 10px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-.bedBathDropdown {
-    background-color: #fff;
-    height: 10rem;
-    width: 350px;
-}
-
-.menuBox {
-    /* position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 4;
-    margin-top: 0.2rem; */
-    padding: 10px;
-    /* -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
-    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box; */
-    /* border-radius: 0.5rem; */
-    background-color: #fff;
-    height: 7rem;
-    width: 350px;
-}
-
-.dropdown-menu-item-box {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 4;
-    margin-top: 0.2rem;
-    padding: 1rem;
-    -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
-    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 0.5rem;
-    background-color: #fff;
-}
-
-.dropdown-menu-item-box2 {
-    max-height: 14rem;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-/* button */
-.dropdownSelectBtn {
-    min-height: 2.5rem;
-    width: 100%;
-    border-radius: 0;
-    font-size: 1.0rem;
-    display: block;
-    margin-top: 5px;
-    text-align: center;
-    color: #222;
-    border: 1px solid #dedede;
-    border-radius: 0.4rem;
-    background-color: #fff;
-}
-
-.dropdownSelectBtn:hover {
-    background-color: rgb(213, 220, 218);
-}
-
-/* button */
-/* close button */
-.dropdownCloseBox {
-    margin-left: auto;
-    margin-top: 0.9rem;
-    display: flex;
-    justify-content: center;
-}
-
-.dropdownCloseBtn {
-    font-size: 0.7rem;
-    padding: 0.1rem 0.6rem;
-    color: #ffffff;
-    border: none;
-    border-radius: 0.4rem;
-    background-color: rgb(255, 69, 0);
-}
-
-/* close button */
-.dropdown-menu-item-boxPrice {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 4;
-    margin-top: 0.2rem;
-    padding: 10px;
-    -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
-    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 0.5rem;
-    background-color: #fff;
-    width: 200px;
-}
-
-.dropdownSelectBtnPrice {
-    min-height: 2rem;
-    width: 100%;
-    font-size: 14px;
-    display: block;
-    margin-top: 5px;
-    text-align: center;
-    color: #222;
-    border: 1px solid #dedede;
-    border-radius: 0.4rem;
-    background-color: #fff;
-}
-
-.dropdownSelectBtnPrice:hover {
-    background-color: rgb(213, 220, 218)
-}
-
-.lableText {
-    font-size: 16px;
-    color: rgb(255, 69, 0);
-    text-align: center;
-    margin-bottom: 0 !important;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}</style>
+</style>
