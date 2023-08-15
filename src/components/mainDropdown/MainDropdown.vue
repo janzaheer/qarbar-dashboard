@@ -9,44 +9,50 @@
                 <button :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
                     v-on:click="handleRentView">
                     <i class="fa-solid fa-house-lock"></i> Rent</button>
+                    
             </div>
             <div class="row g-1">
                 <div class="col-9 col-md-12 col-lg-6 ">
-                    <Multiselect v-model="selectedCities" mode="tags" :close-on-select="false" :searchable="true"
-                        :create-option="true" placeholder='Select Location' :options="cityOptions" />
+                    <!-- <Multiselect v-model="selectedCities" mode="tags" :close-on-select="false" :searchable="true"
+                        :create-option="true" placeholder='Select Location' :options="cityOptions" /> -->
+                    <Cities @childToParentEvent="handleCityData" />
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
                     <div class="">
                         <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
                             aria-expanded="false">Property Type</button>
                         <ul class="dropdown-menu propertyTypeDp">
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('house')">House</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('flat')">Flat</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('room')">Room</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('upper_portion')">Uper Portion'</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('lower_portion')">Lower Portion</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('farm_house')">Farm House</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('pent_house')">Pent House</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('residetial_plot')">Residential Plot
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('house')">House</li>
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('flat')">Flat</li>
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('room')">Room</li>
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('upper_portion')">Uper Portion
                             </li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('commercial_plot')">Commercial Plot'
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('lower_portion')">Lower Portion
                             </li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('agricultural_land')">Agricultural
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('farm_house')">Farm House</li>
+                            <li class="dropdown-item" v-on:click="handleHomePropertyTypes('pent_house')">Pent House</li>
+                            <li class="dropdown-item" v-on:click="handlePlotPropertyTypes('residetial_plot')">Residential
+                                Plot
+                            </li>
+                            <li class="dropdown-item" v-on:click="handlePlotPropertyTypes('commercial_plot')">Commercial
+                                Plot
+                            </li>
+                            <li class="dropdown-item" v-on:click="handlePlotPropertyTypes('agricultural_land')">Agricultural
                                 Land</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('Industrial_land')">Industrial_Land
+                            <li class="dropdown-item" v-on:click="handlePropertyTypes('Industrial_land')">Industrial Land
                             </li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('plot_file')">Plot File</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('plot_form')">Plot Form</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('office')">Office</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('shop')">Shop</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('warehouse')">WareHouse</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('factory')">Factory</li>
-                            <li class="dropdown-item" v-on:click="handlePropertyTypes('building')">Building</li>
+                            <li class="dropdown-item" v-on:click="handlePlotPropertyTypes('plot_file')">Plot File</li>
+                            <li class="dropdown-item" v-on:click="handlePlotPropertyTypes('plot_form')">Plot Form</li>
+                            <li class="dropdown-item" v-on:click="handleCommercialPropertyTypes('office')">Office</li>
+                            <li class="dropdown-item" v-on:click="handleCommercialPropertyTypes('shop')">Shop</li>
+                            <li class="dropdown-item" v-on:click="handleCommercialPropertyTypes('warehouse')">WareHouse</li>
+                            <li class="dropdown-item" v-on:click="handleCommercialPropertyTypes('factory')">Factory</li>
+                            <li class="dropdown-item" v-on:click="handleCommercialPropertyTypes('building')">Building</li>
                         </ul>
                     </div>
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
-                    <div class="">
+                    <!-- <div class="">
                         <button class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
                             Beds & Baths
                         </button>
@@ -146,10 +152,10 @@
 
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
 
 
-
+                    <BedsBaths @childToParentEventSelectedBeds="handleBadsData" @childToParentEventSelectedBaths="handleBathsData"  />
 
                 </div>
                 <div class="col-2 col-md-1 col-lg-1 mt-lg-1 mt-1">
@@ -420,29 +426,38 @@
 import Multiselect from '@vueform/multiselect'
 import axios from 'axios';
 import { BASE_URL, API_VERSION, CITY_END_POINT, PROPERTY_END_POINT } from '../../utils/api';
+import Cities from './Cities.vue';
+import BedsBaths from './BedsBaths.vue';
 
 export default {
     mode: 'tags',
     components: {
         Multiselect,
+        Cities,
+        BedsBaths,
     },
     data() {
         return {
             value: [],
             sellChecked: true,
             rentChecked: false,
-            selectedCities: [], // Holds the selected cities
-            cityOptions: [], // Holds the city options for the Multiselect
+            // selectedCities: [], // Holds the selected cities
+            // cityOptions: [], // Holds the city options for the Multiselect
             minPrice: '',
             maxPrice: '',
             minArea: '',
             maxArea: '',
             selectedOption: '',
-            selectedBeds: [],
-            selectedBaths: [],
+            // selectedBeds: [],
+            // selectedBaths: [],
             searchValue: '',
             unitMeter: 'marla',
-            selectedPropertyType: ''
+            selectedPropertyType: '',
+            selectedCommercialPropertyType: '',
+            selectedPlotPropertyType: '',
+            receivedCitiesData: [],
+            receivedBedsData: [],
+            receivedBathsData: [],
 
 
         }
@@ -456,18 +471,25 @@ export default {
             this.sellChecked = false;
             this.rentChecked = true;
         },
-        async handleCity() {
-            try {
-                let finalUrl = BASE_URL + API_VERSION() + CITY_END_POINT();
-                let res = await axios.get(finalUrl);
-                this.cityOptions = res.data.map(city => ({
-                    value: city.city_name,
-                    label: city.city_name
-                }));
-            } catch (error) {
-                console.error('Error fetching city data:', error);
-            }
+        // async handleCity() {
+        //     try {
+        //         let finalUrl = BASE_URL + API_VERSION() + CITY_END_POINT();
+        //         let res = await axios.get(finalUrl);
+        //         this.cityOptions = res.data.map(city => ({
+        //             value: city.city_name,
+        //             label: city.city_name
+        //         }));
+        //     } catch (error) {
+        //         console.error('Error fetching city data:', error);
+        //     }
 
+        // },
+        handleBathsData(data){
+            this.receivedBathsData = data
+
+        },
+        handleBadsData(data) {
+            this.receivedBedsData = data
         },
         handleSelectedBath(val, event) {
             console.log('e', event.target.checked)
@@ -501,14 +523,6 @@ export default {
             this.unitMeter = val
         },
         handleValue() {
-            // console.log('----')
-            // console.log('click')
-            // console.log(this.minArea, this.maxArea, this.minPrice, this.maxPrice)
-            // console.log('selectedBath', this.selectedBaths)
-            // console.log('selectedBed', this.selectedBeds)
-            // console.log('searchInput', this.searchValue)
-            // console.log('selectPtype', this.selectedPropertyType)
-
             const params = new URLSearchParams()
             if (this.searchValue) {
                 params.append("search", this.searchValue)
@@ -520,39 +534,84 @@ export default {
                 params.append("max_price", this.maxPrice)
             }
             if (this.minArea) {
-                params.append("min_area", this.minArea)
+                params.append("min_size", this.minArea)
             }
             if (this.maxArea) {
-                params.append("max_area", this.maxArea)
+                params.append("max_size", this.maxArea)
             }
-            if (this.selectedBeds) {
-                this.selectedBeds.forEach((s_bed) => params.append("beds", s_bed))
+            // if (this.selectedBeds) {
+            //     this.selectedBeds.forEach((s_bed) => params.append("beds", s_bed))
+            // }
+            // if (this.selectedBaths) {
+            //     this.selectedBaths.forEach((s_bath) => params.append("baths", s_bath))
+            // }
+            if (this.receivedBedsData) {
+                this.receivedBedsData.forEach((s_bed) => params.append("beds", s_bed))
             }
-            if (this.selectedBaths) {
-                this.selectedBaths.forEach((s_bath) => params.append("baths", s_bath))
+            if (this.receivedBathsData) {
+                this.receivedBathsData.forEach((s_bath) => params.append("baths", s_bath))
             }
-
-            if (this.selectedCities) {
-                this.selectedCities.forEach((s_cities) => params.append("cities", s_cities))
+            if (this.receivedCitiesData) {
+                this.receivedCitiesData.forEach((s_cities) => params.append("cities", s_cities))
             }
-            if (this.unitMeter) {
-                params.append("unit_types", this.unitMeter)
+            // if (this.selectedCities) {
+            //     this.selectedCities.forEach((s_cities) => params.append("cities", s_cities))
+            // }
+            if (this.rentChecked) {
+                params.append("rent_sale_type", 'rent')
             }
-            
+            if (this.sellChecked) {
+                params.append("rent_sale_type", 'sale')
+            }
+            if (this.selectedPropertyType) {
+                params.append("home_types", this.selectedPropertyType)
+            }
+            if (this.selectedCommercialPropertyType) {
+                params.append("commercial_types", this.selectedCommercialPropertyType)
+            }
+            if (this.selectedPlotPropertyType) {
+                params.append("plot_types", this.selectedPlotPropertyType)
+            }
             console.log(params.toString())
+            // const query = params.toString();
+            // const listing = { name: 'AboutUs', query: params.toString() };
+
+            // this.$router.push(listing);
+            // this.$router.push({ name: 'AboutUs', query: params.toString() });
+
             // this.$refs.handleValue.reset();
-           
+
+            const listingRoute = {
+                name: 'Listing', // Assuming 'listing' is the name of your route
+
+                // query: params.toString()
+                query: {
+                    params: params.toString()
+                }
+            };
+            this.$router.push(listingRoute);
+            // this.$router.push(listingRoute);
         },
-        handlePropertyTypes(val) {
+        handleHomePropertyTypes(val) {
             this.selectedPropertyType = val
-            console.warn('property', this.selectedPropertyType = val)
-
-
+            console.warn('home', this.selectedPropertyType = val)
         },
+        handleCommercialPropertyTypes(val) {
+            this.selectedCommercialPropertyType = val
+            console.warn('commercial', this.selectedCommercialPropertyType = val)
+        },
+        handlePlotPropertyTypes(val) {
+            this.selectedPlotPropertyType = val
+            console.warn('plot', this.selectedPlotPropertyType = val)
+        },
+        handleCityData(data) {
+            this.receivedCitiesData = data;
+        }
 
     },
     mounted() {
-        this.handleCity();
+        // this.handleCity();
+        // console.log(this.receivedData)
     },
 }
 </script>

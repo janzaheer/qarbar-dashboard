@@ -97,7 +97,7 @@ export default {
             // console.log('---------------------------')
 
 
-            console.log('ProperyVal', this.homePropertyVal)
+            console.log('commercialPropertyVal', this.commercialPropertyVal)
 
         },
         handleSellView() {
