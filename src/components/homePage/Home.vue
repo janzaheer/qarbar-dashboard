@@ -32,7 +32,7 @@
             </div>
            
             <div class="d-flex justify-content-center mt-2">
-                <RouterLink to="/listing/?rent_sale_type=rent" class="mainBtnColor text-decoration-none">view more</RouterLink>
+                <RouterLink :to="{ name: 'Listing', query: { params: 'rent_sale_type=rent' } }" class="mainBtnColor text-decoration-none">view more</RouterLink>
             </div>
             <!-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
