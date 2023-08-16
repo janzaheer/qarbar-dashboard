@@ -2,7 +2,7 @@
     <Header />
 
     <div class="container listingPage">
-    
+
         <div class="border-bottom border-top p-2 mt-2 sticky-top">
             <div class="row g-1">
                 <div class="col-4">
@@ -61,63 +61,28 @@
                 <div class="col">
                     <div class="">
                         <div class="dropdown">
-                            <button class="mainDropBtn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown"
+                            <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Min (Price) & Max (Price)
+                                Min (Price) - Max (Price)
                             </button>
+                            <ul class="dropdown-menu ">
+                                <div class="menuBox">
 
-                            <div class="dropdown-menu">
-                                <div class="dropdown-menu-item-boxPrice" role="listbox">
-                                    <div class="row g-2">
+                                    <div class="row g-3">
                                         <div class="col-6">
-                                            <div role="listbox" class="dropdown-menu-item-box2">
-                                                <div class="mt-2 mb-4">
-                                                    <label for="exampleFormControlInput3" class="form-label lableText">Min
-                                                        Price</label>
-                                                    <input type="text" class="form-control" id="exampleFormControlInput3"
-                                                        placeholder="Min Price">
-                                                </div>
-                                                <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
-                                                <button aria-label="1" class="dropdownSelectBtnPrice">100000</button>
-                                                <button aria-label="2" class="dropdownSelectBtnPrice">200000</button>
-                                                <button aria-label="3" class="dropdownSelectBtnPrice">300000</button>
-                                                <button aria-label="4" class="dropdownSelectBtnPrice">400000</button>
-                                                <button aria-label="5" class="dropdownSelectBtnPrice">500000</button>
-                                                <button aria-label="6" class="dropdownSelectBtnPrice">600000</button>
-                                                <button aria-label="7" class="dropdownSelectBtnPrice">700000</button>
-                                                <button aria-label="8" class="dropdownSelectBtnPrice">800000</button>
-                                                <button aria-label="9" class="dropdownSelectBtnPrice">900000</button>
-                                                <button aria-label="10+" class="dropdownSelectBtnPrice">1000000+</button>
-                                            </div>
+                                            <div class="lableText">Min Price</div>
+                                            <input type="number" class="form-control h-100" placeholder=" Min Price"
+                                                aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
                                         </div>
                                         <div class="col-6">
-                                            <div role="listbox" class="dropdown-menu-item-box2">
-                                                <div class="mt-2 mb-4">
-                                                    <label for="exampleFormControlInput4" class="form-label lableText">Max
-                                                        Price</label>
-                                                    <input type="text" class="form-control" id="exampleFormControlInput4"
-                                                        placeholder="Max Price">
-                                                </div>
-                                                <button aria-label="All" class="dropdownSelectBtnPrice">0</button>
-                                                <button aria-label="1" class="dropdownSelectBtnPrice">100000</button>
-                                                <button aria-label="2" class="dropdownSelectBtnPrice">200000</button>
-                                                <button aria-label="3" class="dropdownSelectBtnPrice">300000</button>
-                                                <button aria-label="4" class="dropdownSelectBtnPrice">400000</button>
-                                                <button aria-label="5" class="dropdownSelectBtnPrice">500000</button>
-                                                <button aria-label="6" class="dropdownSelectBtnPrice">600000</button>
-                                                <button aria-label="7" class="dropdownSelectBtnPrice">700000</button>
-                                                <button aria-label="8" class="dropdownSelectBtnPrice">800000</button>
-                                                <button aria-label="9" class="dropdownSelectBtnPrice">900000</button>
-                                                <button aria-label="10+" class="dropdownSelectBtnPrice">1000000+</button>
-                                            </div>
+                                            <div class="lableText">Max Price</div>
+                                            <input type="number" class="form-control h-100" placeholder=" Max Price"
+                                                aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
                                         </div>
+                                    </div>
 
-                                    </div>
-                                    <div class="dropdownCloseBox">
-                                        <button class="dropdownCloseBtn" aria-label="Close">Close</button>
-                                    </div>
                                 </div>
-                            </div>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -316,7 +281,8 @@ export default {
 
         async getProperties() {
             const queryParams = new URLSearchParams(window.location.search);
-            let category_name = queryParams.get("rent_sale_type");
+            // let category_name = queryParams.get("rent_sale_type");
+            let category_name = queryParams.get("params");
 
             if (!category_name) {
                 category_name = ''
@@ -324,7 +290,7 @@ export default {
 
             try {
                 this.loading = true;
-                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?rent_sale_type=${category_name}`
+                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${category_name}`
                 let res = await axios.get(finalUrl);
                 console.log(res.data);
                 const apiRes = [...this.properties, ...res.data.results]
@@ -369,6 +335,14 @@ export default {
 
     },
     mounted() {
+        console.log('111111111111111111111111111111111111111')
+        // console.log(this.$route.query)
+        const query = this.$route.query;
+
+        // Now you can access the query parameters
+        const search = query.search;
+        console.log(search)
+        console.log('111111111111111111111111111111111111111')
         // this.getCategory();
         // this.handleProfile();
         this.getProperties();

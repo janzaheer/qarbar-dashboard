@@ -7,6 +7,7 @@
                     <div class="row h-100 align-items-center py-5">
                         <div class="col-lg-6">
                             <h1 class="display-4">our About us page</h1>
+                            <h3>Product name: {{ $route.query.params }}</h3>
                             <p class="lead text-muted mb-0">Create a minimal about us page using Bootstrap 4.</p>
                             <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets"
                                     class="text-muted">
@@ -162,7 +163,9 @@
 </style>
 <script>
 import Header from '../common/header/Header.vue';
-import Footer from '../common/footer/Footer.vue'
+import Footer from '../common/footer/Footer.vue';
+import axios from 'axios';
+import { API_VERSION, BASE_URL, PROPERTY_END_POINT } from '../../utils/api';
 export default {
     name: 'AboutUs',
     components: {
@@ -190,6 +193,23 @@ export default {
 
     },
     methods: {
+        async getData() {
+            // let data = this.$route.query.params
+            const queryParams = new URLSearchParams(window.location.search);
+            let category_name = queryParams.get("params");
+         
+            let res = await axios.get(BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${category_name}`)
+            console.log('222222222222222222222222222222222222222222222222222')
+            console.log(res.data)
+            console.log('222222222222222222222222222222222222222222222222222')
+        }
+    },
+    mounted() {
+        this.getData();
+        // const queryParams = new URLSearchParams(window.location.search);
+        //         let category_name = queryParams.get("params");
+        //     console.log('----', category_name)
+        // console.log(this.$route.query.params);
     },
 
 };

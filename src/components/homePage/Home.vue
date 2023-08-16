@@ -32,7 +32,7 @@
             </div>
            
             <div class="d-flex justify-content-center mt-2">
-                <RouterLink to="/listing/?rent_sale_type=rent" class="mainBtnColor text-decoration-none">view more</RouterLink>
+                <RouterLink :to="{ name: 'Listing', query: { params: 'rent_sale_type=rent' } }" class="mainBtnColor text-decoration-none">view more</RouterLink>
             </div>
             <!-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <RouterLink to="/detailPage" class="text-decoration-none">
@@ -107,7 +107,7 @@
         </div>
         <div class="row mt-4 g-2">
             <h5>Recent properties for {{ propertiesSaleList[0]?.rent_sale_type }}</h5>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-2" v-for="item in propertiesSaleList.slice(0, 6)"
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2 mx-md-block" v-for="item in propertiesSaleList.slice(0, 6)"
                 :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">
                     <div class="card text-dark productBg">
@@ -135,7 +135,9 @@
                 </RouterLink>
             </div>
             <div class="d-flex justify-content-center mt-2">
-                <RouterLink to="/listing/?rent_sale_type=sale" class="mainBtnColor text-decoration-none">view more</RouterLink>
+                <!-- <RouterLink to="/listing/?rent_sale_type=sale" class="mainBtnColor text-decoration-none">view more</RouterLink> -->
+                <RouterLink :to="{ name: 'Listing', query: { params: 'rent_sale_type=sale' } }" class="mainBtnColor text-decoration-none">view more</RouterLink>
+                
             </div>
         </div>
     </div>
@@ -162,16 +164,16 @@ export default {
             let res = await axios.get(finalUrl)
             this.propertiesList = res.data.results
             console.log('-----------------------------------')
-            console.log(res.data.results)
+            // console.log(res.data.results)
             console.log('-----------------------------------')
         },
         async getPropertiesSale() {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=sale`;
             let res = await axios.get(finalUrl)
             this.propertiesSaleList = res.data.results
-            console.log('-------------11111-----------------')
-            console.log(res.data.results)
-            console.log('------------1111111---------------')
+            // console.log('-------------11111-----------------')
+            // console.log(res.data.results)
+            // console.log('------------1111111---------------')
         }
     },
     mounted() {

@@ -12,6 +12,10 @@ export const PROPERTY_DETAIL_END_POINT = () => {
     return `/detail_property/`
 }
 
+export const CITY_END_POINT = () => {
+    return `cities/`
+}
+
 export const changeUrl = () => {
     return 'http://127.0.0.1:8000/';
 }

@@ -1,0 +1,273 @@
+
+.propertyTypeDp{
+    max-height: 14rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.unitMeterCLass{
+    color: rgb(255, 69, 0);
+    background-color: #EAEAEA;
+    padding: 1px 0;
+    border-radius: 5px;
+}
+.cat {
+    margin: 2px;
+    background-color: darkgray;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    /* float: left; */
+}
+
+.cat label {
+    /* float: left; */
+    line-height: 3.0em;
+    /* width: 8.0em; */
+   height: 2.0em;
+    /* padding: 6px 5px; */
+    /* width: 50px; */
+    width: 100px;
+}
+
+.cat label span {
+    text-align: center;
+    /* padding: 3px 0; */
+    padding: 0px 15px;
+    /* display: block; */
+}
+
+.cat label input {
+    position: absolute;
+    display: none;
+    color: #fff !important;
+}
+
+/* selects all of the text within the input element and changes the color of the text */
+.cat label input+span {
+    color: #fff;
+    /* text-align: start; */
+    /* margin-left: 15px;   */
+}
+
+/* This will declare how a selected input will look giving generic properties */
+.cat input:checked+span {
+    color: #ffffff;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.action input:checked+span {
+    background-color: #F75A1B;
+}
+
+
+.mainDropBtn {
+    color: darkgray;
+    border: 1px solid rgb(210, 208, 208);
+    background-color: #ffffff;
+    padding: 8px 0;
+    border-radius: 5px;
+    text-align: start;
+    padding-left: 10px;
+
+}
+
+.mainDropBtn:hover {
+    color: #888;
+    border: 1px solid #888;
+}
+
+@media screen and (max-width: 1024px) {
+    .maindropdownwidth {
+        margin: 0 50px;
+    }
+}
+
+@media screen and (min-width: 1080px) {
+    .maindropdownwidth {
+        margin: 0 150px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .maindropdownwidth {
+        margin: -5px;
+    }
+}
+
+.SearchBtnColor {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(255, 69, 0);
+    background-color: rgb(255, 69, 0);
+    color: white;
+}
+
+.SearchBtnColor:hover {
+    color: rgb(255, 69, 0);
+    background-color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.bedBathDropdown {
+    background-color: #fff;
+    height: 10rem;
+    width: 350px;
+}
+
+.menuBox {
+    /* position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    margin-top: 0.2rem; */
+    padding: 10px;
+    /* -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; */
+    /* border-radius: 0.5rem; */
+    background-color: #fff;
+    height: 7rem;
+    width: 350px;
+}
+
+.dropdown-menu-item-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    margin-top: 0.2rem;
+    padding: 1rem;
+    -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+.dropdown-menu-item-box2 {
+    max-height: 14rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* button */
+.dropdownSelectBtn {
+    min-height: 2.5rem;
+    width: 100%;
+    border-radius: 0;
+    font-size: 1.0rem;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    color: #222;
+    border: 1px solid #dedede;
+    border-radius: 0.4rem;
+    background-color: #fff;
+}
+
+.dropdownSelectBtn:hover {
+    background-color: rgb(213, 220, 218);
+}
+
+/* button */
+/* close button */
+.dropdownCloseBox {
+    margin-left: auto;
+    margin-top: 0.9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dropdownCloseBtn {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.6rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: rgb(255, 69, 0);
+}
+
+/* close button */
+.dropdown-menu-item-boxPrice {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    margin-top: 0.2rem;
+    padding: 10px;
+    -webkit-box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, .25);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    width: 200px;
+}
+
+.dropdownSelectBtnPrice {
+    min-height: 2rem;
+    width: 100%;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    color: #222;
+    border: 1px solid #dedede;
+    border-radius: 0.4rem;
+    background-color: #fff;
+}
+
+.dropdownSelectBtnPrice:hover {
+    background-color: rgb(213, 220, 218)
+}
+
+.lableText {
+    font-size: 16px;
+    color: rgb(255, 69, 0);
+    text-align: center;
+    margin-bottom: 0 !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
