@@ -135,7 +135,9 @@
                 </RouterLink>
             </div>
             <div class="d-flex justify-content-center mt-2">
-                <RouterLink to="/listing/?rent_sale_type=sale" class="mainBtnColor text-decoration-none">view more</RouterLink>
+                <!-- <RouterLink to="/listing/?rent_sale_type=sale" class="mainBtnColor text-decoration-none">view more</RouterLink> -->
+                <RouterLink :to="{ name: 'Listing', query: { params: 'rent_sale_type=sale' } }" class="mainBtnColor text-decoration-none">view more</RouterLink>
+                
             </div>
         </div>
     </div>
