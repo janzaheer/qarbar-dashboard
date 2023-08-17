@@ -7,112 +7,34 @@
             <div class="row g-1">
                 <div class="col-4">
                     <input type="text" class="form-control h-100" placeholder="search Community ot building ..."
-                        aria-label="First name">
+                        aria-label="First name" v-on:keyup="(e) => handleSearchTerm(e)">
                 </div>
                 <div class="col">
-                    <select class=" mainDropBtn h-100" aria-label="Default select example">
-                        <option selected value="1">Buy</option>
-                        <option value="2">Rent</option>
-                        <option value="3">Commercial for Rent</option>
-                        <option value="4">Commercial for Sale</option>
-                    </select>
+                    <PropertyTypes @childToParentDataHomeType="handleHomeData" @childToParentDataPlotType="handlePlotData"
+                        @childToParentDataCommercialType="handleCommercialData" :h_type="h_type" :p_type="p_type" :c_type="c_type" />
                 </div>
                 <div class="col">
-                    <div class="">
-                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
-                            aria-expanded="false">Property Type</button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item">Home Type</li>
-                            <li class="dropdown-item"> Commercial Type</li>
-                            <li class="dropdown-item">Plot Type </li>
-                        </ul>
-                    </div>
+                    <BedsBaths @childToParentEventSelectedBeds="handleBadsData"
+                        @childToParentEventSelectedBaths="handleBathsData" :beds_type="beds_type" :baths_type="baths_type" />
                 </div>
                 <div class="col">
-                    <div class="">
-                        <button type="button" class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Beds & Baths
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-items">
-                                <div class="m-2">
-                                    <h6>bathrooms</h6>
-                                    <button class="btn btn-secondary">1</button>
-                                    <button class="btn btn-secondary mx-1">2</button>
-                                    <button class="btn btn-secondary">3</button>
-                                    <button class="btn btn-secondary mx-1">4</button>
-                                    <button class="btn btn-secondary">5</button>
-                                    <button class="btn btn-secondary ms-1">6+</button>
-                                </div>
-                                <div class=" m-2">
-                                    <h6>bedrooms</h6>
-                                    <button class="btn btn-secondary">1</button>
-                                    <button class="btn btn-secondary mx-1">2</button>
-                                    <button class="btn btn-secondary">3</button>
-                                    <button class="btn btn-secondary mx-1">4</button>
-                                    <button class="btn btn-secondary">5</button>
-                                    <button class="btn btn-secondary ms-1">6+</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="">
-                        <div class="dropdown">
-                            <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Min (Price) - Max (Price)
-                            </button>
-                            <ul class="dropdown-menu ">
-                                <div class="menuBox">
 
-                                    <div class="row g-3">
-                                        <div class="col-6">
-                                            <div class="lableText">Min Price</div>
-                                            <input type="number" class="form-control h-100" placeholder=" Min Price"
-                                                aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="lableText">Max Price</div>
-                                            <input type="number" class="form-control h-100" placeholder=" Max Price"
-                                                aria-label="First name" v-on:keyup="(e) => handleSearch(e)">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
+                    <PriceRange @childToParentEventMaxPrice="handleMaxPriceData"
+                        @childToParentEventMinPrice="handleMinPriceData" :maxPrice_type="maxPrice_type" :minPrice_type="minPrice_type" />
                 </div>
                 <div class="col">
-                    <button class="SearchBtnColor">Find</button>
+                    <button class="SearchBtnColor" v-on:click="handleValue">Find</button>
                 </div>
             </div>
-            <!-- <div class="d-flex my-2">
-                <div class="form-check form-switch me-4">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"><img
-                            src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;" alt="" /> Verified</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault"><img
-                            src="../../assets/tropyBadgeIcon/pngegg.png" style="height: 15px;" alt="" /> SuperAgent</label>
-                </div>
-            </div> -->
         </div>
         <div class="row g-0 mt-4">
 
             <div class="d-flex justify-content-between">
                 <div>
                     <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
+                    <!-- <div>beds {{ beds_type }} baths {{ baths_type }}</div> -->
                     <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
                             new</span></p>
-                    <!-- <button class="btn btn-outline-info me-2"><img src="../../assets/icons/location.png"
-                            style="width: 30px; height: 20px;" alt=""> Map view</button>
-                    <button class="btn btn-outline-info">save Search</button> -->
                 </div>
                 <div>
                     <select class="form-select" aria-label="Default select example">
@@ -131,7 +53,7 @@
             <VueSpinnerHourglass size="100" color="rgb(255, 69, 0)" />
         </div>
         <div class="row g-2 my-2 mx-lg-2">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-9">
                 <div class="row">
                     <div class="col-12" v-for="items in properties" :key="items.id">
                         <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
@@ -142,11 +64,6 @@
                                             <img :src="items?.media[0]?.image_url" class="img-fluid rounded-start cardImage"
                                                 alt="...">
                                             <div class="card-img-overlay">
-                                                <!-- <div class="">
-                                        <span class="badge text-bg-success card-title">
-                                            <img src="../../assets/tropyBadgeIcon/verified.png" style="height: 15px;"
-                                                alt="" /> VERIFIED</span>
-                                    </div> -->
                                                 <div v-if="items.agent">
                                                     <span class="badge text-bg-secondary card-title">
                                                         <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
@@ -229,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-none d-sm-block col-md-4">
+            <div class="d-none d-sm-block col-md-3">
                 <Advertise />
             </div>
         </div>
@@ -254,6 +171,9 @@ import axios from 'axios';
 import { BASE_URL, PROPERTY_END_POINT, changeUrl, API_VERSION } from '../../utils/api';
 import { VueSpinner, VueSpinnerHourglass } from 'vue3-spinners';
 import ScrollButton from '../../scrollComponent/ScrollButton.vue';
+import PropertyTypes from '../mainDropdown/PropertyTypes.vue';
+import BedsBaths from '../mainDropdown/BedsBaths.vue';
+import PriceRange from '../mainDropdown/PriceRange.vue';
 export default {
     name: 'Listing',
     components: {
@@ -263,6 +183,9 @@ export default {
         VueSpinner,
         VueSpinnerHourglass,
         ScrollButton,
+        PropertyTypes,
+        BedsBaths,
+        PriceRange
     },
     data() {
         return {
@@ -271,6 +194,23 @@ export default {
             loading: false,
             nextUrlPage: null,
             preUrlPage: null,
+            receivedHomeData: '',
+            receivedPlotData: '',
+            receivedCommercialData: '',
+            receivedBedsData: [],
+            receivedBathsData: [],
+            receivedMaxPrice: '',
+            receivedMinPrice: '',
+            searchValue: '',
+            unitType: '',
+            r_s_type: '',
+            h_type: '',
+            p_type: '',
+            c_type: '',
+            beds_type: [],
+            baths_type: [],
+            minPrice_type: '',
+            maxPrice_type: ''
 
         }
     },
@@ -289,18 +229,28 @@ export default {
             }
 
             try {
+                // category_name = ''
                 this.loading = true;
                 let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${category_name}`
                 let res = await axios.get(finalUrl);
                 console.log(res.data);
                 const apiRes = [...this.properties, ...res.data.results]
-                // this.properties = res.data.results
                 this.properties = apiRes
                 this.propertiesCount = res.data
                 this.nextUrlPage = res?.data?.next
                 this.preUrlPage = res?.data?.previous
                 console.log(category_name)
-                // console.log('Query parameter search:', searchValue)
+                // Extract unit_type value from the category_name parameter
+                const unitTypeParam = new URLSearchParams(category_name);
+                this.unitType = unitTypeParam.get("unit_type");
+                this.r_s_type = unitTypeParam.get("rent_sale_type")
+                this.h_type = unitTypeParam.get("home_types");
+                this.p_type = unitTypeParam.get("plot_types");
+                this.c_type = unitTypeParam.get("commercial_types")
+                this.beds_type = unitTypeParam.get("beds");
+                this.baths_type = unitTypeParam.get("baths");
+                this.maxPrice_type = unitTypeParam.get("max_price");
+                this.minPrice_type = unitTypeParam.get("min_price")
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
@@ -318,119 +268,92 @@ export default {
                 })
                 .catch((err) => console.log(err))
         },
+        handleSearchTerm(e) {
+            if (e.key == 'Enter') {
+                let value = e.target.value
+                console.log('search', value)
+                this.searchValue = value
+            }
+        },
+        handleHomeData(data) {
+            this.receivedHomeData = data
+        },
+        handlePlotData(data) {
+            this.receivedPlotData = data
+        },
+        handleCommercialData(data) {
+            this.receivedCommercialData = data
+        },
+        handleBathsData(data) {
+            this.receivedBathsData = data
 
-        // async getSearch() {
-        //      const searchValue = this.$route.query.search;
-        //     try {
-        //         let res = await axios.get(`http://13.127.231.16/api/v1/properties/?search=${searchValue}` );
-        //         // console.log(res.data.results);
-        //         this.properties = res.data.results
-        //         this.propertiesCount = res.data
-        //         // console.log(category_name)
-        //         console.log('Query parameter search:', searchValue)
-        //     } catch (error) {
-        //         console.error('Error fetching properties:', error);
-        //     }
-        // },
+        },
+        handleBadsData(data) {
+            this.receivedBedsData = data
+        },
+        handleMaxPriceData(data) {
+            this.receivedMaxPrice = data
+        },
+        handleMinPriceData(data) {
+            this.receivedMinPrice = data
+        },
+
+
+        async handleValue() {
+            console.log('-----click------')
+            const params = new URLSearchParams()
+            if (this.searchValue) {
+                params.append("search", this.searchValue)
+            }
+            if (this.receivedMinPrice) {
+                params.append("min_price", this.receivedMinPrice)
+            }
+            if (this.receivedMaxPrice) {
+                params.append("max_price", this.receivedMaxPrice)
+            }
+            if (this.receivedBedsData) {
+                this.receivedBedsData.forEach((s_bed) => params.append("beds", s_bed))
+            }
+            if (this.receivedBathsData) {
+                this.receivedBathsData.forEach((s_bath) => params.append("baths", s_bath))
+            }
+
+            if (this.receivedHomeData) {
+                params.append("home_types", this.receivedHomeData)
+            }
+            if (this.receivedCommercialData) {
+                params.append("commercial_types", this.receivedCommercialData)
+            }
+            if (this.receivedPlotData) {
+                params.append("plot_types", this.receivedPlotData)
+            }
+            console.log(params.toString())
+            try {
+                this.loading = true;
+                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${params.toString()}`;
+                let res = await axios.get(finalUrl);
+                // ... Handle the API response as needed
+                // const apiRes = [...this.properties, ...res.data.results]
+                this.properties = res.data.results
+                this.propertiesCount = res.data
+                this.nextUrlPage = res?.data?.next
+                this.preUrlPage = res?.data?.previous
+            } catch (error) {
+                console.error('Error fetching properties:', error);
+            } finally {
+                this.loading = false;
+            }
+
+        },
 
     },
     mounted() {
-        console.log('111111111111111111111111111111111111111')
-        // console.log(this.$route.query)
-        const query = this.$route.query;
-
-        // Now you can access the query parameters
-        const search = query.search;
-        console.log(search)
-        console.log('111111111111111111111111111111111111111')
-        // this.getCategory();
-        // this.handleProfile();
         this.getProperties();
-        // this.getSearch();
-        // const searchValue = this.$route.query.search;
-        // console.log('Query parameter search:', searchValue);
-        // console.log(category_name)
-        // console.log(this.$route.params.id)
-
+        console.log(this.$route.query.unit_type)
     }
-
 }
 </script>
 
 <style>
-.iconBtn {
-    color: rgb(255, 69, 0);
-    border: 1px solid rgb(255, 69, 0);
-    background-color: white;
-    border-radius: 5px;
-    padding: 3px 9px;
-}
-
-.iconBtn:hover {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    color: darkgray;
-}
-
-button:disabled,
-button[disabled] {
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
-}
-
-.cardImage {
-    height: 225px !important;
-}
-
-.card-images {
-    height: 50vh !important;
-}
-
-.listingPage {
-    min-height: 100vh;
-}
-
-.listPageHover {
-    cursor: pointer;
-}
-
-.listPageHover:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.dropdown-image {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.dropdown-image:hover .dropdown-content {
-    display: block;
-}
-
-.desc {
-    padding: 15px;
-    text-align: center;
-}
-
-@media screen and (min-width: 1080px) {
-    .cardImage {
-        height: 200px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .cardImage {
-        height: 50px;
-    }
-}
+@import './ListStyle.css';
 </style>

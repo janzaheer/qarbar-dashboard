@@ -1,6 +1,10 @@
 <script>
 export default {
     name: 'PriceRange',
+    props: {
+        maxPrice_type: String,
+        minPrice_type: String,
+    },
     data() {
         return {
             minPrice: '',
@@ -8,12 +12,30 @@ export default {
         }
     },
     methods: {
-        handleMaxPrice(){
+        handleMaxPrice() {
             this.$emit("childToParentEventMaxPrice", this.maxPrice);
         },
-        handleMinPrice(){
+        handleMinPrice() {
             this.$emit("childToParentEventMinPrice", this.minPrice);
-        }
+        },
+        ValuemaxPrice() {
+            if (this.maxPrice) {
+                return this.maxPrice
+            }
+            if (this.maxPrice_type) {
+                return this.maxPrice_type
+            }
+            return 'price'
+        },
+        ValueminPrice() {
+            if (this.minPrice) {
+                return this.minPrice
+            }
+            if (this.minPrice_type) {
+                return this.minPrice_type
+            }
+            return 'price'
+        },
     }
 }
 </script>
@@ -26,7 +48,7 @@ export default {
             <div class="dropdown">
                 <button class="mainDropBtn dropdown-toggle  w-100" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Min (Price) - Max (Price)
+                    Min ({{ ValueminPrice() }}) - Max ({{ ValuemaxPrice() }})
                 </button>
                 <ul class="dropdown-menu ">
                     <div class="menuBox">

@@ -1,6 +1,10 @@
 <script>
 export default {
     name: 'BedsBaths',
+    props:{
+        beds_type:Array,
+        baths_type:Array,
+    },
     data() {
         return {
             selectedBeds: [],
@@ -28,6 +32,24 @@ export default {
             }
             this.$emit("childToParentEventSelectedBeds", this.selectedBeds);
         },
+        ValueSelectedBed(){
+            if (this.selectedBeds) {
+                return this.selectedBeds.toString()
+            }
+            if (this.beds_type) {
+                return this.beds_type
+            }
+            return ''
+        },
+        ValueSelectedBaths(){
+            if (this.selectedBaths) {
+                return this.selectedBaths.toString()
+            }
+            if (this.baths_type) {
+                return this.baths_type.toString()
+            }
+            return ''
+        },
     }
 }
 
@@ -39,7 +61,7 @@ export default {
     <div>
         <div class="">
             <button class="mainDropBtn dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                Beds & Baths
+                Bed{{ ValueSelectedBed() }} & Bath{{ ValueSelectedBaths() }}
             </button>
             <ul class="dropdown-menu">
                 <li class="bedBathDropdown">

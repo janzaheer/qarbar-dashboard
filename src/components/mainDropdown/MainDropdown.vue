@@ -38,7 +38,7 @@
                                 <div class="dropdown">
                                     <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown"
                                         aria-expanded="false">
-                                        Min (Area) - Max (Area)
+                                        Min ({{ ValueminArea() }}) - Max ({{ ValuemaxArea() }})
                                     </button>
                                     <ul class="dropdown-menu ">
                                         <div class="menuBox">
@@ -173,6 +173,20 @@ export default {
             console.log('----', val)
             this.unitMeter = val
         },
+        ValuemaxArea(){
+            if (this.maxArea) {
+                return this.maxArea
+            } else {
+                return 'Area'
+            }
+        },
+        ValueminArea(){
+            if (this.minArea) {
+                return this.minArea
+            } else {
+                return 'Area'
+            }
+        },
 
         handleValue() {
             const params = new URLSearchParams()
@@ -223,26 +237,14 @@ export default {
             // this.$refs.handleValue.reset();
 
             const listingRoute = {
-                name: 'Listing', // Assuming 'listing' is the name of your route
+                name: 'Listing',
                 query: {
-                    params: params.toString()
+                    params: params.toString(),
                 }
             };
             this.$router.push(listingRoute);
         },
         
-        handleHomePropertyTypes(val) {
-            this.selectedPropertyType = val
-            console.warn('home', this.selectedPropertyType = val)
-        },
-        handleCommercialPropertyTypes(val) {
-            this.selectedCommercialPropertyType = val
-            console.warn('commercial', this.selectedCommercialPropertyType = val)
-        },
-        handlePlotPropertyTypes(val) {
-            this.selectedPlotPropertyType = val
-            console.warn('plot', this.selectedPlotPropertyType = val)
-        },
         handleCityData(data) {
             this.receivedCitiesData = data;
         },
@@ -271,8 +273,6 @@ export default {
 
     },
     mounted() {
-        // this.handleCity();
-        // console.log(this.receivedData)
     },
 }
 </script>
@@ -280,8 +280,4 @@ export default {
 <style>
 @import './mainDropDown.css';
 
-.active {
-    background-color: #007bff;
-    color: #fff;
-}
 </style>
