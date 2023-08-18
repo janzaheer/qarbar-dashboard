@@ -1,0 +1,39 @@
+.mainBtnColor {
+    color: rgb(255, 69, 0);
+    border: 1px solid rgb(255, 69, 0);
+    border-radius: 13px;
+    padding: 8px 20px 8px 20px;
+}
+
+.mainBtnColor:hover {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    color: darkgray;
+}
+
+.ButtonColor {
+    border-radius: 15px;
+    padding: 8px 20px 8px 20px;
+}
+
+.ButtonColor:hover {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    /* color: darkgray; */
+}
+
+.selectedButtonColor {
+    background-color: rgb(243, 236, 231);
+    border: 1px solid rgb(255, 69, 0);
+    color: rgb(255, 69, 0);
+}
+
+.unSelectedButtonColor {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    color: darkgray;
+}
+.active {
+    /* background-color: #007bff; */
+    color: #fff;
+}

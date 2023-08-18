@@ -1,73 +1,77 @@
 <script>
 import AgentDashboardHeader from '../agentDashboardHeader/AgentDashboardHeader.vue';
-import AgentDashboardFooter from '../agentDashboardFooter/AgentDashboardFooter.vue'
+import AgentDashboardFooter from '../agentDashboardFooter/AgentDashboardFooter.vue';
+import HomePropertyType from './components/HomePropertyType.vue';
+import PlotPropertyType from './components/PlotPropertyType.vue';
+import CommercialPropertyType from './components/CommercialPropertyType.vue';
+import PropertyInfo from './components/PropertyInfo.vue';
+import ContactInfo from './components/ContactInfo.vue';
+import PriceAndArea from './components/PriceAndArea.vue';
 export default {
     name: 'AddAdvertisement',
     components: {
         AgentDashboardHeader,
         AgentDashboardFooter,
+        HomePropertyType,
+        PlotPropertyType,
+        CommercialPropertyType,
+        PropertyInfo,
+        ContactInfo,
+        PriceAndArea
 
     },
     data() {
         return {
+            receivedHomePropertyVal: '',
+            receivedPlotPropertyVal: '',
+            receivedCommercialPropertyVal: '',
+            //....................
             sellChecked: true,
             rentChecked: false,
+            //....................
             propertyType: 'home',
-            homePropertyVal: 'flat',
-            homeProperty: {
-                isFlat: true,
-                isHouse: false,
-                isVilla: false,
-                isRoom: false,
-                isUpper: false,
-                isLower: false,
-                isFarm: false,
-                isPenthouse: false,
-                isApartment: false
-            },
-            plotPropertyVal: 'plot',
-            plotProperty: {
-                isResidential: true,
-                isCommercial: false,
-                isIndustrial: false,
-                isAgricultural: false,
-                isPlotFarm: false,
-                isPlotFile: false
-            },
-            commercialPropertyVal: 'commercial',
-            commercialProperty: {
-                isOffice: true,
-                isSHop: false,
-                isWherehouse: false,
-                isFactory: false,
-                isBuilding: false
-            },
-            // houseChecked: false,
-            // flatChecked: false,
-            // upperChecked: false,
-            // lowerChecked: false,
-            // farmHouseChecked: false,
-            // roomChecked: false,
-            // penthouseChecked: false,
-            // villaChecked: false,
-            // apartmentChecked: false,
-            // residentialChecked: false,
-            // commercialChecked: false,
-            // industrialChecked: false,
-            // agriculturalChecked: false,
-            // plotFileChecked: false,
-            // plotFormChecked: false,
-            // officeChecked: false,
-            // shopChecked: false,
-            // wherehouseChecked: false,
-            // factoryChecked: false,
-            // buildingChecked: false,
+            //....................
             buyCHecked: true,
             loanCHecked: false,
+            //....................
+            city: '',
+            location: '',
+            area: '',
+            // Price and Area
+            AreaUnit: '',
+            UnitTypes: '',
+            totalPrice: '',
+            // Installment section
+            AdvanceAmount: '',
+            NofInstallments: '',
+            MonthlyInstallments: '',
+            ReadyPossession: false,
+            // Feature & Amenities
+            BedRooms: '',
+            BathRooms: '',
+            // Property Information
+            title: '',
+            description: '',
+            // Property Images Upload
+            image: '',
+            // Contact Information
+            emailAddress: '',
+            mobileNumber: '',
+            landlineNumber: '',
+            secondaryNumber: '',
 
         };
     },
     methods: {
+        handleHomePropertyVal(data) {
+            this.receivedHomePropertyVal = data
+        },
+        handlePropertyVal(data) {
+            this.receivedPlotPropertyVal = data
+        },
+        handleCommercialPropertyVal(data) {
+            this.receivedCommercialPropertyVal = data
+        },
         logCheckboxValues() {
             // console.log('sell Checked:', this.sellChecked);
             // console.log('rent Checked:', this.rentChecked);
@@ -96,8 +100,8 @@ export default {
             // console.log('building Checked', this.buildingChecked)
             // console.log('---------------------------')
 
-
-            console.log('commercialPropertyVal', this.commercialPropertyVal)
+            console.log('homeType', this.receivedHomePropertyVal)
+            // console.log('commercialPropertyVal', this.commercialPropertyVal)
 
         },
         handleSellView() {
@@ -108,146 +112,12 @@ export default {
             this.rentChecked = true;
             this.sellChecked = false;
         },
-        handleHomeProperty(e) {
-            Object.entries(this.homeProperty).forEach(([key, val]) => {
-                this.homeProperty[key] = false
-            });
-
-            if (e == 'flat') {
-                this.homeProperty.isFlat = true;
-                this.homePropertyVal = 'flat'
-            }
-
-            if (e == 'house') {
-                this.homeProperty.isHouse = true;
-                this.homePropertyVal = 'house'
-            }
-
-            if (e == 'villa') {
-                this.homeProperty.isVilla = true;
-                this.homePropertyVal = 'villa'
-            }
-
-            if (e == 'room') {
-                this.homeProperty.isRoom = true;
-                this.homePropertyVal = 'room'
-            }
-
-            if (e == 'upper') {
-                this.homeProperty.isUpper = true;
-                this.homePropertyVal = 'upper'
-            }
-
-            if (e == 'lower') {
-                this.homeProperty.isLower = true;
-                this.homePropertyVal = 'lower'
-            }
-
-            if (e == 'farm') {
-                this.homeProperty.isFarm = true;
-                this.homePropertyVal = 'farm'
-            }
-            if (e == 'penthouse') {
-                this.homeProperty.isPenthouse = true;
-                this.homePropertyVal = 'penthouse'
-            }
-
-        },
-        handlePlotProperty(e) {
-            Object.entries(this.plotProperty).forEach(([key, val]) => {
-                this.plotProperty[key] = false
-            })
-            if (e == 'residential') {
-                this.plotProperty.isResidential = true;
-                this.plotPropertyVal = 'residential'
-            }
-            if (e == 'commercial') {
-                this.plotProperty.isCommercial = true;
-                this.plotPropertyVal = 'commercial'
-            }
-            if (e == 'industiral') {
-                this.plotProperty.isIndustrial = true;
-                this.plotPropertyVal = 'industiral'
-            }
-            if (e == 'agricultural') {
-                this.plotProperty.isAgricultural = true;
-                this.plotPropertyVal = 'agricultural'
-            }
-            if (e == 'plotFile') {
-                this.plotProperty.isPlotFile = true;
-                this.plotPropertyVal = 'plotFile'
-            }
-            if (e == 'plotFarm') {
-                this.plotProperty.isPlotFarm = true;
-                this.plotPropertyVal = 'plotFarm'
-            }
-
-        },
-        handleCommercialProperty(e) {
-            Object.entries(this.commercialProperty).forEach(([key, val]) => {
-                this.commercialProperty[key] = false
-            })
-            if (e == 'office') {
-                this.commercialProperty.isOffice = true;
-                this.commercialPropertyVal = 'office'
-            }
-            if (e == 'shop') {
-                this.commercialProperty.isSHop = true;
-                this.commercialPropertyVal = 'shop'
-            }
-            if (e == 'wherehouse') {
-                this.commercialProperty.isWherehouse = true;
-                this.commercialPropertyVal = 'wherehouse'
-            }
-            if (e == 'factory') {
-                this.commercialProperty.isFactory = true;
-                this.commercialPropertyVal = 'factory'
-            }
-            if (e == 'building') {
-                this.commercialProperty.isBuilding = true;
-                this.commercialPropertyVal = 'building'
-            }
-        },
     },
 }
 </script>
 
 <style>
-.mainBtnColor {
-    color: rgb(255, 69, 0);
-    border: 1px solid rgb(255, 69, 0);
-    border-radius: 13px;
-    padding: 8px 20px 8px 20px;
-}
-
-.mainBtnColor:hover {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    color: darkgray;
-}
-
-.ButtonColor {
-    border-radius: 15px;
-    padding: 8px 20px 8px 20px;
-}
-
-.ButtonColor:hover {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    /* color: darkgray; */
-}
-
-.selectedButtonColor {
-    background-color: rgb(243, 236, 231);
-    border: 1px solid rgb(255, 69, 0);
-    color: rgb(255, 69, 0);
-}
-
-.unSelectedButtonColor {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    color: darkgray;
-}
+@import './Advertisement.css';
 </style>
 
 <template>
@@ -259,10 +129,10 @@ export default {
         <div class="container my-5">
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around">
                         <div class="col-4 text-center">
                             <i class="fa-solid fa-house-circle-check fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Select Purpose And Locations</h5>
+                            <h5 class="mt-2">Select Purpose And Location</h5>
                         </div>
                         <div class="col-6">
                             <button
@@ -295,7 +165,6 @@ export default {
                                             <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                                 data-bs-target="#contact-tab-pane" type="button" role="tab"
                                                 aria-controls="contact-tab-pane" aria-selected="false">
-
                                                 Commercial
                                             </button>
                                         </li>
@@ -304,89 +173,19 @@ export default {
                                     <div class="tab-content mt-4" id="myTabContent">
                                         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
                                             aria-labelledby="home-tab" tabIndex="0">
-
-                                            <button
-                                                :class="homeProperty.isFlat ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleHomeProperty('flat')">
-                                                <i class="fa-solid fa-house-lock"></i> Flat</button>
-                                            <button
-                                                :class="homeProperty.isHouse ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleHomeProperty('house')">
-                                                <i class="fa-solid fa-house-lock"></i> House</button>
-                                            <button
-                                                :class="homeProperty.isVilla ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleHomeProperty('villa')">
-                                                <i class="fa-solid fa-house-lock"></i> Villa</button>
-                                            <button
-                                                :class="homeProperty.isRoom ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleHomeProperty('room')">
-                                                <i class="fa-solid fa-house-lock"></i> Room</button>
-                                            <button
-                                                :class="homeProperty.isUpper ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                v-on:click="handleHomeProperty('upper')">
-                                                <i class="fa-solid fa-house-lock"></i> Upper Portion</button>
-                                            <button
-                                                :class="homeProperty.isLower ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleHomeProperty('lower')">
-                                                <i class="fa-solid fa-house-lock"></i> Lower Portion</button>
-                                            <button
-                                                :class="homeProperty.isFarm ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleHomeProperty('farm')">
-                                                <i class="fa-solid fa-house-lock"></i> Farm House</button>
-                                            <button
-                                                :class="homeProperty.isPenthouse ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                v-on:click="handleHomeProperty('penthouse')">
-                                                <i class="fa-solid fa-house-lock"></i> Penthouse</button>
-
+                                            <HomePropertyType @childDataHomePropertyTypeVal="handleHomePropertyVal" />
                                         </div>
                                         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
                                             aria-labelledby="profile-tab" tabIndex="0">
                                             <div>
-                                                <button
-                                                    :class="plotProperty.isResidential ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                    v-on:click="handlePlotProperty('residential')">Residential Plot</button>
-                                                <button
-                                                    :class="plotProperty.isCommercial ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                    v-on:click="handlePlotProperty('commercial')">Commercial Plot</button>
-                                                <button
-                                                    :class="plotProperty.isIndustrial ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                    v-on:click="handlePlotProperty('industiral')">Industiral Land</button>
-                                                <button
-                                                    :class="plotProperty.isAgricultural ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                    v-on:click="handlePlotProperty('agricultural')">Agricultural
-                                                    Land</button>
-                                                <button
-                                                    :class="plotProperty.isPlotFile ? 'selectedButtonColor ButtonColor mt-2 mx-2' : 'unSelectedButtonColor ButtonColor mt-2 mx-2'"
-                                                    v-on:click="handlePlotProperty('plotFile')">Plot File</button>
-                                                <button
-                                                    :class="plotProperty.isPlotFarm ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                    v-on:click="handlePlotProperty('plotFarm')">Plot Farm</button>
+                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal" />
                                             </div>
 
                                         </div>
                                         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
                                             aria-labelledby="contact-tab" tabIndex="0">
                                             <div>
-                                                <button :class="commercialProperty.isOffice ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleCommercialProperty('office')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Office</button>
-                                                <button :class="commercialProperty.isSHop ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleCommercialProperty('shop')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Shop</button>
-                                                <button :class="commercialProperty.isWherehouse ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleCommercialProperty('wherehouse')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Wherehouse</button>
-                                                <button :class="commercialProperty.isFactory ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleCommercialProperty('factory')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Factory</button>
-                                                <button :class="commercialProperty.isBuilding ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                v-on:click="handleCommercialProperty('building')"
-                                                ><i class="fa-solid fa-building"></i>
-                                                    Building</button>
+                                                <CommercialPropertyType @childDataCommercialPropertyTypeVal="handleCommercialPropertyVal" />
                                             </div>
                                         </div>
                                     </div>
@@ -428,66 +227,12 @@ export default {
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-hand-holding-dollar fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Price & Area</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="row mb-3">
-                                <div class="col-8">
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control" id="floatingAreaUnit"
-                                            placeholder="Enter Area Unit">
-                                        <label for="floatingAreaUnit">Enter Area Unit</label>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="1" selected>Marla</option>
-                                        <option value="2">Square Ft</option>
-                                        <option value="3">Kanal</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingInput" placeholder="price">
-                                <label for="floatingInput">Enter Price</label>
-                            </div>
-                            <h4>installment available</h4>
-                            <div class="mb-3">
-                                <label for="exampleAdvanceAmountControlInput1" class="form-label">Advance Amount</label>
-                                <input type="number" class="form-control" id="exampleAdvanceAmountControlInput1"
-                                    placeholder="22222">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleNoInstallmentControlInput1" class="form-label">No of Installments</label>
-                                <input type="number" class="form-control" id="exampleNoInstallmentControlInput1"
-                                    placeholder="0333">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleMonthlyInstallmentControlInput1" class="form-label">Monthly
-                                    Installments</label>
-                                <input type="number" class="form-control" id="exampleMonthlyInstallmentControlInput1"
-                                    placeholder="035">
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch"
-                                        id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Ready for
-                                        Possession</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PriceAndArea />
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around">
                         <div class="col-4 text-center">
                             <i class="fa-solid fa-house-circle-exclamation fa-2xl" style="color: #2c4e1d;"></i>
                             <h5 class="mt-2">Feature & Amenities</h5>
@@ -519,29 +264,12 @@ export default {
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-clipboard-list fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Property Information</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="inputTitle" class="form-label">Title</label>
-                                <input type="text" class="form-control" id="inputTitle">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PropertyInfo />
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around">
                         <div class="col-4 text-center">
                             <i class="fa-solid fa-images fa-2xl" style="color: #2c4e1d;"></i>
                             <h5 class="mt-2">Property Images Upload</h5>
@@ -557,36 +285,13 @@ export default {
             </div>
 
             <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-address-card fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Contact Information</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="name@example.com">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleMobileControlInput1" class="form-label">Mobile Number</label>
-                                <input type="number" class="form-control" id="exampleMobileControlInput1"
-                                    placeholder="03332222222">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleLandlineControlInput1" class="form-label">Landline Number</label>
-                                <input type="number" class="form-control" id="exampleLandlineControlInput1"
-                                    placeholder="0812444444">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ContactInfo />
             </div>
-        <div class="my-1">
-            <button class="btn btn-secondary" v-on:click="logCheckboxValues">Add Submit Advertisement</button>
+            <div class="my-1">
+                <button class="adversBtn" v-on:click="logCheckboxValues">Add Submit Advertisement</button>
+            </div>
         </div>
-    </div>
 
-</div>
-<AgentDashboardFooter /></template>
+    </div>
+    <AgentDashboardFooter />
+</template>
