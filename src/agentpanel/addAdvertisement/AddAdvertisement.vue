@@ -262,7 +262,7 @@ export default {
                     <div class="row d-flex justify-content-center">
                         <div class="col-4 text-center">
                             <i class="fa-solid fa-house-circle-check fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Select Purpose And Location</h5>
+                            <h5 class="mt-2">Select Purpose And Locations</h5>
                         </div>
                         <div class="col-6">
                             <button
