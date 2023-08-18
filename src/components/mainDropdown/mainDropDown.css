@@ -57,6 +57,7 @@
 
 .action input:checked+span {
     background-color: #F75A1B;
+    padding: 14px;
 }
 
 
