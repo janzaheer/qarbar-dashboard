@@ -1,6 +1,9 @@
 <script>
 export default {
     name: 'PlotPropertyType',
+    props: {
+        isCHecked: Boolean,
+    },
     data() {
         return {
             plotPropertyVal: 'plot',
@@ -44,9 +47,14 @@ export default {
                 this.plotPropertyVal = 'plotFarm'
             }
             this.$emit("childDataPlotPropertyTypeVal", this.plotPropertyVal)
+            console.log(this.isCHecked)
 
         },
     },
+    mounted() {
+
+
+    }
 }
 </script>
 
@@ -66,11 +74,13 @@ export default {
             :class="plotProperty.isAgricultural ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
             v-on:click="handlePlotProperty('agricultural')">Agricultural
             Land</button>
-        <button
-            :class="plotProperty.isPlotFile ? 'selectedButtonColor ButtonColor mt-2 mx-2' : 'unSelectedButtonColor ButtonColor mt-2 mx-2'"
-            v-on:click="handlePlotProperty('plotFile')">Plot File</button>
-        <button
-            :class="plotProperty.isPlotFarm ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-            v-on:click="handlePlotProperty('plotFarm')">Plot Farm</button>
+        <div class="" v-if="this.isCHecked == false">
+            <button
+                :class="plotProperty.isPlotFile ? 'selectedButtonColor ButtonColor mt-2 mx-2' : 'unSelectedButtonColor ButtonColor mt-2 mx-2'"
+                v-on:click="handlePlotProperty('plotFile')">Plot File</button>
+            <button
+                :class="plotProperty.isPlotFarm ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
+                v-on:click="handlePlotProperty('plotFarm')">Plot Farm</button>
+        </div>
     </div>
 </template>
