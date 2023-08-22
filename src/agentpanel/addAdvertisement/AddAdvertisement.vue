@@ -36,6 +36,8 @@ export default {
             //....................
             sellChecked: true,
             rentChecked: false,
+            sellvalue: '',
+            rentvalue: '',
             //....................
             propertyType: 'home',
             //....................
@@ -67,7 +69,44 @@ export default {
             receivedMobileNumber: '',
             receivedLandlineNumber: '',
             receivedSecondaryNumber: '',
-            isCHecked: false // for Plot check
+            isCHecked: false, // for Plot check
+            // amenities
+            receivedBuilt_in_year: '',
+            receivedBuilt_in_wardrobes: '',
+            receivedSecurity: '',
+            receivedKitchen_appliances: '',
+            receivedBalcony: '',
+            receivedFarmhouse: '',
+            receivedLower_portion: '',
+            receivedElectricity_backup: '',
+            receivedInternet: '',
+            receivedParking_space: '',
+            receivedFurnished_unfurnished: '',
+            receivedLobby_in_building: '',
+            receivedFloor: '',
+            receivedKitchen: '',
+            // rooms
+            receivedStudy_room: '',
+            receivedLaundry_room: '',
+            receivedMaid_room: '',
+            receivedStore_room: '',
+            receivedDrawing_room: '',
+            receivedLounge_sitting_area: '',
+            receivedGym: '',
+            // community
+            receivedKids_play_area: '',
+            receivedMosque: '',
+            receivedCommunity_lawn_garden: '',
+            // healthcare
+            receivedMedical_center: '',
+            receivedSwimming_pool: '',
+            // near Location
+            receivedNear_by_school: '',
+            receivedNear_by_hospital: '',
+            receivedNear_by_shopping_mall: '',
+            receivedOther_nearby_palces: '',
+            receivedDistance_from_airport: '',
+            receivedOther_description: '',
 
         };
     },
@@ -145,22 +184,127 @@ export default {
 
             // console.log('homeType', this.receivedHomePropertyVal)
             // console.log('commercialPropertyVal', this.commercialPropertyVal)
-            console.log('rp', this.receivedReadyPossession)
+            // console.log('rp', this.receivedReadyPossession)
+            console.log('sale',this.sellvalue)
+            console.log('rent',this.rentvalue)
         },
         handleSellView() {
             this.sellChecked = true;
             this.rentChecked = false;
-            if ( this.sellChecked = true) {
+            if (this.sellChecked = true) {
                 this.isCHecked = false
+            }
+            if (this.sellChecked = true) {
+                this.sellvalue = 'sale'
             }
         },
         handleRentView() {
             this.rentChecked = true;
             this.sellChecked = false;
-            if ( this.rentChecked = true) {
+            if (this.rentChecked = true) {
                 this.isCHecked = true
             }
+            if (this.rentChecked = true) {
+                this.rentvalue = 'rent'
+            }
         },
+        handleBuiltYear(data) {
+            this.receivedBuilt_in_year = data  
+        },
+        handleBuiltInWhaedrobes(data) {
+            this.receivedBuilt_in_wardrobes = data
+        },
+        handleSecurity(data) {
+            this.receivedSecurity = data
+        },
+        handleKitchenAppliance(data) {
+            this.receivedKitchen_appliances = data
+        },
+        handleBalcony(data) {
+            this.receivedBalcony = data
+        },
+        handleFarmHouse(data) {
+            this.receivedFarmhouse = data
+        },
+        handleLowerPortion(data) {
+            this.receivedLower_portion = data
+        },
+        handleElectricityBackup(data) {
+            this.receivedElectricity_backup = data
+        },
+        handleInternet(data) {
+            this.receivedInternet = data
+        },
+        handleParkingSpace(data) {
+            this.receivedParking_space = data
+        },
+        handleFurnished(data) {
+            this.receivedFurnished_unfurnished = data
+        },
+        handleLobbyBuilding(data) {
+            this.receivedLobby_in_building = data
+        },
+        handleFloor(data) {
+            this.receivedFloor = data
+        },
+        handleKitchen(data) {
+            this.receivedKitchen = data
+        },
+        handleStudyRoom(data) {
+            this.receivedStudy_room = data
+        },
+        handleLaundryRoom(data) {
+            this.receivedLaundry_room = data
+        },
+        handleMaidRoom(data) {
+            this.receivedMaid_room = data
+        },
+        handleStoreRoom(data) {
+            this.receivedStore_room = data
+        },
+        handleDrawingRoom(data) {
+            this.receivedDrawing_room = data
+        },
+        handleLoungeArea(data) {
+            this.receivedLounge_sitting_area = data
+        },
+        handleGym(data) {
+            this.receivedGym = data
+        },
+        handleKidsPlayArea(data) {
+            this.receivedKids_play_area = data
+        },
+        handleMosque(data) {
+            this.receivedMosque = data
+        },
+        handleCommunityLawnGarden(data) {
+            this.receivedCommunity_lawn_garden = data
+        },
+        handleMedicalCenter(data) {
+            this.receivedMedical_center = data
+        },
+        handleSwimmingPool(data){
+            this.receivedSwimming_pool = data
+        },
+        handleNearSchool(data) {
+            this.receivedNear_by_school = data
+        },
+        handleNearHospital(data) {
+            this.receivedNear_by_hospital = data
+        },
+        handleNearShoppingMall(data) {
+            this.receivedNear_by_shopping_mall = data
+        },
+        handleOtherPalces(data) {
+            this.receivedOther_nearby_palces = data
+        },
+        handleDistanceAirport(data) {
+            this.receivedDistance_from_airport = data
+        },
+        handleOtherDesc(data) {
+            this.receivedOther_description = data
+        },
+
     },
 }
 </script>
@@ -227,7 +371,8 @@ export default {
                                         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
                                             aria-labelledby="profile-tab" tabIndex="0">
                                             <div>
-                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal" :isCHecked="isCHecked" />
+                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal"
+                                                    :isCHecked="isCHecked" />
                                             </div>
 
                                         </div>
@@ -251,18 +396,34 @@ export default {
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
-                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData"/>
-                    <div class="" v-if="sellChecked == true">
-                        <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
-                    @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
-                    @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
-                    @ChildToParentReadyForPossessionData="handleRpData"  />
-                    </div>
+                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData" />
+                <div class="" v-if="sellChecked == true">
+                    <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
+                        @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
+                        @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
+                        @ChildToParentReadyForPossessionData="handleRpData" />
+                </div>
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
-                    @ChildToParentBathRoomData="handleBathRoomData" />
+                    @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
+                    @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
+                    @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
+                    @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
+                    @childDataElectricityBackup="handleElectricityBackup" @childDataInternet="handleInternet"
+                    @childDataParkingSpace="handleParkingSpace" @childDataFurnished="handleFurnished"
+                    @childDataLobbyBuilding="handleLobbyBuilding" @childDataFloor="handleFloor"
+                    @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
+                    @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
+                    @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
+                    @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
+                    @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
+                    @childDataCommunityLawnGarden="handleCommunityLawnGarden" @childDataMedicalCenter="handleMedicalCenter"
+                    @childDataSwimmingPool="handleSwimmingPool"
+                    @childDataNearSchool="handleNearSchool" @childDataNearHospital="handleNearHospital"
+                    @childDataNearShoppingMall="handleNearShoppingMall" @childDataOtherPalces="handleOtherPalces"
+                    @childDataDistanceAirport="handleDistanceAirport" @childDataOtherDesc="handleOtherDesc" />
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
@@ -283,4 +444,5 @@ export default {
         </div>
 
     </div>
-    <AgentDashboardFooter /></template>
+    <AgentDashboardFooter />
+</template>

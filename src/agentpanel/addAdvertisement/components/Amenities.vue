@@ -51,7 +51,40 @@ export default {
             this.floor, this.kitchen, this.study_room, this.laundry_room, this.maid_room, this.store_room, this.drawing_room, this.lounge_sitting_area, this.gym,
             this.kids_play_area, this.mosque, this.community_lawn_garden, this.medical_center, this.near_by_school, this.near_by_hospital, this.near_by_shopping_mall,
             this.other_nearby_palces, this.distance_from_airport, this.other_description)
+
+            this.$emit("childDataBuiltInYear",this.built_in_year)
+            this.$emit("childDataBuiltInWhaedrobes",this.built_in_wardrobes)
+            this.$emit("childDataSecurity",this.security)
+            this.$emit("childDataKitchenAppliance",this.kitchen_appliances)
+            this.$emit("childDataBalcony",this.balcony)
+            this.$emit("childDataFarmHouse",this.Farmhouse)
+            this.$emit("childDataLowerPortion",this.lower_portion)
+            this.$emit("childDataElectricityBackup",this.electricity_backup)
+            this.$emit("childDataInternet",this.internet)
+            this.$emit("childDataParkingSpace",this.parking_space)
+            this.$emit("childDataFurnished",this.furnished_unfurnished)
+            this.$emit("childDataLobbyBuilding",this.lobby_in_building)
+            this.$emit("childDataFloor",this.floor)
+            this.$emit("childDataKitchen",this.kitchen)
+            this.$emit("childDataStudyRoom",this.study_room)
+            this.$emit("childDataLaundryRoom",this.laundry_room)
+            this.$emit("childDataMaidRoom",this.maid_room)
+            this.$emit("childDataStoreRoom",this.store_room)
+            this.$emit("childDataDrawingRoom",this.drawing_room)
+            this.$emit("childDataLoungeArea",this.lounge_sitting_area)
+            this.$emit("childDataGym",this.gym)
+            this.$emit("childDataKidsPlayArea",this.kids_play_area)
+            this.$emit("childDataMosque",this.mosque)
+            this.$emit("childDataCommunityLawnGarden",this.community_lawn_garden)
+            this.$emit("childDataMedicalCenter",this.medical_center)
+            this.$emit("childDataNearSchool",this.near_by_school)
+            this.$emit("childDataNearHospital",this.near_by_hospital)
+            this.$emit("childDataNearShoppingMall",this.near_by_shopping_mall)
+            this.$emit("childDataOtherPalces",this.other_nearby_palces)
+            this.$emit("childDataDistanceAirport",this.distance_from_airport)
+            this.$emit("childDataOtherDesc",this.other_description)
         },
+
 
     }
 }
