@@ -5,34 +5,74 @@
 
         <div class="border-bottom border-top p-2 mt-2 sticky-top">
             <div class="row g-1">
-                <div class="col-4">
+                <div class="col-5">
                     <input type="text" class="form-control h-100" placeholder="search Community ot building ..."
                         aria-label="First name" v-on:keyup="(e) => handleSearchTerm(e)">
                 </div>
+                <div class="col-3">
+                    <Cities @childToParentEvent="handleCityData" :cityType="cityType" />
+                </div>
                 <div class="col">
                     <PropertyTypes @childToParentDataHomeType="handleHomeData" @childToParentDataPlotType="handlePlotData"
-                        @childToParentDataCommercialType="handleCommercialData" :h_type="h_type" :p_type="p_type" :c_type="c_type" />
+                        @childToParentDataCommercialType="handleCommercialData" :h_type="h_type" :p_type="p_type"
+                        :c_type="c_type" />
                 </div>
-                <div class="col">
-                    <BedsBaths @childToParentEventSelectedBeds="handleBadsData"
-                        @childToParentEventSelectedBaths="handleBathsData" :beds_type="beds_type" :baths_type="baths_type" />
-                </div>
-                <div class="col">
-
-                    <PriceRange @childToParentEventMaxPrice="handleMaxPriceData"
-                        @childToParentEventMinPrice="handleMinPriceData" :maxPrice_type="maxPrice_type" :minPrice_type="minPrice_type" />
-                </div>
-                <div class="col">
+                <div class="col-1">
                     <button class="SearchBtnColor" v-on:click="handleValue">Find</button>
+                </div>
+            </div>
+            <div class="row g-1 mt-1">
+                <div class="col-3">
+                    <BedsBaths @childToParentEventSelectedBeds="handleBadsData"
+                        @childToParentEventSelectedBaths="handleBathsData" :beds_type="beds_type"
+                        :baths_type="baths_type" />
+                </div>
+                <div class="col-3">
+                    <div class="">
+                        <div class="dropdown">
+                            <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Min ({{ ValueminArea() }}) - Max ({{ ValuemaxArea() }})
+                            </button>
+                            <ul class="dropdown-menu ">
+                                <div class="menuBox">
+                                    <div class=" text-center unitMeterCLass">
+                                        {{ this.unitMeter }}
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-6">
+                                            <div class="lableText">Min Area</div>
+                                            <input type="number" class="form-control h-100" placeholder=" Min Area"
+                                                aria-label="First name" name="minArea" v-model="minArea">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="lableText">Max Area</div>
+                                            <input v-model="maxArea" type="number" class="form-control h-100"
+                                                placeholder=" Max Area" aria-label="First name" name="maxArea">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdownCloseBox">
+                                    <button class="dropdownCloseBtn" data-bs-toggle="modal"
+                                        data-bs-target="#areaModal">Change Area unit</button>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <PriceRange @childToParentEventMaxPrice="handleMaxPriceData"
+                        @childToParentEventMinPrice="handleMinPriceData" :maxPrice_type="maxPrice_type"
+                        :minPrice_type="minPrice_type" />
                 </div>
             </div>
         </div>
         <div class="row g-0 mt-4">
-
             <div class="d-flex justify-content-between">
                 <div>
                     <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
                     <!-- <div>beds {{ beds_type }} baths {{ baths_type }}</div> -->
+                    <!-- <div>city{{ this.cityType }}</div> -->
                     <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
                             new</span></p>
                 </div>
@@ -157,6 +197,30 @@
                 v-on:click="handleNextPage(nextUrlPage)">Next</button>
         </div>
         <ScrollButton />
+        <!-- Modal -->
+        <div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="areaModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-center" id="areaModalLabel">Change Area</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select class="form-select" aria-label="Default select example" v-on:change="handleMeterUnit"
+                            :value="unitMeter">
+                            <option value="marla" selected>Marla</option>
+                            <option value="sqft">Sq.Ft</option>
+                            <option value="sqm">Sq.M</option>
+                            <option value="sqyd">Sq.Yd</option>
+                            <option value="kanal">Kanal</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success w-100" data-bs-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <Footer />
 </template>
@@ -174,6 +238,8 @@ import ScrollButton from '../../scrollComponent/ScrollButton.vue';
 import PropertyTypes from '../mainDropdown/PropertyTypes.vue';
 import BedsBaths from '../mainDropdown/BedsBaths.vue';
 import PriceRange from '../mainDropdown/PriceRange.vue';
+import Cities from '../mainDropdown/Cities.vue';
+import AreaRange from '../mainDropdown/AreaRange.vue';
 export default {
     name: 'Listing',
     components: {
@@ -185,7 +251,9 @@ export default {
         ScrollButton,
         PropertyTypes,
         BedsBaths,
-        PriceRange
+        PriceRange,
+        Cities,
+        AreaRange
     },
     data() {
         return {
@@ -201,6 +269,7 @@ export default {
             receivedBathsData: [],
             receivedMaxPrice: '',
             receivedMinPrice: '',
+            receivedCitiesData: [],
             searchValue: '',
             unitType: '',
             r_s_type: '',
@@ -210,7 +279,12 @@ export default {
             beds_type: [],
             baths_type: [],
             minPrice_type: '',
-            maxPrice_type: ''
+            maxPrice_type: '',
+            cityType: '',
+            ////////////
+            minArea: '',
+            maxArea: '',
+            unitMeter: 'marla',
 
         }
     },
@@ -250,7 +324,8 @@ export default {
                 this.beds_type = unitTypeParam.get("beds");
                 this.baths_type = unitTypeParam.get("baths");
                 this.maxPrice_type = unitTypeParam.get("max_price");
-                this.minPrice_type = unitTypeParam.get("min_price")
+                this.minPrice_type = unitTypeParam.get("min_price");
+                this.cityType = unitTypeParam.get("cities")
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
@@ -269,11 +344,11 @@ export default {
                 .catch((err) => console.log(err))
         },
         handleSearchTerm(e) {
-            if (e.key == 'Enter') {
-                let value = e.target.value
-                console.log('search', value)
-                this.searchValue = value
-            }
+            // if (e.key == 'Enter') {
+            let value = e.target.value
+            console.log('search', value)
+            this.searchValue = value
+            // }
         },
         handleHomeData(data) {
             this.receivedHomeData = data
@@ -297,6 +372,9 @@ export default {
         handleMinPriceData(data) {
             this.receivedMinPrice = data
         },
+        handleCityData(data) {
+            this.receivedCitiesData = data;
+        },
 
 
         async handleValue() {
@@ -311,13 +389,21 @@ export default {
             if (this.receivedMaxPrice) {
                 params.append("max_price", this.receivedMaxPrice)
             }
+            if (this.minArea) {
+                params.append("min_size", this.minArea)
+            }
+            if (this.maxArea) {
+                params.append("max_size", this.maxArea)
+            }
             if (this.receivedBedsData) {
                 this.receivedBedsData.forEach((s_bed) => params.append("beds", s_bed))
             }
             if (this.receivedBathsData) {
                 this.receivedBathsData.forEach((s_bath) => params.append("baths", s_bath))
             }
-
+            if (this.receivedCitiesData) {
+                this.receivedCitiesData.forEach((s_cities) => params.append("cities", s_cities))
+            }
             if (this.receivedHomeData) {
                 params.append("home_types", this.receivedHomeData)
             }
@@ -326,6 +412,9 @@ export default {
             }
             if (this.receivedPlotData) {
                 params.append("plot_types", this.receivedPlotData)
+            }
+            if (this.unitMeter) {
+                params.append("unit_type",this.unitMeter)
             }
             console.log(params.toString())
             try {
@@ -343,7 +432,25 @@ export default {
             } finally {
                 this.loading = false;
             }
-
+        },
+        handleMeterUnit(e) {
+            let val = e.target.value;
+            console.log('----', val)
+            this.unitMeter = val
+        },
+        ValuemaxArea() {
+            if (this.maxArea) {
+                return this.maxArea
+            } else {
+                return 'Area'
+            }
+        },
+        ValueminArea() {
+            if (this.minArea) {
+                return this.minArea
+            } else {
+                return 'Area'
+            }
         },
 
     },

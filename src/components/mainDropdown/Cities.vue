@@ -4,7 +4,10 @@ import { BASE_URL, API_VERSION, CITY_END_POINT } from '../../utils/api';
 import axios from 'axios';
 export default {
     name: 'Cities',
-    components : {
+    props: {
+        cityType: String
+    },
+    components: {
         Multiselect
     },
     data() {
@@ -26,11 +29,19 @@ export default {
                     value: city.city_name,
                     label: city.city_name
                 }));
-               
             } catch (error) {
                 console.error('Error fetching city data:', error);
             }
-
+        },
+    },
+    watch: {
+        cityType: {
+            immediate: true,
+            handler(newValue) {
+                if (newValue) {
+                    this.selectedCities.push(newValue);
+                }
+            },
         },
     },
     mounted() {
@@ -44,9 +55,7 @@ export default {
 
 <template>
     <div>
-        <!-- <<h5>CHild data</h5> -->
-        <!-- <button @click="sendDataToParent">Send Data to Parent</button>  -->
-        <Multiselect v-model="selectedCities" mode="tags" :close-on-select="false" :searchable="true"
-                        :create-option="true" placeholder='Select Location' :options="cityOptions" v-on:click="sendDataToParent" />
+        <Multiselect v-model="selectedCities" mode="tags" :close-on-select="false" :searchable="true" :create-option="true"
+            placeholder='Select Location' :options="cityOptions" v-on:click="sendDataToParent" />
     </div>
 </template>

@@ -1,9 +1,9 @@
 <script>
 export default {
     name: 'BedsBaths',
-    props:{
-        beds_type:Array,
-        baths_type:Array,
+    props: {
+        beds_type: Array,
+        baths_type: Array,
     },
     data() {
         return {
@@ -32,23 +32,41 @@ export default {
             }
             this.$emit("childToParentEventSelectedBeds", this.selectedBeds);
         },
-        ValueSelectedBed(){
-            if (this.selectedBeds) {
-                return this.selectedBeds.toString()
+        // ValueSelectedBed(){
+        //     if (this.selectedBeds) {
+        //         return this.selectedBeds.toString()
+        //     }
+        //     if (this.beds_type) {
+        //         return this.beds_type
+        //     }
+        //     return ''
+        // },
+        // ValueSelectedBaths(){
+        //     if (this.selectedBaths) {
+        //         return this.selectedBaths.toString()
+        //     }
+        //     if (this.baths_type) {
+        //         return this.baths_type.toString()
+        //     }
+        //     return ''
+        // },
+        ValueSelectedBed() {
+            if (this.selectedBeds.length > 0) {
+                return this.selectedBeds.toString();
             }
-            if (this.beds_type) {
-                return this.beds_type
+            if (this.beds_type && this.beds_type.length > 0) {
+                return this.beds_type.toString();
             }
-            return ''
+            return '';
         },
-        ValueSelectedBaths(){
-            if (this.selectedBaths) {
-                return this.selectedBaths.toString()
+        ValueSelectedBaths() {
+            if (this.selectedBaths.length > 0) {
+                return this.selectedBaths.toString();
             }
-            if (this.baths_type) {
-                return this.baths_type.toString()
+            if (this.baths_type && this.baths_type.length > 0) {
+                return this.baths_type.toString();
             }
-            return ''
+            return '';
         },
     }
 }

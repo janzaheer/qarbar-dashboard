@@ -1,17 +1,17 @@
 <script>
 export default {
     name: 'AreaRange',
-    data(){
+    data() {
         return {
             minArea: '',
             maxArea: '',
         }
     },
     methods: {
-        handleMaxArea(){
+        handleMaxArea() {
             this.$emit("childToParentEventMaxArea", this.maxArea);
         },
-        handleMinArea(){
+        handleMinArea() {
             this.$emit("childToParentEventMinArea", this.minArea);
         }
     }
@@ -22,6 +22,30 @@ export default {
 
 <template>
     <div>
+          <!-- Modal -->
+          <div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="areaModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 text-center" id="areaModalLabel">Change Area</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <select class="form-select" aria-label="Default select example" v-on:change="handleMeterUnit"
+                                :value="unitMeter">
+                                <option value="marla" selected>Marla</option>
+                                <option value="sqft">Sq.Ft</option>
+                                <option value="sqm">Sq.M</option>
+                                <option value="sqyd">Sq.Yd</option>
+                                <option value="kanal">Kanal</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success w-100" data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div class="">
             <div class="dropdown">
                 <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,6 +77,9 @@ export default {
                     </div>
                 </ul>
             </div>
+            
         </div>
+       
     </div>
+    
 </template>

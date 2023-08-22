@@ -28,12 +28,12 @@
             <div class="mt-2">
                 <div class="collapse" id="collapseExample">
                     <div class="row g-1">
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-4">
 
                             <PriceRange @childToParentEventMaxPrice="handleMaxPriceData"
                                 @childToParentEventMinPrice="handleMinPriceData" />
                         </div>
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-4">
                             <div class="">
                                 <div class="dropdown">
                                     <button class="mainDropBtn dropdown-toggle  w-100" data-bs-toggle="dropdown"
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-4">
                             <input type="text" class="form-control h-100" placeholder=" Search any property..."
                                 aria-label="First name" v-on:keyup="(e) => handleSearchTerm(e)">
                         </div>
@@ -162,11 +162,11 @@ export default {
             this.rentChecked = true;
         },
         handleSearchTerm(e) {
-            if (e.key == 'Enter') {
+            // if (e.key == 'Enter') {
                 let value = e.target.value
                 console.log('search', value)
                 this.searchValue = value
-            }
+            // }
         },
         handleMeterUnit(e) {
             let val = e.target.value;

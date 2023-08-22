@@ -26,14 +26,14 @@
                         <li class="nav-item">
                             <!-- <RouterLink class="nav-link" :to="'/Listing/buy?rent_sale_type=sale'">Buy</RouterLink> -->
                             <!-- <a href="/Listing/?rent_sale_type=sale" class="nav-link">Buy</a> -->
-                            <a class="nav-link" href="" v-on:click="generateLink()">Buy</a>
+                            <a class="nav-link" href="/listing/?params=rent_sale_type=sale" v-on:click="generateLink()">Buy</a>
                         </li>
                         <li class="nav-item">
                             <!-- <RouterLink class="nav-link" to="/Listing/rent?rent_sale_type=rent">Rent</RouterLink> -->
                             <!-- <a href="/Listing/?rent_sale_type=rent" class="nav-link">Rent</a> -->
                             <!-- <router-link class="nav-link"
                                 :to="{ name: 'AboutUs', query: { params: 'rent_sale_type=rent' } }">Rent</router-link> -->
-                                <a class="nav-link" href="" v-on:click="generateLinkRent()">Rent</a>
+                                <a class="nav-link" href="/listing/?params=rent_sale_type=rent" v-on:click="generateLinkRent()">Rent</a>
                         </li>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
