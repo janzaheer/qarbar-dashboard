@@ -70,7 +70,8 @@
                 <div>
                     <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
                     <!-- <div>maxArea {{ this.maxArea_type }} // minArea {{ this.minArea_type }}</div> -->
-                    <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344 new</span></p>
+                    <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
+                            new</span></p>
                 </div>
                 <div>
                     <select class="form-select" aria-label="Default select example">
@@ -146,13 +147,14 @@
                                                     </p>
                                                     <p class="card-text"><img src="../../assets/icons/sqft.png"
                                                             style="width: 30px; height: 30px;" alt=""> {{
-                                                                items?.property_type?.size_sqf }} {{items?.property_type?.unit_types }}
+                                                                items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types
+    }}
                                                     </p>
                                                 </div>
                                                 <div class="mb-2">
                                                     <small class="text-body-secondary">Added: {{
                                                         moment(items?.created_at).startOf('hour').fromNow()
-                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow()}})</small>
+                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow() }})</small>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="">
@@ -311,11 +313,12 @@ export default {
             // let category_name = queryParams.get("rent_sale_type");
             let category_name = queryParams.get("params");
 
-            if (!category_name) {
-                category_name = ''
-            }
+
 
             try {
+                if (!category_name) {
+                    category_name = ''
+                }
                 // category_name = ''
                 this.loading = true;
                 this.error = null;
@@ -379,7 +382,7 @@ export default {
         },
         placeholderText() {
             if (this.searchType) {
-               return `${this.searchType} Search... `
+                return `${this.searchType} Search... `
             }
             return `Search Community or Building ...`
         },

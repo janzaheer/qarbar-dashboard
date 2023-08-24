@@ -26,14 +26,22 @@
                         <li class="nav-item">
                             <!-- <RouterLink class="nav-link" :to="'/Listing/buy?rent_sale_type=sale'">Buy</RouterLink> -->
                             <!-- <a href="/Listing/?rent_sale_type=sale" class="nav-link">Buy</a> -->
-                            <a class="nav-link" href="/listing/?params=rent_sale_type=sale" v-on:click="generateLink()">Buy</a>
+                            <!-- <a class="nav-link" href="/listing/?params=rent_sale_type=sale" v-on:click="generateLink()">Buy</a> -->
+                            <!-- <RouterLink to="/listing" class="nav-link" v-on:click="generateLink('sale')">Buy</RouterLink> -->
+                            <!-- <button class="nav-link" v-on:click="generateLink()">Buy</button> -->
+                            <!-- <RouterLink :to="{ path: '/listing', query: { params: 'rent_sale_type=sale' } }" class="nav-link">Buy</RouterLink> -->
+                            <a href="/listing/?params=rent_sale_type=sale" class="nav-link">Buy</a>
                         </li>
                         <li class="nav-item">
                             <!-- <RouterLink class="nav-link" to="/Listing/rent?rent_sale_type=rent">Rent</RouterLink> -->
                             <!-- <a href="/Listing/?rent_sale_type=rent" class="nav-link">Rent</a> -->
                             <!-- <router-link class="nav-link"
                                 :to="{ name: 'AboutUs', query: { params: 'rent_sale_type=rent' } }">Rent</router-link> -->
-                                <a class="nav-link" href="/listing/?params=rent_sale_type=rent" v-on:click="generateLinkRent()">Rent</a>
+                            <!-- <a class="nav-link" href="/listing/?params=rent_sale_type=rent" v-on:click="generateLinkRent()">Rent</a> -->
+                            <!-- <RouterLink to="/listing" class="nav-link" v-on:click="generateLink('rent')">Rent</RouterLink> -->
+                            <!-- <button class="nav-link" v-on:click="generateLinkRent()">Rent</button> -->
+                            <!-- <RouterLink :to="{ path: '/listing', query: { params: 'rent_sale_type=rent' } }" class="nav-link">Rent</RouterLink> -->
+                            <a href="/listing/?params=rent_sale_type=rent" class="nav-link">Rent</a>
                         </li>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
@@ -119,9 +127,13 @@ import { RouterLink, RouterView } from 'vue-router'
 export default {
     name: 'Header',
     methods: {
+        // generateLink(type) {
+        //     // Use RouterLink with dynamic `to` binding
+        //     this.$router.push({ path: '/listing', query: { rent_sale_type: type } });
+        // },
         generateLink() {
             const listingRoute = {
-                name: 'Listing', // Assuming 'listing' is the name of your route
+                path: 'Listing', // Assuming 'listing' is the name of your route
 
                 // query: params.toString()
                 query: {
@@ -130,7 +142,7 @@ export default {
             };
             this.$router.push(listingRoute);
         },
-        generateLinkRent(){
+        generateLinkRent() {
             const listingRoute = {
                 name: 'Listing', // Assuming 'listing' is the name of your route
 
@@ -164,4 +176,5 @@ export default {
 .addPropertyBtnColor:hover {
     color: rgb(221, 221, 221);
     border: 1px solid rgb(221, 221, 221);
-}</style>
+}
+</style>
