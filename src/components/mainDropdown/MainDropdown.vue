@@ -67,7 +67,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <!-- Modal -->
                             <div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="areaModalLabel"
                                 aria-hidden="true">
@@ -97,13 +96,12 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <input type="text" class="form-control h-100" placeholder=" Search any property..."
+                            <input type="text" class="form-control h-100" placeholder=" Search any property type..."
                                 aria-label="First name" v-on:keyup="(e) => handleSearchTerm(e)">
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="d-flex justify-content-center mt-1 mx-md-5">
                 <div>
                     <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
@@ -270,7 +268,6 @@ export default {
         handleBadsData(data) {
             this.receivedBedsData = data
         },
-
     },
     mounted() {
     },

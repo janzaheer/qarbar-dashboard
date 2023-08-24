@@ -1,13 +1,11 @@
 <template>
     <Header />
-
     <div class="container listingPage">
-
         <div class="border-bottom border-top p-2 mt-2 sticky-top">
             <div class="row g-1">
                 <div class="col-5">
-                    <input type="text" class="form-control h-100" placeholder="search Community ot building ..."
-                        aria-label="First name" v-on:keyup="(e) => handleSearchTerm(e)">
+                    <input type="text" class="form-control h-100" :placeholder="placeholderText()" aria-label="First name"
+                        v-on:keyup="(e) => handleSearchTerm(e)">
                 </div>
                 <div class="col-3">
                     <Cities @childToParentEvent="handleCityData" :cityType="cityType" />
@@ -71,10 +69,8 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
-                    <!-- <div>beds {{ beds_type }} baths {{ baths_type }}</div> -->
-                    <!-- <div>city{{ this.cityType }}</div> -->
-                    <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
-                            new</span></p>
+                    <!-- <div>maxArea {{ this.maxArea_type }} // minArea {{ this.minArea_type }}</div> -->
+                    <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344 new</span></p>
                 </div>
                 <div>
                     <select class="form-select" aria-label="Default select example">
@@ -92,110 +88,116 @@
         <div class="text-center m-5" v-if="loading">
             <VueSpinnerHourglass size="100" color="rgb(255, 69, 0)" />
         </div>
-        <div class="row g-2 my-2 mx-lg-2">
-            <div class="col-12 col-md-9">
-                <div class="row">
-                    <div class="col-12" v-for="items in properties" :key="items.id">
-                        <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
-                            <div class="card mb-3 listPageHover">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <img :src="items?.media[0]?.image_url" class="img-fluid rounded-start cardImage"
-                                                alt="...">
-                                            <div class="card-img-overlay">
-                                                <div v-if="items.agent">
-                                                    <span class="badge text-bg-secondary card-title">
-                                                        <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                            style="height: 15px;" alt=""> SUPERAGENT</span>
+        <div class="text-center m-5" v-if="error">
+            <h1 class="text-danger">Data not found.</h1>
+        </div>
+        <div v-else>
+            <div class="row g-2 my-2 mx-lg-2">
+                <div class="col-12 col-md-9">
+                    <div class="row">
+                        <div class="col-12" v-for="items in properties" :key="items.id">
+                            <RouterLink :to="'/detailPage/' + items.id" class="text-decoration-none">
+                                <div class="card mb-3 listPageHover">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <img :src="items?.media[0]?.image_url"
+                                                    class="img-fluid rounded-start cardImage" alt="...">
+                                                <div class="card-img-overlay">
+                                                    <div v-if="items.agent">
+                                                        <span class="badge text-bg-secondary card-title">
+                                                            <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
+                                                                style="height: 15px;" alt=""> SUPERAGENT</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body bg-white rounded">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
-                                                    <span class="badge text-bg-secondary card-title">{{
-                                                        items?.property_type?.home_types }}</span>
-                                                    <h4>{{ items?.total_price }} Rs </h4>
+                                        <div class="col-md-8">
+                                            <div class="card-body bg-white rounded">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
+                                                        <span class="badge text-bg-secondary card-title">{{
+                                                            items?.property_type?.home_types }}</span>
+                                                        <h4>{{ items?.total_price }} Rs </h4>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <a type="button" className="text-success" data-bs-toggle="popover"
+                                                            :title="items?.agent?.name" data-bs-content=""><img
+                                                                v-if="items.agent" src="https://github.com/mdo.png" alt=""
+                                                                width="60" height="60" class="rounded-circle"></a>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center">
-                                                    <a type="button" className="text-success" data-bs-toggle="popover"
-                                                        :title="items?.agent?.name" data-bs-content=""><img
-                                                            v-if="items.agent" src="https://github.com/mdo.png" alt=""
-                                                            width="60" height="60" class="rounded-circle"></a>
-
+                                                <div class="mb-2">
+                                                    <p class="card-text">
+                                                        <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
+                                                        {{ items?.area.area }}
+                                                    </p>
                                                 </div>
-                                            </div>
-                                            <div class="mb-2">
-                                                <p class="card-text">
-                                                    <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
-                                                    {{ items?.area.area }}
-                                                </p>
-                                            </div>
-                                            <div class="d-flex ">
-                                                <p class="card-text">
-                                                    {{ items?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i>
-                                                    Bedroom
-                                                </p>
-                                                <p class="card-text mx-2">
-                                                    {{ items?.amenties?.bathrooms }} <i class="fa-solid fa-bath"></i>
-                                                    Bathrooms
-                                                </p>
-                                                <p class="card-text"><img src="../../assets/icons/sqft.png"
-                                                        style="width: 30px; height: 30px;" alt=""> {{
-                                                            items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types }}
-                                                </p>
-                                            </div>
-                                            <div class="mb-2">
-                                                <small class="text-body-secondary">Added: {{
-                                                    moment(items?.created_at).startOf('hour').fromNow()
-                                                }} ({{ moment(items?.updated_at).startOf('day').fromNow() }})</small>
-                                            </div>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="">
-                                                    <button class="iconBtn">
-                                                        <i class="fas fa-phone fa-lg"></i>
-                                                    </button>
-                                                    <button class="iconBtn mx-2">
-                                                        <i class="fas fa-message fa-lg"></i>
-                                                    </button>
-                                                    <button class="iconBtn">
-                                                        <i class="fa-brands fa-whatsapp fa-lg"></i>
-                                                    </button>
+                                                <div class="d-flex ">
+                                                    <p class="card-text">
+                                                        {{ items?.amenties?.bedrooms }} <i
+                                                            class="fa-sharp fa-solid fa-bed"></i>
+                                                        Bedroom
+                                                    </p>
+                                                    <p class="card-text mx-2">
+                                                        {{ items?.amenties?.bathrooms }} <i class="fa-solid fa-bath"></i>
+                                                        Bathrooms
+                                                    </p>
+                                                    <p class="card-text"><img src="../../assets/icons/sqft.png"
+                                                            style="width: 30px; height: 30px;" alt=""> {{
+                                                                items?.property_type?.size_sqf }} {{items?.property_type?.unit_types }}
+                                                    </p>
                                                 </div>
-                                                <div class="dropdown-image">
-                                                    <img v-if="items.company_agent"
-                                                        src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
-                                                        style="width: 60px; height: 60px;" alt="">
-                                                    <div class="dropdown-content">
+                                                <div class="mb-2">
+                                                    <small class="text-body-secondary">Added: {{
+                                                        moment(items?.created_at).startOf('hour').fromNow()
+                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow()}})</small>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="">
+                                                        <button class="iconBtn">
+                                                            <i class="fas fa-phone fa-lg"></i>
+                                                        </button>
+                                                        <button class="iconBtn mx-2">
+                                                            <i class="fas fa-message fa-lg"></i>
+                                                        </button>
+                                                        <button class="iconBtn">
+                                                            <i class="fa-brands fa-whatsapp fa-lg"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="dropdown-image">
                                                         <img v-if="items.company_agent"
                                                             src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
-                                                            alt="Cinque Terre" width="300" height="200">
-                                                        <div class="desc">company agent name</div>
+                                                            style="width: 60px; height: 60px;" alt="">
+                                                        <div class="dropdown-content">
+                                                            <img v-if="items.company_agent"
+                                                                src="https://media.zameen.com/thumbnails/204332890-240x180.webp"
+                                                                alt="Cinque Terre" width="300" height="200">
+                                                            <div class="desc">company agent name</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </RouterLink>
+                            </RouterLink>
+                        </div>
                     </div>
                 </div>
+                <div class="d-none d-sm-block col-md-3">
+                    <Advertise />
+                </div>
             </div>
-            <div class="d-none d-sm-block col-md-3">
-                <Advertise />
+            <div class="my-4 text-center">
+                <button class="mainBtnColor bg-white me-2" :disabled="preUrlPage === null"
+                    v-on:click="handleNextPage(preUrlPage)">Previous</button>
+                <button class="mainBtnColor bg-white" :disabled="nextUrlPage === null"
+                    v-on:click="handleNextPage(nextUrlPage)">Next</button>
             </div>
         </div>
-        <div class="my-4 text-center">
-            <button class="mainBtnColor bg-white me-2" :disabled="preUrlPage === null"
-                v-on:click="handleNextPage(preUrlPage)">Previous</button>
-            <button class="mainBtnColor bg-white" :disabled="nextUrlPage === null"
-                v-on:click="handleNextPage(nextUrlPage)">Next</button>
-        </div>
+
         <ScrollButton />
         <!-- Modal -->
         <div class="modal fade" id="areaModal" tabindex="-1" aria-labelledby="areaModalLabel" aria-hidden="true">
@@ -257,6 +259,7 @@ export default {
     },
     data() {
         return {
+            error: null, // data not found check
             properties: [],
             propertiesCount: [],
             loading: false,
@@ -280,7 +283,10 @@ export default {
             baths_type: [],
             minPrice_type: '',
             maxPrice_type: '',
+            minArea_type: '',
+            maxArea_type: '',
             cityType: '',
+            searchType: '',
             ////////////
             minArea: '',
             maxArea: '',
@@ -291,6 +297,13 @@ export default {
     created: function () {
         this.moment = moment;
     },
+    // computed: {
+    //     placeholderText() {
+    //         return this.searchType
+    //             ? `Previous search: ${this.searchType}`
+    //             : 'Search Community or Building ...';
+    //     },
+    // },
     methods: {
 
         async getProperties() {
@@ -305,27 +318,43 @@ export default {
             try {
                 // category_name = ''
                 this.loading = true;
+                this.error = null;
                 let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${category_name}`
                 let res = await axios.get(finalUrl);
-                console.log(res.data);
-                const apiRes = [...this.properties, ...res.data.results]
-                this.properties = apiRes
-                this.propertiesCount = res.data
-                this.nextUrlPage = res?.data?.next
-                this.preUrlPage = res?.data?.previous
-                console.log(category_name)
-                // Extract unit_type value from the category_name parameter
-                const unitTypeParam = new URLSearchParams(category_name);
-                this.unitType = unitTypeParam.get("unit_type");
-                this.r_s_type = unitTypeParam.get("rent_sale_type")
-                this.h_type = unitTypeParam.get("home_types");
-                this.p_type = unitTypeParam.get("plot_types");
-                this.c_type = unitTypeParam.get("commercial_types")
-                this.beds_type = unitTypeParam.get("beds");
-                this.baths_type = unitTypeParam.get("baths");
-                this.maxPrice_type = unitTypeParam.get("max_price");
-                this.minPrice_type = unitTypeParam.get("min_price");
-                this.cityType = unitTypeParam.get("cities")
+                // const apiRes = [...this.properties, ...res.data.results]
+                if (res.data.results.length === 0) {
+                    this.error = "Data not found.";
+                    this.properties = [];
+                } else {
+
+                    this.properties = res.data.results
+                    console.log(res.data.results)
+                    this.propertiesCount = res.data
+                    this.nextUrlPage = res?.data?.next
+                    this.preUrlPage = res?.data?.previous
+                    // Extract unit_type value from the category_name parameter
+                    const unitTypeParam = new URLSearchParams(category_name);
+                    this.unitType = unitTypeParam.get("unit_type");
+                    this.r_s_type = unitTypeParam.get("rent_sale_type")
+                    this.h_type = unitTypeParam.get("home_types");
+                    this.p_type = unitTypeParam.get("plot_types");
+                    this.c_type = unitTypeParam.get("commercial_types")
+                    this.beds_type = unitTypeParam.get("beds");
+                    this.baths_type = unitTypeParam.get("baths");
+                    this.maxPrice_type = unitTypeParam.get("max_price");
+                    this.minPrice_type = unitTypeParam.get("min_price");
+                    this.maxArea_type = unitTypeParam.get("max_size");
+                    this.minArea_type = unitTypeParam.get("min_size");
+                    this.cityType = unitTypeParam.get("cities");
+                    this.searchType = unitTypeParam.get("search")
+                    this.$router.push({
+                        query: {
+                            params: category_name.toString(),
+                        }
+                    });
+                }
+                // console.log(category_name)
+
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
@@ -344,11 +373,15 @@ export default {
                 .catch((err) => console.log(err))
         },
         handleSearchTerm(e) {
-            // if (e.key == 'Enter') {
             let value = e.target.value
             console.log('search', value)
             this.searchValue = value
-            // }
+        },
+        placeholderText() {
+            if (this.searchType) {
+               return `${this.searchType} Search... `
+            }
+            return `Search Community or Building ...`
         },
         handleHomeData(data) {
             this.receivedHomeData = data
@@ -414,19 +447,31 @@ export default {
                 params.append("plot_types", this.receivedPlotData)
             }
             if (this.unitMeter) {
-                params.append("unit_type",this.unitMeter)
+                params.append("unit_type", this.unitMeter)
             }
             console.log(params.toString())
             try {
                 this.loading = true;
-                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${params.toString()}`;
+                this.error = null;
+                let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?${params}`;
                 let res = await axios.get(finalUrl);
-                // ... Handle the API response as needed
-                // const apiRes = [...this.properties, ...res.data.results]
-                this.properties = res.data.results
-                this.propertiesCount = res.data
-                this.nextUrlPage = res?.data?.next
-                this.preUrlPage = res?.data?.previous
+                if (res.data.results.length === 0) {
+                    this.error = "Data not found.";
+                } else {
+                    // const apiRes = [...this.properties, ...res.data.results]
+                    // this.properties = apiRes
+                    this.properties = res.data.results
+                    this.propertiesCount = res.data
+                    this.nextUrlPage = res?.data?.next
+                    this.preUrlPage = res?.data?.previous
+                    // Update the route with new parameters
+                    this.$router.push({
+                        query: {
+                            params: params.toString(),
+                        }
+                    });
+                }
+
             } catch (error) {
                 console.error('Error fetching properties:', error);
             } finally {
@@ -439,15 +484,15 @@ export default {
             this.unitMeter = val
         },
         ValuemaxArea() {
-            if (this.maxArea) {
-                return this.maxArea
+            if (this.maxArea_type) {
+                return this.maxArea_type
             } else {
                 return 'Area'
             }
         },
         ValueminArea() {
-            if (this.minArea) {
-                return this.minArea
+            if (this.minArea_type) {
+                return this.minArea_type
             } else {
                 return 'Area'
             }
@@ -456,7 +501,6 @@ export default {
     },
     mounted() {
         this.getProperties();
-        console.log(this.$route.query.unit_type)
     }
 }
 </script>
