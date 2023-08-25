@@ -147,14 +147,16 @@
                                                     </p>
                                                     <p class="card-text"><img src="../../assets/icons/sqft.png"
                                                             style="width: 30px; height: 30px;" alt=""> {{
-                                                                items?.property_type?.size_sqf }} {{ items?.property_type?.unit_types
+                                                                items?.property_type?.size_sqf }} {{
+        items?.property_type?.unit_types
     }}
                                                     </p>
                                                 </div>
                                                 <div class="mb-2">
                                                     <small class="text-body-secondary">Added: {{
                                                         moment(items?.created_at).startOf('hour').fromNow()
-                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow() }})</small>
+                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow()
+}})</small>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="">
@@ -306,15 +308,13 @@ export default {
     //             : 'Search Community or Building ...';
     //     },
     // },
+
     methods: {
 
         async getProperties() {
             const queryParams = new URLSearchParams(window.location.search);
             // let category_name = queryParams.get("rent_sale_type");
             let category_name = queryParams.get("params");
-
-
-
             try {
                 if (!category_name) {
                     category_name = ''

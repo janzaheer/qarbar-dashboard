@@ -24,24 +24,10 @@
                             <RouterLink class="nav-link active" to="/">Home</RouterLink>
                         </li>
                         <li class="nav-item">
-                            <!-- <RouterLink class="nav-link" :to="'/Listing/buy?rent_sale_type=sale'">Buy</RouterLink> -->
-                            <!-- <a href="/Listing/?rent_sale_type=sale" class="nav-link">Buy</a> -->
-                            <!-- <a class="nav-link" href="/listing/?params=rent_sale_type=sale" v-on:click="generateLink()">Buy</a> -->
-                            <!-- <RouterLink to="/listing" class="nav-link" v-on:click="generateLink('sale')">Buy</RouterLink> -->
-                            <!-- <button class="nav-link" v-on:click="generateLink()">Buy</button> -->
-                            <!-- <RouterLink :to="{ path: '/listing', query: { params: 'rent_sale_type=sale' } }" class="nav-link">Buy</RouterLink> -->
-                            <a href="/listing/?params=rent_sale_type=sale" class="nav-link">Buy</a>
+                            <a href="/listing/?params=rent_sale_type=sale" class="nav-link" >Buy</a>
                         </li>
                         <li class="nav-item">
-                            <!-- <RouterLink class="nav-link" to="/Listing/rent?rent_sale_type=rent">Rent</RouterLink> -->
-                            <!-- <a href="/Listing/?rent_sale_type=rent" class="nav-link">Rent</a> -->
-                            <!-- <router-link class="nav-link"
-                                :to="{ name: 'AboutUs', query: { params: 'rent_sale_type=rent' } }">Rent</router-link> -->
-                            <!-- <a class="nav-link" href="/listing/?params=rent_sale_type=rent" v-on:click="generateLinkRent()">Rent</a> -->
-                            <!-- <RouterLink to="/listing" class="nav-link" v-on:click="generateLink('rent')">Rent</RouterLink> -->
-                            <!-- <button class="nav-link" v-on:click="generateLinkRent()">Rent</button> -->
-                            <!-- <RouterLink :to="{ path: '/listing', query: { params: 'rent_sale_type=rent' } }" class="nav-link">Rent</RouterLink> -->
-                            <a href="/listing/?params=rent_sale_type=rent" class="nav-link">Rent</a>
+                            <a href="/listing/?params=rent_sale_type=rent" class="nav-link" >Rent</a>
                         </li>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
@@ -75,50 +61,6 @@
                 </div>
             </div>
         </nav>
-        <!-- <nav class="navbar navbar-expand-lg">
-            <div class="container d-flex justify-content-center">
-                <div class="d-flex justify-content-end">
-                    <RouterLink class="navbar-brand" to="/">
-                        <img src="../../../assets/logo.svg" class="" alt="" style="height: 30px;">
-                    </RouterLink>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
-                            <li class="nav-item">
-                                <RouterLink class="nav-link active" to="/">Home</RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="nav-link" :to="'/Listing/?R_B_type=sale'">Buy</RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="nav-link" to="/Listing/?R_B_type=rent">Rent</RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="nav-link" to="/agentsList">Find agent</RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="btn btn-outline-danger btn-sm mt-1" to="/agentpanel">Add Property
-                                </RouterLink>
-                            </li>
-                            <li class="nav-item">
-                                <RouterLink class="btn btn-outline-warning btn-sm mt-1" to="/login">Login</RouterLink>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </nav> -->
     </div>
     <RouterView />
 </template>
@@ -133,9 +75,7 @@ export default {
         // },
         generateLink() {
             const listingRoute = {
-                path: 'Listing', // Assuming 'listing' is the name of your route
-
-                // query: params.toString()
+                path: 'Listing',
                 query: {
                     params: 'rent_sale_type=sale'
                 }
@@ -144,9 +84,7 @@ export default {
         },
         generateLinkRent() {
             const listingRoute = {
-                name: 'Listing', // Assuming 'listing' is the name of your route
-
-                // query: params.toString()
+                name: 'Listing',
                 query: {
                     params: 'rent_sale_type=rent'
                 }
