@@ -185,8 +185,83 @@ export default {
             // console.log('homeType', this.receivedHomePropertyVal)
             // console.log('commercialPropertyVal', this.commercialPropertyVal)
             // console.log('rp', this.receivedReadyPossession)
-            console.log('sale',this.sellvalue)
-            console.log('rent',this.rentvalue)
+            // console.log('sale',this.sellvalue)
+            // console.log('rent',this.rentvalue)
+            const payload = {
+                media: [
+                    {
+                        image_url: "https://media.zameen.com/thumbnails/230702002-400x300.webp",
+                        media_type: "image"
+                    }
+                ],
+                title: "Quetta Beautiful House for Rent",
+                phone: "123456789",
+                landline: "987654321",
+                secondry_phone: "9876543210",
+                email: "example@example.com",
+                rent_sale_type: "rent",
+                area: 1105,
+                agent: 1100,
+                amenties: {
+                    other_nearby_palces: "Park, Supermarket",
+                    bedrooms: 3,
+                    distance_from_airport: 10,
+                    built_in_year: 2005,
+                    bathrooms: 2,
+                    kitchen: 1,
+                    floors: 2,
+                    maid_room: false,
+                    built_in_wardrobes: true,
+                    kitchen_appliances: true,
+                    balcony: true,
+                    lower_portion: false,
+                    Farmhouse: false,
+                    electricity_backup: true,
+                    furnished_unfurnished: true,
+                    covered_parking: true,
+                    lobby_in_building: false,
+                    security: true,
+                    parking_space: true,
+                    drawing_room: true,
+                    study_room: false,
+                    laundry_room: true,
+                    store_room: true,
+                    gym: false,
+                    lounge_sitting_area: true,
+                    internet: true,
+                    swimming_pool: false,
+                    mosque: true,
+                    kids_play_area: true,
+                    medical_center: true,
+                    community_lawn_garden: false,
+                    near_by_school: true,
+                    near_by_hospital: true,
+                    near_by_shopping_mall: true,
+                    other_description: "Additional amenities description here"
+                },
+                property_type: {
+                    plot_types: null,
+                    home_types: null,
+                    commercial_types: "office",
+                    unit_types: "sqft",
+                    size: 2000,
+                    other_description: "Property type description here"
+                },
+                property_location: {
+                    latitude: 25.123456,
+                    longitude: 67.987654
+                },
+                installment: {
+                    advance_amount: 50000,
+                    no_of_inst: 12,
+                    monthly_inst: 10000,
+                    ready_for_possession: true
+                },
+                available: true,
+                description: "This is a beautiful house for sale with modern amenities.",
+                total_price: 1500000
+            }
+            console.log('payload', payload)
         },
         handleSellView() {
             this.sellChecked = true;
@@ -209,7 +284,7 @@ export default {
             }
         },
         handleBuiltYear(data) {
-            this.receivedBuilt_in_year = data  
+            this.receivedBuilt_in_year = data
         },
         handleBuiltInWhaedrobes(data) {
             this.receivedBuilt_in_wardrobes = data
@@ -283,7 +358,7 @@ export default {
         handleMedicalCenter(data) {
             this.receivedMedical_center = data
         },
-        handleSwimmingPool(data){
+        handleSwimmingPool(data) {
             this.receivedSwimming_pool = data
         },
         handleNearSchool(data) {
@@ -420,10 +495,10 @@ export default {
                     @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
                     @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
                     @childDataCommunityLawnGarden="handleCommunityLawnGarden" @childDataMedicalCenter="handleMedicalCenter"
-                    @childDataSwimmingPool="handleSwimmingPool"
-                    @childDataNearSchool="handleNearSchool" @childDataNearHospital="handleNearHospital"
-                    @childDataNearShoppingMall="handleNearShoppingMall" @childDataOtherPalces="handleOtherPalces"
-                    @childDataDistanceAirport="handleDistanceAirport" @childDataOtherDesc="handleOtherDesc" />
+                    @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
+                    @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
+                    @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
+                    @childDataOtherDesc="handleOtherDesc" />
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
