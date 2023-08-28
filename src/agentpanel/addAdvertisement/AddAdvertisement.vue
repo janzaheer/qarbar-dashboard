@@ -10,7 +10,9 @@ import PriceAndArea from './components/PriceAndArea.vue';
 import Installment from './components/Installment.vue';
 import CityLocationArea from './components/CityLocationArea.vue';
 import FeatureAndAmenities from './components/FeatureAndAmenities.vue';
-import UploadImages from './components/UploadImages.vue'
+import UploadImages from './components/UploadImages.vue';
+import { BASE_URL,API_VERSION,PROPERTY_END_POINT }from '../../utils/api';
+import axios from 'axios';
 export default {
     name: 'AddAdvertisement',
     components: {
@@ -177,7 +179,15 @@ export default {
         handleRpData(data) {
             this.receivedReadyPossession = data
         },
-        logCheckboxValues() {
+        R_S_Value(){
+            if (this.sellvalue) {
+                return this.sellvalue
+            }
+            if (this.rentvalue) {
+                return this.rentvalue
+            }
+        },
+        async logCheckboxValues() {
             // console.log('sell Checked:', this.sellChecked);
             // console.log('rent Checked:', this.rentChecked);
             // console.log('---------------------------')
@@ -194,74 +204,85 @@ export default {
                         media_type: "image"
                     }
                 ],
-                title: "Quetta Beautiful House for Rent",
-                phone: "123456789",
-                landline: "987654321",
-                secondry_phone: "9876543210",
-                email: "example@example.com",
-                rent_sale_type: "rent",
-                area: 1105,
-                agent: 1100,
+                title: this.receivedTitle,
+                phone: this.receivedMobileNumber,
+                landline: this.receivedLandlineNumber,
+                secondry_phone: this.receivedSecondaryNumber,
+                email: this.receivedEmailAddress,
+                rent_sale_type: this.R_S_Value(), // remaining
+                area: 1105, // remaining
+                agent: 1100, // remaining
                 amenties: {
-                    other_nearby_palces: "Park, Supermarket",
-                    bedrooms: 3,
-                    distance_from_airport: 10,
-                    built_in_year: 2005,
-                    bathrooms: 2,
-                    kitchen: 1,
-                    floors: 2,
-                    maid_room: false,
-                    built_in_wardrobes: true,
-                    kitchen_appliances: true,
-                    balcony: true,
-                    lower_portion: false,
-                    Farmhouse: false,
-                    electricity_backup: true,
-                    furnished_unfurnished: true,
-                    covered_parking: true,
-                    lobby_in_building: false,
-                    security: true,
-                    parking_space: true,
-                    drawing_room: true,
-                    study_room: false,
-                    laundry_room: true,
-                    store_room: true,
-                    gym: false,
-                    lounge_sitting_area: true,
-                    internet: true,
-                    swimming_pool: false,
-                    mosque: true,
-                    kids_play_area: true,
-                    medical_center: true,
-                    community_lawn_garden: false,
-                    near_by_school: true,
-                    near_by_hospital: true,
-                    near_by_shopping_mall: true,
-                    other_description: "Additional amenities description here"
+                    other_nearby_palces: this.receivedOther_nearby_palces,
+                    bedrooms: this.receivedBedRooms,
+                    distance_from_airport: this.receivedDistance_from_airport,
+                    built_in_year: this.receivedBuilt_in_year,
+                    bathrooms: this.receivedBathRooms,
+                    kitchen: this.receivedKitchen,
+                    floors: this.receivedFloor,
+                    maid_room: this.receivedMaid_room,
+                    built_in_wardrobes: this.receivedBuilt_in_wardrobes,
+                    kitchen_appliances: this.receivedKitchen_appliances,
+                    balcony: this.receivedBalcony,
+                    lower_portion: this.receivedLower_portion,
+                    Farmhouse: this.receivedFarmhouse,
+                    electricity_backup: this.receivedElectricity_backup,
+                    furnished_unfurnished: this.receivedFurnished_unfurnished,
+                    covered_parking: true, // remaining
+                    lobby_in_building: this.receivedLobby_in_building,
+                    security: this.receivedSecurity,
+                    parking_space: this.receivedParking_space,
+                    drawing_room: this.receivedDrawing_room,
+                    study_room: this.receivedStudy_room,
+                    laundry_room: this.receivedLaundry_room,
+                    store_room: this.receivedStore_room,
+                    gym: this.receivedGym,
+                    lounge_sitting_area: this.receivedLounge_sitting_area,
+                    internet: this.receivedInternet,
+                    swimming_pool: this.receivedSwimming_pool,
+                    mosque: this.receivedMosque,
+                    kids_play_area: this.receivedKids_play_area,
+                    medical_center: this.receivedMedical_center,
+                    community_lawn_garden: this.receivedCommunity_lawn_garden,
+                    near_by_school: this.receivedNear_by_school,
+                    near_by_hospital: this.receivedNear_by_hospital,
+                    near_by_shopping_mall: this.near_by_shopping_mall,
+                    other_description: this.receivedOther_description,
                 },
                 property_type: {
-                    plot_types: null,
-                    home_types: null,
-                    commercial_types: "office",
-                    unit_types: "sqft",
-                    size: 2000,
-                    other_description: "Property type description here"
+                    plot_types: this.receivedPlotPropertyVal,
+                    home_types: this.receivedHomePropertyVal,
+                    commercial_types: this.receivedCommercialPropertyVal,
+                    unit_types: this.receivedAreaTypes,
+                    size: this.receivedAreaUnit,
+                    other_description: "Property type description here" // remaining
                 },
                 property_location: {
-                    latitude: 25.123456,
-                    longitude: 67.987654
+                    latitude: 25.123456, // remaining
+                    longitude: 67.987654 // remaining
                 },
                 installment: {
-                    advance_amount: 50000,
-                    no_of_inst: 12,
-                    monthly_inst: 10000,
-                    ready_for_possession: true
+                    advance_amount: this.receivedAdvanceAmount,
+                    no_of_inst: this.receivedNofInstallments,
+                    monthly_inst: this.receivedMonthlyInstallments,
+                    ready_for_possession: this.receivedReadyPossession,
                 },
                 available: true,
-                description: "This is a beautiful house for sale with modern amenities.",
-                total_price: 1500000
+                description: this.receivedDescription,
+                total_price: this.ReceivedTotalPrice,
             }
-            console.log('payload', payload)
+            // let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + 'create_property/' 
+            
+             console.log('payload', payload)
+            // console.log('check',this.R_S_Value())
+            // try {
+            //     await axios.post(finallURL, payload)
+            //     .then((resp)=>{
+            //         console.log(resp.ok)
+            //     })
+            // } catch (error) {
+            //     console.log(error)
+            // }
         },
         handleSellView() {
             this.sellChecked = true;
