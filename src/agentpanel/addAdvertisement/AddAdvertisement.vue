@@ -11,7 +11,10 @@ import Installment from './components/Installment.vue';
 import CityLocationArea from './components/CityLocationArea.vue';
 import FeatureAndAmenities from './components/FeatureAndAmenities.vue';
 import UploadImages from './components/UploadImages.vue';
-import { BASE_URL,API_VERSION,PROPERTY_END_POINT }from '../../utils/api';
+import { BASE_URL, API_VERSION, PROPERTY_END_POINT } from '../../utils/api';
+// import Vue3Dropzone from 'vue3-dropzone';
+// import 'vue3-dropzone/dist/vue3Dropzone.css';
+// import s3 from '../../aws/aws.js';
 import axios from 'axios';
 export default {
     name: 'AddAdvertisement',
@@ -27,7 +30,8 @@ export default {
         Installment,
         CityLocationArea,
         FeatureAndAmenities,
-        UploadImages
+        UploadImages,
+        // Vue3Dropzone
 
     },
     data() {
@@ -81,6 +85,7 @@ export default {
             receivedFarmhouse: '',
             receivedLower_portion: '',
             receivedElectricity_backup: '',
+            receivedCoverParking: '',
             receivedInternet: '',
             receivedParking_space: '',
             receivedFurnished_unfurnished: '',
@@ -109,10 +114,34 @@ export default {
             receivedOther_nearby_palces: '',
             receivedDistance_from_airport: '',
             receivedOther_description: '',
+            dropzoneOptions: {
+                url: '/fake-endpoint', // Doesn't matter since we're handling the upload manually
+                addRemoveLinks: true,
+            },
 
         };
     },
     methods: {
+        async handleSuccess(files, responses) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const response = responses[i];
+                const imageKey = `images/${file.name}`;
+
+                const params = {
+                    Bucket: 'YOUR_BUCKET_NAME',
+                    Key: imageKey,
+                    Body: file,
+                };
+
+                try {
+                    await s3.upload(params).promise();
+                    console.log(`Image ${file.name} uploaded successfully`);
+                } catch (error) {
+                    console.error(`Error uploading image ${file.name}:`, error);
+                }
+            }
+        },
         handleHomePropertyVal(data) {
             this.receivedHomePropertyVal = data
         },
@@ -179,7 +208,7 @@ export default {
         handleRpData(data) {
             this.receivedReadyPossession = data
         },
-        R_S_Value(){
+        R_S_Value() {
             if (this.sellvalue) {
                 return this.sellvalue
             }
@@ -211,7 +240,7 @@ export default {
                 email: this.receivedEmailAddress,
                 rent_sale_type: this.R_S_Value(), // remaining
                 area: 1105, // remaining
-                agent: 1100, // remaining
+                agent: 1100, // remaining agent id is here after login agent
                 amenties: {
                     other_nearby_palces: this.receivedOther_nearby_palces,
                     bedrooms: this.receivedBedRooms,
@@ -228,7 +257,7 @@ export default {
                     Farmhouse: this.receivedFarmhouse,
                     electricity_backup: this.receivedElectricity_backup,
                     furnished_unfurnished: this.receivedFurnished_unfurnished,
-                    covered_parking: true, // remaining
+                    covered_parking: this.receivedCoverParking,
                     lobby_in_building: this.receivedLobby_in_building,
                     security: this.receivedSecurity,
                     parking_space: this.receivedParking_space,
@@ -271,18 +300,27 @@ export default {
                 description: this.receivedDescription,
                 total_price: this.ReceivedTotalPrice,
             }
-            // let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + 'create_property/' 
-            
-             console.log('payload', payload)
+            let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + 'create_property/'
+
+            //  console.log('payload', payload)
             // console.log('check',this.R_S_Value())
-            // try {
-            //     await axios.post(finallURL, payload)
-            //     .then((resp)=>{
-            //         console.log(resp.ok)
-            //     })
-            // } catch (error) {
-            //     console.log(error)
-            // }
+            try {
+                await axios.post(finallURL, payload)
+                    .then((resp) => {
+                        console.log(resp.ok)
+                    })
+            } catch (resp) {
+                if (resp.response) {
+                    console.log('response-error', resp.response.data)
+                    if (resp.response.data.total_price) {
+                        console.log('invalid-price-field')
+                    }
+                } else if (resp.request) {
+                    console.log('request-error', resp.request)
+                } else {
+                    console.log(resp)
+                }
+            }
         },
         handleSellView() {
             this.sellChecked = true;
@@ -327,6 +365,9 @@ export default {
         },
         handleElectricityBackup(data) {
             this.receivedElectricity_backup = data
+        },
+        handleCoveredParking(data) {
+            this.receivedCoverParking = data
         },
         handleInternet(data) {
             this.receivedInternet = data
@@ -507,10 +548,10 @@ export default {
                     @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
                     @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
                     @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
-                    @childDataElectricityBackup="handleElectricityBackup" @childDataInternet="handleInternet"
-                    @childDataParkingSpace="handleParkingSpace" @childDataFurnished="handleFurnished"
-                    @childDataLobbyBuilding="handleLobbyBuilding" @childDataFloor="handleFloor"
-                    @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
+                    @childDataElectricityBackup="handleElectricityBackup" @childDataCoveredParking="handleCoveredParking"
+                    @childDataInternet="handleInternet" @childDataParkingSpace="handleParkingSpace"
+                    @childDataFurnished="handleFurnished" @childDataLobbyBuilding="handleLobbyBuilding"
+                    @childDataFloor="handleFloor" @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
                     @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
                     @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
                     @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
@@ -527,7 +568,22 @@ export default {
             </div>
 
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" />
+                <!-- <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" /> -->
+                <div class="card-body ">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-4 text-center">
+                            <i class="fa-solid fa-images fa-2xl" style="color: rgb(255, 69, 0);"></i>
+                            <h5 class="mt-2">Property Images Upload</h5>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <div>
+                                    <!-- <vue3-dropzone :options="dropzoneOptions" @vdropzone-success="handleSuccess" /> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="card shadow-sm p-3 mb-5 bg-body rounded">

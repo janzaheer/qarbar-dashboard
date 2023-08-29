@@ -27,6 +27,7 @@ export default {
             lobby_in_building: false,
             floor: '',
             kitchen: '',
+            covered_parking: false,
             // rooms
             study_room: false,
             laundry_room: false,
@@ -69,6 +70,7 @@ export default {
             this.$emit("childDataFarmHouse", this.Farmhouse)
             this.$emit("childDataLowerPortion", this.lower_portion)
             this.$emit("childDataElectricityBackup", this.electricity_backup)
+            this.$emit("childDataCoveredParking", this.covered_parking)
             this.$emit("childDataInternet", this.internet)
             this.$emit("childDataParkingSpace", this.parking_space)
             this.$emit("childDataFurnished", this.furnished_unfurnished)
@@ -214,6 +216,14 @@ export default {
                                                         v-on:change="handleElectricityBackup">
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         electricity_backup
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault" v-model="covered_parking"
+                                                        v-on:change="handleCover_Parking">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Covered Parking
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
