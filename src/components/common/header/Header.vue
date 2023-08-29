@@ -11,7 +11,7 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid mx-5">
                 <RouterLink class="navbar-brand" to="/">
-                    <img src="../../../assets/logo.svg" class="" alt="" style="height: 30px;">
+                    <img src="../../../assets/LoogQ.png" class="" alt="" style="height: 30px;">
                 </RouterLink>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -23,19 +23,19 @@
                         <li class="nav-item">
                             <RouterLink class="nav-link active" to="/">Home</RouterLink>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-md-1">
                             <a href="/listing/?params=rent_sale_type=sale" class="nav-link" >Buy</a>
                         </li>
                         <li class="nav-item">
                             <a href="/listing/?params=rent_sale_type=rent" class="nav-link" >Rent</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-md-1">
                             <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
                         </li>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/agentsList">Find agent</RouterLink>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mx-md-1">
                             <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
                         </li>
                     </ul>

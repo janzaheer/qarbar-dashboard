@@ -5,17 +5,24 @@
                 <button
                     :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
                     v-on:click="handleSellView">
-                    <i class="fa-solid fa-house-circle-check"></i> Sell</button>
+                    <i class="fa-solid fa-house-circle-check"></i> Buy</button>
                 <button :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
                     v-on:click="handleRentView">
                     <i class="fa-solid fa-house-lock"></i> Rent</button>
+                <div class="mt-md-2 ms-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" v-model="showCommercialValue" v-on:change="handleShowCOmmercialValue">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Show commercial properties only</label>
+                    </div>
+                </div>
             </div>
             <div class="row g-1">
-                <div class="col-9 col-md-12 col-lg-6 ">
+                <div class="col-9 col-md-4 col-lg-6 ">
                     <Cities @childToParentEvent="handleCityData" />
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
-                    <PropertyTypes @childToParentDataHomeType="handleHomeData" @childToParentDataPlotType="handlePlotData" @childToParentDataCommercialType="handleCommercialData" />
+                    <PropertyTypes @childToParentDataHomeType="handleHomeData" @childToParentDataPlotType="handlePlotData"
+                        @childToParentDataCommercialType="handleCommercialData" />
                 </div>
                 <div class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
                     <BedsBaths @childToParentEventSelectedBeds="handleBadsData"
@@ -146,11 +153,16 @@ export default {
             receivedHomeData: '',
             receivedPlotData: '',
             receivedCommercialData: '',
+            showCommercialValue: false
 
 
         }
     },
     methods: {
+        handleShowCOmmercialValue(){
+            this.showCommercialValue
+            console.log('value',this.showCommercialValue)
+        },
         handleSellView() {
             this.sellChecked = true;
             this.rentChecked = false;
@@ -161,9 +173,9 @@ export default {
         },
         handleSearchTerm(e) {
             // if (e.key == 'Enter') {
-                let value = e.target.value
-                console.log('search', value)
-                this.searchValue = value
+            let value = e.target.value
+            console.log('search', value)
+            this.searchValue = value
             // }
         },
         handleMeterUnit(e) {
@@ -171,14 +183,14 @@ export default {
             console.log('----', val)
             this.unitMeter = val
         },
-        ValuemaxArea(){
+        ValuemaxArea() {
             if (this.maxArea) {
                 return this.maxArea
             } else {
                 return 'Area'
             }
         },
-        ValueminArea(){
+        ValueminArea() {
             if (this.minArea) {
                 return this.minArea
             } else {
@@ -204,7 +216,7 @@ export default {
                 params.append("max_size", this.maxArea)
             }
             if (this.unitMeter) {
-                params.append("unit_type",this.unitMeter)
+                params.append("unit_type", this.unitMeter)
             }
             if (this.receivedBedsData) {
                 this.receivedBedsData.forEach((s_bed) => params.append("beds", s_bed))
@@ -242,7 +254,7 @@ export default {
             };
             this.$router.push(listingRoute);
         },
-        
+
         handleCityData(data) {
             this.receivedCitiesData = data;
         },
@@ -252,13 +264,13 @@ export default {
         handleMinPriceData(data) {
             this.receivedMinPrice = data
         },
-        handleHomeData(data){
+        handleHomeData(data) {
             this.receivedHomeData = data
         },
-        handlePlotData(data){
+        handlePlotData(data) {
             this.receivedPlotData = data
         },
-        handleCommercialData(data){
+        handleCommercialData(data) {
             this.receivedCommercialData = data
         },
         handleBathsData(data) {
@@ -276,5 +288,4 @@ export default {
 
 <style>
 @import './mainDropDown.css';
-
 </style>
