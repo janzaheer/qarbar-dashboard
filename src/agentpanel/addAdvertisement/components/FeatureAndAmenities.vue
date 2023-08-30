@@ -48,7 +48,7 @@ export default {
             near_by_hospital: false,
             near_by_shopping_mall: false,
             other_nearby_palces: '',
-            distance_from_airport: '',
+            distance_from_airport: 0,
             other_description: '',
         }
     },
@@ -457,8 +457,8 @@ export default {
                                         <div class="col-6">
                                             <div class="mb-1">
                                                 <label for="exampleFormControlInput1"
-                                                    class="form-label">distance_from_airport</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                    class="form-label">distance_from_airport from km</label>
+                                                <input type="number" class="form-control" id="exampleFormControlInput1"
                                                     placeholder="10km etc" v-model="distance_from_airport"
                                                     v-on:change="handleAirport">
                                             </div>

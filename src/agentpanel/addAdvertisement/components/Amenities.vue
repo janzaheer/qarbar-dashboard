@@ -341,8 +341,8 @@ export default {
                         </div>
                         <div class="col-6">
                             <div class="mb-1">
-                                <label for="exampleFormControlInput1" class="form-label">distance_from_airport</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                <label for="exampleFormControlInput1" class="form-label">distance_from_airport from km</label>
+                                <input type="number" class="form-control" id="exampleFormControlInput1"
                                     placeholder="10km etc" v-model="distance_from_airport" v-on:change="handleAirport">
                             </div>
                             <div class="">

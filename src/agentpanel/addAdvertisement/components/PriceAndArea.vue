@@ -1,5 +1,6 @@
 <script>
-import Installment from './Installment.vue'
+import Installment from './Installment.vue';
+
 export default {
     name: 'PriceAndArea',
     components: {
@@ -29,6 +30,10 @@ export default {
             this.totalPrice
             this.$emit("ChildToParentTotalPriceData", this.totalPrice)
         },
+       
+    },
+    mounted(){
+    
     }
 }
 </script>
