@@ -6,7 +6,7 @@ export default {
     },
     data() {
         return {
-            selectedImage: '',
+            selectedImage: null,
         }
     },
     methods: {
@@ -28,6 +28,44 @@ export default {
                 <h5 class="mt-2">Property Images Upload</h5>
             </div>
             <div class="col-6">
+                <!-- <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload image here</label>
+                            <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                        </div>
+                    </div>
+                </div> -->
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Upload image here</label>
                     <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">

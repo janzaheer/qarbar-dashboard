@@ -54,9 +54,6 @@ export default {
                     }
                     return 'null'; // Or handle missing data
                 });
-                console.log('------------------------------')
-                console.log('area', res.data)
-                console.log('------------------------------')
             } catch (error) {
                 console.error('Error fetching city data:', error);
             }

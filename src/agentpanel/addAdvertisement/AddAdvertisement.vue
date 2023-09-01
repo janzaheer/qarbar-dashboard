@@ -11,7 +11,7 @@ import Installment from './components/Installment.vue';
 import CityLocationArea from './components/CityLocationArea.vue';
 import FeatureAndAmenities from './components/FeatureAndAmenities.vue';
 import UploadImages from './components/UploadImages.vue';
-import { BASE_URL, API_VERSION, PROPERTY_END_POINT } from '../../utils/api';
+import { BASE_URL, API_VERSION, PROPERTY_END_POINT, CREATE_PROPERTY_END_POINT } from '../../utils/api';
 import { createToast } from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css';
 // import Vue3Dropzone from 'vue3-dropzone';
@@ -120,6 +120,10 @@ export default {
                 url: '/fake-endpoint', // Doesn't matter since we're handling the upload manually
                 addRemoveLinks: true,
             },
+            selectedImage: null,
+            selectedImage2: null,
+            selectedImage3: null,
+            selectedImage4: null,
 
         };
     },
@@ -217,6 +221,7 @@ export default {
             if (this.rentvalue) {
                 return this.rentvalue
             }
+            return 'sale';
         },
         async logCheckboxValues() {
             // console.log('sell Checked:', this.sellChecked);
@@ -228,20 +233,26 @@ export default {
             // console.log('rp', this.receivedReadyPossession)
             // console.log('sale',this.sellvalue)
             // console.log('rent',this.rentvalue)
+            let imageData = [this.selectedImage]
+            if (this.selectedImage2) {
+                imageData.push(this.selectedImage2)
+            }
+            if (this.selectedImage3) {
+                imageData.push(this.selectedImage3)
+            }
+            if (this.selectedImage4) {
+                imageData.push(this.selectedImage4)
+            }
+
             const payload = {
-                media: [
-                    {
-                        image_url: "https://media.zameen.com/thumbnails/230702002-400x300.webp",
-                        media_type: "image"
-                    }
-                ],
+                media: imageData,
                 title: this.receivedTitle,
                 phone: this.receivedMobileNumber,
                 landline: this.receivedLandlineNumber,
                 secondry_phone: this.receivedSecondaryNumber,
                 email: this.receivedEmailAddress,
-                rent_sale_type: this.R_S_Value(), // remaining
-                area: this.receivedSelectedCity, // remaining
+                rent_sale_type: this.R_S_Value(),
+                area: this.receivedSelectedCity, // area-id
                 agent: 1100, // remaining agent id is here after login agent
                 amenties: {
                     other_nearby_palces: this.receivedOther_nearby_palces,
@@ -302,39 +313,75 @@ export default {
                 description: this.receivedDescription,
                 total_price: this.ReceivedTotalPrice,
             }
-            let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + 'create_property/'
+            let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + CREATE_PROPERTY_END_POINT()
 
-            console.log('payload', payload)
-            //  console.log('plot',this.receivedPlotPropertyVal)
-            // console.log('check',this.R_S_Value())
-            // try {
-            //     await axios.post(finallURL, payload)
-            //         .then((resp) => {
-            //             console.log(resp.ok)
-            //         })
-            // } catch (resp) {
-            //     if (resp.response) {
-            //         console.log('response-error', resp.response.data)
-            //         if (resp.response.data.total_price) {
-            //             console.log('invalid-price-field')
-            //         }
-            //     } else if (resp.request) {
-            //         console.log('request-error', resp.request)
-            //     } else {
-            //         console.log(resp)
-            //     }
-            // }
-            if (this.receivedTitle.length == 0) {
-                console.log('title-error')
-                this.toast()
+            // console.log('payload', payload)
+            try {
+                await axios.post(finallURL, payload)
+                    .then((resp) => {
+                        console.log(resp.ok)
+                        this.toastSuccess()
+                    })
+            } catch (resp) {
+                if (resp.response) {
+                    console.log('response-error', resp.response)
+                    if (this.receivedTitle.length == 0) {
+                        this.toast()
+                    }
+                    if (this.receivedDescription.length == 0) {
+                        this.toast2()
+                    }
+                    if (this.receivedMobileNumber.length == 0) {
+                        this.toastMobile()
+                    }
+                    if (this.receivedLandlineNumber.length == 0) {
+                        this.toastLandLineNumber()
+                    }
+                    if (this.receivedSecondaryNumber.length == 0) {
+                        this.toastSecondaryNumber()
+                    }
+                    if (this.receivedEmailAddress.length == 0) {
+                        this.toastEmail()
+                    }
+                    if (this.receivedBathRooms.length == 0) {
+                        this.toastBaths()
+                    }
+                    if (this.receivedBedRooms.length == 0) {
+                        this.toastBeds()
+                    }
+                    if (this.receivedSelectedCity.length == 0) {
+                        this.toastCity()
+                    }
+                    if (this.receivedAreaUnit.length == 0) {
+                        this.toastAreaSize()
+                    }
+                    if (this.receivedAreaTypes.length == 0) {
+                        this.toastAreaUnit()
+                    }
+                    if (this.ReceivedTotalPrice.length == 0) {
+                        this.toastPrice()
+                    }
+
+                } else if (resp.request) {
+                    console.log('request-error', resp.request)
+                } else {
+                    console.log(resp)
+                }
             }
-            if (this.receivedDescription.length == 0) {
-                this.toast2()
-            }
-            this.$refs.logCheckboxValues.reset();
+
+
+            // console.log('image', this.receivedUploadedImage)
+            // this.$refs.logCheckboxValues.reset();
+        },
+        toastSuccess() {
+            createToast('Submit Successfully',
+                {
+                    type: 'success',
+                    transition: 'zoom',
+                })
         },
         toast() {
-            createToast('1title-error',
+            createToast('Title-Required',
                 {
                     type: 'danger',
                     transition: 'zoom',
@@ -342,6 +389,76 @@ export default {
         },
         toast2() {
             createToast('desc-error',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastEmail() {
+            createToast('email-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastMobile() {
+            createToast('MobileNumber-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastLandLineNumber() {
+            createToast('LandLineNumber-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastSecondaryNumber() {
+            createToast('SecondaryNumber-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastBeds() {
+            createToast('Beds-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastBaths() {
+            createToast('Baths-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastCity() {
+            createToast('SelectCity-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastAreaSize() {
+            createToast('AreaSize-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastAreaUnit() {
+            createToast('AreaUnitTypes-required',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        toastPrice() {
+            createToast('Price-required',
                 {
                     type: 'danger',
                     transition: 'zoom',
@@ -466,6 +583,24 @@ export default {
         handleOtherDesc(data) {
             this.receivedOther_description = data
         },
+        async handleImageUpload(event) {
+            event.preventDefault();
+            this.selectedImage = event.target.files[0];
+        },
+        handleImageUpload2(event) {
+            event.preventDefault();
+            this.selectedImage2 = event.target.files[0];
+        },
+        handleImageUpload3(event) {
+            event.preventDefault();
+            this.selectedImage3 = event.target.files[0];
+
+        },
+        handleImageUpload4(event) {
+            event.preventDefault();
+            this.selectedImage4 = event.target.files[0];
+
+        }
 
     },
 }
@@ -481,147 +616,157 @@ export default {
         <div class="my-2">
             <img src="https://profolio.zameen.com/images/header-add-property.png" class="img-thumbnail" alt="...">
         </div>
-        <form ref="logCheckboxValues" @submit.prevent="logCheckboxValues" autoComplete="off">
-            <div class="container my-5">
-                <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                    <div class="card-body ">
-                        <div class="row d-flex justify-content-around">
-                            <div class="col-4 text-center">
-                                <i class="fa-solid fa-house-circle-check fa-2xl" style="color: rgb(255, 69, 0);"></i>
-                                <h5 class="mt-2">Select Purpose And Location</h5>
-                            </div>
-                            <div class="col-6">
-                                <button
-                                    :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
-                                    v-on:click="handleSellView">
-                                    <i class="fa-solid fa-house-circle-check"></i> Sell</button>
-                                <button
-                                    :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                    v-on:click="handleRentView">
-                                    <i class="fa-solid fa-house-lock"></i> Rent</button>
+        <!-- <form ref="logCheckboxValues" @submit.prevent="logCheckboxValues" autoComplete="off"> -->
+        <div class="container my-5">
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <div class="card-body ">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-4 text-center">
+                            <i class="fa-solid fa-house-circle-check fa-2xl" style="color: rgb(255, 69, 0);"></i>
+                            <h5 class="mt-2">Select Purpose And Location</h5>
+                        </div>
+                        <div class="col-6">
+                            <button
+                                :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
+                                v-on:click="handleSellView">
+                                <i class="fa-solid fa-house-circle-check"></i> Sell</button>
+                            <button
+                                :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                                v-on:click="handleRentView">
+                                <i class="fa-solid fa-house-lock"></i> Rent</button>
 
-                                <div class="my-3">
-                                    <h4>Select Property Type</h4>
-                                    <div>
-                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#home-tab-pane" type="button" role="tab"
-                                                    aria-controls="home-tab-pane" aria-selected="true">
-                                                    Home
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                                    aria-controls="profile-tab-pane" aria-selected="false">
-                                                    Plot</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#contact-tab-pane" type="button" role="tab"
-                                                    aria-controls="contact-tab-pane" aria-selected="false">
-                                                    Commercial
-                                                </button>
-                                            </li>
+                            <div class="my-3">
+                                <h4>Select Property Type</h4>
+                                <div>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#home-tab-pane" type="button" role="tab"
+                                                aria-controls="home-tab-pane" aria-selected="true">
+                                                Home
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                                aria-controls="profile-tab-pane" aria-selected="false">
+                                                Plot</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#contact-tab-pane" type="button" role="tab"
+                                                aria-controls="contact-tab-pane" aria-selected="false">
+                                                Commercial
+                                            </button>
+                                        </li>
 
-                                        </ul>
-                                        <div class="tab-content mt-4" id="myTabContent">
-                                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                                aria-labelledby="home-tab" tabIndex="0">
-                                                <HomePropertyType @childDataHomePropertyTypeVal="handleHomePropertyVal" />
+                                    </ul>
+                                    <div class="tab-content mt-4" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                            aria-labelledby="home-tab" tabIndex="0">
+                                            <HomePropertyType @childDataHomePropertyTypeVal="handleHomePropertyVal" />
+                                        </div>
+                                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+                                            aria-labelledby="profile-tab" tabIndex="0">
+                                            <div>
+                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal"
+                                                    :isCHecked="isCHecked" />
                                             </div>
-                                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
-                                                aria-labelledby="profile-tab" tabIndex="0">
-                                                <div>
-                                                    <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal"
-                                                        :isCHecked="isCHecked" />
-                                                </div>
 
-                                            </div>
-                                            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
-                                                aria-labelledby="contact-tab" tabIndex="0">
-                                                <div>
-                                                    <CommercialPropertyType
-                                                        @childDataCommercialPropertyTypeVal="handleCommercialPropertyVal" />
-                                                </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
+                                            aria-labelledby="contact-tab" tabIndex="0">
+                                            <div>
+                                                <CommercialPropertyType
+                                                    @childDataCommercialPropertyTypeVal="handleCommercialPropertyVal" />
                                             </div>
                                         </div>
                                     </div>
-                                    <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
-                                        @ChildToParentSelectLocation="handleLocationData"
-                                        @ChildToParentSelectArea="handleAreaData" />
                                 </div>
+                                <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
+                                    @ChildToParentSelectLocation="handleLocationData"
+                                    @ChildToParentSelectArea="handleAreaData" />
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                    <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
-                        @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData" />
-                    <div class="" v-if="sellChecked == true">
-                        <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
-                            @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
-                            @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
-                            @ChildToParentReadyForPossessionData="handleRpData" />
-                    </div>
-                </div>
-
-                <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                    <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
-                        @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
-                        @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
-                        @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
-                        @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
-                        @childDataElectricityBackup="handleElectricityBackup"
-                        @childDataCoveredParking="handleCoveredParking" @childDataInternet="handleInternet"
-                        @childDataParkingSpace="handleParkingSpace" @childDataFurnished="handleFurnished"
-                        @childDataLobbyBuilding="handleLobbyBuilding" @childDataFloor="handleFloor"
-                        @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
-                        @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
-                        @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
-                        @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
-                        @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
-                        @childDataCommunityLawnGarden="handleCommunityLawnGarden"
-                        @childDataMedicalCenter="handleMedicalCenter" @childDataSwimmingPool="handleSwimmingPool"
-                        @childDataNearSchool="handleNearSchool" @childDataNearHospital="handleNearHospital"
-                        @childDataNearShoppingMall="handleNearShoppingMall" @childDataOtherPalces="handleOtherPalces"
-                        @childDataDistanceAirport="handleDistanceAirport" @childDataOtherDesc="handleOtherDesc" />
-                </div>
-
-                <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                    <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData" />
-                </div>
-
-                <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                    <!-- <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" /> -->
-                    <div class="card-body ">
-                        <div class="row d-flex justify-content-around">
-                            <div class="col-4 text-center">
-                                <i class="fa-solid fa-images fa-2xl" style="color: rgb(255, 69, 0);"></i>
-                                <h5 class="mt-2">Property Images Upload</h5>
-                            </div>
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <div>
-                                        <!-- <vue3-dropzone :options="dropzoneOptions" @vdropzone-success="handleSuccess" /> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-                    <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
-                        @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData" />
-                </div>
-                <div class="my-1">
-                    <button type="submit" class="adversBtn">Add Submit Advertisement</button>
                 </div>
             </div>
-        </form>
+
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
+                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData" />
+                <div class="" v-if="sellChecked == true">
+                    <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
+                        @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
+                        @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
+                        @ChildToParentReadyForPossessionData="handleRpData" />
+                </div>
+            </div>
+
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
+                    @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
+                    @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
+                    @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
+                    @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
+                    @childDataElectricityBackup="handleElectricityBackup" @childDataCoveredParking="handleCoveredParking"
+                    @childDataInternet="handleInternet" @childDataParkingSpace="handleParkingSpace"
+                    @childDataFurnished="handleFurnished" @childDataLobbyBuilding="handleLobbyBuilding"
+                    @childDataFloor="handleFloor" @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
+                    @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
+                    @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
+                    @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
+                    @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
+                    @childDataCommunityLawnGarden="handleCommunityLawnGarden" @childDataMedicalCenter="handleMedicalCenter"
+                    @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
+                    @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
+                    @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
+                    @childDataOtherDesc="handleOtherDesc" />
+            </div>
+
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData" />
+            </div>
+
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <!-- <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" /> -->
+                <div class="card-body ">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-4 text-center">
+                            <i class="fa-solid fa-images fa-2xl" style="color: rgb(255, 69, 0);"></i>
+                            <h5 class="mt-2">Property Images Upload</h5>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload image here</label>
+                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload image 2</label>
+                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload image 3</label>
+                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload3">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload image 4</label>
+                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm p-3 mb-5 bg-body rounded">
+                <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
+                    @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData" />
+            </div>
+            <div class="my-1">
+                <button v-on:click="logCheckboxValues" class="adversBtn">Add Submit Advertisement</button>
+            </div>
+        </div>
+        <!-- </form> -->
 
 
     </div>
