@@ -160,7 +160,6 @@ export default {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=rent`;
             let res = await axios.get(finalUrl)
             this.propertiesList = res.data.results
-            console.log('t',res.data.results)
         },
         async getPropertiesSale() {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() +`?rent_sale_type=sale`;

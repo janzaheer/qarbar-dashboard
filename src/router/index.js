@@ -9,6 +9,8 @@ import DetailPage from '../components/propertyListing/DetailPage.vue';
 import Login from '../components/auth/Login.vue';
 import SignUp from '../components/auth/SignUp.vue';
 import PageNotFound from '../router/PageNotFound.vue';
+import BuyPage from '../components/propertyListing/BuyPage.vue';
+import RentPage from '../components/propertyListing/RentPage.vue'
 // agent panel 
 import AgentView from '../views/AgentView.vue'
 import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
@@ -45,6 +47,16 @@ const router = createRouter({
       path: '/listing',
       name: 'Listing',
       component: Listing
+    },
+    {
+      path: '/buyPage',
+      name: 'BuyPage',
+      component: BuyPage
+    },
+    {
+      path: '/rentPage',
+      name: 'RentPage',
+      component: RentPage
     },
     {
       path: '/detailPage/:id',

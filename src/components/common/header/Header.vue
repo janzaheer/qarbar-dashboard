@@ -24,10 +24,10 @@
                             <RouterLink class="nav-link active" to="/">Home</RouterLink>
                         </li>
                         <li class="nav-item mx-md-1">
-                            <a href="/listing/?params=rent_sale_type=sale" class="nav-link" >Buy</a>
+                            <RouterLink class="nav-link" to="/buyPage/?params=rent_sale_type=sale">Buy</RouterLink>
                         </li>
                         <li class="nav-item">
-                            <a href="/listing/?params=rent_sale_type=rent" class="nav-link" >Rent</a>
+                            <RouterLink class="nav-link" to="/rentPage/?params=rent_sale_type=rent">Rent</RouterLink>
                         </li>
                         <li class="nav-item mx-md-1">
                             <RouterLink class="nav-link" to="/newProjectsList">New projects</RouterLink>
@@ -38,6 +38,12 @@
                         <li class="nav-item mx-md-1">
                             <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
                         </li>
+                        <!-- <li class="nav-item mx-md-1">
+                            <RouterLink class="nav-link" to="/buyPage/?params=rent_sale_type=sale">BuyPage</RouterLink>
+                        </li>
+                        <li class="nav-item mx-md-1">
+                            <RouterLink class="nav-link" to="/rentPage/?params=rent_sale_type=rent">RentPage</RouterLink>
+                        </li> -->
                     </ul>
                     <RouterLink class="addPropertyBtnColor mt-1 mx-2" to="/agentDashboard">Add Property
                     </RouterLink>

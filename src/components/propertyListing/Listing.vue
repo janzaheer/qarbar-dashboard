@@ -68,8 +68,7 @@
         <div class="row g-0 mt-4">
             <div class="d-flex justify-content-between">
                 <div>
-                    <h6>Properties for {{ properties[0]?.rent_sale_type }} in Turkiye</h6>
-                    <!-- <div>maxArea {{ this.maxArea_type }} // minArea {{ this.minArea_type }}</div> -->
+                    <h6>Properties for {{ properties[0]?.rent_sale_type }} in Karachi</h6>
                     <p>{{ this.propertiesCount.count }} results <span class="badge rounded-pill text-bg-danger">2344
                             new</span></p>
                 </div>
@@ -301,14 +300,7 @@ export default {
     created: function () {
         this.moment = moment;
     },
-    // computed: {
-    //     placeholderText() {
-    //         return this.searchType
-    //             ? `Previous search: ${this.searchType}`
-    //             : 'Search Community or Building ...';
-    //     },
-    // },
-
+ 
     methods: {
 
         async getProperties() {
