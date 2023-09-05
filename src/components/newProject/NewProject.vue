@@ -4,7 +4,7 @@
             <img src="https://static.rdc.moveaws.com/images/sell/sell-landing-hero/sell-hero-1440.webp" class="card-img" height="190px" alt="...">
             <div class="card-img-overlay text-dark">
                 <div class="">
-                    <h2 class="card-title text-white">New Projects in Turkiye</h2>
+                    <h2 class="card-title text-white">New Projects in Karachi</h2>
                     <p class="card-text text-white">New projects, verified by our quality control teams.</p>
                 </div>
                 <div class="mt-3 mt-md-5">
