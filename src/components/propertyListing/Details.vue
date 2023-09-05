@@ -10,7 +10,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Type</th>
-                                        <th scope="col">property type</th>
+                                        <th scope="col" v-if="productDetail?.property_type?.home_types"> {{  productDetail?.property_type?.home_types}}</th>
+                                        <th scope="col" v-if="productDetail?.property_type?.plot_types"> {{  productDetail?.property_type?.plot_types}}</th>
+                                        <th scope="col" v-if="productDetail?.property_type?.commercial_types"> {{  productDetail?.property_type?.commercial_types}}</th>
 
                                     </tr>
                                 </thead>
@@ -25,7 +27,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Location</th>
-                                        <td>{{ productDetail?.area?.area }}</td>
+                                        <td>{{ productDetail?.area?.city?.city_name }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -37,7 +39,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Area</th>
-                                        <th scope="col">{{ productDetail?.property_type?.size_sqf }} {{
+                                        <th scope="col">{{ productDetail?.property_type?.size }} {{
                                             productDetail?.property_type?.unit_types }}</th>
                                     </tr>
                                 </thead>

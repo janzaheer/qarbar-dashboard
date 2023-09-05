@@ -8,9 +8,10 @@ import Details from './Details.vue';
 import AgentNumber from './AgentNumber.vue';
 import AgentInfo from './AgentInfo.vue';
 import Location from './Location.vue';
+import Installments from './Installments.vue';
 import axios from 'axios';
 import moment from 'moment';
-import { BASE_URL, PROPERTY_END_POINT,API_VERSION } from '../../utils/api';
+import { BASE_URL, PROPERTY_END_POINT, API_VERSION } from '../../utils/api';
 import { GoogleMap, Marker } from "vue3-google-map";
 export default {
     name: 'DetailPage',
@@ -22,7 +23,8 @@ export default {
         AgentNumber,
         AgentInfo,
         Location,
-        GoogleMap, Marker
+        GoogleMap, Marker,
+        Installments
         // VuePictureSwipe
         // VueGallerySlideshow
     },
@@ -67,40 +69,7 @@ export default {
 </script>
 
 <style>
-.detailPage {
-    min-height: 100vh;
-}
-
-.iframeCLass {
-    width: 800px;
-    height: 500px;
-}
-
-.thumbnailImage {
-    height: 600px;
-}
-
-@media screen and (max-width: 1080px) {
-    .iframeCLass {
-        width: 590px;
-        height: 400px;
-    }
-
-    .thumbnailImage {
-        height: 500px;
-    }
-}
-
-@media screen and (max-width: 420px) {
-    .iframeCLass {
-        width: 340px;
-        height: 200px;
-    }
-
-    .thumbnailImage {
-        height: 300px;
-    }
-}
+@import './DetailPageStyle.css';
 </style>
 
 <template>
@@ -128,7 +97,7 @@ export default {
                                 productDetail?.amenties?.bathrooms }}
                                 Bathrooms</p>
                             <p class="card-text"><img src="../../assets/icons/sqft.png" style="width: 30px; height: 30px;"
-                                    alt=""> {{ productDetail?.property_type?.size_sqf }} {{
+                                    alt=""> {{ productDetail?.property_type?.size }} {{
                                         productDetail?.property_type?.unit_types }}</p>
                         </div>
                     </div>
@@ -143,6 +112,9 @@ export default {
                     </div>
                     <div class="col-12">
                         <Amenities :productDetail="productDetail" />
+                    </div>
+                    <div class="col-12 my-3" v-if="productDetail.rent_sale_type == 'sale' ">
+                        <Installments :productDetail="productDetail" />
                     </div>
                     <div class="col-12">
                         <div class="row g-2 my-4">

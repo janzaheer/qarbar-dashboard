@@ -9,6 +9,8 @@
                     <div class="card-body text-center">
                         <button class="mainBtnColor bg-white me-2" data-bs-toggle="modal" data-bs-target="#agentModal"><i
                                 class="fas fa-phone fa-lg"></i> Call</button>
+                                <button class="mainBtnColor bg-white me-2" data-bs-toggle="modal" data-bs-target="#agentModal"><i
+                                class="fas fa-phone fa-lg"></i> Email</button>
                         <button class="mainBtnColor bg-white"><i class="fa-brands fa-whatsapp fa-xl"></i>
                             WhatsApp</button>
                         <div class="mt-2">
@@ -31,19 +33,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- <div class="d-flex justify-content-between">
-                                    <div>
-                                        <i class="fas fa-phone fa-lg"></i>
-                                    </div>
-                                    <div>
-                                        <p>+92 3456 678900</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <i class="fa-regular fa-copy"></i>
-                                        <p class="ms-1">Copy</p>
-                                    </div>
-                                </div> -->
-
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <i class="fas fa-phone fa-lg"></i>
