@@ -1,0 +1,34 @@
+.detailPage {
+    min-height: 100vh;
+}
+
+.iframeCLass {
+    width: 800px;
+    height: 500px;
+}
+
+.thumbnailImage {
+    height: 600px;
+}
+
+@media screen and (max-width: 1080px) {
+    .iframeCLass {
+        width: 590px;
+        height: 400px;
+    }
+
+    .thumbnailImage {
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .iframeCLass {
+        width: 340px;
+        height: 200px;
+    }
+
+    .thumbnailImage {
+        height: 300px;
+    }
+}

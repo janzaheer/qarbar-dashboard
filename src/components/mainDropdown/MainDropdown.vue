@@ -2,17 +2,17 @@
     <div class="container">
         <div class="card p-2 p-md-3 maindropdownwidth">
             <div class="d-flex my-1 my-md-2 justify-content-center">
-                <button
-                    :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
-                    v-on:click="handleSellView">
+                <button :class="sellChecked ? 'R_S_button me-2' : 'R_S_button_Un_Select me-2'" v-on:click="handleSellView">
                     <i class="fa-solid fa-house-circle-check"></i> Buy</button>
-                <button :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                    v-on:click="handleRentView">
+                <button :class="rentChecked ? 'R_S_button' : 'R_S_button_Un_Select'" v-on:click="handleRentView">
                     <i class="fa-solid fa-house-lock"></i> Rent</button>
                 <div class="mt-md-2 ms-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" v-model="showCommercialValue" v-on:change="handleShowCOmmercialValue">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Show commercial properties only</label>
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                            v-model="showCommercialValue" v-on:change="handleShowCOmmercialValue">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Show commercial properties only
+                        </label>
                     </div>
                 </div>
             </div>
@@ -20,11 +20,11 @@
                 <div class="col-9 col-md-4 col-lg-6 ">
                     <Cities @childToParentEvent="handleCityData" />
                 </div>
-                <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1 ">
+                <div class="d-none d-md-block col-6 col-md-3 col-lg-3 mt-sm-1 mt-lg-1">
                     <PropertyTypes @childToParentDataHomeType="handleHomeData" @childToParentDataPlotType="handlePlotData"
                         @childToParentDataCommercialType="handleCommercialData" />
                 </div>
-                <div class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
+                <div v-if="showCommercialValue == false" class="d-none d-md-block col-6 col-md-3 col-lg-2 mt-lg-1 mt-1">
                     <BedsBaths @childToParentEventSelectedBeds="handleBadsData"
                         @childToParentEventSelectedBaths="handleBathsData" />
                 </div>
@@ -159,9 +159,9 @@ export default {
         }
     },
     methods: {
-        handleShowCOmmercialValue(){
+        handleShowCOmmercialValue() {
             this.showCommercialValue
-            console.log('value',this.showCommercialValue)
+            console.log('value', this.showCommercialValue)
         },
         handleSellView() {
             this.sellChecked = true;
