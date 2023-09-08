@@ -26,9 +26,9 @@ export default {
                 this.commercialProperty.isSHop = true;
                 this.commercialPropertyVal = 'shop'
             }
-            if (e == 'wherehouse') {
+            if (e == 'warehouse') {
                 this.commercialProperty.isWherehouse = true;
-                this.commercialPropertyVal = 'wherehouse'
+                this.commercialPropertyVal = 'warehouse'
             }
             if (e == 'factory') {
                 this.commercialProperty.isFactory = true;
@@ -58,8 +58,8 @@ export default {
             Shop</button>
         <button
             :class="commercialProperty.isWherehouse ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-            v-on:click="handleCommercialProperty('wherehouse')"><i class="fa-solid fa-house"></i>
-            Wherehouse</button>
+            v-on:click="handleCommercialProperty('warehouse')"><i class="fa-solid fa-house"></i>
+            Warehouse</button>
         <button
             :class="commercialProperty.isFactory ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
             v-on:click="handleCommercialProperty('factory')"><i class="fa-solid fa-house"></i>

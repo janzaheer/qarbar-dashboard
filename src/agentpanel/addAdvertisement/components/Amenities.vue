@@ -46,12 +46,6 @@ export default {
     },
     methods: {
         handleSaveAmenities(){
-            console.log(this.built_in_year, this.built_in_wardrobes, this.security, this.kitchen_appliances, this.balcony,
-            this.Farmhouse, this.lower_portion, this.electricity_backup, this.internet, this.parking_space, this.furnished_unfurnished, this.lobby_in_building,
-            this.floor, this.kitchen, this.study_room, this.laundry_room, this.maid_room, this.store_room, this.drawing_room, this.lounge_sitting_area, this.gym,
-            this.kids_play_area, this.mosque, this.community_lawn_garden, this.medical_center, this.near_by_school, this.near_by_hospital, this.near_by_shopping_mall,
-            this.other_nearby_palces, this.distance_from_airport, this.other_description)
-
             this.$emit("childDataBuiltInYear",this.built_in_year)
             this.$emit("childDataBuiltInWhaedrobes",this.built_in_wardrobes)
             this.$emit("childDataSecurity",this.security)

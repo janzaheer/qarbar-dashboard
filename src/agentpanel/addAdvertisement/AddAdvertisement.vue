@@ -33,14 +33,12 @@ export default {
         CityLocationArea,
         FeatureAndAmenities,
         UploadImages,
-        // Vue3Dropzone
-
     },
     data() {
         return {
-            receivedHomePropertyVal: '',
-            receivedPlotPropertyVal: '',
-            receivedCommercialPropertyVal: '',
+            receivedHomePropertyVal: null,
+            receivedPlotPropertyVal: null,
+            receivedCommercialPropertyVal: null,
             //....................
             sellChecked: true,
             rentChecked: false,
@@ -116,15 +114,10 @@ export default {
             receivedOther_nearby_palces: '',
             receivedDistance_from_airport: 0,
             receivedOther_description: '',
-            dropzoneOptions: {
-                url: '/fake-endpoint', // Doesn't matter since we're handling the upload manually
-                addRemoveLinks: true,
-            },
-            selectedImage: null,
-            selectedImage2: null,
-            selectedImage3: null,
-            selectedImage4: null,
-
+            ////////////////////////////
+            selectedImages: [],
+            media: [],
+            selectedPropertyType: null,
         };
     },
     methods: {
@@ -223,29 +216,41 @@ export default {
             }
             return 'sale';
         },
-        async logCheckboxValues() {
-            // console.log('sell Checked:', this.sellChecked);
-            // console.log('rent Checked:', this.rentChecked);
-            // console.log('---------------------------')
+        checkValueH() {
+            // Determine the selected property type (home, plot, commercial)
+            const selectedPropertyType = this.selectedPropertyType; // You need to implement this function
+            // Create an object based on the selected property type
+            let propertyTypeObject = {};
 
-            // console.log('homeType', this.receivedHomePropertyVal)
-            // console.log('commercialPropertyVal', this.commercialPropertyVal)
-            // console.log('rp', this.receivedReadyPossession)
-            // console.log('sale',this.sellvalue)
-            // console.log('rent',this.rentvalue)
-            let imageData = [this.selectedImage]
-            if (this.selectedImage2) {
-                imageData.push(this.selectedImage2)
+            if (selectedPropertyType === 'home') {
+                propertyTypeObject.home_types = this.receivedHomePropertyVal;
+            } else if (selectedPropertyType === 'plot') {
+                propertyTypeObject.plot_types = this.receivedPlotPropertyVal;
+            } else if (selectedPropertyType === 'commercial') {
+                propertyTypeObject.commercial_types = this.receivedCommercialPropertyVal;
             }
-            if (this.selectedImage3) {
-                imageData.push(this.selectedImage3)
-            }
-            if (this.selectedImage4) {
-                imageData.push(this.selectedImage4)
-            }
+            // Add other common properties
+            propertyTypeObject.unit_types = this.receivedAreaTypes;
+            propertyTypeObject.size = this.receivedAreaUnit;
+            propertyTypeObject.other_description = "Property type description here"; // remaining
+
+            return propertyTypeObject;
+
+
+        },
+        selectPropertyType(type) {
+            // Set the selected property type
+            this.selectedPropertyType = type;
+        },
+        async logCheckboxValues() {
+            this.media = this.selectedImages.map((media) => ({
+                image_url: media.url,
+                // media_type: "image",
+                media_type: media.media_type,
+            }));
 
             const payload = {
-                media: imageData,
+                media: this.media,
                 title: this.receivedTitle,
                 phone: this.receivedMobileNumber,
                 landline: this.receivedLandlineNumber,
@@ -291,14 +296,7 @@ export default {
                     near_by_shopping_mall: this.near_by_shopping_mall,
                     other_description: this.receivedOther_description,
                 },
-                property_type: {
-                    plot_types: this.receivedPlotPropertyVal,
-                    home_types: this.receivedHomePropertyVal,
-                    commercial_types: this.receivedCommercialPropertyVal,
-                    unit_types: this.receivedAreaTypes,
-                    size: this.receivedAreaUnit,
-                    other_description: "Property type description here" // remaining
-                },
+                property_type: this.checkValueH(),
                 property_location: {
                     latitude: 25.123456, // remaining
                     longitude: 67.987654 // remaining
@@ -313,64 +311,119 @@ export default {
                 description: this.receivedDescription,
                 total_price: this.ReceivedTotalPrice,
             }
+            console.log('payload', payload)
             let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + CREATE_PROPERTY_END_POINT()
 
-            // console.log('payload', payload)
             try {
                 await axios.post(finallURL, payload)
                     .then((resp) => {
                         console.log(resp.ok)
                         this.toastSuccess()
+                        this.$router.push('/agentDashboard')
                     })
             } catch (resp) {
                 if (resp.response) {
-                    console.log('response-error', resp.response)
+                    const resData = resp.response.data
+                    console.warn(resData)
+                    this.eroMsg = resData
                     if (this.receivedTitle.length == 0) {
-                        this.toast()
+                        createToast(`Title-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
                     if (this.receivedDescription.length == 0) {
-                        this.toast2()
-                    }
-                    if (this.receivedMobileNumber.length == 0) {
-                        this.toastMobile()
-                    }
-                    if (this.receivedLandlineNumber.length == 0) {
-                        this.toastLandLineNumber()
-                    }
-                    if (this.receivedSecondaryNumber.length == 0) {
-                        this.toastSecondaryNumber()
-                    }
-                    if (this.receivedEmailAddress.length == 0) {
-                        this.toastEmail()
+                        createToast(`Desc-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
                     if (this.receivedBathRooms.length == 0) {
-                        this.toastBaths()
+                        createToast(`Baths-required`, {
+                            type: 'danger',
+                            position: 'top-center',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
                     if (this.receivedBedRooms.length == 0) {
-                        this.toastBeds()
+                        createToast(`Beds-required`, {
+                            type: 'danger',
+                            position: 'top-center',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
-                    if (this.receivedSelectedCity.length == 0) {
-                        this.toastCity()
+                    if (this.receivedBuilt_in_year.length == 0) {
+                        createToast(`Built In Year-required`, {
+                            type: 'danger',
+                            position: 'top-center',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
+                    if (this.receivedFloor.length == 0) {
+                        createToast(`Floor-required`, {
+                            type: 'danger',
+                            position: 'top-center',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
+                    if (this.receivedKitchen.length == 0) {
+                        createToast(`Kitchen-required`, {
+                            type: 'danger',
+                            position: 'top-center',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
                     if (this.receivedAreaUnit.length == 0) {
-                        this.toastAreaSize()
+                        createToast(`Area Size-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
-                    if (this.receivedAreaTypes.length == 0) {
-                        this.toastAreaUnit()
+                    if (this.receivedDescription.length == 0) {
+                        createToast(`Total Price-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
-                    if (this.ReceivedTotalPrice.length == 0) {
-                        this.toastPrice()
+                    if (this.receivedEmailAddress.length == 0) {
+                        createToast(`Email-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
                     }
-
+                    if (this.receivedMobileNumber.length == 0) {
+                        createToast(`phone-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
+                    if (this.receivedLandlineNumber.length == 0) {
+                        createToast(`LandLine Number-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
+                    if (this.receivedSecondaryNumber.length == 0) {
+                        createToast(`SecondaryNumber-required`, {
+                            type: 'danger',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
+                    if (this.media.length == 0) {
+                        createToast(`media-required`, {
+                            type: 'danger',
+                            position: 'top-left',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
                 } else if (resp.request) {
                     console.log('request-error', resp.request)
+                    this.toastNetworkError()
                 } else {
                     console.log(resp)
                 }
+
             }
-
-
-            // console.log('image', this.receivedUploadedImage)
             // this.$refs.logCheckboxValues.reset();
         },
         toastSuccess() {
@@ -380,90 +433,14 @@ export default {
                     transition: 'zoom',
                 })
         },
-        toast() {
-            createToast('Title-Required',
+        toastNetworkError() {
+            createToast('network-error',
                 {
                     type: 'danger',
                     transition: 'zoom',
                 })
         },
-        toast2() {
-            createToast('desc-error',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastEmail() {
-            createToast('email-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastMobile() {
-            createToast('MobileNumber-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastLandLineNumber() {
-            createToast('LandLineNumber-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastSecondaryNumber() {
-            createToast('SecondaryNumber-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastBeds() {
-            createToast('Beds-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastBaths() {
-            createToast('Baths-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastCity() {
-            createToast('SelectCity-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastAreaSize() {
-            createToast('AreaSize-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastAreaUnit() {
-            createToast('AreaUnitTypes-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
-        toastPrice() {
-            createToast('Price-required',
-                {
-                    type: 'danger',
-                    transition: 'zoom',
-                })
-        },
+        ////////////////////////////////
         handleSellView() {
             this.sellChecked = true;
             this.rentChecked = false;
@@ -583,24 +560,16 @@ export default {
         handleOtherDesc(data) {
             this.receivedOther_description = data
         },
-        async handleImageUpload(event) {
-            event.preventDefault();
-            this.selectedImage = event.target.files[0];
+        handleImageUpload(event) {
+            const files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const mediaType = file.type.startsWith('image/') ? 'image' : 'video';
+                const mediaUrl = URL.createObjectURL(file);
+                this.selectedImages.push({ url: mediaUrl, media_type: mediaType, file });
+            }
+            event.target.value = ""; // Clear the input field to allow selecting more images
         },
-        handleImageUpload2(event) {
-            event.preventDefault();
-            this.selectedImage2 = event.target.files[0];
-        },
-        handleImageUpload3(event) {
-            event.preventDefault();
-            this.selectedImage3 = event.target.files[0];
-
-        },
-        handleImageUpload4(event) {
-            event.preventDefault();
-            this.selectedImage4 = event.target.files[0];
-
-        }
 
     },
 }
@@ -608,6 +577,10 @@ export default {
 
 <style>
 @import './Advertisement.css';
+/* .active {
+    background-color: #ebebeb !important;
+    color: #fff;
+} */
 </style>
 
 <template>
@@ -616,7 +589,6 @@ export default {
         <div class="my-2">
             <img src="https://profolio.zameen.com/images/header-add-property.png" class="img-thumbnail" alt="...">
         </div>
-        <!-- <form ref="logCheckboxValues" @submit.prevent="logCheckboxValues" autoComplete="off"> -->
         <div class="container my-5">
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <div class="card-body ">
@@ -642,24 +614,27 @@ export default {
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                                 data-bs-target="#home-tab-pane" type="button" role="tab"
-                                                aria-controls="home-tab-pane" aria-selected="true">
+                                                aria-controls="home-tab-pane" aria-selected="true"
+                                                @click="selectPropertyType('home')">
                                                 Home
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                 data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                                aria-controls="profile-tab-pane" aria-selected="false">
-                                                Plot</button>
+                                                aria-controls="profile-tab-pane" aria-selected="false"
+                                                @click="selectPropertyType('plot')">
+                                                Plot
+                                            </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                                 data-bs-target="#contact-tab-pane" type="button" role="tab"
-                                                aria-controls="contact-tab-pane" aria-selected="false">
+                                                aria-controls="contact-tab-pane" aria-selected="false"
+                                                @click="selectPropertyType('commercial')">
                                                 Commercial
                                             </button>
                                         </li>
-
                                     </ul>
                                     <div class="tab-content mt-4" id="myTabContent">
                                         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
@@ -737,27 +712,26 @@ export default {
                             <h5 class="mt-2">Property Images Upload</h5>
                         </div>
                         <div class="col-6">
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload image here</label>
-                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload image 2</label>
-                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload2">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload image 3</label>
-                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload3">
-                            </div>
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload image 4</label>
-                                <input class="form-control" type="file" id="formFile" v-on:change="handleImageUpload4">
+                            <input type="file" ref="imageInput" class="btn btn-primary" multiple
+                                @change="handleImageUpload" />
+                            <div class="row ">
+                                <div class="col-6 col-md-12">
+                                    <div class="d-flex flex-wrap my-2">
+                                        <div v-for="(media, index) in selectedImages" :key="index">
+                                            <img class="mx-1" v-if="media.media_type === 'image'" :src="media.url"
+                                                alt="Selected Image" :height="60" />
+                                            <video class="mt-1 ms-1" v-else :src="media.url" controls width="100"
+                                                height="60">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="card shadow-sm p-3 mb-5 bg-body rounded">
                 <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
                     @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData" />
@@ -766,9 +740,5 @@ export default {
                 <button v-on:click="logCheckboxValues" class="adversBtn">Add Submit Advertisement</button>
             </div>
         </div>
-        <!-- </form> -->
-
-
     </div>
-    <AgentDashboardFooter />
-</template>
+<AgentDashboardFooter /></template>

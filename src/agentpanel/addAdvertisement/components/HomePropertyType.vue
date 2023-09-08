@@ -46,23 +46,23 @@ export default {
                 this.homePropertyVal = 'room'
             }
 
-            if (e == 'upper') {
+            if (e == 'upper_portion') {
                 this.homeProperty.isUpper = true;
-                this.homePropertyVal = 'upper'
+                this.homePropertyVal = 'upper_portion'
             }
 
-            if (e == 'lower') {
+            if (e == 'lower_portion') {
                 this.homeProperty.isLower = true;
-                this.homePropertyVal = 'lower'
+                this.homePropertyVal = 'lower_portion'
             }
 
-            if (e == 'farm') {
+            if (e == 'farm_house') {
                 this.homeProperty.isFarm = true;
-                this.homePropertyVal = 'farm'
+                this.homePropertyVal = 'farm_house'
             }
-            if (e == 'penthouse') {
+            if (e == 'pent_house') {
                 this.homeProperty.isPenthouse = true;
-                this.homePropertyVal = 'penthouse'
+                this.homePropertyVal = 'pent_house'
             }
             this.$emit("childDataHomePropertyTypeVal", this.homePropertyVal)
 
@@ -94,18 +94,18 @@ export default {
             <i class="fa-solid fa-house-lock"></i> Room</button>
         <button
             :class="homeProperty.isUpper ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-            v-on:click="handleHomeProperty('upper')">
+            v-on:click="handleHomeProperty('upper_portion')">
             <i class="fa-solid fa-house-lock"></i> Upper Portion</button>
         <button
             :class="homeProperty.isLower ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-            v-on:click="handleHomeProperty('lower')">
+            v-on:click="handleHomeProperty('lower_portion')">
             <i class="fa-solid fa-house-lock"></i> Lower Portion</button>
         <button :class="homeProperty.isFarm ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-            v-on:click="handleHomeProperty('farm')">
+            v-on:click="handleHomeProperty('farm_house')">
             <i class="fa-solid fa-house-lock"></i> Farm House</button>
         <button
             :class="homeProperty.isPenthouse ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-            v-on:click="handleHomeProperty('penthouse')">
+            v-on:click="handleHomeProperty('pent_house')">
             <i class="fa-solid fa-house-lock"></i> Penthouse</button>
     </div>
 </template>

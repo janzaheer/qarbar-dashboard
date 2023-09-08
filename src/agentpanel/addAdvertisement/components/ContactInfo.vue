@@ -1,32 +1,76 @@
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email, sameAs, between, minValue, maxValue, alpha, numeric, minLength, maxLength, helpers } from '@vuelidate/validators'
 export default {
     name: 'ContactInfo',
-    props:{
-        
+    props: {
+
     },
-    data(){
+    data() {
         return {
             email: '',
             MobNum: '',
             LandNum: '',
-            SecondNum:''
+            SecondNum: ''
         }
     },
-    methods:{
-        handleEmail(){
+    setup() {
+        return { v$: useVuelidate() }
+    },
+    validations() {
+        return {
+            email: {
+                required,
+                email
+            },
+            MobNum: {
+                required,
+                maxLength: maxLength(15),
+                minLength: minLength(6),
+                numeric
+            },
+            LandNum: {
+                required,
+                maxLength: maxLength(15),
+                minLength: minLength(6),
+                numeric
+            },
+            SecondNum: {
+                required,
+                maxLength: maxLength(15),
+                minLength: minLength(6),
+                numeric
+            }
+        }
+    },
+    methods: {
+        setTouched(theModel) {
+            if (theModel == this.email || theModel == 'all') { this.v$.email.$touch() }
+            if (theModel == this.MobNum || theModel == 'all') { this.v$.MobNum.$touch() }
+            if (theModel == this.LandNum || theModel == 'all') { this.v$.LandNum.$touch() }
+            if (theModel == this.SecondNum || theModel == 'all') { this.v$.SecondNum.$touch() }
+        },
+        handleEmail() {
             this.email
+            this.setTouched('all')
             this.$emit("ChildToParentEmailData", this.email)
         },
-        handleMobNum(){
+        handleMobNum() {
             this.MobNum
+            this.setTouched('all')
+            this.MobNum = this.MobNum.replace(/[^0-9]/g, "")
             this.$emit("ChildToParentMobNumData", this.MobNum)
         },
-        handleLandNum(){
+        handleLandNum() {
             this.LandNum
+            this.setTouched('all')
+            this.LandNum = this.LandNum.replace(/[^0-9]/g, "")
             this.$emit("ChildToParentLandNumData", this.LandNum)
         },
-        handleSecondNum(){
+        handleSecondNum() {
             this.SecondNum
+            this.setTouched('all')
+            this.SecondNum = this.SecondNum.replace(/[^0-9]/g, "")
             this.$emit("ChildToParentSecondNumData", this.SecondNum)
         }
     }
@@ -45,19 +89,35 @@ export default {
             <div class="col-6">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" v-model="email" v-on:change="handleEmail">
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"
+                        v-model="email" @input="handleEmail" :class="v$.email.$error ? 'is-invalid' : ''">
+                    <div v-for="error of v$.email.$errors" class="invalid-feedback" :key="error.$uid">
+                        {{ error.$message }}
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleMobileControlInput1" class="form-label">Mobile Number</label>
-                    <input type="number" class="form-control" id="exampleMobileControlInput1" placeholder="+123456789" v-model="MobNum" v-on:change="handleMobNum">
+                    <input type="text" class="form-control" id="exampleMobileControlInput1" placeholder="+123456789"
+                        v-model="MobNum" @input="handleMobNum" :class="v$.MobNum.$error ? 'is-invalid' : ''">
+                    <div v-for="error of v$.MobNum.$errors" class="invalid-feedback" :key="error.$uid">
+                        {{ error.$message }}
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleLandlineControlInput1" class="form-label">Landline Number</label>
-                    <input type="number" class="form-control" id="exampleLandlineControlInput1" placeholder="+1234567" v-model="LandNum" v-on:change="handleLandNum">
+                    <input type="text" class="form-control" id="exampleLandlineControlInput1" placeholder="+1234567"
+                        v-model="LandNum" @input="handleLandNum" :class="v$.LandNum.$error ? 'is-invalid' : ''">
+                        <div v-for="error of v$.LandNum.$errors" class="invalid-feedback" :key="error.$uid">
+                        {{ error.$message }}
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleLandlineControlInput1" class="form-label">Secondary Number</label>
-                    <input type="number" class="form-control" id="exampleLandlineControlInput1" placeholder="+1234567890" v-model="SecondNum" v-on:change="handleSecondNum">
+                    <input type="text" class="form-control" id="exampleLandlineControlInput1" placeholder="+1234567890"
+                        v-model="SecondNum" @input="handleSecondNum" :class="v$.SecondNum.$error ? 'is-invalid' : ''">
+                        <div v-for="error of v$.SecondNum.$errors" class="invalid-feedback" :key="error.$uid">
+                        {{ error.$message }}
+                    </div>
                 </div>
             </div>
         </div>

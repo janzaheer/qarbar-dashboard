@@ -1,4 +1,6 @@
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email, sameAs, between, minValue, maxValue, alpha, numeric, minLength, maxLength, helpers } from '@vuelidate/validators'
 export default {
     name: 'Installment',
     props: {
@@ -12,25 +14,58 @@ export default {
             readyForPossession: false, // Initial value
         }
     },
+    setup() {
+        return { v$: useVuelidate() }
+    },
+    validations() {
+        return {
+            AdvanceAmount: {
+                required,
+                minLength: minLength(5),
+                maxLength: maxLength(20)
+            },
+            NofInstallments: {
+                required,
+                minLength: minLength(2),
+                maxLength: maxLength(20)
+            },
+            MonthlyInstallments: {
+                required,
+                minLength: minLength(5),
+                maxLength: maxLength(20)
+            },
+            
+        }
+    },
     methods: {
+        setTouched(theModel) {
+            if (theModel == this.AdvanceAmount || theModel == 'all') { this.v$.AdvanceAmount.$touch() }
+            if (theModel == this.NofInstallments || theModel == 'all') { this.v$.NofInstallments.$touch() }
+            if (theModel == this.MonthlyInstallments || theModel == 'all') { this.v$.MonthlyInstallments.$touch() }
+        },
         handleAdvanceAmount() {
             this.AdvanceAmount
+            this.setTouched('all')
+            this.AdvanceAmount = this.AdvanceAmount.replace(/[^0-9]/g, "");
             this.$emit("ChildToParentAdvanceAmountData", this.AdvanceAmount)
         },
         handleNoOfInstallment() {
             this.NofInstallments
+            this.setTouched('all')
+            this.NofInstallments = this.NofInstallments.replace(/[^0-9]/g, "");
             this.$emit("ChildToParentNofInstallmentsData", this.NofInstallments)
-
         },
         handleMonthlyInstallment() {
             this.MonthlyInstallments
+            this.setTouched('all')
+            this.MonthlyInstallments = this.MonthlyInstallments.replace(/[^0-9]/g, "");
             this.$emit("ChildToParentMonthlyInstallmentsData", this.MonthlyInstallments)
         },
         handlePossession() {
             this.readyForPossession
             this.$emit("ChildToParentReadyForPossessionData", this.readyForPossession)
         },
-    } 
+    }
 }
 </script>
 
@@ -48,19 +83,31 @@ export default {
                     <h4>installment available</h4>
                     <div class="mb-3">
                         <label for="exampleAdvanceAmountControlInput1" class="form-label">Advance Amount</label>
-                        <input type="number" class="form-control" id="exampleAdvanceAmountControlInput1" placeholder="22222"
-                            v-model="AdvanceAmount" v-on:change="handleAdvanceAmount">
+                        <input type="text" class="form-control" id="exampleAdvanceAmountControlInput1" placeholder="22222"
+                            v-model="AdvanceAmount" @input="handleAdvanceAmount"
+                            :class="v$.AdvanceAmount.$error ? 'is-invalid' : ''">
+                        <div v-for="error of v$.AdvanceAmount.$errors" class="invalid-feedback" :key="error.$uid">
+                            {{ error.$message }}
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleNoInstallmentControlInput1" class="form-label">No of Installments</label>
-                        <input type="number" class="form-control" id="exampleNoInstallmentControlInput1" placeholder="0333"
-                            v-model="NofInstallments" v-on:change="handleNoOfInstallment">
+                        <input type="text" class="form-control" id="exampleNoInstallmentControlInput1" placeholder="0333"
+                            v-model="NofInstallments" @input="handleNoOfInstallment"
+                            :class="v$.NofInstallments.$error ? 'is-invalid' : ''">
+                        <div v-for="error of v$.NofInstallments.$errors" class="invalid-feedback" :key="error.$uid">
+                            {{ error.$message }}
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleMonthlyInstallmentControlInput1" class="form-label">Monthly
                             Installments</label>
-                        <input type="number" class="form-control" id="exampleMonthlyInstallmentControlInput1"
-                            placeholder="035" v-model="MonthlyInstallments" v-on:change="handleMonthlyInstallment">
+                        <input type="text" class="form-control" id="exampleMonthlyInstallmentControlInput1"
+                            placeholder="3500" v-model="MonthlyInstallments" @input="handleMonthlyInstallment"
+                            :class="v$.MonthlyInstallments.$error ? 'is-invalid' : ''">
+                        <div v-for="error of v$.MonthlyInstallments.$errors" class="invalid-feedback" :key="error.$uid">
+                            {{ error.$message }}
+                        </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-check form-switch">
@@ -73,5 +120,4 @@ export default {
                 </div>
             </div>
         </div>
-    </div>
-</template>
+    </div></template>

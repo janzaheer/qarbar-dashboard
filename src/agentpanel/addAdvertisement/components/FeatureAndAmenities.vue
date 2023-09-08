@@ -1,5 +1,7 @@
 <script>
 import Amenities from './Amenities.vue'
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 export default {
     name: 'FeatureAndAmenities',
     components: {
@@ -55,13 +57,45 @@ export default {
     methods: {
         handleBedRoom() {
             this.bedRoom
+            this.bedRoom = this.bedRoom.replace(/[^0-9]/g, "");
             this.$emit("ChildToParentBedRoomData", this.bedRoom)
         },
         handleBathRoom() {
             this.bathRoom
+            this.bathRoom = this.bathRoom.replace(/[^0-9]/g, "");
             this.$emit("ChildToParentBathRoomData", this.bathRoom)
         },
         handleSaveAmenities() {
+            if (this.built_in_wardrobes == false) {
+                createToast(`built_in_warehouse-required`, {
+                    type: 'danger',
+                    timeout: 8000, // Adjust timeout as needed
+                });
+            }
+            if (this.bathRoom.length == 0) {
+                createToast(`Baths-required`, {
+                    type: 'danger',
+                    timeout: 8000, // Adjust timeout as needed
+                });
+            }
+            if (this.bedRoom.length == 0) {
+                createToast(`Beds-required`, {
+                    type: 'danger',
+                    timeout: 8000, // Adjust timeout as needed
+                });
+            }
+            if (this.floor.length == 0) {
+                createToast(`Floor-required`, {
+                    type: 'danger',
+                    timeout: 8000, // Adjust timeout as needed
+                });
+            }
+            if (this.kitchen.length == 0) {
+                createToast(`Kitchen-required`, {
+                    type: 'danger',
+                    timeout: 8000, // Adjust timeout as needed
+                });
+            }
             this.$emit("childDataBuiltInYear", this.built_in_year)
             this.$emit("childDataBuiltInWhaedrobes", this.built_in_wardrobes)
             this.$emit("childDataSecurity", this.security)
@@ -114,16 +148,15 @@ export default {
                     <h5>Bedrooms</h5>
                     <div class="mb-2">
                         <label for="inputBedroom" class="form-label">Enter Bedroom</label>
-                        <input type="number" class="form-control" id="inputBedroom" v-model="bedRoom"
-                            v-on:change="handleBedRoom">
+                        <input type="text" class="form-control" id="inputBedroom" v-model="bedRoom" @input="handleBedRoom">
                     </div>
                 </div>
                 <div class="mb-3">
                     <h5>Bathrooms</h5>
                     <div class="mb-2">
                         <label for="inputBathroom" class="form-label">Enter Bathroom</label>
-                        <input type="number" class="form-control" id="inputBathroom" v-model="bathRoom"
-                            v-on:change="handleBathRoom">
+                        <input type="text" class="form-control" id="inputBathroom" v-model="bathRoom"
+                            @input="handleBathRoom">
                     </div>
                 </div>
                 <div class="">
@@ -427,61 +460,62 @@ export default {
                                                         id="flexCheckDefault" v-model="near_by_school"
                                                         v-on:change="handleNearSchool">
                                                     <label class="form-check-label" for="flexCheckDefault">
-                                                    near_by_school
-                                                </label>
+                                                        near_by_school
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault" v-model="near_by_hospital"
+                                                        v-on:change="handleNearHospital">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        near_by_hospital
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault" v-model="near_by_shopping_mall"
+                                                        v-on:change="handleNearShoppingMall">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        near_by_shopping_mall
+                                                    </label>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlTextarea1"
+                                                        class="form-label">other_nearby_palces</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                                        v-model="other_nearby_palces"
+                                                        v-on:change="handleOtherPalces"></textarea>
+                                                </div>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" v-model="near_by_hospital"
-                                                    v-on:change="handleNearHospital">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    near_by_hospital
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" v-model="near_by_shopping_mall"
-                                                    v-on:change="handleNearShoppingMall">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    near_by_shopping_mall
-                                                </label>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1"
-                                                    class="form-label">other_nearby_palces</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
-                                                    v-model="other_nearby_palces"
-                                                    v-on:change="handleOtherPalces"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="mb-1">
-                                                <label for="exampleFormControlInput1"
-                                                    class="form-label">distance_from_airport from km</label>
-                                                <input type="number" class="form-control" id="exampleFormControlInput1"
-                                                    placeholder="10km etc" v-model="distance_from_airport"
-                                                    v-on:change="handleAirport">
-                                            </div>
-                                            <div class="">
-                                                <label for="exampleFormControlTextarea1"
-                                                    class="form-label">other_description</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
-                                                    v-model="other_description"
-                                                    v-on:change="handleOtherDesc"></textarea>
+                                            <div class="col-6">
+                                                <div class="mb-1">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label">distance_from_airport from km</label>
+                                                    <input type="number" class="form-control" id="exampleFormControlInput1"
+                                                        placeholder="10km etc" v-model="distance_from_airport"
+                                                        v-on:change="handleAirport">
+                                                </div>
+                                                <div class="">
+                                                    <label for="exampleFormControlTextarea1"
+                                                        class="form-label">other_description</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+                                                        v-model="other_description"
+                                                        v-on:change="handleOtherDesc"></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <button class="btn btn-primary" v-on:click="handleSaveAmenities">save</button>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Save Amenities</button>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-dismiss="modal"
+                            v-on:click="handleSaveAmenities">save</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div></template>
+</template>
