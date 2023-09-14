@@ -11,7 +11,7 @@
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                             v-model="showCommercialValue" v-on:change="handleShowCOmmercialValue">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Show commercial properties only
+                            Show commercial properties only......
                         </label>
                     </div>
                 </div>
