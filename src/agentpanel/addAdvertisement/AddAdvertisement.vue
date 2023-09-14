@@ -1,253 +1,523 @@
 <script>
 import AgentDashboardHeader from '../agentDashboardHeader/AgentDashboardHeader.vue';
-import AgentDashboardFooter from '../agentDashboardFooter/AgentDashboardFooter.vue'
+import AgentDashboardFooter from '../agentDashboardFooter/AgentDashboardFooter.vue';
+import HomePropertyType from './components/HomePropertyType.vue';
+import PlotPropertyType from './components/PlotPropertyType.vue';
+import CommercialPropertyType from './components/CommercialPropertyType.vue';
+import PropertyInfo from './components/PropertyInfo.vue';
+import ContactInfo from './components/ContactInfo.vue';
+import PriceAndArea from './components/PriceAndArea.vue';
+import Installment from './components/Installment.vue';
+import CityLocationArea from './components/CityLocationArea.vue';
+import FeatureAndAmenities from './components/FeatureAndAmenities.vue';
+import UploadImages from './components/UploadImages.vue';
+import { BASE_URL, API_VERSION, PROPERTY_END_POINT, CREATE_PROPERTY_END_POINT } from '../../utils/api';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
+import axios from 'axios';
 export default {
     name: 'AddAdvertisement',
     components: {
         AgentDashboardHeader,
         AgentDashboardFooter,
-
+        HomePropertyType,
+        PlotPropertyType,
+        CommercialPropertyType,
+        PropertyInfo,
+        ContactInfo,
+        PriceAndArea,
+        Installment,
+        CityLocationArea,
+        FeatureAndAmenities,
+        UploadImages,
     },
     data() {
         return {
+            receivedHomePropertyVal: '',
+            receivedPlotPropertyVal: null,
+            receivedCommercialPropertyVal: null,
+            //....................
             sellChecked: true,
             rentChecked: false,
+            sellvalue: '',
+            rentvalue: '',
+            //....................
             propertyType: 'home',
-            homePropertyVal: 'flat',
-            homeProperty: {
-                isFlat: true,
-                isHouse: false,
-                isVilla: false,
-                isRoom: false,
-                isUpper: false,
-                isLower: false,
-                isFarm: false,
-                isPenthouse: false,
-                isApartment: false
-            },
-            plotPropertyVal: 'plot',
-            plotProperty: {
-                isResidential: true,
-                isCommercial: false,
-                isIndustrial: false,
-                isAgricultural: false,
-                isPlotFarm: false,
-                isPlotFile: false
-            },
-            commercialPropertyVal: 'commercial',
-            commercialProperty: {
-                isOffice: true,
-                isSHop: false,
-                isWherehouse: false,
-                isFactory: false,
-                isBuilding: false
-            },
-            // houseChecked: false,
-            // flatChecked: false,
-            // upperChecked: false,
-            // lowerChecked: false,
-            // farmHouseChecked: false,
-            // roomChecked: false,
-            // penthouseChecked: false,
-            // villaChecked: false,
-            // apartmentChecked: false,
-            // residentialChecked: false,
-            // commercialChecked: false,
-            // industrialChecked: false,
-            // agriculturalChecked: false,
-            // plotFileChecked: false,
-            // plotFormChecked: false,
-            // officeChecked: false,
-            // shopChecked: false,
-            // wherehouseChecked: false,
-            // factoryChecked: false,
-            // buildingChecked: false,
+            //....................
             buyCHecked: true,
             loanCHecked: false,
-
+            //....................
+            receivedSelectedCity: '',
+            receivedSelectedLocation: '',
+            receivedSelectedArea: '',
+            // Price and Area
+            receivedAreaUnit: '',
+            receivedAreaTypes: '',
+            ReceivedTotalPrice: '',
+            // Installment section
+            receivedAdvanceAmount: 0,
+            receivedNofInstallments: 0,
+            receivedMonthlyInstallments: 0,
+            receivedReadyPossession: false,
+            // Feature & Amenities
+            receivedBedRooms: '',
+            receivedBathRooms: '',
+            // Property Information
+            receivedTitle: '',
+            receivedDescription: '',
+            // Property Images Upload
+            receivedUploadedImage: '',
+            // Contact Information
+            receivedEmailAddress: '',
+            receivedMobileNumber: '',
+            receivedLandlineNumber: '',
+            receivedSecondaryNumber: '',
+            isCHecked: false, // for Plot check
+            // amenities
+            receivedBuilt_in_year: '',
+            receivedBuilt_in_wardrobes: '',
+            receivedSecurity: '',
+            receivedKitchen_appliances: '',
+            receivedBalcony: '',
+            receivedFarmhouse: '',
+            receivedLower_portion: '',
+            receivedElectricity_backup: '',
+            receivedCoverParking: '',
+            receivedInternet: '',
+            receivedParking_space: '',
+            receivedFurnished_unfurnished: '',
+            receivedLobby_in_building: '',
+            receivedFloor: '',
+            receivedKitchen: '',
+            // rooms
+            receivedStudy_room: '',
+            receivedLaundry_room: '',
+            receivedMaid_room: '',
+            receivedStore_room: '',
+            receivedDrawing_room: '',
+            receivedLounge_sitting_area: '',
+            receivedGym: '',
+            // community
+            receivedKids_play_area: '',
+            receivedMosque: '',
+            receivedCommunity_lawn_garden: '',
+            // healthcare
+            receivedMedical_center: '',
+            receivedSwimming_pool: '',
+            // near Location
+            receivedNear_by_school: '',
+            receivedNear_by_hospital: '',
+            receivedNear_by_shopping_mall: '',
+            receivedOther_nearby_palces: '',
+            receivedDistance_from_airport: 0,
+            receivedOther_description: '',
+            ////////////////////////////
+            selectedPropertyType: null,
+            errorMsg: '',
+            errorDesc: '',
+            errorEmail: '',
+            errorMob: '',
+            errorLand: '',
+            errorSec: '',
+            errorAreaSize: '',
+            errorPrice: '',
+            errorAdvanceAmount: '',
+            errorNofInstallment: '',
+            errorMOinstallment: '',
+            errorLocation: '',
+            errorAreaNumber: '',
+            errorBeds: '',
+            errorBaths: '',
+            errorKitchen: '',
+            errorFloor: '',
         };
     },
     methods: {
-        logCheckboxValues() {
-            // console.log('sell Checked:', this.sellChecked);
-            // console.log('rent Checked:', this.rentChecked);
-            // console.log('---------------------------')
-            // console.log('houseChecked', this.houseChecked);
-            // console.log('flatChecked', this.flatChecked);
-            // console.log('upperChecked', this.upperChecked);
-            // console.log('lowerChecked', this.lowerChecked);
-            // console.log('farmHouseChecked', this.farmHouseChecked);
-            // console.log('roomChecked', this.roomChecked);
-            // console.log('penthouseChecked', this.penthouseChecked);
-            // console.log('Villa Checked:', this.villaChecked);
-            // console.log('Apartment Checked:', this.apartmentChecked);
-            // console.log('---------------------------')
-            // console.log('residentialChecked', this.residentialChecked);
-            // console.log('commercialChecked', this.commercialChecked);
-            // console.log('industrialChecked', this.industrialChecked);
-            // console.log('agriculturalChecked', this.agriculturalChecked);
-            // console.log('plotFileChecked', this.plotFileChecked);
-            // console.log('plotFormChecked', this.plotFormChecked);
-            // console.log('---------------------------')
-            // console.log('office Checked:', this.officeChecked);
-            // console.log('shop Checked:', this.shopChecked);
-            // console.log('wherehouse Checked:', this.wherehouseChecked);
-            // console.log('factory Checked:', this.factoryChecked);
-            // console.log('building Checked', this.buildingChecked)
-            // console.log('---------------------------')
-
-
-            console.log('commercialPropertyVal', this.commercialPropertyVal)
-
+        handleHomePropertyVal(data) {
+            this.receivedHomePropertyVal = data
         },
+        handlePropertyVal(data) {
+            this.receivedPlotPropertyVal = data
+        },
+        handleCommercialPropertyVal(data) {
+            this.receivedCommercialPropertyVal = data
+        },
+        handleCItyData(data) {
+            this.receivedSelectedCity = data
+        },
+        handleAreaData(data) {
+            this.receivedSelectedArea = data
+        },
+        handleLocationData(data) {
+            this.receivedSelectedLocation = data
+        },
+        handleImageUploaded(data) {
+            this.receivedUploadedImage = data;
+        },
+        handleBedRoomData(data) {
+            this.receivedBedRooms = data
+        },
+        handleBathRoomData(data) {
+            this.receivedBathRooms = data
+        },
+        handleTitleData(data) {
+            this.receivedTitle = data
+        },
+        handleDescData(data) {
+            this.receivedDescription = data
+        },
+        handleEmailData(data) {
+            this.receivedEmailAddress = data
+        },
+        handleMobNumData(data) {
+            this.receivedMobileNumber = data
+        },
+        handleLandNumData(data) {
+            this.receivedLandlineNumber = data
+        },
+        handleSecondNumData(data) {
+            this.receivedSecondaryNumber = data
+        },
+        handleAreaUnitData(data) {
+            this.receivedAreaUnit = data
+        },
+        handleAreaTypeData(data) {
+            this.receivedAreaTypes = data
+        },
+        handlePriceData(data) {
+            this.ReceivedTotalPrice = data
+        },
+        handleAdvanceAmount(data) {
+            this.receivedAdvanceAmount = data
+        },
+        handleNoOfInstallmentData(data) {
+            this.receivedNofInstallments = data
+        },
+        handleMonthlyInstallment(data) {
+            this.receivedMonthlyInstallments = data
+        },
+        handleRpData(data) {
+            this.receivedReadyPossession = data
+        },
+        R_S_Value() {
+            if (this.sellvalue) {
+                return this.sellvalue
+            }
+            if (this.rentvalue) {
+                return this.rentvalue
+            }
+            return 'sale';
+        },
+        checkValueH() {
+            // Determine the selected property type (home, plot, commercial)
+            const selectedPropertyType = this.selectedPropertyType; // You need to implement this function
+            // Create an object based on the selected property type
+            let propertyTypeObject = {};
+
+            if (selectedPropertyType === 'home') {
+                propertyTypeObject.home_types = this.receivedHomePropertyVal;
+            } else if (selectedPropertyType === 'plot') {
+                propertyTypeObject.plot_types = this.receivedPlotPropertyVal;
+            } else if (selectedPropertyType === 'commercial') {
+                propertyTypeObject.commercial_types = this.receivedCommercialPropertyVal;
+            }
+            // Add other common properties
+            propertyTypeObject.unit_types = this.receivedAreaTypes;
+            propertyTypeObject.size = this.receivedAreaUnit;
+            propertyTypeObject.other_description = "Property type description here"; // remaining
+            console.log('t', propertyTypeObject)
+            console.log('h', this.receivedHomePropertyVal)
+            return propertyTypeObject;
+        },
+        selectPropertyType(type) {
+            // Set the selected property type
+            this.selectedPropertyType = type;
+        },
+        async logCheckboxValues() {
+            const payload = {
+                media: this.receivedUploadedImage,
+                title: this.receivedTitle,
+                phone: this.receivedMobileNumber,
+                landline: this.receivedLandlineNumber,
+                secondry_phone: this.receivedSecondaryNumber,
+                email: this.receivedEmailAddress,
+                rent_sale_type: this.R_S_Value(),
+                area: this.receivedSelectedCity, // area-id
+                agent: 1100, // remaining agent id is here after login agent
+                amenties: {
+                    other_nearby_palces: this.receivedOther_nearby_palces,
+                    bedrooms: this.receivedBedRooms,
+                    distance_from_airport: this.receivedDistance_from_airport,
+                    built_in_year: this.receivedBuilt_in_year,
+                    bathrooms: this.receivedBathRooms,
+                    kitchen: this.receivedKitchen,
+                    floors: this.receivedFloor,
+                    maid_room: this.receivedMaid_room,
+                    built_in_wardrobes: this.receivedBuilt_in_wardrobes,
+                    kitchen_appliances: this.receivedKitchen_appliances,
+                    balcony: this.receivedBalcony,
+                    lower_portion: this.receivedLower_portion,
+                    Farmhouse: this.receivedFarmhouse,
+                    electricity_backup: this.receivedElectricity_backup,
+                    furnished_unfurnished: this.receivedFurnished_unfurnished,
+                    covered_parking: this.receivedCoverParking,
+                    lobby_in_building: this.receivedLobby_in_building,
+                    security: this.receivedSecurity,
+                    parking_space: this.receivedParking_space,
+                    drawing_room: this.receivedDrawing_room,
+                    study_room: this.receivedStudy_room,
+                    laundry_room: this.receivedLaundry_room,
+                    store_room: this.receivedStore_room,
+                    gym: this.receivedGym,
+                    lounge_sitting_area: this.receivedLounge_sitting_area,
+                    internet: this.receivedInternet,
+                    swimming_pool: this.receivedSwimming_pool,
+                    mosque: this.receivedMosque,
+                    kids_play_area: this.receivedKids_play_area,
+                    medical_center: this.receivedMedical_center,
+                    community_lawn_garden: this.receivedCommunity_lawn_garden,
+                    near_by_school: this.receivedNear_by_school,
+                    near_by_hospital: this.receivedNear_by_hospital,
+                    near_by_shopping_mall: this.near_by_shopping_mall,
+                    other_description: this.receivedOther_description,
+                },
+                property_type: this.checkValueH(),
+                property_location: {
+                    latitude: 25.123456, // remaining
+                    longitude: 67.987654 // remaining
+                },
+                installment: {
+                    advance_amount: this.receivedAdvanceAmount,
+                    no_of_inst: this.receivedNofInstallments,
+                    monthly_inst: this.receivedMonthlyInstallments,
+                    ready_for_possession: this.receivedReadyPossession,
+                },
+                available: true,
+                description: this.receivedDescription,
+                total_price: this.ReceivedTotalPrice,
+            }
+            console.log('payload', payload)
+            let finallURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + CREATE_PROPERTY_END_POINT()
+
+            try {
+                await axios.post(finallURL, payload)
+                    .then((resp) => {
+                        console.log(resp.ok)
+                        this.toastSuccess()
+                        this.$router.push('/agentDashboard')
+                    })
+            } catch (resp) {
+                if (resp.response) {
+                    const resData = resp.response.data
+                    console.warn(resData)
+                    this.eroMsg = resData
+                    if (this.receivedTitle.length == 0) {
+                        this.errorMsg = 'title-required'
+                    }
+                    if (this.receivedDescription.length == 0) {
+                        this.errorDesc = 'desc-required'
+                    }
+                    if (this.receivedAreaUnit.length == 0) {
+                        this.errorAreaSize = 'Area-required'
+                    }
+                    if (this.ReceivedTotalPrice.length == 0) {
+                        this.errorPrice = 'Price-required'
+                    }
+                    if (this.receivedAdvanceAmount.length == 0) {
+                        this.errorAdvanceAmount = 'Advance Amount-required'
+                    }
+                    if (this.receivedNofInstallments.length == 0) {
+                        this.errorPrice = 'No of Installment-required'
+                    }
+                    if (this.receivedMonthlyInstallments.length == 0) {
+                        this.errorMOinstallment = 'Monthly Installment-required'
+                    }
+                    if (this.receivedEmailAddress.length == 0) {
+                        this.errorEmail = 'Email-required'
+                    }
+                    if (this.receivedMobileNumber.length == 0) {
+                        this.errorMob = 'Phone-required'
+                    }
+                    if (this.receivedLandlineNumber.length == 0) {
+                        this.errorLand = 'LandLine Number-required'
+                    }
+                    if (this.receivedSecondaryNumber.length == 0) {
+                        this.errorSec = 'Secondary Number-required'
+                    }
+                    if (this.receivedSelectedArea.length == 0) {
+                        this.errorAreaNumber = 'Area-required'
+                    }
+                    if (this.receivedSelectedLocation.length == 0) {
+                        this.errorLocation = 'Location-required'
+                    }
+                    if (this.receivedBedRooms.length == 0) {
+                        this.errorBeds = 'Bedrooms-required'
+                    }
+                    if (this.receivedBathRooms.length == 0) {
+                        this.errorBaths = 'Bathrooms-required'
+                    }
+                    if (this.receivedKitchen.length == 0) {
+                        this.errorKitchen = 'Kitchen-required'
+                    }
+                    if (this.receivedFloor.length == 0) {
+                        this.errorFloor = 'Floor-required'
+                    }
+                    if (resp.response) {
+                        createToast(`fields-required`, {
+                            type: 'danger',
+                            position: 'top-right',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+                    }
+                } else if (resp.request) {
+                    console.log('request-error', resp.request)
+                    this.toastNetworkError()
+                } else {
+                    console.log(resp)
+                }
+            }
+        },
+        toastSuccess() {
+            createToast('Submit Successfully',
+                {
+                    type: 'success',
+                    transition: 'zoom',
+                })
+        },
+        toastNetworkError() {
+            createToast('network-error',
+                {
+                    type: 'danger',
+                    transition: 'zoom',
+                })
+        },
+        ////////////////////////////////
         handleSellView() {
             this.sellChecked = true;
             this.rentChecked = false;
+            if (this.sellChecked = true) {
+                this.isCHecked = false
+            }
+            if (this.sellChecked = true) {
+                this.sellvalue = 'sale'
+            }
         },
         handleRentView() {
             this.rentChecked = true;
             this.sellChecked = false;
+            if (this.rentChecked = true) {
+                this.isCHecked = true
+            }
+            if (this.rentChecked = true) {
+                this.rentvalue = 'rent'
+            }
         },
-        handleHomeProperty(e) {
-            Object.entries(this.homeProperty).forEach(([key, val]) => {
-                this.homeProperty[key] = false
-            });
-
-            if (e == 'flat') {
-                this.homeProperty.isFlat = true;
-                this.homePropertyVal = 'flat'
-            }
-
-            if (e == 'house') {
-                this.homeProperty.isHouse = true;
-                this.homePropertyVal = 'house'
-            }
-
-            if (e == 'villa') {
-                this.homeProperty.isVilla = true;
-                this.homePropertyVal = 'villa'
-            }
-
-            if (e == 'room') {
-                this.homeProperty.isRoom = true;
-                this.homePropertyVal = 'room'
-            }
-
-            if (e == 'upper') {
-                this.homeProperty.isUpper = true;
-                this.homePropertyVal = 'upper'
-            }
-
-            if (e == 'lower') {
-                this.homeProperty.isLower = true;
-                this.homePropertyVal = 'lower'
-            }
-
-            if (e == 'farm') {
-                this.homeProperty.isFarm = true;
-                this.homePropertyVal = 'farm'
-            }
-            if (e == 'penthouse') {
-                this.homeProperty.isPenthouse = true;
-                this.homePropertyVal = 'penthouse'
-            }
-
+        handleBuiltYear(data) {
+            this.receivedBuilt_in_year = data
         },
-        handlePlotProperty(e) {
-            Object.entries(this.plotProperty).forEach(([key, val]) => {
-                this.plotProperty[key] = false
-            })
-            if (e == 'residential') {
-                this.plotProperty.isResidential = true;
-                this.plotPropertyVal = 'residential'
-            }
-            if (e == 'commercial') {
-                this.plotProperty.isCommercial = true;
-                this.plotPropertyVal = 'commercial'
-            }
-            if (e == 'industiral') {
-                this.plotProperty.isIndustrial = true;
-                this.plotPropertyVal = 'industiral'
-            }
-            if (e == 'agricultural') {
-                this.plotProperty.isAgricultural = true;
-                this.plotPropertyVal = 'agricultural'
-            }
-            if (e == 'plotFile') {
-                this.plotProperty.isPlotFile = true;
-                this.plotPropertyVal = 'plotFile'
-            }
-            if (e == 'plotFarm') {
-                this.plotProperty.isPlotFarm = true;
-                this.plotPropertyVal = 'plotFarm'
-            }
-
+        handleBuiltInWhaedrobes(data) {
+            this.receivedBuilt_in_wardrobes = data
         },
-        handleCommercialProperty(e) {
-            Object.entries(this.commercialProperty).forEach(([key, val]) => {
-                this.commercialProperty[key] = false
-            })
-            if (e == 'office') {
-                this.commercialProperty.isOffice = true;
-                this.commercialPropertyVal = 'office'
-            }
-            if (e == 'shop') {
-                this.commercialProperty.isSHop = true;
-                this.commercialPropertyVal = 'shop'
-            }
-            if (e == 'wherehouse') {
-                this.commercialProperty.isWherehouse = true;
-                this.commercialPropertyVal = 'wherehouse'
-            }
-            if (e == 'factory') {
-                this.commercialProperty.isFactory = true;
-                this.commercialPropertyVal = 'factory'
-            }
-            if (e == 'building') {
-                this.commercialProperty.isBuilding = true;
-                this.commercialPropertyVal = 'building'
-            }
+        handleSecurity(data) {
+            this.receivedSecurity = data
+        },
+        handleKitchenAppliance(data) {
+            this.receivedKitchen_appliances = data
+        },
+        handleBalcony(data) {
+            this.receivedBalcony = data
+        },
+        handleFarmHouse(data) {
+            this.receivedFarmhouse = data
+        },
+        handleLowerPortion(data) {
+            this.receivedLower_portion = data
+        },
+        handleElectricityBackup(data) {
+            this.receivedElectricity_backup = data
+        },
+        handleCoveredParking(data) {
+            this.receivedCoverParking = data
+        },
+        handleInternet(data) {
+            this.receivedInternet = data
+        },
+        handleParkingSpace(data) {
+            this.receivedParking_space = data
+        },
+        handleFurnished(data) {
+            this.receivedFurnished_unfurnished = data
+        },
+        handleLobbyBuilding(data) {
+            this.receivedLobby_in_building = data
+        },
+        handleFloor(data) {
+            this.receivedFloor = data
+        },
+        handleKitchen(data) {
+            this.receivedKitchen = data
+        },
+        handleStudyRoom(data) {
+            this.receivedStudy_room = data
+        },
+        handleLaundryRoom(data) {
+            this.receivedLaundry_room = data
+        },
+        handleMaidRoom(data) {
+            this.receivedMaid_room = data
+        },
+        handleStoreRoom(data) {
+            this.receivedStore_room = data
+        },
+        handleDrawingRoom(data) {
+            this.receivedDrawing_room = data
+        },
+        handleLoungeArea(data) {
+            this.receivedLounge_sitting_area = data
+        },
+        handleGym(data) {
+            this.receivedGym = data
+        },
+        handleKidsPlayArea(data) {
+            this.receivedKids_play_area = data
+        },
+        handleMosque(data) {
+            this.receivedMosque = data
+        },
+        handleCommunityLawnGarden(data) {
+            this.receivedCommunity_lawn_garden = data
+        },
+        handleMedicalCenter(data) {
+            this.receivedMedical_center = data
+        },
+        handleSwimmingPool(data) {
+            this.receivedSwimming_pool = data
+        },
+        handleNearSchool(data) {
+            this.receivedNear_by_school = data
+        },
+        handleNearHospital(data) {
+            this.receivedNear_by_hospital = data
+        },
+        handleNearShoppingMall(data) {
+            this.receivedNear_by_shopping_mall = data
+        },
+        handleOtherPalces(data) {
+            this.receivedOther_nearby_palces = data
+        },
+        handleDistanceAirport(data) {
+            this.receivedDistance_from_airport = data
+        },
+        handleOtherDesc(data) {
+            this.receivedOther_description = data
         },
     },
 }
+
 </script>
 
 <style>
-.mainBtnColor {
-    color: rgb(255, 69, 0);
-    border: 1px solid rgb(255, 69, 0);
-    border-radius: 13px;
-    padding: 8px 20px 8px 20px;
-}
-
-.mainBtnColor:hover {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    color: darkgray;
-}
-
-.ButtonColor {
-    border-radius: 15px;
-    padding: 8px 20px 8px 20px;
-}
-
-.ButtonColor:hover {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    /* color: darkgray; */
-}
-
-.selectedButtonColor {
-    background-color: rgb(243, 236, 231);
-    border: 1px solid rgb(255, 69, 0);
-    color: rgb(255, 69, 0);
-}
-
-.unSelectedButtonColor {
-    background-color: white;
-    border: 1px solid rgb(221, 221, 221);
-    color: darkgray;
-}
+@import './Advertisement.css';
 </style>
 
 <template>
@@ -259,9 +529,9 @@ export default {
         <div class="container my-5">
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-around">
                         <div class="col-4 text-center">
-                            <i class="fa-solid fa-house-circle-check fa-2xl" style="color: #2c4e1d;"></i>
+                            <i class="fa-solid fa-house-circle-check fa-2xl" style="color: rgb(255, 69, 0);"></i>
                             <h5 class="mt-2">Select Purpose And Location</h5>
                         </div>
                         <div class="col-6">
@@ -281,312 +551,109 @@ export default {
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                                 data-bs-target="#home-tab-pane" type="button" role="tab"
-                                                aria-controls="home-tab-pane" aria-selected="true">
+                                                aria-controls="home-tab-pane" aria-selected="true"
+                                                @click="selectPropertyType('home')">
                                                 Home
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                 data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                                aria-controls="profile-tab-pane" aria-selected="false">
-                                                Plot</button>
+                                                aria-controls="profile-tab-pane" aria-selected="false"
+                                                @click="selectPropertyType('plot')">
+                                                Plot
+                                            </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                                 data-bs-target="#contact-tab-pane" type="button" role="tab"
-                                                aria-controls="contact-tab-pane" aria-selected="false">
-
+                                                aria-controls="contact-tab-pane" aria-selected="false"
+                                                @click="selectPropertyType('commercial')">
                                                 Commercial
                                             </button>
                                         </li>
-
                                     </ul>
                                     <div class="tab-content mt-4" id="myTabContent">
                                         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
                                             aria-labelledby="home-tab" tabIndex="0">
-
-                                            <button
-                                                :class="homeProperty.isFlat ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleHomeProperty('flat')">
-                                                <i class="fa-solid fa-house-lock"></i> Flat</button>
-                                            <button
-                                                :class="homeProperty.isHouse ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleHomeProperty('house')">
-                                                <i class="fa-solid fa-house-lock"></i> House</button>
-                                            <button
-                                                :class="homeProperty.isVilla ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleHomeProperty('villa')">
-                                                <i class="fa-solid fa-house-lock"></i> Villa</button>
-                                            <button
-                                                :class="homeProperty.isRoom ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleHomeProperty('room')">
-                                                <i class="fa-solid fa-house-lock"></i> Room</button>
-                                            <button
-                                                :class="homeProperty.isUpper ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                v-on:click="handleHomeProperty('upper')">
-                                                <i class="fa-solid fa-house-lock"></i> Upper Portion</button>
-                                            <button
-                                                :class="homeProperty.isLower ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleHomeProperty('lower')">
-                                                <i class="fa-solid fa-house-lock"></i> Lower Portion</button>
-                                            <button
-                                                :class="homeProperty.isFarm ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleHomeProperty('farm')">
-                                                <i class="fa-solid fa-house-lock"></i> Farm House</button>
-                                            <button
-                                                :class="homeProperty.isPenthouse ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                v-on:click="handleHomeProperty('penthouse')">
-                                                <i class="fa-solid fa-house-lock"></i> Penthouse</button>
-
+                                            <HomePropertyType @childDataHomePropertyTypeVal="handleHomePropertyVal" />
                                         </div>
                                         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
                                             aria-labelledby="profile-tab" tabIndex="0">
                                             <div>
-                                                <button
-                                                    :class="plotProperty.isResidential ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                    v-on:click="handlePlotProperty('residential')">Residential Plot</button>
-                                                <button
-                                                    :class="plotProperty.isCommercial ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                    v-on:click="handlePlotProperty('commercial')">Commercial Plot</button>
-                                                <button
-                                                    :class="plotProperty.isIndustrial ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                    v-on:click="handlePlotProperty('industiral')">Industiral Land</button>
-                                                <button
-                                                    :class="plotProperty.isAgricultural ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                    v-on:click="handlePlotProperty('agricultural')">Agricultural
-                                                    Land</button>
-                                                <button
-                                                    :class="plotProperty.isPlotFile ? 'selectedButtonColor ButtonColor mt-2 mx-2' : 'unSelectedButtonColor ButtonColor mt-2 mx-2'"
-                                                    v-on:click="handlePlotProperty('plotFile')">Plot File</button>
-                                                <button
-                                                    :class="plotProperty.isPlotFarm ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                    v-on:click="handlePlotProperty('plotFarm')">Plot Farm</button>
+                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal"
+                                                    :isCHecked="isCHecked" />
                                             </div>
 
                                         </div>
                                         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
                                             aria-labelledby="contact-tab" tabIndex="0">
                                             <div>
-                                                <button :class="commercialProperty.isOffice ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleCommercialProperty('office')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Office</button>
-                                                <button :class="commercialProperty.isSHop ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleCommercialProperty('shop')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Shop</button>
-                                                <button :class="commercialProperty.isWherehouse ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                                v-on:click="handleCommercialProperty('wherehouse')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Wherehouse</button>
-                                                <button :class="commercialProperty.isFactory ? 'selectedButtonColor ButtonColor mx-2' : 'unSelectedButtonColor ButtonColor mx-2'"
-                                                v-on:click="handleCommercialProperty('factory')"
-                                                ><i class="fa-solid fa-house"></i>
-                                                    Factory</button>
-                                                <button :class="commercialProperty.isBuilding ? 'selectedButtonColor ButtonColor mt-2' : 'unSelectedButtonColor ButtonColor mt-2'"
-                                                v-on:click="handleCommercialProperty('building')"
-                                                ><i class="fa-solid fa-building"></i>
-                                                    Building</button>
+                                                <CommercialPropertyType
+                                                    @childDataCommercialPropertyTypeVal="handleCommercialPropertyVal" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="my-4">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select City</option>
-                                        <option value="1">Karachi</option>
-                                        <option value="2">Quetta</option>
-                                        <option value="3">Islamabad</option>
-                                        <option value="3">Lahore</option>
-                                        <option value="3">Faisalabad</option>
-                                        <option value="3">Peshawar</option>
-                                        <option value="3">Multan</option>
-                                    </select>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="abcdef">
-                                    <label for="floatingInput">Location</label>
-                                </div>
-                                <div class="mb-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <iframe
-                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217760.23951033925!2d74.16958104254596!3d31.482834783890713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1690373876865!5m2!1sen!2s"
-                                                width="570" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                                referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="plot">
-                                    <label for="floatingInput">Enter Plot number eg 122 A</label>
-                                </div>
+                                <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
+                                    @ChildToParentSelectLocation="handleLocationData"
+                                    @ChildToParentSelectArea="handleAreaData" 
+                                    :errorLocation="this.errorLocation" :errorAreaNumber="this.errorAreaNumber" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-hand-holding-dollar fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Price & Area</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="row mb-3">
-                                <div class="col-8">
-                                    <div class="form-floating">
-                                        <input type="number" class="form-control" id="floatingAreaUnit"
-                                            placeholder="Enter Area Unit">
-                                        <label for="floatingAreaUnit">Enter Area Unit</label>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="1" selected>Marla</option>
-                                        <option value="2">Square Ft</option>
-                                        <option value="3">Kanal</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingInput" placeholder="price">
-                                <label for="floatingInput">Enter Price</label>
-                            </div>
-                            <h4>installment available</h4>
-                            <div class="mb-3">
-                                <label for="exampleAdvanceAmountControlInput1" class="form-label">Advance Amount</label>
-                                <input type="number" class="form-control" id="exampleAdvanceAmountControlInput1"
-                                    placeholder="22222">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleNoInstallmentControlInput1" class="form-label">No of Installments</label>
-                                <input type="number" class="form-control" id="exampleNoInstallmentControlInput1"
-                                    placeholder="0333">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleMonthlyInstallmentControlInput1" class="form-label">Monthly
-                                    Installments</label>
-                                <input type="number" class="form-control" id="exampleMonthlyInstallmentControlInput1"
-                                    placeholder="035">
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch"
-                                        id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Ready for
-                                        Possession</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
+                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData"
+                    :errorAreaSize="this.errorAreaSize" :errorPrice="this.errorPrice" />
+                <div class="" v-if="sellChecked == true">
+                    <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
+                        @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
+                        @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
+                        @ChildToParentReadyForPossessionData="handleRpData" :errorAdvanceAmounts="this.errorAdvanceAmount"
+                        :errorNofInstallments="this.errorNofInstallment" :errorMOinstallments="this.errorMOinstallment" />
                 </div>
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-house-circle-exclamation fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Feature & Amenities</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <h5>Bedrooms</h5>
-                                <div class="mb-2">
-                                    <label for="inputBedroom" class="form-label">Enter Bedroom</label>
-                                    <input type="number" class="form-control" id="inputBedroom">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <h5>Bathrooms</h5>
-                                <div class="mb-2">
-                                    <label for="inputBathroom" class="form-label">Enter Bathroom</label>
-                                    <input type="number" class="form-control" id="inputBathroom">
-                                </div>
-                            </div>
-                            <div class="">
-                                <h5>Feature and Amenities</h5>
-                                <p class="text-muted">Add additional features e.g. parking spaces, waste disposal, internet
-                                    etc.</p>
-                                <button class="btn btn-success">Add Amenities</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
+                    @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
+                    @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
+                    @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
+                    @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
+                    @childDataElectricityBackup="handleElectricityBackup" @childDataCoveredParking="handleCoveredParking"
+                    @childDataInternet="handleInternet" @childDataParkingSpace="handleParkingSpace"
+                    @childDataFurnished="handleFurnished" @childDataLobbyBuilding="handleLobbyBuilding"
+                    @childDataFloor="handleFloor" @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
+                    @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
+                    @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
+                    @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
+                    @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
+                    @childDataCommunityLawnGarden="handleCommunityLawnGarden" @childDataMedicalCenter="handleMedicalCenter"
+                    @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
+                    @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
+                    @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
+                    @childDataOtherDesc="handleOtherDesc" :errorBaths="this.errorBaths" :errorBeds="this.errorBeds" 
+                    :errorKitchen="this.errorKitchen" :errorFloor="this.errorFloor" />
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-clipboard-list fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Property Information</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="inputTitle" class="form-label">Title</label>
-                                <input type="text" class="form-control" id="inputTitle">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData"
+                    :titleError="this.errorMsg" :descError="this.errorDesc" />
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-images fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Property Images Upload</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload image here</label>
-                                <input class="form-control" type="file" id="formFile">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" />
             </div>
-
             <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-address-card fa-2xl" style="color: #2c4e1d;"></i>
-                            <h5 class="mt-2">Contact Information</h5>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="name@example.com">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleMobileControlInput1" class="form-label">Mobile Number</label>
-                                <input type="number" class="form-control" id="exampleMobileControlInput1"
-                                    placeholder="03332222222">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleLandlineControlInput1" class="form-label">Landline Number</label>
-                                <input type="number" class="form-control" id="exampleLandlineControlInput1"
-                                    placeholder="0812444444">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
+                    @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData"
+                    :emailError="this.errorEmail" :mobError="this.errorMob" :landError="this.errorLand"
+                    :secError="this.errorSec" />
             </div>
-        <div class="my-1">
-            <button class="btn btn-secondary" v-on:click="logCheckboxValues">Add Submit Advertisement</button>
+            <div class="my-1 text-center">
+                <button v-on:click="logCheckboxValues" class="adversBtn">Add Submit Advertisement</button>
+            </div>
         </div>
     </div>
-
-</div>
-<AgentDashboardFooter /></template>
+    <AgentDashboardFooter />
+</template>

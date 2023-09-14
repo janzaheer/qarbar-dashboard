@@ -6,7 +6,7 @@
 <template>
     <div class=''>
         <div class="row">
-            <div class="col-lg-3 col-sm-6 my-2 m-md-block">
+            <div class="col-lg-3 col-sm-6 my-2 my-md-block my-lg-0">
                 <div class="card bg-success shadow">
                     <div class="card-body">
                         <h3 class="card-title text-white">Properties Sold</h3>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 my-2 m-md-block">
+            <div class="col-lg-3 col-sm-6 my-2 my-md-block my-lg-0">
                 <div class="card bg-warning shadow">
                     <div class="card-body">
                         <h3 class="card-title text-white">New Customers</h3>

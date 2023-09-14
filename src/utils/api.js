@@ -4,6 +4,10 @@ export const API_VERSION = () => {
     return `api/v1/`
 }
 
+export const CREATE_PROPERTY_END_POINT = () => {
+    return `create_property/`;
+}
+
 export const PROPERTY_END_POINT = () => {
     return `properties/`;
 }

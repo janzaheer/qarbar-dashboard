@@ -1,0 +1,58 @@
+.mainBtnColor {
+    color: rgb(255, 69, 0);
+    border: 1px solid rgb(255, 69, 0);
+    border-radius: 13px;
+    padding: 8px 20px 8px 20px;
+}
+
+.mainBtnColor:hover {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    color: darkgray;
+}
+
+.ButtonColor {
+    border-radius: 15px;
+    padding: 8px 20px 8px 20px;
+}
+
+.ButtonColor:hover {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    /* color: darkgray; */
+}
+
+.selectedButtonColor {
+    background-color: rgb(243, 236, 231);
+    border: 1px solid rgb(255, 69, 0);
+    color: rgb(255, 69, 0);
+}
+
+.unSelectedButtonColor {
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    color: darkgray;
+}
+.active {
+    /* background-color: #007bff; */
+    color: #fff;
+}
+
+.file-preview {
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+.uploadBtn{
+    color:  rgb(255, 69, 0);
+    border: 1px solid  rgb(255, 69, 0);
+    border-radius: 7px;
+    padding: 7px 10px;
+    background-color: white;
+}
+.uploadBtn:hover{
+    color:  darkgray;
+    border: 1px solid  darkgray;
+    border-radius: 7px;
+}
