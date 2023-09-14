@@ -14,9 +14,6 @@ import UploadImages from './components/UploadImages.vue';
 import { BASE_URL, API_VERSION, PROPERTY_END_POINT, CREATE_PROPERTY_END_POINT } from '../../utils/api';
 import { createToast } from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css';
-// import Vue3Dropzone from 'vue3-dropzone';
-// import 'vue3-dropzone/dist/vue3Dropzone.css';
-// import s3 from '../../aws/aws.js';
 import axios from 'axios';
 export default {
     name: 'AddAdvertisement',
@@ -36,7 +33,7 @@ export default {
     },
     data() {
         return {
-            receivedHomePropertyVal: null,
+            receivedHomePropertyVal: '',
             receivedPlotPropertyVal: null,
             receivedCommercialPropertyVal: null,
             //....................
@@ -115,32 +112,27 @@ export default {
             receivedDistance_from_airport: 0,
             receivedOther_description: '',
             ////////////////////////////
-            selectedImages: [],
-            media: [],
             selectedPropertyType: null,
+            errorMsg: '',
+            errorDesc: '',
+            errorEmail: '',
+            errorMob: '',
+            errorLand: '',
+            errorSec: '',
+            errorAreaSize: '',
+            errorPrice: '',
+            errorAdvanceAmount: '',
+            errorNofInstallment: '',
+            errorMOinstallment: '',
+            errorLocation: '',
+            errorAreaNumber: '',
+            errorBeds: '',
+            errorBaths: '',
+            errorKitchen: '',
+            errorFloor: '',
         };
     },
     methods: {
-        async handleSuccess(files, responses) {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const response = responses[i];
-                const imageKey = `images/${file.name}`;
-
-                const params = {
-                    Bucket: 'YOUR_BUCKET_NAME',
-                    Key: imageKey,
-                    Body: file,
-                };
-
-                try {
-                    await s3.upload(params).promise();
-                    console.log(`Image ${file.name} uploaded successfully`);
-                } catch (error) {
-                    console.error(`Error uploading image ${file.name}:`, error);
-                }
-            }
-        },
         handleHomePropertyVal(data) {
             this.receivedHomePropertyVal = data
         },
@@ -156,8 +148,8 @@ export default {
         handleAreaData(data) {
             this.receivedSelectedArea = data
         },
-        handleLocationData() {
-            this.receivedSelectedLocation
+        handleLocationData(data) {
+            this.receivedSelectedLocation = data
         },
         handleImageUploaded(data) {
             this.receivedUploadedImage = data;
@@ -233,24 +225,17 @@ export default {
             propertyTypeObject.unit_types = this.receivedAreaTypes;
             propertyTypeObject.size = this.receivedAreaUnit;
             propertyTypeObject.other_description = "Property type description here"; // remaining
-
+            console.log('t', propertyTypeObject)
+            console.log('h', this.receivedHomePropertyVal)
             return propertyTypeObject;
-
-
         },
         selectPropertyType(type) {
             // Set the selected property type
             this.selectedPropertyType = type;
         },
         async logCheckboxValues() {
-            this.media = this.selectedImages.map((media) => ({
-                image_url: media.url,
-                // media_type: "image",
-                media_type: media.media_type,
-            }));
-
             const payload = {
-                media: this.media,
+                media: this.receivedUploadedImage,
                 title: this.receivedTitle,
                 phone: this.receivedMobileNumber,
                 landline: this.receivedLandlineNumber,
@@ -327,92 +312,60 @@ export default {
                     console.warn(resData)
                     this.eroMsg = resData
                     if (this.receivedTitle.length == 0) {
-                        createToast(`Title-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorMsg = 'title-required'
                     }
                     if (this.receivedDescription.length == 0) {
-                        createToast(`Desc-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
-                    }
-                    if (this.receivedBathRooms.length == 0) {
-                        createToast(`Baths-required`, {
-                            type: 'danger',
-                            position: 'top-center',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
-                    }
-                    if (this.receivedBedRooms.length == 0) {
-                        createToast(`Beds-required`, {
-                            type: 'danger',
-                            position: 'top-center',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
-                    }
-                    if (this.receivedBuilt_in_year.length == 0) {
-                        createToast(`Built In Year-required`, {
-                            type: 'danger',
-                            position: 'top-center',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
-                    }
-                    if (this.receivedFloor.length == 0) {
-                        createToast(`Floor-required`, {
-                            type: 'danger',
-                            position: 'top-center',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
-                    }
-                    if (this.receivedKitchen.length == 0) {
-                        createToast(`Kitchen-required`, {
-                            type: 'danger',
-                            position: 'top-center',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorDesc = 'desc-required'
                     }
                     if (this.receivedAreaUnit.length == 0) {
-                        createToast(`Area Size-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorAreaSize = 'Area-required'
                     }
-                    if (this.receivedDescription.length == 0) {
-                        createToast(`Total Price-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                    if (this.ReceivedTotalPrice.length == 0) {
+                        this.errorPrice = 'Price-required'
+                    }
+                    if (this.receivedAdvanceAmount.length == 0) {
+                        this.errorAdvanceAmount = 'Advance Amount-required'
+                    }
+                    if (this.receivedNofInstallments.length == 0) {
+                        this.errorPrice = 'No of Installment-required'
+                    }
+                    if (this.receivedMonthlyInstallments.length == 0) {
+                        this.errorMOinstallment = 'Monthly Installment-required'
                     }
                     if (this.receivedEmailAddress.length == 0) {
-                        createToast(`Email-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorEmail = 'Email-required'
                     }
                     if (this.receivedMobileNumber.length == 0) {
-                        createToast(`phone-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorMob = 'Phone-required'
                     }
                     if (this.receivedLandlineNumber.length == 0) {
-                        createToast(`LandLine Number-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorLand = 'LandLine Number-required'
                     }
                     if (this.receivedSecondaryNumber.length == 0) {
-                        createToast(`SecondaryNumber-required`, {
-                            type: 'danger',
-                            timeout: 8000, // Adjust timeout as needed
-                        });
+                        this.errorSec = 'Secondary Number-required'
                     }
-                    if (this.media.length == 0) {
-                        createToast(`media-required`, {
+                    if (this.receivedSelectedArea.length == 0) {
+                        this.errorAreaNumber = 'Area-required'
+                    }
+                    if (this.receivedSelectedLocation.length == 0) {
+                        this.errorLocation = 'Location-required'
+                    }
+                    if (this.receivedBedRooms.length == 0) {
+                        this.errorBeds = 'Bedrooms-required'
+                    }
+                    if (this.receivedBathRooms.length == 0) {
+                        this.errorBaths = 'Bathrooms-required'
+                    }
+                    if (this.receivedKitchen.length == 0) {
+                        this.errorKitchen = 'Kitchen-required'
+                    }
+                    if (this.receivedFloor.length == 0) {
+                        this.errorFloor = 'Floor-required'
+                    }
+                    if (resp.response) {
+                        createToast(`fields-required`, {
                             type: 'danger',
-                            position: 'top-left',
+                            position: 'top-right',
                             timeout: 8000, // Adjust timeout as needed
                         });
                     }
@@ -422,9 +375,7 @@ export default {
                 } else {
                     console.log(resp)
                 }
-
             }
-            // this.$refs.logCheckboxValues.reset();
         },
         toastSuccess() {
             createToast('Submit Successfully',
@@ -560,27 +511,13 @@ export default {
         handleOtherDesc(data) {
             this.receivedOther_description = data
         },
-        handleImageUpload(event) {
-            const files = event.target.files;
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const mediaType = file.type.startsWith('image/') ? 'image' : 'video';
-                const mediaUrl = URL.createObjectURL(file);
-                this.selectedImages.push({ url: mediaUrl, media_type: mediaType, file });
-            }
-            event.target.value = ""; // Clear the input field to allow selecting more images
-        },
-
     },
 }
+
 </script>
 
 <style>
 @import './Advertisement.css';
-/* .active {
-    background-color: #ebebeb !important;
-    color: #fff;
-} */
 </style>
 
 <template>
@@ -660,24 +597,25 @@ export default {
                                 </div>
                                 <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
                                     @ChildToParentSelectLocation="handleLocationData"
-                                    @ChildToParentSelectArea="handleAreaData" />
+                                    @ChildToParentSelectArea="handleAreaData" 
+                                    :errorLocation="this.errorLocation" :errorAreaNumber="this.errorAreaNumber" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
-                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData" />
+                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData"
+                    :errorAreaSize="this.errorAreaSize" :errorPrice="this.errorPrice" />
                 <div class="" v-if="sellChecked == true">
                     <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
                         @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
                         @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
-                        @ChildToParentReadyForPossessionData="handleRpData" />
+                        @ChildToParentReadyForPossessionData="handleRpData" :errorAdvanceAmounts="this.errorAdvanceAmount"
+                        :errorNofInstallments="this.errorNofInstallment" :errorMOinstallments="this.errorMOinstallment" />
                 </div>
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
                     @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
@@ -696,49 +634,26 @@ export default {
                     @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
                     @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
                     @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
-                    @childDataOtherDesc="handleOtherDesc" />
+                    @childDataOtherDesc="handleOtherDesc" :errorBaths="this.errorBaths" :errorBeds="this.errorBeds" 
+                    :errorKitchen="this.errorKitchen" :errorFloor="this.errorFloor" />
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData" />
+                <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData"
+                    :titleError="this.errorMsg" :descError="this.errorDesc" />
             </div>
-
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <!-- <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" /> -->
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-around">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-images fa-2xl" style="color: rgb(255, 69, 0);"></i>
-                            <h5 class="mt-2">Property Images Upload</h5>
-                        </div>
-                        <div class="col-6">
-                            <input type="file" ref="imageInput" class="btn btn-primary" multiple
-                                @change="handleImageUpload" />
-                            <div class="row ">
-                                <div class="col-6 col-md-12">
-                                    <div class="d-flex flex-wrap my-2">
-                                        <div v-for="(media, index) in selectedImages" :key="index">
-                                            <img class="mx-1" v-if="media.media_type === 'image'" :src="media.url"
-                                                alt="Selected Image" :height="60" />
-                                            <video class="mt-1 ms-1" v-else :src="media.url" controls width="100"
-                                                height="60">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" />
             </div>
             <div class="card shadow-sm p-3 mb-5 bg-body rounded">
                 <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
-                    @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData" />
+                    @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData"
+                    :emailError="this.errorEmail" :mobError="this.errorMob" :landError="this.errorLand"
+                    :secError="this.errorSec" />
             </div>
-            <div class="my-1">
+            <div class="my-1 text-center">
                 <button v-on:click="logCheckboxValues" class="adversBtn">Add Submit Advertisement</button>
             </div>
         </div>
     </div>
-<AgentDashboardFooter /></template>
+    <AgentDashboardFooter />
+</template>

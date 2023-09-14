@@ -4,14 +4,21 @@ import { required, email, sameAs, between, minValue, maxValue, alpha, numeric, m
 export default {
     name: 'ContactInfo',
     props: {
-
+        emailError: String,
+        mobError: String,
+        landError: String,
+        secError: String
     },
     data() {
         return {
             email: '',
             MobNum: '',
             LandNum: '',
-            SecondNum: ''
+            SecondNum: '',
+            showEmailError: true,
+            showMobError: true,
+            showLandError: true,
+            showSecError: true,
         }
     },
     setup() {
@@ -72,7 +79,20 @@ export default {
             this.setTouched('all')
             this.SecondNum = this.SecondNum.replace(/[^0-9]/g, "")
             this.$emit("ChildToParentSecondNumData", this.SecondNum)
-        }
+        },
+        hideErrorMessageEmail() {
+            this.showEmailError = false;
+        },
+        hideErrorMessageMob() {
+            this.showMobError = false;
+        },
+        hideErrorMessageLand() {
+            this.showLandError = false;
+        },
+        hideErrorMessageSec() {
+            this.showSecError = false;
+        },
+        
     }
 }
 </script>
@@ -90,34 +110,38 @@ export default {
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"
-                        v-model="email" @input="handleEmail" :class="v$.email.$error ? 'is-invalid' : ''">
+                       @focus="hideErrorMessageEmail" v-model="email" @input="handleEmail" :class="v$.email.$error ? 'is-invalid' : ''">
                     <div v-for="error of v$.email.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showEmailError">{{ emailError }}</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleMobileControlInput1" class="form-label">Mobile Number</label>
                     <input type="text" class="form-control" id="exampleMobileControlInput1" placeholder="+123456789"
-                        v-model="MobNum" @input="handleMobNum" :class="v$.MobNum.$error ? 'is-invalid' : ''">
+                       @focus="hideErrorMessageMob" v-model="MobNum" @input="handleMobNum" :class="v$.MobNum.$error ? 'is-invalid' : ''">
                     <div v-for="error of v$.MobNum.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showMobError">{{ mobError }}</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleLandlineControlInput1" class="form-label">Landline Number</label>
                     <input type="text" class="form-control" id="exampleLandlineControlInput1" placeholder="+1234567"
-                        v-model="LandNum" @input="handleLandNum" :class="v$.LandNum.$error ? 'is-invalid' : ''">
-                        <div v-for="error of v$.LandNum.$errors" class="invalid-feedback" :key="error.$uid">
+                       @focus="hideErrorMessageLand" v-model="LandNum" @input="handleLandNum" :class="v$.LandNum.$error ? 'is-invalid' : ''">
+                    <div v-for="error of v$.LandNum.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showLandError">{{ landError }}</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleLandlineControlInput1" class="form-label">Secondary Number</label>
                     <input type="text" class="form-control" id="exampleLandlineControlInput1" placeholder="+1234567890"
-                        v-model="SecondNum" @input="handleSecondNum" :class="v$.SecondNum.$error ? 'is-invalid' : ''">
-                        <div v-for="error of v$.SecondNum.$errors" class="invalid-feedback" :key="error.$uid">
+                       @focus="hideErrorMessageSec" v-model="SecondNum" @input="handleSecondNum" :class="v$.SecondNum.$error ? 'is-invalid' : ''">
+                    <div v-for="error of v$.SecondNum.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showSecError">{{ secError }}</div>
                 </div>
             </div>
         </div>

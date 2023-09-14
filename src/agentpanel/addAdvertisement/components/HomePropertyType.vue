@@ -67,9 +67,7 @@ export default {
             this.$emit("childDataHomePropertyTypeVal", this.homePropertyVal)
 
         },
-        // ValueHandleHomeProperty() {
-        //     this.$emit("childDataHomePropertyTypeVal", this.homePropertyVal)
-        // },
+
     },
 }
 </script>

@@ -4,12 +4,15 @@ import { required, email, sameAs, between, minValue, maxValue, alpha, numeric, m
 export default {
     name: 'PropertyInfo',
     props: {
-
+        titleError: String,
+        descError: String
     },
     data() {
         return {
             title: '',
-            description: ''
+            description: '',
+            showTitleError: true,
+            showDescError: true,
         }
     },
     setup() {
@@ -44,6 +47,12 @@ export default {
             this.description
             this.setTouched('all')
             this.$emit("ChildToParentDescData", this.description)
+        },
+        hideMessageTitleError(){
+            this.showTitleError = false
+        },
+        hideMessageDescError(){
+            this.showDescError = false
         }
     }
 }
@@ -59,21 +68,24 @@ export default {
                 <h5 class="mt-2">Property Information</h5>
             </div>
             <div class="col-6">
+
                 <div class="mb-3">
                     <label for="inputTitle" class="form-label">Title</label>
                     <input type="text" class="form-control" id="inputTitle" v-model="title" @input="handleTitle"
-                        :class="v$.title.$error ? 'is-invalid' : ''">
+                      @focus="hideMessageTitleError"  :class="v$.title.$error ? 'is-invalid' : ''">
                     <div v-for="error of v$.title.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showTitleError">{{ titleError }}</div>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="description"
-                        @input="handleDesc" :class="v$.description.$error ? 'is-invalid' : ''"></textarea>
+                       @focus="hideMessageDescError" @input="handleDesc" :class="v$.description.$error ? 'is-invalid' : ''"></textarea>
                     <div v-for="error of v$.description.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showDescError">{{ descError }}</div>
                 </div>
             </div>
         </div>

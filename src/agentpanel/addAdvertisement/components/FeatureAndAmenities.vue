@@ -8,7 +8,10 @@ export default {
         Amenities
     },
     props: {
-
+        errorBeds: String,
+        errorBaths: String,
+        errorKitchen: String,
+        errorFloor: String,
     },
     data() {
         return {
@@ -52,6 +55,11 @@ export default {
             other_nearby_palces: '',
             distance_from_airport: 0,
             other_description: '',
+            ///////////////
+            showBathsErrorMessage: true,
+            showBedsErrorMessage: true,
+            showKitchenErrorMessage: true,
+            showFloorErrorMessage: true,
         }
     },
     methods: {
@@ -65,33 +73,26 @@ export default {
             this.bathRoom = this.bathRoom.replace(/[^0-9]/g, "");
             this.$emit("ChildToParentBathRoomData", this.bathRoom)
         },
+        handleKitchen() {
+            this.kitchen
+            this.kitchen = this.kitchen.replace(/[^0-9]/g, "");
+            this.$emit("childDataKitchen", this.kitchen)
+        },
+        handleFloor() {
+            this.floor
+            this.floor = this.floor.replace(/[^0-9]/g, "");
+            this.$emit("childDataFloor", this.floor)
+
+        },
         handleSaveAmenities() {
+            if (this.built_in_year == 0) {
+                createToast(`built_in_year-required`, {
+                    type: 'danger',
+                    timeout: 8000, // Adjust timeout as needed
+                });
+            }
             if (this.built_in_wardrobes == false) {
-                createToast(`built_in_warehouse-required`, {
-                    type: 'danger',
-                    timeout: 8000, // Adjust timeout as needed
-                });
-            }
-            if (this.bathRoom.length == 0) {
-                createToast(`Baths-required`, {
-                    type: 'danger',
-                    timeout: 8000, // Adjust timeout as needed
-                });
-            }
-            if (this.bedRoom.length == 0) {
-                createToast(`Beds-required`, {
-                    type: 'danger',
-                    timeout: 8000, // Adjust timeout as needed
-                });
-            }
-            if (this.floor.length == 0) {
-                createToast(`Floor-required`, {
-                    type: 'danger',
-                    timeout: 8000, // Adjust timeout as needed
-                });
-            }
-            if (this.kitchen.length == 0) {
-                createToast(`Kitchen-required`, {
+                createToast(`built_in_wardrobes-required`, {
                     type: 'danger',
                     timeout: 8000, // Adjust timeout as needed
                 });
@@ -109,8 +110,6 @@ export default {
             this.$emit("childDataParkingSpace", this.parking_space)
             this.$emit("childDataFurnished", this.furnished_unfurnished)
             this.$emit("childDataLobbyBuilding", this.lobby_in_building)
-            this.$emit("childDataFloor", this.floor)
-            this.$emit("childDataKitchen", this.kitchen)
             this.$emit("childDataStudyRoom", this.study_room)
             this.$emit("childDataLaundryRoom", this.laundry_room)
             this.$emit("childDataMaidRoom", this.maid_room)
@@ -130,6 +129,18 @@ export default {
             this.$emit("childDataDistanceAirport", this.distance_from_airport)
             this.$emit("childDataOtherDesc", this.other_description)
         },
+        hideBathsError() {
+            this.showBathsErrorMessage = false
+        },
+        hideBedsError() {
+            this.showBedsErrorMessage = false
+        },
+        hideKitchenError() {
+            this.showKitchenErrorMessage = false
+        },
+        hideFloorError() {
+            this.showFloorErrorMessage = false
+        },
     },
 }
 </script>
@@ -144,21 +155,31 @@ export default {
                 <h5 class="mt-2">Feature & Amenities</h5>
             </div>
             <div class="col-6">
-                <div class="mb-3">
-                    <h5>Bedrooms</h5>
-                    <div class="mb-2">
-                        <label for="inputBedroom" class="form-label">Enter Bedroom</label>
-                        <input type="text" class="form-control" id="inputBedroom" v-model="bedRoom" @input="handleBedRoom">
-                    </div>
+                <div class="mb-2">
+                    <label for="inputBedroom" class="form-label">Bedroom</label>
+                    <input type="text" class="form-control" id="inputBedroom" v-model="bedRoom" @input="handleBedRoom"
+                       @focus="hideBedsError" placeholder="Enter number of BedRoom">
+                    <div v-if="showBedsErrorMessage" class="text-danger">{{ errorBeds }}</div>
+                </div>
+                <div class="mb-2">
+                    <label for="inputBathroom" class="form-label">Bathroom</label>
+                    <input type="text" class="form-control" id="inputBathroom" v-model="bathRoom" @input="handleBathRoom"
+                       @focus="hideBathsError" placeholder="Enter number of BathRoom">
+                        <div v-if="showBathsErrorMessage" class="text-danger">{{ errorBaths }}</div>
+                </div>
+                <div class="mb-2">
+                    <label for="inputKitchen" class="form-label">Kitchen</label>
+                    <input type="text" class="form-control" id="inputKitchen" placeholder="enter number of kitchen"
+                       @focus="hideKitchenError" v-model="kitchen" @input="handleKitchen">
+                        <div v-if="showKitchenErrorMessage" class="text-danger">{{ errorKitchen }}</div>
                 </div>
                 <div class="mb-3">
-                    <h5>Bathrooms</h5>
-                    <div class="mb-2">
-                        <label for="inputBathroom" class="form-label">Enter Bathroom</label>
-                        <input type="text" class="form-control" id="inputBathroom" v-model="bathRoom"
-                            @input="handleBathRoom">
-                    </div>
+                    <label for="inputFloor" class="form-label">Floor</label>
+                    <input type="text" class="form-control" id="inputFloor" placeholder="Enter Floor example 2"
+                       @focus="hideFloorError" v-model="floor" @input="handleFloor">
+                        <div v-if="showFloorErrorMessage" class="text-danger">{{ errorFloor }}</div>
                 </div>
+
                 <div class="">
                     <h5>Feature and Amenities</h5>
                     <p class="text-muted">Add additional features e.g. parking spaces, waste disposal, internet
@@ -290,18 +311,6 @@ export default {
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         lobby_in_building
                                                     </label>
-                                                </div>
-                                                <div class="">
-                                                    <label for="exampleFormControlInput1" class="form-label">Floor</label>
-                                                    <input type="number" class="form-control" id="exampleFormControlInput1"
-                                                        placeholder="name@example.com" v-model="floor"
-                                                        v-on:change="handleFloor">
-                                                </div>
-                                                <div class="">
-                                                    <label for="exampleFormControlInput1" class="form-label">Kitchen</label>
-                                                    <input type="number" class="form-control" id="exampleFormControlInput1"
-                                                        placeholder="enter number of kitchen" v-model="kitchen"
-                                                        v-on:change="handleKitchen">
                                                 </div>
                                             </div>
                                         </div>
@@ -506,7 +515,6 @@ export default {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

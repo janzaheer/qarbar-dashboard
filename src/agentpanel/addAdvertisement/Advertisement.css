@@ -37,3 +37,22 @@
     /* background-color: #007bff; */
     color: #fff;
 }
+
+.file-preview {
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+.uploadBtn{
+    color:  rgb(255, 69, 0);
+    border: 1px solid  rgb(255, 69, 0);
+    border-radius: 7px;
+    padding: 7px 10px;
+    background-color: white;
+}
+.uploadBtn:hover{
+    color:  darkgray;
+    border: 1px solid  darkgray;
+    border-radius: 7px;
+}

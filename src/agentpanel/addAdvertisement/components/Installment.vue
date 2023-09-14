@@ -4,7 +4,9 @@ import { required, email, sameAs, between, minValue, maxValue, alpha, numeric, m
 export default {
     name: 'Installment',
     props: {
-
+        errorAdvanceAmounts: String,
+        errorNofInstallments: String,
+        errorMOinstallments: String
     },
     data() {
         return {
@@ -83,31 +85,34 @@ export default {
                     <h4>installment available</h4>
                     <div class="mb-3">
                         <label for="exampleAdvanceAmountControlInput1" class="form-label">Advance Amount</label>
-                        <input type="text" class="form-control" id="exampleAdvanceAmountControlInput1" placeholder="22222"
+                        <input type="text" class="form-control" id="exampleAdvanceAmountControlInput1" placeholder="Enter Advance Amount"
                             v-model="AdvanceAmount" @input="handleAdvanceAmount"
                             :class="v$.AdvanceAmount.$error ? 'is-invalid' : ''">
                         <div v-for="error of v$.AdvanceAmount.$errors" class="invalid-feedback" :key="error.$uid">
                             {{ error.$message }}
                         </div>
+                        <div class="text-danger" v-if="errorAdvanceAmounts">{{ errorAdvanceAmounts }}</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleNoInstallmentControlInput1" class="form-label">No of Installments</label>
-                        <input type="text" class="form-control" id="exampleNoInstallmentControlInput1" placeholder="0333"
+                        <input type="text" class="form-control" id="exampleNoInstallmentControlInput1" placeholder="Enter No of Installment"
                             v-model="NofInstallments" @input="handleNoOfInstallment"
                             :class="v$.NofInstallments.$error ? 'is-invalid' : ''">
                         <div v-for="error of v$.NofInstallments.$errors" class="invalid-feedback" :key="error.$uid">
                             {{ error.$message }}
                         </div>
+                        <div class="text-danger" v-if="errorNofInstallments">{{ errorNofInstallments }}</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleMonthlyInstallmentControlInput1" class="form-label">Monthly
                             Installments</label>
                         <input type="text" class="form-control" id="exampleMonthlyInstallmentControlInput1"
-                            placeholder="3500" v-model="MonthlyInstallments" @input="handleMonthlyInstallment"
+                            placeholder="Enter Monthly Installment" v-model="MonthlyInstallments" @input="handleMonthlyInstallment"
                             :class="v$.MonthlyInstallments.$error ? 'is-invalid' : ''">
                         <div v-for="error of v$.MonthlyInstallments.$errors" class="invalid-feedback" :key="error.$uid">
                             {{ error.$message }}
                         </div>
+                        <div class="text-danger" v-if="errorMOinstallments">{{ errorMOinstallments }}</div>
                     </div>
                     <div class="mb-3">
                         <div class="form-check form-switch">

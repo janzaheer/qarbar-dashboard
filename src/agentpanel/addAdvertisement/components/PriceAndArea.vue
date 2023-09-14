@@ -7,7 +7,8 @@ export default {
 
     },
     props: {
-
+        errorAreaSize: String,
+        errorPrice: String
     },
     setup() {
         return { v$: useVuelidate() }
@@ -17,22 +18,13 @@ export default {
             areaUnit: '',
             AreaType: '',
             totalPrice: '',
-            // form: {
-            // name: "",
-            // }
-
-
+            showError: true,
+            showPriceError: true
         }
     },
     validations() {
         return {
-            // form: {
-            // name: {
-            //     required,
-            //     alpha,
-            //     minLength: minLength(3),
-            //     maxLength: maxLength(9)
-            // },
+
             totalPrice: {
                 required,
                 minLength: minLength(3),
@@ -41,19 +33,14 @@ export default {
             },
             areaUnit: {
                 required,
-                minLength: minLength(3),
+                minLength: minLength(1),
                 maxLength: maxLength(10),
                 numeric,
             }
-
-            // }
-
-
         }
     },
     methods: {
         setTouched(theModel) {
-            // if (theModel == 'name' || theModel == 'all') { this.v$.name.$touch() }
             if (theModel == this.totalPrice || theModel == 'all') { this.v$.totalPrice.$touch() }
             if (theModel == this.areaUnit || theModel == 'all') { this.v$.areaUnit.$touch() }
         },
@@ -69,20 +56,21 @@ export default {
         },
         handlePrice() {
             this.totalPrice
-            //  this.totalPrice = this.totalPrice.replace(/[^0-9]/g, "");
             this.setTouched('all')
             this.$emit("ChildToParentTotalPriceData", this.totalPrice)
         },
-        // async onSubmit(event) {
-        //     event.preventDefault()
-        //     this.setTouched('all')
-        //     if (!this.v$.$invalid) {
-        //         alert('good')
-        //     } else {
-
-        //     }
-        // }
-
+        hideErrorMessage() {
+            this.showError = false;
+        },
+        showErrorMessage() {
+            this.showError = true;
+        },
+        hideErrorMessagePrice() {
+            this.showPriceError = false;
+        },
+        showErrorMessagePrice() {
+            this.showPriceError = true;
+        },
     },
     mounted() {
 
@@ -105,11 +93,13 @@ export default {
                         <div class="mb-1">
                             <label for="exampleAreaUnitControlInput1" class="form-label">Enter Area Size</label>
                             <input type="text" class="form-control" id="exampleAreaUnitControlInput1"
-                                placeholder="Enter Area Unit" v-model="areaUnit" @input="handleAreaUnit"
-                                :class="v$.areaUnit.$error ? 'is-invalid' : ''">
-                            <div v-for="error of v$.areaUnit.$errors" class="invalid-feedback" :key="error.$uid">
+                                placeholder="Enter Area Unit" @focus="hideErrorMessage" v-model="areaUnit"
+                                @input="handleAreaUnit" :class="v$.areaUnit.$error ? 'is-invalid' : ''">
+                            <div v-for="error of v$.areaUnit.$errors" @focus="areaUnitTouched = true"
+                                class="invalid-feedback" :key="error.$uid">
                                 {{ error.$message }}
                             </div>
+                            <div class="text-danger" v-if="showError">{{ errorAreaSize }}</div>
                         </div>
                     </div>
                     <div class="col-4 mt-2">
@@ -127,24 +117,12 @@ export default {
                 <div class="mb-1">
                     <label for="examplePriceControlInput1" class="form-label">Enter Price</label>
                     <input type="text" class="form-control" id="examplePriceControlInput1" placeholder="price"
-                        v-model="totalPrice" @input="handlePrice" :class="v$.totalPrice.$error ? 'is-invalid' : ''">
+                       @focus="hideErrorMessagePrice" v-model="totalPrice" @input="handlePrice" :class="v$.totalPrice.$error ? 'is-invalid' : ''">
                     <div v-for="error of v$.totalPrice.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
+                    <div class="text-danger" v-if="showPriceError">{{ errorPrice }}</div>
                 </div>
-                <!-- <div>
-                    <form @submit="onSubmit">
-                        <div class="mb-3">
-                            <label for="exampleNameControlInput1" class="form-label">Enter name</label>
-                            <input type="text" class="form-control" id="exampleNameControlInput1" placeholder="name"
-                                v-model.trim="name" @input="$event => setTouched('name')" :class="v$.name.$error ? 'is-invalid' : ''">
-                            <div v-for="error of v$.name.$errors" class="invalid-feedback" :key="error.$uid">
-                                {{ error.$message }}
-                            </div>
-                        </div>
-                        <button type="submit">submit</button>
-                    </form>
-                </div> -->
             </div>
         </div>
     </div>

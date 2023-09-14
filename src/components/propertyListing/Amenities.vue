@@ -7,7 +7,7 @@
                 <h5 class="card-title">Features Of Apartment</h5>
                 <div class="row g-2">
                     <div class="col-12 col-md-6">
-                        <p v-if="productDetail?.amenties?.built_in_year">Build In Year {{
+                        <p v-if="productDetail?.amenties?.built_in_year"><i class="fa-regular fa-calendar fa-lg"></i> Build In Year {{
                             productDetail.amenties.built_in_year }}</p>
                         <p v-if="productDetail?.amenties?.furnished_unfurnished == false">Unfurnished</p>
                         <p v-if="productDetail?.amenties?.furnished_unfurnished == true">Furnished</p>
@@ -18,8 +18,6 @@
                         <p v-if="productDetail?.amenties?.Farmhouse">FarmHouse</p>
                         <p v-if="productDetail?.amenties?.community_lawn_garden">Community lawn garden</p>
                         <p v-if="productDetail?.amenties?.covered_parking">Parking</p>
-                        <p v-if="productDetail?.amenties?.distance_from_airport">AirPort Distance {{
-                            productDetail.amenties.distance_from_airport }} </p>
                         <p v-if="productDetail?.amenties?.drawing_room">Drawing Room</p>
                         <p v-if="productDetail?.amenties?.electricity_backup">Electric Backup</p>
                         <p v-if="productDetail?.amenties?.gym">Gym</p>
@@ -27,6 +25,8 @@
                         <p v-if="productDetail?.amenties?.parking_space">Parking Space</p>
                         <p v-if="productDetail?.amenties?.swimming_pool">Swimming Pool</p>
                         <p v-if="productDetail?.amenties?.study_room">Study Room</p>
+                        <p v-if="productDetail?.amenties?.distance_from_airport">Distance From Airport {{
+                            productDetail.amenties.distance_from_airport }} Km </p>
                     </div>
                     <div class="col-12 col-md-6">
                         <p v-if="productDetail?.amenties?.balcony">Balcony</p>

@@ -1,15 +1,14 @@
 <template>
     <div>
         <div class="card text-dark">
-            <img src="https://static.rdc.moveaws.com/images/hero/default/2021-11/webp/hp-hero-desktop-xl.webp" class="card-img imge-card d-block w-100" alt="...">
+            <img src="../../assets//slider/sliderImage.jpg" class="card-img imge-card d-block w-100" alt="...">
             <div class="card-img-overlay ">
                 <div class="sliderTop">
                     <div class="d-flex justify-content-center align-items-center my-md-1">
-                        <h1 class="card-title text-white">Find Every Home Here</h1>
+                        <h1 class="card-title text-white">Find Your Dream Home</h1>
                     </div>
                     <MainDropdown />
                 </div>
-
             </div>
         </div>
     </div>
@@ -27,6 +26,9 @@ export default {
 .sliderTop {
     margin-top: 100px;
 }
+.imge-card{
+        height: 600px !important;
+    }
 
 @media only screen and (max-width: 1380px) {
     .imge-card{
