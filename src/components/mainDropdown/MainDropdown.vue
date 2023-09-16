@@ -10,8 +10,8 @@
                      <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                             v-model="showCommercialValue" v-on:change="handleShowCOmmercialValue">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Show commercial properties only......
+                        <label class="form-check-label text" for="flexCheckDefault">
+                            Show commercial properties only
                         </label>
                     </div>
                 </div>
@@ -154,14 +154,11 @@ export default {
             receivedPlotData: '',
             receivedCommercialData: '',
             showCommercialValue: false
-
-
         }
     },
     methods: {
         handleShowCOmmercialValue() {
             this.showCommercialValue
-            console.log('value', this.showCommercialValue)
         },
         handleSellView() {
             this.sellChecked = true;
@@ -174,13 +171,11 @@ export default {
         handleSearchTerm(e) {
             // if (e.key == 'Enter') {
             let value = e.target.value
-            console.log('search', value)
             this.searchValue = value
             // }
         },
         handleMeterUnit(e) {
             let val = e.target.value;
-            console.log('----', val)
             this.unitMeter = val
         },
         ValuemaxArea() {
@@ -197,7 +192,6 @@ export default {
                 return 'Area'
             }
         },
-
         handleValue() {
             const params = new URLSearchParams()
             if (this.searchValue) {
@@ -254,7 +248,6 @@ export default {
             };
             this.$router.push(listingRoute);
         },
-
         handleCityData(data) {
             this.receivedCitiesData = data;
         },
@@ -275,7 +268,6 @@ export default {
         },
         handleBathsData(data) {
             this.receivedBathsData = data
-
         },
         handleBadsData(data) {
             this.receivedBedsData = data

@@ -100,7 +100,9 @@
     color: #888;
     border: 1px solid #888;
 }
-
+.collapsed{
+    color: #6C757D;
+}
 @media screen and (max-width: 1024px) {
     .maindropdownwidth {
         margin: 0 50px;
@@ -112,10 +114,37 @@
         margin: 0 150px;
     }
 }
-
+@media screen and (max-width: 765px) {
+    .R_S_button {
+        font-size: xx-small;
+    }
+    .R_S_button_Un_Select{
+        font-size: xx-small;
+    }
+}
+@media screen and (max-width: 560px) {
+    .R_S_button {
+        font-size: xx-small;
+    }
+    .R_S_button_Un_Select{
+        font-size: xx-small;
+    }
+    .text{
+        font-size: 12px !important;
+    }
+}
 @media screen and (max-width: 420px) {
     .maindropdownwidth {
         margin: -5px;
+    }
+    .R_S_button {
+        font-size: xx-small;
+    }
+    .R_S_button_Un_Select{
+        font-size: xx-small;
+    }
+    .text{
+        font-size: 10px !important;
     }
 }
 

@@ -9,6 +9,7 @@ import AgentNumber from './AgentNumber.vue';
 import AgentInfo from './AgentInfo.vue';
 import Location from './Location.vue';
 import Installments from './Installments.vue';
+import OverviewPage from './OverviewPage.vue' 
 import axios from 'axios';
 import moment from 'moment';
 import { BASE_URL, PROPERTY_END_POINT, API_VERSION } from '../../utils/api';
@@ -24,7 +25,8 @@ export default {
         AgentInfo,
         Location,
         GoogleMap, Marker,
-        Installments
+        Installments,
+        OverviewPage
         // VuePictureSwipe
         // VueGallerySlideshow
     },
@@ -41,8 +43,25 @@ export default {
         return {
             productDetail: [],
             singleImage: [],
-            ThumbnailImage: this.productDetail?.media && this.productDetail?.media[0].image_url,
+            ThumbnailImages: this.productDetail?.media && this.productDetail?.media[0].image_url, // Replace with your data
         }
+    },
+    computed: {
+        mediaUrl() {
+            if (this.ThumbnailImages) {
+                return this.ThumbnailImages.image_url;
+            } else if (this.productDetail && this.productDetail.media && this.productDetail.media[0]) {
+                return this.productDetail.media[0].image_url;
+            } else {
+                return ''; // Empty URL for no media
+            }
+        },
+        isImage() {
+            return Boolean(this.mediaUrl && /\.(jpeg|jpg|png)$/i.test(this.mediaUrl));
+        },
+        isVideo() {
+            return Boolean(this.mediaUrl && /\.(mp4|avi)$/i.test(this.mediaUrl));
+        },
     },
     methods: {
         async getSingleProduct() {
@@ -50,15 +69,23 @@ export default {
                 let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + this.$route.params.id + `/detail_property/`
                 let res = await axios.get(finalUrl)
                 this.productDetail = res.data
-                this.singleImage = res.data.media
+                // this.singleImage = res.data.media
+                this.singleImage = res.data.media.map(item => ({
+                    ...item,
+                    mediaType: /\.(jpeg|jpg|png)$/i.test(item.image_url) ? 'image' : /\.(mp4|avi)$/i.test(item.image_url) ? 'video' : 'unknown',
+                }));
                 console.log(res.data)
             } catch (error) {
                 console.log(error)
             }
         },
-        selectimage(i) {
-            this.ThumbnailImage = i
-            console.log('imageSelect', this.ThumbnailImage = i)
+        selectImage(item) {
+            this.ThumbnailImages = item
+            console.log('imageSelect', this.ThumbnailImages)
+        },
+        selectVideo(item) {
+            this.ThumbnailImages = item;
+            console.log('videoSelect', this.ThumbnailImages);
         },
     },
     mounted() {
@@ -78,27 +105,39 @@ export default {
         <div class="row my-5">
             <div class="col-md-12">
                 <div class="card shadow">
-                    <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
-                        class="card-img-top thumbnailImage" alt="...">
+                    <!-- <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
+                        class="card-img-top thumbnailImage" alt="..."> -->
+                    <div>
+                        <div v-if="isImage">
+                            <img :src="mediaUrl" class="card-img-top thumbnailImage" alt="...">
+                        </div>
+                        <div v-else-if="isVideo">
+                            <video controls :src="mediaUrl" class="card-img-top thumbnailImage" alt="...">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div v-else>
+                            No media available.
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-center mt-1">
-                            <div class="thumbnail text-center mx-1" v-for="item in singleImage">
-                                <img :src="item.image_url" class="img-thumbnail" style="height: 50px; width: 60px;"
-                                    v-on:click="selectimage(item)" />
+                            <div class="thumbnail text-center mx-1" v-for="item in singleImage" :key="item.id">
+                                <div v-if="item.mediaType === 'image'">
+                                    <img :src="item.image_url" class="img-thumbnail" style="height: 50px; width: 60px;"
+                                        @click="selectImage(item)" />
+                                </div>
+                                <div v-else-if="item.mediaType === 'video'">
+                                    <!-- <video controls :src="item.image_url" class="img-thumbnail"
+                                        style="height: 120px; width: 120px;" @click="selectVideo(item)"></video> -->
+                                    <div class="img-thumbnail" style="height: 50px; width: 60px;"
+                                        @click="selectVideo(item)"><i
+                                            class="fa-solid fa-video fa-fade fa-2xl videoClass"></i></div>
+                                </div>
                             </div>
                         </div>
-                        <h5 class="card-title">Overview</h5>
-                        <h6 class="card-title">{{ productDetail?.title }}</h6>
-                        <div class="d-flex align-items-center">
-                            <p class="card-text"><i class="fa-sharp fa-solid fa-bed"></i> {{
-                                productDetail?.amenties?.bedrooms }}
-                                Bedroom</p>
-                            <p class="card-text mx-5"> <i class="fa-solid fa-bath"></i> {{
-                                productDetail?.amenties?.bathrooms }}
-                                Bathrooms</p>
-                            <p class="card-text"><img src="../../assets/icons/sqft.png" style="width: 30px; height: 30px;"
-                                    alt=""> {{ productDetail?.property_type?.size }} {{
-                                        productDetail?.property_type?.unit_types }}</p>
+                        <div>
+                            <OverviewPage :productDetail="productDetail"  />
                         </div>
                     </div>
                 </div>
@@ -113,7 +152,7 @@ export default {
                     <div class="col-12">
                         <Amenities :productDetail="productDetail" />
                     </div>
-                    <div class="col-12 my-3" v-if="productDetail.rent_sale_type == 'sale' ">
+                    <div class="col-12 my-3" v-if="productDetail.rent_sale_type == 'sale'">
                         <Installments :productDetail="productDetail" />
                     </div>
                     <div class="col-12">

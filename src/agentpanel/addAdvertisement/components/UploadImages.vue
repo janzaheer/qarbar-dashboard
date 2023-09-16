@@ -24,7 +24,7 @@ export default {
                 region: "ap-northeast-1",
                 accessKeyId: 'AKIA2GGOXYXVJBADABN5',
                 secretAccessKey: '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',
-                Key: `media/jpg`,
+                Key: `media`,
                 s3Url: "https://meditech-products.s3-ap-northeast-1.amazonaws.com/",
             },
         }

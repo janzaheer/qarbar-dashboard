@@ -11,6 +11,11 @@
     height: 600px;
 }
 
+.videoClass{
+    margin-top: 20px;
+    color: brown;
+}
+
 @media screen and (max-width: 1080px) {
     .iframeCLass {
         width: 590px;

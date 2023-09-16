@@ -36,14 +36,11 @@
                             <RouterLink class="nav-link" to="/agentsList">Find agent</RouterLink>
                         </li>
                         <li class="nav-item mx-md-1">
-                            <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
-                        </li>
-                        <!-- <li class="nav-item mx-md-1">
-                            <RouterLink class="nav-link" to="/buyPage/?params=rent_sale_type=sale">BuyPage</RouterLink>
+                            <RouterLink class="nav-link" to="#">Blogs</RouterLink>
                         </li>
                         <li class="nav-item mx-md-1">
-                            <RouterLink class="nav-link" to="/rentPage/?params=rent_sale_type=rent">RentPage</RouterLink>
-                        </li> -->
+                            <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
+                        </li>
                     </ul>
                     <RouterLink class="addPropertyBtnColor mt-1 mx-2" to="/agentDashboard">Add Property
                     </RouterLink>
