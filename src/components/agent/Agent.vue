@@ -2,7 +2,7 @@
     <div class="container my-5">
         <h1>Meet the Agents</h1>
         <p class="my-4">Learn more about Agent</p>
-        <div class="row text-center g-2">
+        <div class="row text-center g-1">
             <Carousel :autoplay="4000" :wrap-around="true" v-bind="settings" :breakpoints="breakpoints">
                 <Slide  v-for="user in userList" :key="user?.id">
                     <div class="carousel__item p-1">

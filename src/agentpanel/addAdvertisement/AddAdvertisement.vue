@@ -153,6 +153,7 @@ export default {
         },
         handleImageUploaded(data) {
             this.receivedUploadedImage = data;
+            console.log('img',this.receivedUploadedImage)
         },
         handleBedRoomData(data) {
             this.receivedBedRooms = data
@@ -524,7 +525,7 @@ export default {
     <AgentDashboardHeader />
     <div class="container-fluid AgentDashboardHeight">
         <div class="my-2">
-            <img src="https://profolio.zameen.com/images/header-add-property.png" class="img-thumbnail" alt="...">
+            <img src="../../assets/webBanner1.jpg" class="img-thumbnail" alt="...">
         </div>
         <div class="container my-5">
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">

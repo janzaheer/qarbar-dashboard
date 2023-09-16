@@ -10,10 +10,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Type</th>
-                                        <th scope="col" v-if="productDetail?.property_type?.home_types"> {{  productDetail?.property_type?.home_types}}</th>
-                                        <th scope="col" v-if="productDetail?.property_type?.plot_types"> {{  productDetail?.property_type?.plot_types}}</th>
-                                        <th scope="col" v-if="productDetail?.property_type?.commercial_types"> {{  productDetail?.property_type?.commercial_types}}</th>
-
+                                        <th scope="col"> {{ handlePropertyType(productDetail.property_type?.home_types, productDetail.property_type?.plot_types, productDetail.property_type?.commercial_types) }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,5 +79,67 @@ export default {
     created: function () {
         this.moment = moment;
     },
+    methods:{
+        handlePropertyType(home_types, plot_types, commercial_types) {
+            if (home_types == 'flat') {
+                return 'Flat'
+            }
+            if (home_types == 'house') {
+                return 'House'
+            }
+            if (home_types == 'villa') {
+                return 'Villa'
+            }
+            if (home_types == 'room') {
+                return 'Room'
+            }
+            if (home_types == 'upper_portion') {
+                return 'Upper-Portion'
+            }
+            if (home_types == 'lower_portion') {
+                return 'Lower-Portion'
+            }
+            if (home_types == 'farm_house') {
+                return 'Farm-House'
+            }
+            if (home_types == 'pent_house') {
+                return 'PentHouse'
+            }
+            if (commercial_types == 'office') {
+                return 'Office'
+            }
+            if (commercial_types == 'shop') {
+                return 'Shop'
+            }
+            if (commercial_types == 'warehouse') {
+                return 'Wardrobe'
+            }
+            if (commercial_types == 'building') {
+                return 'Building'
+            }
+            if (commercial_types == 'factory') {
+                return 'Factory'
+            }
+            if (plot_types == 'residetial_plot') {
+                return 'Residential-Plot'
+            }
+            if (plot_types == 'commercial_plot') {
+                return 'Commercial-Plot'
+            }
+            if (plot_types == 'industrial_land') {
+                return 'Industrial-Land'
+            }
+            if (plot_types == 'agricultural_land') {
+                return 'Agricultural-Land'
+            }
+            if (plot_types == 'plot_file') {
+                return 'Plot-File'
+            }
+            if (plot_types == 'plot_form') {
+                return 'Plot-Form'
+            }
+            return 'Unknown';
+        }
+    }
 }
 </script>

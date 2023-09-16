@@ -46,9 +46,9 @@
                         <p v-if="productDetail?.amenties?.near_by_hospital">Near By Hospital</p>
                         <p v-if="productDetail?.amenties?.near_by_school">Near By School</p>
                         <p v-if="productDetail?.amenties?.store_room">Store Room</p>
-                        <p v-if="productDetail?.amenties?.other_nearby_palces">{{
+                        <p v-if="productDetail?.amenties?.other_nearby_palces">Other Nearby Places:- {{
                             productDetail.amenties.other_nearby_palces }}</p>
-                        <p v-if="productDetail?.amenties?.other_description">{{
+                        <p v-if="productDetail?.amenties?.other_description">Other Description:- {{
                             productDetail.amenties.other_description }}</p>
                     </div>
                 </div>
