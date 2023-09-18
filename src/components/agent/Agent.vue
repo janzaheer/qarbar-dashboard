@@ -6,12 +6,12 @@
             <Carousel :autoplay="4000" :wrap-around="true" v-bind="settings" :breakpoints="breakpoints">
                 <Slide  v-for="user in userList" :key="user?.id">
                     <div class="carousel__item p-1">
-                        <RouterLink to="/agentprofile" class="text-decoration-none">
+                        <RouterLink :to="'/agentprofile/' + user.id" class="text-decoration-none">
                             <div class="card text-center border-0 agentBg">
                                 <div class="card-body">
                                     <img src="https://github.com/mdo.png" alt="" width="150" height="150"
                                         class="rounded-circle border border-2 border-primary p-1">
-                                    <h4 class="card-title mt-2">{{ user.username }}</h4>
+                                    <h4 class="card-title mt-2">{{ user?.name }}</h4>
                                     <p class="card-text">Owner Real Estate</p>
                                 </div>
                             </div>
@@ -70,10 +70,10 @@ export default {
     },
     methods: {
         async getUsers() {
-            let res = await axios.get('https://dummyjson.com/users')
-            // console.log(res.data)
+            let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
+            //  console.log(res.data)
             // this.list = res.data.products
-            this.userList = res.data.users
+            this.userList = res.data.results
         },
     },
     mounted() {

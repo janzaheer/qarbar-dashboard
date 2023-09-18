@@ -4,6 +4,8 @@
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
 import { RouterLink } from 'vue-router';
+import axios from 'axios';
+import { BASE_URL,API_VERSION, AGENT_POINT,PROPERTY_END_POINT } from '../../utils/api';
 export default {
     name: 'AgentProfile',
     components: {
@@ -11,7 +13,29 @@ export default {
         Footer,
        
     },
-
+    data(){
+        return {
+            agentDetail: []
+        }
+    },
+    methods:{
+       async getAgent(){
+        let finalUrl = BASE_URL + API_VERSION() + AGENT_POINT() + this.$route.params.id + `/`
+        let res = await axios.get(finalUrl)
+        this.agentDetail = res.data
+         console.log('singleAgent',res.data)
+       }
+    },
+    async getAgentProperties(){
+        let FinalURL = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `agent_properties/`
+        let res = await axios.get(`https://apidev.qarbar.com/api/v1/properties/agent_properties/`)
+        console.log('agentProperty',res.data)
+    },
+    mounted() {
+        console.log('idddddd',this.$route.params.id)
+         this.getAgent()
+        //  this.getAgentProperties();
+    }
 };
 </script>
 
@@ -34,13 +58,15 @@ export default {
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h4 class="card-title">Atif Badini</h4>
+                                <h4 class="card-title">{{ agentDetail?.name }}</h4>
                                 <p class="card-text">Owner Real Estate</p>
-                                <p class="card-text"><small class="text-muted"> Nushki,Balochistan</small></p>
+                                <p class="card-text"><small class="text-muted">Language {{ agentDetail?.languages }}</small></p>
                                 <div class="d-flex">
                                     <p class="card-text me-5">200 for Sale</p>
                                     <p class="card-text">141 for Rent</p>
                                 </div>
+                                <p class="card-text" >Experience ({{ agentDetail?.experience_since }})</p>
+                                <p class="card-text" >Bio {{ agentDetail?.bio }}</p>
                             </div>
                         </div>
                     </div>
@@ -56,7 +82,7 @@ export default {
                             <button class="btn btn-danger">Email</button>
                         </div>
                         <div>
-                            <p class="card-text"><b>Atif Badini</b> usually respond within 10 minutes</p>
+                            <p class="card-text"><b>{{ agentDetail?.name }}</b> usually respond within 10 minutes</p>
                         </div>
                         <hr>
                         <div class="">
@@ -72,7 +98,7 @@ export default {
                 <hr>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-title">Properties By Atif Badini Real Estate & Builders</h5>
+                        <h5 class="text-title">Properties By {{ agentDetail?.name }} Real Estate & Builders</h5>
                         <div class="row g-2 mt-2">
                             <div class="col-md-6">
                                 <h6 class="card-title">200 Properties for Sale</h6>
@@ -133,7 +159,7 @@ export default {
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nationality</th>
-                                                <th scope="col">Pakistan</th>
+                                                <th scope="col">{{ agentDetail?.nationality }}</th>
 
                                             </tr>
                                         </thead>
@@ -144,7 +170,7 @@ export default {
                                             </tr>
                                             <tr>
                                                 <th scope="row">Languages</th>
-                                                <td>English, Hindi, Urdu, Balochi</td>
+                                                <td>{{ agentDetail?.languages }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -163,9 +189,7 @@ export default {
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Area</th>
-                                                <td>Business Bay
-                                                    Dubai Land
-                                                    Jumeirah Lake Towers</td>
+                                                <td>{{ agentDetail?.areas }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -182,7 +206,7 @@ export default {
                 <hr>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-title">About Atif Badini Real Estate & Builders</h5>
+                        <h5 class="text-title">About {{ agentDetail?.name }} Real Estate & Builders</h5>
                         <p class="card-text">Buying and selling real estate signifies a time of change. Whether making an
                             investment for capital gains or for personal or business use, the process can be challenging for
                             any consumer. For people who have never set foot in dealings, investments and buying or selling

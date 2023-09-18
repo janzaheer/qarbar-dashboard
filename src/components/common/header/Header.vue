@@ -42,19 +42,26 @@
                             <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
                         </li>
                     </ul>
-                    <RouterLink class="addPropertyBtnColor mt-1 mx-2" to="/agentDashboard">Add Property
+                    <RouterLink class="addPropertyBtnColor mt-1 mx-2" v-if="isLoggedIn" to="/agentDashboard">Add Property
                     </RouterLink>
-                    <ul class="navbar-nav me-md-5">
+                    <router-link class="addPropertyBtnColor mt-1 mx-2" v-else to="/login">Add Property</router-link>
+
+                    <ul class="navbar-nav NV">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="fa-solid fa-circle-user fa-2xl"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white">
-                                <li>
+                                <li v-if="!isLoggedIn">
                                     <RouterLink class="dropdown-item btn btn-outline-warning btn-sm mt-1" to="/login">Login
                                     </RouterLink>
                                 </li>
+                                <li v-else>
+                                    <a class="dropdown-item" href="#" @click="logout">Logout</a>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">{{ user }}</a></li>
                                 <li><a class="dropdown-item" href="#">Add Property</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -71,6 +78,11 @@
 import { RouterLink, RouterView } from 'vue-router'
 export default {
     name: 'Header',
+    data() {
+        return {
+            user: '',
+        };
+    },
     methods: {
         // generateLink(type) {
         //     // Use RouterLink with dynamic `to` binding
@@ -93,7 +105,20 @@ export default {
                 }
             };
             this.$router.push(listingRoute);
-        }
+        },
+        logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            this.$router.push('/login');
+        },
+    },
+    mounted() {
+        this.user = localStorage.getItem('user');
+    },
+    computed: {
+        isLoggedIn() {
+            return localStorage.getItem('token') !== null;
+        },
     }
 }
 
@@ -105,7 +130,9 @@ export default {
 /* a:active {
     color: yellow;
 } */
-
+.NV{
+ margin-right: 80px;
+}
 .addPropertyBtnColor {
     color: rgb(255, 69, 0);
     border: 1px solid rgb(255, 69, 0);

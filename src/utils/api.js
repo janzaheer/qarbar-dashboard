@@ -20,6 +20,18 @@ export const CITY_END_POINT = () => {
     return `cities/`
 }
 
+export const LOGIN_POINT = () => {
+    return `auth/login/`
+}
+
+export const SIGNUP_POINT = () => {
+    return `auth/register/`
+}
+
+export const AGENT_POINT = () => {
+    return `agent/`
+}
+
 export const changeUrl = () => {
     return 'http://127.0.0.1:8000/';
 }

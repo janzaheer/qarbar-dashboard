@@ -10,7 +10,8 @@ import Login from '../components/auth/Login.vue';
 import SignUp from '../components/auth/SignUp.vue';
 import PageNotFound from '../router/PageNotFound.vue';
 import BuyPage from '../components/propertyListing/BuyPage.vue';
-import RentPage from '../components/propertyListing/RentPage.vue'
+import RentPage from '../components/propertyListing/RentPage.vue';
+import AgentRegister from '../components/auth/AgentRegister.vue'
 // agent panel 
 import AgentView from '../views/AgentView.vue'
 import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
@@ -69,7 +70,7 @@ const router = createRouter({
       component: AgentList
     },
     {
-      path: '/agentprofile',
+      path: '/agentprofile/:id',
       name: 'AgentProfile',
       component: AgentProfile
     },
@@ -87,6 +88,11 @@ const router = createRouter({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/agentRegister',
+      name: 'AgentRegister',
+      component: AgentRegister
     },
     {
       path: '/agentpanel',
