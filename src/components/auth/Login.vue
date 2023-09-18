@@ -11,9 +11,14 @@
                                 <div class="card shadow-2-strong shadow">
                                     <div class="card-body p-5 text-center">
                                         <form ref="LoginForm" @submit.prevent="loginForm" autoComplete="on">
-
+                                            <div class="mb-2">
+                                                <RouterLink class="" to="/">
+                                                    <img src="../../assets/LoogQ.png" class="" alt=""
+                                                        style="height: 30px;">
+                                                </RouterLink>
+                                            </div>
                                             <div class="mb-5 mt-2">
-                                                <h3>Welcome to Qaarbar! Please login.</h3>
+                                                <h3>Welcome to Qarbar Please login.</h3>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control"

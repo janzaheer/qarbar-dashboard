@@ -8,8 +8,13 @@
                     <div class="container py-2">
                         <div className="card shadow-2-strong shadow sigupForm">
                             <div className="card-body p-5 text-center">
+                                <div class="mb-2">
+                                    <RouterLink class="" to="/">
+                                        <img src="../../assets/LoogQ.png" class="" alt="" style="height: 30px;">
+                                    </RouterLink>
+                                </div>
                                 <div className="mb-5">
-                                    <h3>Welcome to Qaarbar! Please Register Now.</h3>
+                                    <h3>Welcome to Qarbar Please Register Now.</h3>
                                 </div>
                                 <form className="row g-2 " ref="handleSignUp" @submit.prevent="handleSignUp"
                                     autoComplete="off">
@@ -106,7 +111,8 @@
                                     </div>
                                     <div className="col-12 d-flex justify-content-center align-items-center">
                                         <button class="btn btn-warning mt-2" type="submit">Register Now</button>
-                                        <RouterLink to="/agentRegister" class="btn btn-warning ms-2 mt-2">Apply for Agent Registration</RouterLink>
+                                        <RouterLink to="/agentRegister" class="btn btn-warning ms-2 mt-2">Apply for Agent
+                                            Registration</RouterLink>
                                     </div>
                                 </form>
                             </div>
@@ -232,13 +238,13 @@ export default {
                     // Reset the form
                     this.$router.push('/login');
                     this.$refs.handleSignUp.reset();
-                        // this.first_name = "",
-                        // this.last_name = "",
-                        // this.username = "",
-                        // this.password = "",
-                        // this.confirm_password = "",
-                        // this.email = "",
-                        // this.phone_number = ""
+                    // this.first_name = "",
+                    // this.last_name = "",
+                    // this.username = "",
+                    // this.password = "",
+                    // this.confirm_password = "",
+                    // this.email = "",
+                    // this.phone_number = ""
 
 
                     this.successMessage = "Registration successful!";
