@@ -9,9 +9,9 @@
                         <RouterLink :to="'/agentprofile/' + user.id" class="text-decoration-none">
                             <div class="card text-center border-0 agentBg">
                                 <div class="card-body">
-                                    <img src="https://github.com/mdo.png" alt="" width="150" height="150"
+                                    <img src="../../assets/user.png" alt="" width="150" height="150"
                                         class="rounded-circle border border-2 border-primary p-1">
-                                    <h4 class="card-title mt-2">{{ user?.name }}</h4>
+                                    <h6 class="card-title mt-2">{{ user?.user.username }}</h6>
                                     <p class="card-text">Owner Real Estate</p>
                                 </div>
                             </div>
@@ -71,9 +71,9 @@ export default {
     methods: {
         async getUsers() {
             let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
-            //  console.log(res.data)
+              console.log(res.data)
             // this.list = res.data.products
-            this.userList = res.data.results
+            this.userList = res.data
         },
     },
     mounted() {
