@@ -10,12 +10,15 @@
                         <div class="card-img-overlay">
                             <!-- <span class="badge badgeColor card-title">{{ item?.property_type?.home_types ||
                                 item?.property_type?.plot_types || item?.property_type?.commercial_types }}</span> -->
-                                 <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types, item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
+                            <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types,
+                                item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
                         </div>
                         <div class="card-body bg-white text-dark rounded">
-                            <h6 class="card-text">Rs {{ item?.total_price }}</h6>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="card-text">Rs {{ item?.total_price }}</h6>
+                                <span class="textSizeClass"><i class="fa-regular fa-eye fa-xs"></i> {{ item?.agent?.views_count }}</span>
+                            </div>
                             <small class="text-body-secondary">{{ item?.title.substring(0, 15) }}</small>
-
                             <div class="d-flex textSizeClass">
                                 <p class="card-text">{{ item?.amenties?.bedrooms }} <i class="fa-sharp fa-solid fa-bed"></i>
                                 </p>
@@ -114,10 +117,14 @@
                     <div class="card text-dark productBg">
                         <img :src="item?.media[0].image_url" class="card-img w-100" width="180" height="180" alt="...">
                         <div class="card-img-overlay">
-                            <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types, item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
-                    </div>
+                            <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types,
+                                item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
+                        </div>
                         <div class="card-body bg-white text-dark rounded">
-                            <h6 class="card-text">Rs {{ item?.total_price }}</h6>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="card-text">Rs {{ item?.total_price }}</h6>
+                                <span class="textSizeClass"><i class="fa-regular fa-eye fa-xs"></i> {{ item?.agent?.views_count }}</span>
+                            </div>
                             <small class="text-body-secondary"> {{ item?.title.substring(0, 15) }}</small>
                             <div class="d-flex textSizeClass">
                                 <p class="card-text">
@@ -170,6 +177,7 @@ export default {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?rent_sale_type=sale`;
             let res = await axios.get(finalUrl)
             this.propertiesSaleList = res.data.results
+            console.log('data', res.data.results)
         },
         handlePropertyType(home_types, plot_types, commercial_types) {
             if (home_types == 'flat') {
@@ -270,5 +278,4 @@ h6,
     font-size: 12px;
     margin-top: 5px;
 }
-
 </style>
