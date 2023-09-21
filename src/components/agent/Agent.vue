@@ -12,7 +12,7 @@
                                     <img src="../../assets/user.png" alt="" width="150" height="150"
                                         class="rounded-circle border border-2 border-primary p-1">
                                     <h6 class="card-title mt-2">{{ user?.user.username }}</h6>
-                                    <p class="card-text">Owner Real Estate</p>
+                                    <p class="card-text">{{ user?.bio.substring(0, 20) }}</p>
                                 </div>
                             </div>
                         </RouterLink>
