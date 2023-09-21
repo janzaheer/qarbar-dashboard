@@ -23,6 +23,7 @@ export default {
             <p class="card-text"><img src="../../assets/icons/sqft.png" style="width: 30px; height: 30px;" alt=""> {{
                 productDetail?.property_type?.size }} {{
         productDetail?.property_type?.unit_types }}</p>
+          <span class="ms-4"><i class="fa-regular fa-eye fa-xs"></i> {{ productDetail?.agent?.views_count }}</span>
         </div>
     </div>
 </template>

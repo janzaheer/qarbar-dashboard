@@ -14,6 +14,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { BASE_URL, PROPERTY_END_POINT, API_VERSION } from '../../utils/api';
 import { GoogleMap, Marker } from "vue3-google-map";
+
 export default {
     name: 'DetailPage',
     components: {

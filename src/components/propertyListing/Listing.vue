@@ -119,6 +119,7 @@
                                                         <span class="badge text-bg-warning card-title me-1">PREMIUM</span>
                                                         <span class="badge text-bg-secondary card-title">{{
                                                             items?.property_type?.home_types }}</span>
+                                                            <span class="badge text-bg-secondary card-title ms-2"><i class="fa-regular fa-eye fa-xs"></i> {{ items?.agent?.views_count }}</span>
                                                         <h4>{{ items?.total_price }} Rs </h4>
                                                     </div>
                                                     <div class="d-flex align-items-center">
@@ -131,7 +132,7 @@
                                                 <div class="mb-2">
                                                     <p class="card-text">
                                                         <i class="fa-sharp fa-solid fa-map-location-dot fa-lg"></i>
-                                                        {{ items?.area.area }}
+                                                        {{ items?.area?.area }}
                                                     </p>
                                                 </div>
                                                 <div class="d-flex ">
@@ -146,16 +147,14 @@
                                                     </p>
                                                     <p class="card-text"><img src="../../assets/icons/sqft.png"
                                                             style="width: 30px; height: 30px;" alt=""> {{
-                                                                items?.property_type?.size_sqf }} {{
-        items?.property_type?.unit_types
-    }}
+                                                                items?.property_type?.size }} {{ items?.property_type?.unit_types }}
                                                     </p>
                                                 </div>
                                                 <div class="mb-2">
                                                     <small class="text-body-secondary">Added: {{
                                                         moment(items?.created_at).startOf('hour').fromNow()
-                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow()
-}})</small>
+                                                    }} ({{ moment(items?.updated_at).startOf('day').fromNow()}})</small>
+                                                    
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="">

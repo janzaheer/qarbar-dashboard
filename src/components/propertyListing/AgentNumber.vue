@@ -9,9 +9,9 @@
                     <div class="card-body text-center">
                         <button class="mainBtnColor bg-white me-2" data-bs-toggle="modal" data-bs-target="#agentModal"><i
                                 class="fas fa-phone fa-lg"></i> Call</button>
-                                <button class="mainBtnColor bg-white me-2" data-bs-toggle="modal" data-bs-target="#agentModal"><i
+                        <button class="mainBtnColor bg-white me-lg-2" data-bs-toggle="modal" data-bs-target="#agentModal"><i
                                 class="fas fa-phone fa-lg"></i> Email</button>
-                        <button class="mainBtnColor bg-white"><i class="fa-brands fa-whatsapp fa-xl"></i>
+                        <button class="mainBtnColor bg-white mt-1"><i class="fa-brands fa-whatsapp fa-xl"></i>
                             WhatsApp</button>
                         <div class="mt-2">
                             <img src="https://github.com/mdo.png" alt="" width="50" height="50"
@@ -57,7 +57,7 @@ import moment from 'moment';
 export default {
     name: 'AgentNumber',
     props: {
-        productDetail:Object
+        productDetail: Object
     },
     created: function () {
         this.moment = moment;

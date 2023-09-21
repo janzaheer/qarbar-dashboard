@@ -57,7 +57,7 @@
         <div class="row g-4 my-5">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <h3>{{ userListCount.total }} Matching Agents Found</h3>
+                    <h3>Agents Found</h3>
                 </div>
                 <div>
                     <select class="form-select" aria-label="Default select example">
@@ -66,38 +66,38 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3" v-for="user in userList" :key="user?.id">
+            <div class="col-md-3" v-for="agent in AgentList" :key="agent?.id">
 
-                <RouterLink to="/agentprofile" class="text-decoration-none">
+                <RouterLink :to="'/agentprofile/' + agent.id" class="text-decoration-none">
                     <div class="card agentListBox">
-                        <img :src="user.image" class="card-img-top" alt="">
+                        <img src="https://robohash.org/hicveldicta.png" class="card-img-top" alt="">
                         <div class="card-body">
                             <div class="text-center">
-                                <h5 class="card-title">{{ user.username }}</h5>
-                                <p class="card-text">Owner Real Estate</p>
+                                <h5 class="card-title">{{ agent?.user.username }}</h5>
+                                <!-- <p class="card-text">Owner Real Estate</p> -->
                                 <span class="badge text-bg-primary card-title"><img
                                         src="../../assets/tropyBadgeIcon/pngegg.png" class="" style="height: 15px;" alt="">
                                     SUPERAGENT</span>
                             </div>
                             <div class="mt-1">
-                                <p class="card-text text-muted">NATIONALITY : <span>Pakistan {{ user?.id }}</span></p>
-                                <p class="card-text text-muted">LANGUAGES : <span>English,Urdu,Balochi</span></p>
+                                <p class="card-text text-muted">NATIONALITY : <span>{{ agent?.nationality }}</span></p>
+                                <p class="card-text text-muted">LANGUAGES : <span>{{ agent?.languages }}</span></p>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <div class="d-flex justify-content-between text-center">
+                            <div class="d-flex justify-content-evenly text-center">
                                 <div class="">
-                                    <p>{{ user.age }}</p>
+                                    <p>{{ agent?.rent_property_count }}</p>
                                     <small class="text-muted">For Rent</small>
                                 </div>
                                 <div>
-                                    <p>{{ user.weight }}</p>
+                                     <p>{{ agent?.sale_property_count }}</p>
                                     <small class="text-muted">For Sale</small>
                                 </div>
-                                <div>
-                                    <p>{{ user.height }}</p>
+                                <!-- <div>
+                                    <p>12</p>
                                     <small class="text-muted">Commercial</small>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -142,21 +142,22 @@ export default {
     },
     data() {
         return {
-            userList: [],
-            userListCount: [],
+            AgentList: [],
+            // AgentListCount: [],
         };
     },
     methods: {
         async getUsers() {
-            let res = await axios.get('https://dummyjson.com/users')
-            // console.log(res.data)
+            let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
+             console.log('agents',res.data)
             // this.list = res.data.products
-            this.userList = res.data.users
-            this.userListCount = res.data
+             this.AgentList = res.data
+            // console.log('agent',res.data.users)
+            // this.AgentListCount = res.data.count
         },
     },
     mounted() {
-        this.getUsers()
+        this.getUsers();
     }
 
 };
