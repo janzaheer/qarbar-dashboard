@@ -74,7 +74,6 @@
                         <div class="card-body">
                             <div class="text-center">
                                 <h5 class="card-title">{{ agent?.user.username }}</h5>
-                                <!-- <p class="card-text">Owner Real Estate</p> -->
                                 <span class="badge text-bg-primary card-title"><img
                                         src="../../assets/tropyBadgeIcon/pngegg.png" class="" style="height: 15px;" alt="">
                                     SUPERAGENT</span>
