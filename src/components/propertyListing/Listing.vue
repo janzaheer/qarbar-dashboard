@@ -146,7 +146,7 @@
                                                     </p>
                                                     <p class="card-text"><img src="../../assets/icons/sqft.png"
                                                             style="width: 30px; height: 30px;" alt=""> {{
-                                                                items?.property_type?.size_sqf }} {{
+                                                                items?.property_type?.size }} {{
         items?.property_type?.unit_types
     }}
                                                     </p>

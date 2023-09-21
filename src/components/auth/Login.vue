@@ -93,7 +93,9 @@ export default {
             showPasswordError: true,
             isAuthenticated: false, // Add an authentication state variable
             token: '',
-            user: ''
+            user: '',
+            agent_id: '',
+            user_id: ''
 
         }
     },
@@ -110,6 +112,8 @@ export default {
         if (this.isAuthenticated) {
             localStorage.setItem('token', this.token);
             localStorage.setItem('user', this.user);
+            localStorage.setItem('agent_id', this.agent_id)
+            localStorage.setItem('id', this.user_id)
         }
     },
     methods: {
@@ -148,11 +152,16 @@ export default {
                         // localStorage.setItem('token', token)
                         this.token = response.data.token;
                         this.user = response.data.user.username;
+                        this.agent_id = response.data.user.agent_id;
+                        this.user_id = response.data.user.id
                         console.log('Token:', this.token);
                         console.log('User:', this.user);
-                        console.log('user', response.data.id)
+                        console.log('AGent-id', this.agent_id)
+                        console.log('user-id', this.user_id)
                         localStorage.setItem('token', this.token);
                         localStorage.setItem('user', this.user);
+                        localStorage.setItem('agent_id',this.agent_id)
+                        localStorage.setItem('id',this.user_id)
                         this.isAuthenticated = true
                         createToast(`login successful!`, {
                             type: 'success',

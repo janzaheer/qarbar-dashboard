@@ -57,7 +57,7 @@
         <div class="row g-4 my-5">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <h3>{{ this.AgentListCount }} Matching Agents Found</h3>
+                    <h3>Agents Found</h3>
                 </div>
                 <div>
                     <select class="form-select" aria-label="Default select example">
@@ -73,8 +73,8 @@
                         <img src="https://robohash.org/hicveldicta.png" class="card-img-top" alt="">
                         <div class="card-body">
                             <div class="text-center">
-                                <h5 class="card-title">{{ agent?.name }}</h5>
-                                <p class="card-text">Owner Real Estate</p>
+                                <h5 class="card-title">{{ agent?.user.username }}</h5>
+                                <!-- <p class="card-text">Owner Real Estate</p> -->
                                 <span class="badge text-bg-primary card-title"><img
                                         src="../../assets/tropyBadgeIcon/pngegg.png" class="" style="height: 15px;" alt="">
                                     SUPERAGENT</span>
@@ -85,19 +85,19 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <div class="d-flex justify-content-between text-center">
+                            <div class="d-flex justify-content-evenly text-center">
                                 <div class="">
-                                    <p>22</p>
+                                    <p>{{ agent?.rent_property_count }}</p>
                                     <small class="text-muted">For Rent</small>
                                 </div>
                                 <div>
-                                     <p>122</p>
+                                     <p>{{ agent?.sale_property_count }}</p>
                                     <small class="text-muted">For Sale</small>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <p>12</p>
                                     <small class="text-muted">Commercial</small>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -143,21 +143,21 @@ export default {
     data() {
         return {
             AgentList: [],
-            AgentListCount: [],
+            // AgentListCount: [],
         };
     },
     methods: {
         async getUsers() {
             let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
-             console.log('agents',res.data.results)
+             console.log('agents',res.data)
             // this.list = res.data.products
-             this.AgentList = res.data.results
+             this.AgentList = res.data
             // console.log('agent',res.data.users)
-            this.AgentListCount = res.data.count
+            // this.AgentListCount = res.data.count
         },
     },
     mounted() {
-        this.getUsers()
+        this.getUsers();
     }
 
 };

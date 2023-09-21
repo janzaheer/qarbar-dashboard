@@ -4,44 +4,53 @@
             <div class="col mb-3">
                 <h5>POPULAR SEARCHES</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Properties for rent in UAE</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Properties for sale in UAE</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for rent in UAE</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for rent in Dubai</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Properties for sale in Dubai</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for rent in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for rent in DHA Islamabad</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in DHA Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in Bahria Town Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for rent in Bahria Town Lahore</a></li>
+                    <!-- <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in DHA Quetta</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in DHA Peshawar</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in Bahria Town Rawalpindi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for sale in DHA Multan</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Properties for rent in DHA Multan</a></li> -->
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>POPULAR AREAS</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for rent in Dubai</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for rent Abu Dhabi</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Villas for rent in Dubai</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">House for rent Abu Dhabi</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for sale in Dubai</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Villa for sale in Bahria Town Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Bungalow for sale DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Apartment for sale in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Apartment for rent DHA Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Plot for sale in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Plot for sale in DHA Karachi</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>TRENDING AREAS</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for rent in Dubai Marina</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartments for sale in Dubai Marina</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Villa for rent in Sharjah</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Villa for sale in Dubai</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Flat for rent in Ajman</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Bungalow for sale in DHA Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Bungalow for sale in Bahria Town Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Apartment for sale in Bahria Town Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Apartment for rent in Bahria Town Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Apartment for sale in Bahria Town Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Apartment for rent in Bahria Town Lahore</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>TRENDING SEARCHES</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Villa for rent in Abu Dhabi</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Villas for sale in Ajman</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Studio for rent in Sharjah</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">1 Bedroom Apartment for rent in Dubai</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Property for rent in Abu Dhabi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Villa for rent in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Villa for sale in DHA Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Studio for rent in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Studio for rent in DHA Karachi</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">1 Bedroom Apartment for rent in DHA Lahore</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary font">Property for rent in Bahria Town Karachi</a></li>
                 </ul>
             </div>
         </footer>
@@ -50,4 +59,8 @@
 <script>
 
 </script>
-<style></style>
+<style>
+.font {
+    font-size: 14px !important;
+}
+</style>

@@ -244,7 +244,7 @@ export default {
                 email: this.receivedEmailAddress,
                 rent_sale_type: this.R_S_Value(),
                 area: this.receivedSelectedCity, // area-id
-                agent: 1100, // remaining agent id is here after login agent
+                agent: 1102, // remaining agent id is here after login agent
                 amenties: {
                     other_nearby_palces: this.receivedOther_nearby_palces,
                     bedrooms: this.receivedBedRooms,

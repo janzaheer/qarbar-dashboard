@@ -29,45 +29,41 @@ export default {
             city: '',
             country: '',
             address: '',
+            companyName: '',
+            companyNtn: '',
+            cnic: '',
+            province: '',
+            postalCode: '',
+            confirmPassword: '',
 
             successMessage: "",
             errorMessage: "",
 
+            confirmPasswordError: '',
             passErrorMessage: '',
-            firstErrorMessage: '',
-            lastErrorMessage: '',
             emailErrorMessage: '',
-            usernameErrorMessage: '',
             phoneErrorMessage: '',
-            nameError: '',
             whatsapp_numError: '',
-            bioError: '',
-            nationalityError: '',
-            languagesError: '',
             areasError: '',
-            experience_sinceError: '',
-            dobError: '',
             cityError: '',
-            countryError: '',
-            addressError: '',
+            companyNameError: '',
+            companyNtnError: '',
+            provinceError: '',
+            postalCodeError: '',
+            cnicError: '',
+
             showPasswordError: true,
-            showFirstNameError: true,
-            showLastNameError: true,
             showEmailError: true,
-            showUserNameNameError: true,
             showConfirmError: true,
             showPhoneError: true,
-            showName: true,
             showWhatsapp: true,
-            showBio: true,
-            showNationality: true,
-            showLanguages: true,
             showAreas: true,
-            showExperience: true,
-            showDob: true,
             showCity: true,
-            showCOuntry: true,
-            showAddress: true
+            showCompany: true,
+            showNTN: true,
+            showProvince: true,
+            showPostal: true,
+            showCnic: true
         }
     },
     setup() {
@@ -75,56 +71,37 @@ export default {
     },
     validations() {
         return {
-            first_name: { required, minLength: minLength(2), maxLength: maxLength(20), alpha },
-            last_name: { required, minLength: minLength(2), maxLength: maxLength(50), alpha },
-            username: { required, minLength: minLength(5), maxLength: maxLength(20), alpha },
+            companyName: { required, minLength: minLength(2), maxLength: maxLength(20), alpha },
+            companyNtn: { required, minLength: minLength(2), maxLength: maxLength(50), numeric },
             email: { required, email },
             phone_number: { required, numeric, maxLength: maxLength(15) }, // Assuming phone_number should be numeric
             password: { required, minLength: minLength(8), maxLength: maxLength(19), },
-            name: { required, maxLength: maxLength(25) },
+            confirmPassword: { required, sameAsPassword: sameAs(this.password) },
             whatsapp_num: { required, numeric, maxLength: maxLength(15) },
-            bio: { required, minLength: minLength(5) },
-            nationality: { required, minLength: minLength(3), alpha },
-            languages: { required, minLength: minLength(2), maxLength: maxLength(80), alpha },
             areas: { required, minLength: minLength(5), maxLength: maxLength(50), },
-            experience_since: { required },
-            dob: { required },
             city: { required, minLength: minLength(2), maxLength: maxLength(10), alpha },
-            country: { required, minLength: minLength(2), maxLength: maxLength(20), alpha },
-            address: { required, minLength: minLength(2), maxLength: maxLength(70) }
+            province: { required, minLength: minLength(2), maxLength: maxLength(20), alpha },
+            cnic: { required, minLength: minLength(7), maxLength: maxLength(20) },
+            postalCode: { required, minLength: minLength(3), maxLength: maxLength(10), numeric },
         }
     },
     methods: {
         setTouched(theModel) {
-            if (theModel == this.first_name || theModel == 'all') { this.v$.first_name.$touch() }
-            if (theModel == this.last_name || theModel == 'all') { this.v$.last_name.$touch() }
+            if (theModel == this.companyName || theModel == 'all') { this.v$.companyName.$touch() }
+            if (theModel == this.companyNtn || theModel == 'all') { this.v$.companyNtn.$touch() }
             if (theModel == this.email || theModel == 'all') { this.v$.email.$touch() }
-            if (theModel == this.username || theModel == 'all') { this.v$.username.$touch() }
             if (theModel == this.phone_number || theModel == 'all') { this.v$.phone_number.$touch() }
             if (theModel == this.password || theModel == 'all') { this.v$.password.$touch() }
-            if (theModel == this.name || theModel == 'all') { this.v$.name.$touch() }
+            if (theModel == this.confirmPassword || theModel == 'all') { this.v$.confirmPassword.$touch() }
             if (theModel == this.whatsapp_num || theModel == 'all') { this.v$.whatsapp_num.$touch() }
-            if (theModel == this.bio || theModel == 'all') { this.v$.bio.$touch() }
-            if (theModel == this.nationality || theModel == 'all') { this.v$.nationality.$touch() }
-            if (theModel == this.languages || theModel == 'all') { this.v$.languages.$touch() }
             if (theModel == this.areas || theModel == 'all') { this.v$.areas.$touch() }
-            if (theModel == this.experience_since || theModel == 'all') { this.v$.experience_since.$touch() }
-            if (theModel == this.dob || theModel == 'all') { this.v$.dob.$touch() }
+            if (theModel == this.cnic || theModel == 'all') { this.v$.cnic.$touch() }
             if (theModel == this.city || theModel == 'all') { this.v$.city.$touch() }
-            if (theModel == this.country || theModel == 'all') { this.v$.country.$touch() }
-            if (theModel == this.address || theModel == 'all') { this.v$.address.$touch() }
+            if (theModel == this.province || theModel == 'all') { this.v$.province.$touch() }
+            if (theModel == this.postalCode || theModel == 'all') { this.v$.postalCode.$touch() }
 
         },
-        handleFirstName() {
-            this.setTouched('all')
-        },
-        handleLastName() {
-            this.setTouched('all')
-        },
         handleEmail() {
-            this.setTouched('all')
-        },
-        handleUserName() {
             this.setTouched('all')
         },
         handlePhone() {
@@ -133,67 +110,51 @@ export default {
         handlePassword() {
             this.setTouched('all')
         },
-        handleName() {
+        handleConfirmPassword() {
             this.setTouched('all')
         },
         handleWhatsapp() {
             this.setTouched('all')
         },
-        handleBio() {
-            this.setTouched('all')
-        },
-        handleNationality() {
-            this.setTouched('all')
-        },
-        handleLanguages() {
-            this.setTouched('all')
-        },
         handleAreas() {
-            this.setTouched('all')
-        },
-        handleExperience() {
-            this.setTouched('all')
-        },
-        handleDob() {
             this.setTouched('all')
         },
         handleCity() {
             this.setTouched('all')
         },
-        handleCountry() {
+        handleCompanyName() {
             this.setTouched('all')
         },
-        handleAddress() {
+        handleCompanyNtn() {
+            this.setTouched('all')
+        },
+        handleCnic() {
+            this.setTouched('all')
+        },
+        handlePostalCode() {
+            this.setTouched('all')
+        },
+        handleProvince() {
             this.setTouched('all')
         },
 
 
         async handleSignUp(e) {
             e.preventDefault();
-            // this.$v.$touch(); // Trigger validatio
             const payload = {
-                userprofile: {
-                    phone_number: "",
-                    dob: this.dob,
-                    city: this.city,
-                    country: this.country,
-                    address: this.address
-                },
                 user: {
-                    username: this.username,
-                    first_name: this.first_name,
-                    last_name: this.last_name,
-                    password: this.password,
-                    email: this.email,
+                    username: this.email,
+                    password: this.password
                 },
-                name: this.name,
                 whatsapp_num: this.whatsapp_num,
                 phone_number: this.phone_number,
-                bio: this.bio,
-                nationality: this.nationality,
-                languages: this.languages,
                 areas: this.areas,
-                experience_since: this.experience_since
+                company_name: this.companyName,
+                company_ntn: this.companyNtn,
+                cnic: this.cnic,
+                city: this.city,
+                province: this.province,
+                postal_code: this.postalCode
             };
             const headers = {
                 'Content-Type': 'application/json', // Indicate that you're sending JSON data
@@ -212,97 +173,96 @@ export default {
                     // Reset the form
                     this.$router.push('/login');
                     this.$refs.handleSignUp.reset();
-                    this.successMessage = "Registration successful!";
-                    this.errorMessage = "";
                 })
-                .catch((error) => {
+                .catch((resp) => {
                     // Handle errors here
-                    if (error.response) {
-                        if (error.response.status === 400) {
-                            const errorData = error.response.data;
-                            const newError = error.response
-                            console.log('newError', newError)
-                            this.errorMessage = "Registration failed due to validation errors."; // Set error message
-                            this.successMessage = ""; // Clear any previous success message
-                            if (errorData.areas) {
-                                console.log('Area is required.');
-                                this.areasError = errorData.areas
-                            }
-                            if (errorData.bio) {
-                                console.log('Bio is required.');
-                                this.bioError = errorData.bio
-                            }
-                            if (errorData.experience_since) {
-                                console.log('experience is required.');
-                                this.experience_sinceError = errorData.experience_since
-                            }
-                            if (errorData.user.username) {
-                                console.log('username is required.');
-                                this.usernameErrorMessage = errorData.user.username
-                            }
-                            if (errorData.phone_number) {
-                                console.log('Phone Number is required.');
-                                this.phoneErrorMessage = errorData.phone_number
-                            }
-                            if (errorData.user.password) {
-                                console.log('Password is required.');
-                                this.passErrorMessage = errorData.user.password
-                            }
-                            if (errorData.languages) {
-                                console.log('langua is required.');
-                                this.languagesError = errorData.languages
-                            }
-                            if (errorData.name) {
-                                console.log('name is required.');
-                                this.nameError = errorData.name
-                            }
-                            if (errorData.nationality) {
-                                console.log('nat is required.');
-                                this.nationalityError = errorData.nationality
-                            }
+                    if (resp.response) {
+                        const resData = resp.response.data
+                        console.warn(resData)
+                        this.eroMsg = resData
+                        // if (this.email.length == 0) {
+                        //     this.emailErrorMessage = 'title-required'
+                        // }
+                        // if (this.receivedDescription.length == 0) {
+                        //     this.errorDesc = 'desc-required'
+                        // }
+                        // if (this.receivedAreaUnit.length == 0) {
+                        //     this.errorAreaSize = 'Area-required'
+                        // }
+                        // if (this.ReceivedTotalPrice.length == 0) {
+                        //     this.errorPrice = 'Price-required'
+                        // }
+                        // if (this.receivedAdvanceAmount.length == 0) {
+                        //     this.errorAdvanceAmount = 'Advance Amount-required'
+                        // }
+                        // if (this.receivedNofInstallments.length == 0) {
+                        //     this.errorPrice = 'No of Installment-required'
+                        // }
+                        // if (this.receivedMonthlyInstallments.length == 0) {
+                        //     this.errorMOinstallment = 'Monthly Installment-required'
+                        // }
+                        // if (this.receivedEmailAddress.length == 0) {
+                        //     this.errorEmail = 'Email-required'
+                        // }
+                        // if (this.receivedMobileNumber.length == 0) {
+                        //     this.errorMob = 'Phone-required'
+                        // }
 
-                        } else {
-                            // Handle other errors (e.g., server errors)
-                            this.errorMessage = "Registration failed due to a server error."; // Set error message
-                            this.successMessage = ""; // Clear any previous success message
-                            console.log('Registration failed:', error.response.data);
+                        if (resp.response) {
+                            createToast(`fields-required`, {
+                                type: 'danger',
+                                position: 'top-right',
+                                timeout: 8000, // Adjust timeout as needed
+                            });
                         }
+                    } else if (resp.request) {
+                        console.log('request-error', resp.request)
                     } else {
-                        this.errorMessage = "Registration failed due to a network error."; // Set error message
-                        this.successMessage = ""; // Clear any previous success message
-                        console.log('Registration failed:', error.message);
+                        console.log(resp)
                     }
                 });
 
-            // console.log('payload', payload)
+            console.log('payload', payload)
+        },
+
+
+        hideCompany() {
+            this.showCompany = false
+        },
+        hideNTN() {
+            this.showNTN = false
+        },
+        hideEmail() {
+            this.showEmailError = false
         },
         hideErrorMessagePassword() {
             this.showPasswordError = false
         },
-        hideBio() {
-            this.showBio = false
-        },
-        HideAreas() {
-            this.showAreas = false
-        },
-        hideExperience() {
-            this.showExperience = false
-        },
-        hideErrorMessageUserName() {
-            this.showUserNameNameError = false
+        hideConfirm() {
+            this.showConfirmError = false
         },
         hideErrorMessagePhone() {
             this.showPhoneError = false
         },
-        hideLanguages() {
-            this.showLanguages = false
+        hideWhatsapp() {
+            this.showWhatsapp = false
         },
-        hideName() {
-            this.showName = false
+        hideCity() {
+            this.showCity = false
         },
-        hideNationality() {
-            this.showNationality = false
-        }
+        hideProvince() {
+            this.showProvince = false
+        },
+        hideCnic() {
+            this.showCnic = false
+        },
+        HideAreas() {
+            this.showAreas = false
+        },
+        hidePostal() {
+            this.showPostal = false
+        },
+
 
     }
 }
@@ -357,53 +317,35 @@ export default {
                                 <div className="mb-5">
                                     <h3>Welcome to Qarbar Agent Registration</h3>
                                 </div>
-                                <form className="row g-2 " ref="handleSignUp" @submit.prevent="handleSignUp"
+                                <form class="row g-2 " ref="handleSignUp" @submit.prevent="handleSignUp"
                                     autoComplete="off">
                                     <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputFirstName"
-                                            name='first_name' placeholder='Enter FirstName' v-model="this.first_name"
-                                            :class="v$.first_name.$error ? 'is-invalid' : ''"
-                                            @focus="hideErrorMessageFirstName" @input="handleFirstName" />
-                                        <label htmlFor="floatingInputFirstName" className='ms-3'>FirstName</label>
-                                        <div v-for="error of v$.first_name.$errors" class="invalid-feedback"
+                                        <input type="text" class="form-control" id="floatingInputFirstName validationServer06"
+                                            name='companyName' placeholder='Enter companyName' v-model="this.companyName"
+                                            :class="v$.companyName.$error ? 'is-invalid' : ''"
+                                            @focus="hideErrorMessageFirstName" @input="handleCompanyName" required />
+                                        <label htmlFor="floatingInputFirstName" className='ms-3'>Company Name</label>
+                                        <div v-for="error of v$.companyName.$errors" class="invalid-feedback"
                                             :key="error.$uid">
                                             {{ error.$message }}
                                         </div>
-                                        <!-- <div class="text-danger" v-if="showFirstNameError">{{ this.firstErrorMessage }}
-                                        </div> -->
                                     </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputLastName" name='last_name'
-                                            placeholder='Enter LastName' v-model="this.last_name" @input="handleLastName"
-                                            @focus="hideErrorMessageLastName"
-                                            :class="v$.last_name.$error ? 'is-invalid' : ''" />
-                                        <label htmlFor="floatingInputLastName" className='ms-3'>Last Name</label>
-                                        <div v-for="error of v$.last_name.$errors" class="invalid-feedback"
+                                    <div class="col-md-4 form-floating">
+                                        <input type="text" class="form-control" id="floatingInputLastName validationServer06" name='companyNtn'
+                                            placeholder='Enter companyNtn' v-model="this.companyNtn"
+                                            @input="handleCompanyNtn" @focus="hideErrorMessageLastName"
+                                            :class="v$.companyNtn.$error ? 'is-invalid' : ''" required />
+                                        <label htmlFor="floatingInputLastName" className='ms-3'>Company NTN</label>
+                                        <div v-for="error of v$.companyNtn.$errors" class="invalid-feedback"
                                             :key="error.$uid">
                                             {{ error.$message }}
                                         </div>
-                                        <!-- <div class="text-danger" v-if="showLastNameError">{{ this.lastErrorMessage }}</div> -->
                                     </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control"
-                                            id="floatingInputUserName validationServer03" placeholder='Enter UserName'
-                                            v-model="this.username" @input="handleUserName"
-                                            @focus="hideErrorMessageUserName"
-                                            :class="v$.username.$error ? 'is-invalid' : ''" />
-                                        <label htmlFor="floatingInputUserName" className='ms-3'>User Name</label>
-                                        <div v-for="error of v$.username.$errors" class="invalid-feedback"
-                                            :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showUserNameNameError">{{ this.usernameErrorMessage
-                                        }}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 form-floating">
+                                    <div class="col-md-4 form-floating">
                                         <input type="email" class="form-control"
                                             id="floatingInputUserEmail validationServer07" placeholder='Enter email'
                                             name='email' v-model="this.email" @input="handleEmail"
-                                            @focus="hideErrorMessageEmail" :class="v$.email.$error ? 'is-invalid' : ''" />
+                                            @focus="hideErrorMessageEmail" :class="v$.email.$error ? 'is-invalid' : ''" required />
                                         <label htmlFor="floatingInputUserEmail" className='ms-3'>User Email</label>
                                         <div v-for="error of v$.email.$errors" class="invalid-feedback" :key="error.$uid">
                                             {{ error.$message }}
@@ -411,10 +353,10 @@ export default {
                                         <!-- <div class="text-danger" v-if="showEmailError">{{ this.emailErrorMessage }}</div> -->
                                     </div>
                                     <div class="col-md-4 form-floating">
-                                        <input type="password" class="form-control" id="floatingInputPassword"
+                                        <input type="password" class="form-control" id="floatingInputPassword validationServer06"
                                             placeholder="password" v-model="this.password" @focus="hideErrorMessagePassword"
                                             @input="handlePassword" name="password"
-                                            :class="v$.password.$error ? 'is-invalid' : ''">
+                                            :class="v$.password.$error ? 'is-invalid' : ''" required>
                                         <label for="floatingInputPassword">Password</label>
                                         <div v-for="error of v$.password.$errors" class="invalid-feedback"
                                             :key="error.$uid">
@@ -422,11 +364,29 @@ export default {
                                         </div>
                                         <div class="text-danger" v-if="showPasswordError">{{ this.passErrorMessage }}</div>
                                     </div>
-                                    <div className="col-md-4 form-floating">
+                                    <div class="col-md-4 form-floating">
+                                        <input type="password" class="form-control"
+                                            id="floatingInputConfirmPassword validationServer06"
+                                            placeholder='Enter ConfirmPassword' name='confirmPassword'
+                                            v-model="this.confirmPassword" @input="handleConfirmPassword"
+                                            @focus="hideErrorMessageConfirm"
+                                            :class="v$.confirmPassword.$error ? 'is-invalid' : ''" required />
+                                        <label htmlFor="floatingInputConfirmPassword" className='ms-3'>Confirm
+                                            Password</label>
+                                        <div v-for="error of v$.confirmPassword.$errors" class="invalid-feedback"
+                                            :key="error.$uid">
+                                            {{ error.$message }}
+                                        </div>
+
+                                        <!-- <div class="text-danger" v-if="showUserNameNameError">{{ this.usernameErrorMessage
+                                        }}
+                                        </div> -->
+                                    </div>
+                                    <div class="col-md-4 form-floating">
                                         <input type="number" class="form-control"
                                             id="floatingInputPhoneNumber validationServer04" placeholder='PhoneNumber'
                                             v-model="this.phone_number" @input="handlePhone" @focus="hideErrorMessagePhone"
-                                            :class="v$.phone_number.$error ? 'is-invalid' : ''" />
+                                            :class="v$.phone_number.$error ? 'is-invalid' : ''"  required />
                                         <label htmlFor="floatingInputPhoneNumber" className='ms-3'>Phone Number</label>
                                         <div v-for="error of v$.phone_number.$errors" class="invalid-feedback"
                                             :key="error.$uid">
@@ -434,27 +394,12 @@ export default {
                                         </div>
                                         <div class="text-danger" v-if="showPhoneError">{{ this.phoneErrorMessage }}</div>
                                     </div>
-
-
-                                    <!-- simple  -->
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputName validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='name' v-model="this.name"
-                                            @input="handleName" :class="v$.name.$error ? 'is-invalid' : ''"
-                                            @focus="hideName" />
-                                        <label htmlFor="floatingInputName" class='ms-3'>Name</label>
-                                        <div v-for="error of v$.name.$errors" class="invalid-feedback" :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showName">{{ this.nameError }}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 form-floating">
+                                    <div class="col-md-4 form-floating">
                                         <input type="number" class="form-control"
                                             id="floatingInputWhatsapp validationServer06"
                                             placeholder='Enter ConfirmPassword' name='whatsapp_num'
                                             v-model="this.whatsapp_num" @input="handleWhatsapp"
-                                            :class="v$.whatsapp_num.$error ? 'is-invalid' : ''" />
+                                            :class="v$.whatsapp_num.$error ? 'is-invalid' : ''" required />
                                         <label htmlFor="floatingInputWhatsapp" class='ms-3'>WhatsApp Number</label>
                                         <div v-for="error of v$.whatsapp_num.$errors" class="invalid-feedback"
                                             :key="error.$uid">
@@ -463,91 +408,10 @@ export default {
                                         <!-- <div class="text-danger" v-if="showConfirmError">{{ this.confirmErrorMessage }}
                                         </div> -->
                                     </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputBio validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='bio' v-model="this.bio"
-                                            @input="handleBio" :class="v$.bio.$error ? 'is-invalid' : ''"
-                                            @focus="hideBio" />
-                                        <label htmlFor="floatingInputBio" class='ms-3'>Bio</label>
-                                        <div v-for="error of v$.bio.$errors" class="invalid-feedback" :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showBio">{{ this.bioError }}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control"
-                                            id="floatingInputNationality validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='nationality'
-                                            v-model="this.nationality" @input="handleNationality"
-                                            :class="v$.nationality.$error ? 'is-invalid' : ''" @focus="hideNationality" />
-                                        <label htmlFor="floatingInputNationality" class='ms-3'>Nationality</label>
-                                        <div v-for="error of v$.nationality.$errors" class="invalid-feedback"
-                                            :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showNationality">{{ this.nationalityError }}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control"
-                                            id="floatingInputLanguages validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='languages' v-model="this.languages"
-                                            @input="handleLanguages" :class="v$.languages.$error ? 'is-invalid' : ''"
-                                            @focus="hideLanguages" />
-                                        <label htmlFor="floatingInputLanguages" class='ms-3'>Languages</label>
-                                        <div v-for="error of v$.languages.$errors" class="invalid-feedback"
-                                            :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showLanguages">{{ this.languagesError }}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputAreas validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='areas' v-model="this.areas"
-                                            @input="handleAreas" :class="v$.areas.$error ? 'is-invalid' : ''"
-                                            @focus="HideAreas" />
-                                        <label htmlFor="floatingInputAreas" class='ms-3'>Areas</label>
-                                        <div v-for="error of v$.areas.$errors" class="invalid-feedback" :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showAreas">{{ this.areasError }}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="date" class="form-control"
-                                            id="floatingInputExperience validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='experience_since'
-                                            v-model="this.experience_since" @input="handleExperience"
-                                            :class="v$.experience_since.$error ? 'is-invalid' : ''" />
-                                        <label htmlFor="floatingInputExperience" class='ms-3'>Experience Since</label>
-                                        <div v-for="error of v$.experience_since.$errors" class="invalid-feedback"
-                                            :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <div class="text-danger" v-if="showExperience">{{ this.experience_sinceError }}
-                                        </div>
-                                    </div>
-                                    <!--  -->
-
-                                    <!-- userprofile -->
-
-                                    <div className="col-md-4 form-floating">
-                                        <input type="date" class="form-control" id="floatingInputDob validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='dob' v-model="this.dob"
-                                            @input="handleDob" :class="v$.dob.$error ? 'is-invalid' : ''" />
-                                        <label htmlFor="floatingInputDob" className='ms-3'>DOB</label>
-                                        <div v-for="error of v$.dob.$errors" class="invalid-feedback" :key="error.$uid">
-                                            {{ error.$message }}
-                                        </div>
-                                        <!-- <div class="text-danger" v-if="showConfirmError">{{ this.confirmErrorMessage }}
-                                        </div> -->
-                                    </div>
-                                    <div className="col-md-4 form-floating">
+                                    <div class="col-md-4 form-floating">
                                         <input type="text" class="form-control" id="floatingInputCity validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='city' v-model="this.city"
-                                            @input="handleCity" :class="v$.city.$error ? 'is-invalid' : ''" />
+                                            placeholder='Enter city' name='city' v-model="this.city" @input="handleCity"
+                                            :class="v$.city.$error ? 'is-invalid' : ''" required />
                                         <label htmlFor="floatingInputCity" className='ms-3'>City</label>
                                         <div v-for="error of v$.city.$errors" class="invalid-feedback" :key="error.$uid">
                                             {{ error.$message }}
@@ -555,29 +419,57 @@ export default {
                                         <!-- <div class="text-danger" v-if="showConfirmError">{{ this.confirmErrorMessage }}
                                         </div> -->
                                     </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputCountry validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='country' v-model="this.country"
-                                            @input="handleCountry" :class="v$.country.$error ? 'is-invalid' : ''" />
-                                        <label htmlFor="floatingInputCountry" className='ms-3'>Country</label>
-                                        <div v-for="error of v$.country.$errors" class="invalid-feedback" :key="error.$uid">
+                                    <div class="col-md-4 form-floating">
+                                        <input type="text" class="form-control" id="floatingInputBio validationServer06"
+                                            placeholder='Enter province' name='province' v-model="this.province"
+                                            @input="handleProvince" :class="v$.province.$error ? 'is-invalid' : ''"
+                                            @focus="hideBio" required />
+                                        <label htmlFor="floatingInputBio" class='ms-3'>province</label>
+                                        <div v-for="error of v$.province.$errors" class="invalid-feedback"
+                                            :key="error.$uid">
                                             {{ error.$message }}
                                         </div>
-                                        <!-- <div class="text-danger" v-if="showConfirmError">{{ this.confirmErrorMessage }}
+                                        <!-- <div class="text-danger" v-if="showBio">{{ this.bioError }}
                                         </div> -->
                                     </div>
-                                    <div className="col-md-4 form-floating">
-                                        <input type="text" class="form-control" id="floatingInputAddress validationServer06"
-                                            placeholder='Enter ConfirmPassword' name='address' v-model="this.address"
-                                            @input="handleAddress" :class="v$.address.$error ? 'is-invalid' : ''" />
-                                        <label htmlFor="floatingInputAddress" className='ms-3'>Address</label>
-                                        <div v-for="error of v$.address.$errors" class="invalid-feedback" :key="error.$uid">
+                                    <div class="col-md-4 form-floating">
+                                        <input type="text" class="form-control"
+                                            id="floatingInputNationality validationServer06" placeholder='Enter cnic'
+                                            name='cnic' v-model="this.cnic" @input="handleCnic"
+                                            :class="v$.cnic.$error ? 'is-invalid' : ''" @focus="hideNationality" required />
+                                        <label htmlFor="floatingInputNationality" class='ms-3'>Cnic</label>
+                                        <div v-for="error of v$.cnic.$errors" class="invalid-feedback" :key="error.$uid">
                                             {{ error.$message }}
                                         </div>
-                                        <!-- <div class="text-danger" v-if="showConfirmError">{{ this.confirmErrorMessage }}
+                                        <!-- <div class="text-danger" v-if="showNationality">{{ this.nationalityError }}
                                         </div> -->
                                     </div>
-                                    <div className="col-12">
+                                    <div class="col-md-4 form-floating">
+                                        <input type="text" class="form-control" id="floatingInputAreas validationServer06"
+                                            placeholder='Enter ConfirmPassword' name='areas' v-model="this.areas"
+                                            @input="handleAreas" :class="v$.areas.$error ? 'is-invalid' : ''"
+                                            @focus="HideAreas" required />
+                                        <label htmlFor="floatingInputAreas" class='ms-3'>Areas</label>
+                                        <div v-for="error of v$.areas.$errors" class="invalid-feedback" :key="error.$uid">
+                                            {{ error.$message }}
+                                        </div>
+                                        <div class="text-danger" v-if="showAreas">{{ this.areasError }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 form-floating">
+                                        <input type="text" class="form-control"
+                                            id="floatingInputPostalCode validationServer06" placeholder='Enter postalCode'
+                                            name='postalCode' v-model="this.postalCode" @input="handlePostalCode"
+                                            :class="v$.postalCode.$error ? 'is-invalid' : ''" required />
+                                        <label htmlFor="floatingInputPostalCode" class='ms-3'>postalCode</label>
+                                        <div v-for="error of v$.postalCode.$errors" class="invalid-feedback"
+                                            :key="error.$uid">
+                                            {{ error.$message }}
+                                        </div>
+                                        <!-- <div class="text-danger" v-if="showExperience">{{ this.experience_sinceError }}
+                                        </div> -->
+                                    </div>
+                                    <div class="col-12">
                                         <button class="btn btn-warning mt-2" type="submit">Premium Agent Register
                                             Now</button>
                                     </div>

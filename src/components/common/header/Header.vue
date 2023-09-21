@@ -61,7 +61,7 @@
                                     <a class="dropdown-item" href="#" @click="logout">Logout</a>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">{{ user }}</a></li>
+                                <li><a class="dropdown-item" href="#">{{ user_id }} //{{ agent_id }} {{ user }}</a></li>
                                 <li><a class="dropdown-item" href="#">Add Property</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -81,13 +81,11 @@ export default {
     data() {
         return {
             user: '',
+            agent_id:'',
+            user_id: ''
         };
     },
     methods: {
-        // generateLink(type) {
-        //     // Use RouterLink with dynamic `to` binding
-        //     this.$router.push({ path: '/listing', query: { rent_sale_type: type } });
-        // },
         generateLink() {
             const listingRoute = {
                 path: 'Listing',
@@ -109,11 +107,15 @@ export default {
         logout() {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            localStorage.removeItem('agent_id');
+            localStorage.removeItem('id');
             this.$router.push('/login');
         },
     },
     mounted() {
         this.user = localStorage.getItem('user');
+        this.agent_id = localStorage.getItem('agent_id');
+        this.user_id = localStorage.getItem('id')
     },
     computed: {
         isLoggedIn() {
