@@ -8,8 +8,6 @@
                     <div class="card text-dark productBg">
                         <img :src="item?.media[0].image_url" class="card-img w-100" width="180" height="180" alt="...">
                         <div class="card-img-overlay">
-                            <!-- <span class="badge badgeColor card-title">{{ item?.property_type?.home_types ||
-                                item?.property_type?.plot_types || item?.property_type?.commercial_types }}</span> -->
                             <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types,
                                 item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
                         </div>
