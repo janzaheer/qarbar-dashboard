@@ -491,7 +491,6 @@ export default {
                 return 'Area'
             }
         },
-
     },
     mounted() {
         this.getProperties();

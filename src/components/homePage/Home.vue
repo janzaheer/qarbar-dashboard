@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-5">
         <div class="row g-2">
-            <h5>Recent properties for {{ propertiesList[0]?.rent_sale_type }}</h5>
+            <h5>Exclusive properties for {{ propertiesList[0]?.rent_sale_type }}</h5>
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2 mx-md-block" v-for="item in propertiesList.slice(0, 6)"
                 :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">
@@ -110,7 +110,7 @@
             </div> -->
         </div>
         <div class="row mt-4 g-2">
-            <h5>Recent properties for {{ propertiesSaleList[0]?.rent_sale_type }}</h5>
+            <h5>Exclusive properties for {{ propertiesSaleList[0]?.rent_sale_type }}</h5>
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2 mx-md-block"
                 v-for="item in propertiesSaleList.slice(0, 6)" :key="item.id">
                 <RouterLink :to="'/detailPage/' + item.id" class="text-decoration-none">

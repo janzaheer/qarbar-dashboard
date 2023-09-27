@@ -11,7 +11,8 @@ import SignUp from '../components/auth/SignUp.vue';
 import PageNotFound from '../router/PageNotFound.vue';
 import BuyPage from '../components/propertyListing/BuyPage.vue';
 import RentPage from '../components/propertyListing/RentPage.vue';
-import AgentRegister from '../components/auth/AgentRegister.vue'
+import AgentRegister from '../components/auth/AgentRegister.vue';
+import NewProjectDetails from '../components/newProject/NewProjectDetails.vue'
 // agent panel 
 import AgentView from '../views/AgentView.vue'
 import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
@@ -78,6 +79,11 @@ const router = createRouter({
       path: '/newProjectsList',
       name: 'NewProjectsList',
       component: NewProjectsList
+    },
+    {
+      path: '/newProjectDetails/:id',
+      name: 'NewProjectDetails',
+      component: NewProjectDetails
     },
     {
       path: '/login',

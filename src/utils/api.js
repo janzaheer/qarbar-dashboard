@@ -32,6 +32,10 @@ export const AGENT_POINT = () => {
     return `agent/`
 }
 
+export const NewProject_END_POINT =() => {
+    return `projects/`
+}
+
 export const changeUrl = () => {
     return 'http://127.0.0.1:8000/';
 }
