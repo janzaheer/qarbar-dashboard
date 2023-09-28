@@ -61,7 +61,7 @@
                                     <a class="dropdown-item" href="#" @click="logout">Logout</a>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">{{ user_id }} //{{ agent_id }} {{ user }}</a></li>
+                                <li><a class="dropdown-item" href="#">{{ user }}</a></li>
                                 <li><a class="dropdown-item" href="#">Add Property</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>

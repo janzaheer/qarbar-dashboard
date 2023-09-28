@@ -11,8 +11,8 @@
                                 <div class="card-body">
                                     <img src="../../assets/user.png" alt="" width="150" height="150"
                                         class="rounded-circle border border-2 border-primary p-1">
-                                    <h6 class="card-title mt-2">{{ user?.user.username }}</h6>
-                                    <p class="card-text">{{ user?.bio.substring(0, 20) }}</p>
+                                    <h6 class="card-title mt-2">{{ user?.user?.username }}</h6>
+                                    <p class="card-text">{{ user?.bio?.substring(0, 20) }}</p>
                                 </div>
                             </div>
                         </RouterLink>
@@ -71,8 +71,6 @@ export default {
     methods: {
         async getUsers() {
             let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
-              console.log(res.data)
-            // this.list = res.data.products
             this.userList = res.data
         },
     },

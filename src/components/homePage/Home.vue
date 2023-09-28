@@ -10,6 +10,7 @@
                         <div class="card-img-overlay">
                             <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types,
                                 item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
+                                 <span v-if="item?.available == false" class="badge bg-secondary card-text ms-md-1">Sold</span>
                         </div>
                         <div class="card-body bg-white text-dark rounded">
                             <div class="d-flex justify-content-between align-items-center">
@@ -36,76 +37,6 @@
                 <RouterLink :to="{ name: 'Listing', query: { params: 'rent_sale_type=rent' } }"
                     class="mainBtnColor text-decoration-none">view more</RouterLink>
             </div>
-            <!-- <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card text-dark productBg">
-                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
-                        <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">Dubai</span>
-                            <p class="card-text text-white">Downtown</p>
-                        </div>
-                        <div class="card-body bg-white text-dark rounded">
-                            <p class="card-text">108 new properties for rent.</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card text-dark productBg">
-                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
-                        <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">Dubai</span>
-                            <p class="card-text text-white">The Palm jumeriah</p>
-                        </div>
-                        <div class="card-body bg-white text-dark rounded">
-                            <p class="card-text">45 new properties for rent.</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card text-dark productBg">
-                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
-                        <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">Abu Dhabi</span>
-                            <p class="card-text text-white">AL Reem Island</p>
-                        </div>
-                        <div class="card-body bg-white text-dark rounded">
-                            <p class="card-text">151 new properties for rent.</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card text-dark productBg">
-                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
-                        <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">Dubai</span>
-                            <p class="card-text text-white">Business Bey</p>
-                        </div>
-                        <div class="card-body bg-white text-dark rounded">
-                            <p class="card-text">76 new properties for rent.</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div>
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RouterLink to="/detailPage" class="text-decoration-none">
-                    <div class="card text-dark productBg">
-                        <img src="https://www.propertyfinder.ae/dist/common/assets/new-everyday-images/ae/aa0b9a24b1.jvc.webp" class="card-img" alt="...">
-                        <div class="card-img-overlay">
-                            <span class="badge text-bg-secondary card-title">Abu Dhabi</span>
-                            <p class="card-text text-white">Jumeriah Village</p>
-                        </div>
-                        <div class="card-body bg-white text-dark rounded">
-                            <p class="card-text">75 new properties for rent.</p>
-                        </div>
-                    </div>
-                </RouterLink>
-            </div> -->
         </div>
         <div class="row mt-4 g-2">
             <h5>Exclusive properties for {{ propertiesSaleList[0]?.rent_sale_type }}</h5>
@@ -117,6 +48,7 @@
                         <div class="card-img-overlay">
                             <span class="badge badgeColor card-title">{{ handlePropertyType(item.property_type?.home_types,
                                 item.property_type?.plot_types, item.property_type?.commercial_types) }}</span>
+                                <span v-if="item?.available == false" class="badge bg-secondary card-text ms-md-1">Sold</span>
                         </div>
                         <div class="card-body bg-white text-dark rounded">
                             <div class="d-flex justify-content-between align-items-center">
@@ -175,7 +107,6 @@ export default {
             let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?rent_sale_type=sale`;
             let res = await axios.get(finalUrl)
             this.propertiesSaleList = res.data.results
-            console.log('data', res.data.results)
         },
         handlePropertyType(home_types, plot_types, commercial_types) {
             if (home_types == 'flat') {

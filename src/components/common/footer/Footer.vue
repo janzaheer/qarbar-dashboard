@@ -12,7 +12,7 @@
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Cookies Policy</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">PF Expert</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Careers</a></li>
-                    <li class="nav-item"><RouterLink to="/agentDashboard" class="nav-link px-2 text-body-secondary">Agent Hub</RouterLink></li>
+                    <!-- <li class="nav-item"><RouterLink to="/agentDashboard" class="nav-link px-2 text-body-secondary">Agent Hub</RouterLink></li> -->
                 </ul>
                 <p class="text-center text-body-secondary">
                     <button class="SearchBtnColor">App Store</button>
@@ -26,5 +26,8 @@
 
 <script>
 import { RouterLink } from 'vue-router';
+export default {
+    name: 'Footer'
+}
 </script>
 <style></style>

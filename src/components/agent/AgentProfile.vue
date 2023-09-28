@@ -281,8 +281,8 @@ export default {
                                             <div v-if="agentList.agent">
                                                 <span class="badge text-bg-secondary card-title">
                                                     <img src="../../assets/tropyBadgeIcon/pngegg.png" class=""
-                                                        style="height: 15px;" alt=""> SUPERAGENT</span>
-                                            </div>
+                                                        style="height: 15px;" alt=""> SUPERAGENT</span> </div>
+                                            <span v-if="agentList?.available == false" class="badge bg-secondary card-text ms-md-1">Sold</span>
                                         </div>
                                     </div>
                                 </div>
