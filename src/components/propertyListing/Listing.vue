@@ -120,6 +120,7 @@
                                                         <span class="badge text-bg-secondary card-title">{{
                                                             items?.property_type?.home_types }}</span>
                                                             <span class="badge text-bg-secondary card-title ms-2"><i class="fa-regular fa-eye fa-xs"></i> {{ items?.agent?.views_count }}</span>
+                                                            <span v-if="items?.available == false" class="badge bg-secondary card-text ms-md-1">Sold</span>
                                                         <h4>{{ items?.total_price }} Rs </h4>
                                                     </div>
                                                     <div class="d-flex align-items-center">

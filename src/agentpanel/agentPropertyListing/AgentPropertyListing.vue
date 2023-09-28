@@ -1,12 +1,70 @@
 <script>
+import axios from 'axios';
+import { BASE_URL, API_VERSION, AGENT_POINT, PROPERTY_END_POINT } from '../../utils/api';
+export default {
+    name: 'AgentPropertyListing',
+    data() {
+        return {
+            agent_id: '',
+            user: '',
+            agentProperties: [],
+            error: null, // data not found check
+            status: true, // Initial value
+            forStatus: ''
+        }
+    },
+    methods: {
+        async getAgent() {
+            console.log('agent-id', this.agent_id)
+            if (!this.agent_id) {
+                // Handle the case where agent_id is not set
+                return;
+            }
+            let finalUrl = BASE_URL + API_VERSION() + AGENT_POINT() + this.agent_id + `/detail_agent/`
+            let res = await axios.get(finalUrl)
+            // this.agentDetail = res.data.results
+            if (res.data.results.properties.length === 0) {
+                this.agentProperties = [],
+                    this.error = "Data not found.";
+            } else {
+                // this.status = res.data.results.properties.available
+                this.agentProperties = res.data.results.properties
+                console.log('agent-properties', res.data.results.properties)
+                // this.nextUrlPage = res?.data?.next
+                // this.preUrlPage = res?.data?.previous
+            }
+        },
+        async handleStatus(id) {
 
+            try {
+                let api = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + id + `/toggle-available/`;
+                let res = await axios.post(api)
+                console.log('property-status', res)
+                // this.status
+                this.getAgent();
+            } catch (error) {
+                console.log('status while error', error)
+            }
+            console.log('idddd', id)
+            console.log('status', this.status)
+        },
+    },
+    mounted: async function () {
+        // this.getAgent();
+        this.user = localStorage.getItem('user');
+        this.agent_id = localStorage.getItem('agent_id');
+        if (this.agent_id) {
+            await this.getAgent();
+        }
+        console.log('status-btn', this.status)
+    }
+}
 </script>
 
 <style></style>
 
 <template>
     <div>
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow">
@@ -16,128 +74,37 @@
                                 <table class="table table-xs mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Customers</th>
-                                            <th>Product</th>
-                                            <th>Country</th>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            <th>Price</th>
                                             <th>Status</th>
-                                            <th>Payment Method</th>
-                                            <th>Activity</th>
+                                            <th>Views</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
-                                                    class=" rounded-circle mr-3" alt="">Sarah
-                                                Smith</td>
-                                            <td>iPhone X</td>
+                                        <tr v-for="data in agentProperties" :key="data?.id">
+                                            <td><img :src="data?.media[0]?.image_url" height="40" class="mr-3" alt=""></td>
+                                            <td>{{ data?.title }}</td>
+                                            <td><span>Pkr {{ data?.total_price }}</span></td>
                                             <td>
-                                                <span>United States</span>
+                                                <!-- <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch"
+                                                        id="flexSwitchCheckDefault" v-model="status"
+                                                        v-on:change="handleStatus(data?.id)">
+                                                </div> -->
+                                                <button class="btn btn-outline-success btn-sm"
+                                                v-on:click="handleStatus(data?.id)"
+                                                    v-if="data.available === true">Available</button>
+                                                <button class="btn btn-outline-warning btn-sm"
+                                                v-on:click="handleStatus(data?.id)"
+                                                v-else>DisAvailable</button>
+                                                {{ data?.available }}
                                             </td>
+                                            <td><i class="fa-regular fa-eye"></i> {{ data?.views_count }}</td>
                                             <td>
-                                                <div>
-                                                    <div class="progress" style="height: 6px">
-                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td> <i class="fa-regular fa-circle text-success mr-2"></i> Paid</td>
-                                            <td>
-                                                <span>Last Login</span>
-                                                <span class="m-0 pl-3">10 sec ago</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
-                                                    class=" rounded-circle mr-3" alt="">Walter
-                                                R.</td>
-                                            <td>Pixel 2</td>
-                                            <td><span>Canada</span></td>
-                                            <td>
-                                                <div>
-                                                    <div class="progress" style="height: 6px">
-                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><i class="fa-regular fa-circle text-success mr-2"></i> Paid</td>
-                                            <td>
-                                                <span>Last Login</span>
-                                                <span class="m-0 pl-3">50 sec ago</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
-                                                    class=" rounded-circle mr-3" alt="">Andrew
-                                                D.</td>
-                                            <td>OnePlus</td>
-                                            <td><span>Germany</span></td>
-                                            <td>
-                                                <div>
-                                                    <div class="progress" style="height: 6px">
-                                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><i class="fa-regular fa-circle text-warning mr-2"></i> Pending</td>
-                                            <td>
-                                                <span>Last Login</span>
-                                                <span class="m-0 pl-3">10 sec ago</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
-                                                    class=" rounded-circle mr-3" alt=""> Megan
-                                                S.</td>
-                                            <td>Galaxy</td>
-                                            <td><span>Japan</span></td>
-                                            <td>
-                                                <div>
-                                                    <div class="progress" style="height: 6px">
-                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><i class="fa-regular fa-circle text-success mr-2"></i> Paid</td>
-                                            <td>
-                                                <span>Last Login</span>
-                                                <span class="m-0 pl-3">10 sec ago</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
-                                                    class=" rounded-circle mr-3" alt=""> Doris
-                                                R.</td>
-                                            <td>Moto Z2</td>
-                                            <td><span>England</span></td>
-                                            <td>
-                                                <div>
-                                                    <div class="progress" style="height: 6px">
-                                                        <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><i class="fa-regular fa-circle text-success mr-2"></i> Paid</td>
-                                            <td>
-                                                <span>Last Login</span>
-                                                <span class="m-0 pl-3">10 sec ago</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="https://demo.themefisher.com/quixlab/images/avatar/6.jpg"
-                                                    class=" rounded-circle mr-3" alt="">Elizabeth W.</td>
-                                            <td>Notebook Asus</td>
-                                            <td><span>China</span></td>
-                                            <td>
-                                                <div>
-                                                    <div class="progress" style="height: 6px">
-                                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><i class="fa-regular fa-circle text-warning mr-2"></i> Pending</td>
-                                            <td>
-                                                <span>Last Login</span>
-                                                <span class="m-0 pl-3">10 sec ago</span>
+                                                <button class="btn btn-outline-success btn-sm">Update</button>
+                                                <button class="btn btn-outline-danger ms-1 btn-sm">View</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -147,6 +114,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
-</template>
+</div></template>
