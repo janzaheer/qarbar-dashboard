@@ -172,8 +172,6 @@ export default {
                                         @click="selectImage(item)" />
                                 </div>
                                 <div v-else-if="item.mediaType === 'video'">
-                                    <!-- <video controls :src="item.image_url" class="img-thumbnail"
-                                        style="height: 120px; width: 120px;" @click="selectVideo(item)"></video> -->
                                     <div class="img-thumbnail" style="height: 50px; width: 60px;"
                                         @click="selectVideo(item)"><i
                                             class="fa-solid fa-video fa-fade fa-2xl videoClass"></i></div>
@@ -212,7 +210,7 @@ export default {
                 </div>
             </div>
             <div class="col-12 col-lg-4">
-                <div class="sticky-top">
+                <div class="">
                     <AgentNumber :productDetail="productDetail" />
                 </div>
             </div>
