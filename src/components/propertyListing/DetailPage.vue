@@ -210,7 +210,7 @@ export default {
                 </div>
             </div>
             <div class="col-12 col-lg-4">
-                <div class="sticky-top">
+                <div class="">
                     <AgentNumber :productDetail="productDetail" />
                 </div>
             </div>
