@@ -62,8 +62,11 @@
                                 </li>
 
                                 <li><a class="dropdown-item" href="#">{{ user }}</a></li>
-                                <li><a class="dropdown-item" href="#">Add Property</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">
+                                        <span v-if="agent_id !== null">{{ agent_id }}</span>
+                                        <span v-else>{{ user_id }}</span>
+                                        Add Property</a></li>
+                                <li><a class="dropdown-item" href="#"> {{ handleUser() }} Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
@@ -81,8 +84,8 @@ export default {
     data() {
         return {
             user: '',
-            agent_id:'',
-            user_id: ''
+            agent_id: '',
+            user_id: '',
         };
     },
     methods: {
@@ -111,6 +114,24 @@ export default {
             localStorage.removeItem('id');
             this.$router.push('/login');
         },
+        handleUser() {
+            // if (this.agent_id !==null) {
+            //      console.warn('agent_id',this.agent_id);
+            // } else if (this.user_id) {
+            //      console.warn('user',this.user_id);
+            // } else {
+            //     return 'No ID available'; // Display a message when both IDs are null
+            // }
+            if (this.agent_id !== null && this.agent_id !== undefined) {
+        console.warn('agent_id', this.agent_id);
+    } else if (this.user_id !== null && this.user_id !== undefined) {
+        console.warn('user', this.user_id);
+    } else {
+        console.warn('No ID available'); // Display a message when both IDs are null
+    }
+        },
+
+
     },
     mounted() {
         this.user = localStorage.getItem('user');
@@ -132,9 +153,10 @@ export default {
 /* a:active {
     color: yellow;
 } */
-.NV{
- margin-right: 80px;
+.NV {
+    margin-right: 80px;
 }
+
 .addPropertyBtnColor {
     color: rgb(255, 69, 0);
     border: 1px solid rgb(255, 69, 0);

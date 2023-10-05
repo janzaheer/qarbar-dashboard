@@ -9,7 +9,7 @@ import AgentNumber from './AgentNumber.vue';
 import AgentInfo from './AgentInfo.vue';
 import Location from './Location.vue';
 import Installments from './Installments.vue';
-import OverviewPage from './OverviewPage.vue' 
+import OverviewPage from './OverviewPage.vue'
 import axios from 'axios';
 import moment from 'moment';
 import { BASE_URL, PROPERTY_END_POINT, API_VERSION } from '../../utils/api';
@@ -98,6 +98,33 @@ export default {
 
 <style>
 @import './DetailPageStyle.css';
+
+.watermark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    /* Adjust the opacity of the watermark as needed */
+    pointer-events: none;
+    /* Make sure the watermark doesn't interfere with mouse clicks */
+    z-index: 1;
+    /* Adjust the z-index to control the overlay order */
+}
+
+.watermark::after {
+    content: url('https://meditech-products.s3-ap-northeast-1.amazonaws.com/pexels-binyamin-mellish-186077.jpg');
+    /* Use the cross symbol or any other character you prefer */
+    font-size: 48px;
+    /* Adjust the size of the cross */
+    color: rgba(255, 255, 255, 0.7) !important;
+    /* Adjust the color and opacity of the cross */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 </style>
 
 <template>
@@ -109,8 +136,9 @@ export default {
                     <!-- <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
                         class="card-img-top thumbnailImage" alt="..."> -->
                     <div>
-                        <div v-if="isImage">
-                            <img :src="mediaUrl" class="card-img-top thumbnailImage" alt="...">
+                        <div v-if="isImage" class="position-relative">
+                            <img :src="mediaUrl" class="card-img-top thumbnailImage" alt="..."
+                                @contextmenu="disableContextMenu">
                         </div>
                         <div v-else-if="isVideo">
                             <video controls :src="mediaUrl" class="card-img-top thumbnailImage" alt="...">
@@ -121,6 +149,21 @@ export default {
                             No media available.
                         </div>
                     </div>
+                    <!-- <div>
+                        <div v-if="isImage" class="position-relative">
+                            <img :src="mediaUrl" class="card-img-top thumbnailImage" alt="..."
+                                @contextmenu="disableContextMenu">
+                            <img src="/watermark.png" class="watermark" alt="">
+                        </div>
+                        <div v-else-if="isVideo">
+                            <video controls :src="mediaUrl" class="card-img-top thumbnailImage" alt="...">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div v-else>
+                            No media available.
+                        </div>
+                    </div> -->
                     <div class="card-body">
                         <div class="d-flex justify-content-center mt-1">
                             <div class="thumbnail text-center mx-1" v-for="item in singleImage" :key="item.id">
@@ -138,7 +181,7 @@ export default {
                             </div>
                         </div>
                         <div>
-                            <OverviewPage :productDetail="productDetail"  />
+                            <OverviewPage :productDetail="productDetail" />
                         </div>
                     </div>
                 </div>
