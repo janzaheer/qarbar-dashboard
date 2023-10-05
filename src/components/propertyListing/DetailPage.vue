@@ -114,7 +114,7 @@ export default {
 }
 
 .watermark::after {
-    content: url('../../../public/favicon.png');
+    content: url('https://meditech-products.s3-ap-northeast-1.amazonaws.com/pexels-binyamin-mellish-186077.jpg');
     /* Use the cross symbol or any other character you prefer */
     font-size: 48px;
     /* Adjust the size of the cross */
