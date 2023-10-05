@@ -10,12 +10,10 @@ export default {
             agentProperties: [],
             error: null, // data not found check
             status: true, // Initial value
-            forStatus: ''
         }
     },
     methods: {
         async getAgent() {
-            console.log('agent-id', this.agent_id)
             if (!this.agent_id) {
                 // Handle the case where agent_id is not set
                 return;
@@ -29,7 +27,6 @@ export default {
             } else {
                 // this.status = res.data.results.properties.available
                 this.agentProperties = res.data.results.properties
-                console.log('agent-properties', res.data.results.properties)
                 // this.nextUrlPage = res?.data?.next
                 // this.preUrlPage = res?.data?.previous
             }
@@ -39,14 +36,10 @@ export default {
             try {
                 let api = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + id + `/toggle-available/`;
                 let res = await axios.post(api)
-                console.log('property-status', res)
-                // this.status
                 this.getAgent();
             } catch (error) {
                 console.log('status while error', error)
             }
-            console.log('idddd', id)
-            console.log('status', this.status)
         },
     },
     mounted: async function () {
@@ -56,7 +49,6 @@ export default {
         if (this.agent_id) {
             await this.getAgent();
         }
-        console.log('status-btn', this.status)
     }
 }
 </script>

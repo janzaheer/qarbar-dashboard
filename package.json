@@ -19,6 +19,7 @@
     "moment": "^2.29.4",
     "mosha-vue-toastify": "^1.0.23",
     "vue": "^3.3.2",
+    "vue-graph": "^0.9.3",
     "vue-router": "^4.2.0",
     "vue-scrollto": "^2.20.0",
     "vue-select": "^4.0.0-beta.6",

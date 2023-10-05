@@ -44,9 +44,9 @@ export default {
             <OneGraph />
         </div>
 
-        <div class="my-3">
+        <!-- <div class="my-3">
             <TwoGraph />
-        </div>
+        </div> -->
         <div class="my-5">
             <AgentPropertyListing />
         </div>
