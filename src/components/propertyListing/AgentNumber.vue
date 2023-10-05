@@ -40,7 +40,11 @@
                                 <h6 class="me-2"><i class="fas fa-phone" style="color: coral;"></i></h6>
                             </div>
                             <div>
-                                <h6>{{ productDetail?.agent?.phone_number }}</h6>
+                                <h6 id="myInput" ref="myInput">{{ productDetail?.agent?.phone_number }}</h6>
+                            </div>
+                            <div>
+                                <h6 class="ms-2" v-on:click="myFunction()"><i class="fa-regular fa-copy"
+                                        style="color: coral;"></i></h6>
                             </div>
                         </div>
                     </div>
@@ -61,6 +65,8 @@
 
 <script>
 import moment from 'moment';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 export default {
     name: 'AgentNumber',
     props: {
@@ -76,9 +82,34 @@ export default {
             console.log('click whatsapp', number)
         },
         redirectToGmail(email) {
-            // Replace with the appropriate Gmail URL
             const gmailUrl = `mailto:${email}`;
             window.location.href = gmailUrl;
+        },
+        myFunction() {
+            // Get the text field using a ref
+            const copyText = this.$refs.myInput;
+
+            // Create a range and select the text
+            const range = document.createRange();
+            range.selectNode(copyText);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            // Copy the selected text to the clipboard
+            try {
+                document.execCommand('copy');
+                // alert('Copied the text: ' + copyText.textContent);
+                createToast('Copied the text: ' + copyText.textContent, {
+                            type: 'success',
+                            position: 'top-right',
+                            timeout: 8000, // Adjust timeout as needed
+                        });
+            } catch (err) {
+                console.error('Unable to copy text: ', err);
+            }
+
+            // Clear the selection
+            window.getSelection().removeAllRanges();
         },
     }
 }
