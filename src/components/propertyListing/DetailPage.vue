@@ -135,7 +135,7 @@ export default {
                 <div class="card shadow">
                     <!-- <img :src="ThumbnailImage ? ThumbnailImage.image_url : productDetail?.media && productDetail?.media[0]?.image_url"
                         class="card-img-top thumbnailImage" alt="..."> -->
-                    <!-- <div>
+                    <div>
                         <div v-if="isImage" class="position-relative">
                             <img :src="mediaUrl" class="card-img-top thumbnailImage" alt="..."
                                 @contextmenu="disableContextMenu">
@@ -148,8 +148,8 @@ export default {
                         <div v-else>
                             No media available.
                         </div>
-                    </div> -->
-                    <div>
+                    </div>
+                    <!-- <div>
                         <div v-if="isImage" class="position-relative">
                             <img :src="mediaUrl" class="card-img-top thumbnailImage" alt="..."
                                 @contextmenu="disableContextMenu">
@@ -163,7 +163,7 @@ export default {
                         <div v-else>
                             No media available.
                         </div>
-                    </div>
+                    </div> -->
                     <div class="card-body">
                         <div class="d-flex justify-content-center mt-1">
                             <div class="thumbnail text-center mx-1" v-for="item in singleImage" :key="item.id">
