@@ -1,27 +1,34 @@
 <script>
 import { RouterLink } from 'vue-router';
-export default{
+export default {
   name: 'AgentDashboardHeader',
-  data(){
-    return{
+  data() {
+    return {
       user: '',
-            agent_id:'',
-            user_id: ''
+      agent_id: '',
+      user_id: ''
     }
   },
-  methods:{
+  methods: {
     logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            localStorage.removeItem('agent_id');
-            localStorage.removeItem('id');
-            this.$router.push('/login');
-        },
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('agent_id');
+      localStorage.removeItem('user_id');
+      this.$router.push('/login');
+    },
+    // handleUser(){
+    //   if (this.agent_id) {
+    //     return console.log('agent-iddd',this.agent_id)
+    //   } else {
+    //     return console.log('user-idddddddd',this.user_id)
+    //   }
+    // }
   },
-  mounted(){
+  mounted() {
     this.user = localStorage.getItem('user');
-        this.agent_id = localStorage.getItem('agent_id');
-        this.user_id = localStorage.getItem('id')
+    this.agent_id = localStorage.getItem('agent_id');
+    this.user_id = localStorage.getItem('user_id')
   }
 }
 </script>
@@ -37,13 +44,13 @@ export default{
           <h4>Portfolio</h4>
         </RouterLink>
         <RouterLink class="nav-link text-decoration-underline" to="/">Go to Qarbar.com</RouterLink>
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="btn-group dropstart">
+          <RouterLink to="#"  class="dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
             {{ this.user }}
-          </a>
+          </RouterLink>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"> {{ this.user }}</a></li>
-            <li><a class="dropdown-item" href="#">My Account & Profile</a></li>
+            <li><a class="dropdown-item" href="#">{{ this.user }}</a></li>
+            <li><a class="dropdown-item" href="#"> {{ this.user_id }}My Account & Profile {{ this.agent_id }}</a></li>
             <li><a class="dropdown-item" href="#" v-on:click="logout">Sign Out</a></li>
           </ul>
         </div>

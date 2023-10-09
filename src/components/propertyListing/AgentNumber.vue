@@ -88,26 +88,22 @@ export default {
         myFunction() {
             // Get the text field using a ref
             const copyText = this.$refs.myInput;
-
             // Create a range and select the text
             const range = document.createRange();
             range.selectNode(copyText);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
-
             // Copy the selected text to the clipboard
             try {
                 document.execCommand('copy');
-                // alert('Copied the text: ' + copyText.textContent);
-                createToast('Copied the text: ' + copyText.textContent, {
+                createToast('Copied Number: ' + copyText.textContent, {
                             type: 'success',
                             position: 'top-right',
-                            timeout: 8000, // Adjust timeout as needed
+                            timeout: 8000,
                         });
             } catch (err) {
                 console.error('Unable to copy text: ', err);
             }
-
             // Clear the selection
             window.getSelection().removeAllRanges();
         },
