@@ -34,6 +34,7 @@ export default {
     },
     mounted() {
         console.log(this.$route.params.id)
+        console.log(this.$route.params.id)
         this.agent_id = localStorage.getItem('agent_id');
         this.user_id = localStorage.getItem('user_id')
         this.getProperty();
