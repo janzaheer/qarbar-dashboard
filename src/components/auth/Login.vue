@@ -113,7 +113,7 @@ export default {
             localStorage.setItem('token', this.token);
             localStorage.setItem('user', this.user);
             localStorage.setItem('agent_id', this.agent_id)
-            localStorage.setItem('id', this.user_id)
+            localStorage.setItem('user_id', this.user_id)
         }
     },
     methods: {
@@ -153,7 +153,7 @@ export default {
                         this.token = response.data.token;
                         this.user = response.data.user.username;
                         this.agent_id = response.data.user.agent_id;
-                        this.user_id = response.data.user.id
+                        this.user_id = response.data.user.user_id
                         console.log('Token:', this.token);
                         console.log('User:', this.user);
                         console.log('AGent-id', this.agent_id)
@@ -161,7 +161,7 @@ export default {
                         localStorage.setItem('token', this.token);
                         localStorage.setItem('user', this.user);
                         localStorage.setItem('agent_id',this.agent_id)
-                        localStorage.setItem('id',this.user_id)
+                        localStorage.setItem('user_id',this.user_id)
                         this.isAuthenticated = true
                         createToast(`login successful!`, {
                             type: 'success',

@@ -17,6 +17,7 @@ import NewProjectDetails from '../components/newProject/NewProjectDetails.vue'
 import AgentView from '../views/AgentView.vue'
 import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
 import AddAdvertisement from '../agentpanel/addAdvertisement/AddAdvertisement.vue';
+import UpdateAdvertisement from '../agentpanel/updateAdvertisement/UpdateAdvertisement.vue'
 // import Dashboard from '../agentpanel/Dashboard.vue';
 
 const router = createRouter({
@@ -117,6 +118,11 @@ const router = createRouter({
       path: '/addAdvertisement',
       name: 'AddAdvertisement',
       component: AddAdvertisement
+    },
+    {
+      path: '/updateAdvertisement/:id',
+      name: 'UpdateAdvertisement',
+      component: UpdateAdvertisement
     }
     // {
     //   path : '/agentdashboard',

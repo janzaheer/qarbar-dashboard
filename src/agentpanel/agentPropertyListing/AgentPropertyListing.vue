@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { BASE_URL, API_VERSION, AGENT_POINT, PROPERTY_END_POINT } from '../../utils/api';
+import { RouterLink } from 'vue-router';
 export default {
     name: 'AgentPropertyListing',
     data() {
@@ -95,8 +96,8 @@ export default {
                                             </td>
                                             <td><i class="fa-regular fa-eye"></i> {{ data?.views_count }}</td>
                                             <td>
-                                                <button class="btn btn-outline-success btn-sm">Update</button>
-                                                <button class="btn btn-outline-danger ms-1 btn-sm">View</button>
+                                                <RouterLink :to="'/updateAdvertisement/' + data.id" class="btn btn-outline-success btn-sm">Update</RouterLink>
+                                                <RouterLink :to="'/detailPage/' + data.id" class="btn btn-outline-info ms-1 btn-sm">View</RouterLink>
                                             </td>
                                         </tr>
                                     </tbody>
