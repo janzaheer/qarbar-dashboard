@@ -95,7 +95,7 @@ export default {
           .setLngLat(coordinates)
           .addTo(this.map);
       }
-    },q
+    },
     initMapbox() {
       mapboxgl.accessToken = 'pk.eyJ1Ijoicmh3b3JrcyIsImEiOiJjazBmZmE0bGIwNzh3M25wMjBhOHI2em56In0.317s4zEB48T9QC33pf6sVw#13/46.20721/6.14994';
       this.map = new mapboxgl.Map({
