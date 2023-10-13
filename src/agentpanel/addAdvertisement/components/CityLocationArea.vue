@@ -1,140 +1,120 @@
-<script>
-import useVuelidate from '@vuelidate/core'
-import { required, email, sameAs, between, minValue, maxValue, alpha, numeric, minLength, maxLength, helpers } from '@vuelidate/validators'
-import vSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
-import axios from 'axios';
-export default {
-    name: 'CityLocationArea',
-    components: {
-        vSelect,
-    },
-    props: {
-        errorLocation: String,
-        errorAreaNumber: String
-    },
-    setup() {
-        return { v$: useVuelidate() }
-    },
-    data() {
-        return {
-            selectCity: '',
-            selectLocation: '',
-            selectArea: '',
-            selectedCities: '', // Holds the selected cities
-            cityOptions: [],
-            //////////////
-            showLocationError: true,
-            showAreaNumberError: true,
-        }
-    },
-    validations() {
-        return {
-
-            selectLocation: {
-                required,
-            },
-            selectArea: {
-                required,
-                minLength: minLength(4),
-                maxLength: maxLength(20),
-            }
-        }
-    },
-    methods: {
-        setTouched(theModel) {
-            if (theModel == this.selectArea || theModel == 'all') { this.v$.selectArea.$touch() }
-            if (theModel == this.selectLocation || theModel == 'all') { this.v$.selectLocation.$touch() }
-        },
-        handleLocation() {
-            this.setTouched('all')
-            this.$emit("ChildToParentSelectLocation", this.selectLocation)
-        },
-        handleArea() {
-            this.setTouched('all')
-            this.$emit("ChildToParentSelectArea", this.selectLocation)
-        },
-        async handleCity() {
-            try {
-                let finalUrl = 'https://apidev.qarbar.com/api/v1/area/';
-                let res = await axios.get(finalUrl);
-                this.cityOptions = res.data.map(area => {
-                    if (area && area.city) {
-                        return {
-                            id: area.id,
-                            value: area.city.city_name,
-                            label: area.city.city_name
-                        };
-                    }
-                    return `null`;
-                })
-            } catch (error) {
-                console.error('Error fetching city data:', error);
-            }
-        },
-        handleSelectCity() {
-            console.log('handleSelectCity called');
-            if (this.selectedCities) {
-                const cityId = this.selectedCities.id;
-                console.log('city-id', cityId)
-                this.$emit("ChildToParentSelectedCity", cityId);
-            }
-        },
-        hideLocationErrorMessage() {
-            this.showLocationError = false;
-        },
-        showLocationErrorMessage() {
-            this.showLocationError = true;
-        },
-        hideAreaNumberErrorMessage() {
-            this.showAreaNumberError = false;
-        },
-        showEAreaNumberErrorMessage() {
-            this.showAreaNumberError = true;
-        },
-    },
-     mounted() {
-        this.handleCity();
-    }
-}
-</script>
-<style></style>
-
 <template>
-    <div>
-        <div class="my-4">
-            <v-select v-model="selectedCities" :options="cityOptions" placeholder="Search and select city"
-            @change="handleSelectCity" />
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="abcdef" v-model="selectLocation"
-                @focus="hideLocationErrorMessage" v-on:change="handleLocation"
-                :class="v$.selectLocation.$error ? 'is-invalid' : ''">
-            <label for="floatingInput">Location</label>
-            <div v-for="error of v$.selectLocation.$errors" class="invalid-feedback" :key="error.$uid">
-                {{ error.$message }}
-            </div>
-            <div class="text-danger" v-if="showLocationError">{{ errorLocation }}</div>
-        </div>
-        <div class="mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217760.23951033925!2d74.16958104254596!3d31.482834783890713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1690373876865!5m2!1sen!2s"
-                        width="570" height="250" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="plot" v-model="selectArea"
-                @focus="hideAreaNumberErrorMessage" v-on:change="handleArea"
-                :class="v$.selectArea.$error ? 'is-invalid' : ''">
-            <label for="floatingInput">Enter Plot number eg 122 A</label>
-            <div v-for="error of v$.selectArea.$errors" class="invalid-feedback" :key="error.$uid">
-                {{ error.$message }}
-            </div>
-            <div class="text-danger" v-if="showAreaNumberError">{{ errorAreaNumber }}</div>
-        </div>
+  <div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="City Name"
+        v-model="selectedCityName"
+        @input="fetchCitySuggestions"
+      />
+      <label for="floatingInputCity">Select a City</label>
+      <ul v-if="citySuggestions.length > 0" class="autocomplete-suggestions">
+        <li v-for="(city, index) in citySuggestions" :key="index" @click="selectCity(city)">
+          {{ city.place_name }}
+        </li>
+      </ul>
     </div>
+    <div class="mb-3">
+      <div class="card">
+        <!-- Map container -->
+        <div ref="map" style="width: 100%; height: 400px; cursor: crosshair;"></div>
+      </div>
+    </div>
+  </div>
 </template>
+
+<script>
+import axios from 'axios';
+import mapboxgl from 'mapbox-gl';
+
+export default {
+  name: 'CityLocationArea',
+  data() {
+    return {
+      selectedCityName: '',
+      map: null,
+      citySuggestions: [],
+      selectedCity: null,
+      marker: null,
+    };
+  },
+  methods: {
+    async fetchCitySuggestions() {
+      try {
+        const geocodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+          this.selectedCityName
+        )}.json?access_token=pk.eyJ1Ijoicmh3b3JrcyIsImEiOiJjazBmZmE0bGIwNzh3M25wMjBhOHI2em56In0.317s4zEB48T9QC33pf6sVw#13/46.20721/6.14994
+        &type=place&autocomplete=true&country=PK`;
+        const response = await axios.get(geocodeUrl);
+        this.citySuggestions = response.data.features;
+      } catch (error) {
+        console.error('Error fetching city suggestions:', error);
+      }
+    },
+    selectCity(city) {
+      this.selectedCity = city;
+      this.selectedCityName = city.place_name;
+      this.citySuggestions = [];
+      this.updateMap(city.center);
+    },
+    updateMap(coordinates) {
+      if (this.map) {
+        this.map.flyTo({ center: coordinates, zoom: 15 });
+        this.addCursorListener();
+      }
+    },
+    addCursorListener() {
+      this.map.on('click', (e) => {
+        this.reverseGeocode(e.lngLat);
+        this.addMarker(e.lngLat);
+      });
+    },
+    reverseGeocode(coordinates) {
+      axios
+        .get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${coordinates.lng},${coordinates.lat}.json?access_token=pk.eyJ1Ijoicmh3b3JrcyIsImEiOiJjazBmZmE0bGIwNzh3M25wMjBhOHI2em56In0.317s4zEB48T9QC33pf6sVw#13/46.20721/6.14994
+          `
+        )
+        .then((response) => {
+          if (response.data.features.length > 0) {
+            const place = response.data.features[0];
+            console.log('Place:', place.text);
+            console.log('Coordinates:', coordinates);
+          }
+        })
+        .catch((error) => {
+          console.error('Error reverse geocoding:', error);
+        });
+    },
+    addMarker(coordinates) {
+      if (this.marker) {
+        this.marker.setLngLat(coordinates);
+      } else {
+        this.marker = new mapboxgl.Marker({ element: this.createCustomMarker() })
+          .setLngLat(coordinates)
+          .addTo(this.map);
+      }
+    },
+    initMapbox() {
+      mapboxgl.accessToken = 'pk.eyJ1Ijoicmh3b3JrcyIsImEiOiJjazBmZmE0bGIwNzh3M25wMjBhOHI2em56In0.317s4zEB48T9QC33pf6sVw#13/46.20721/6.14994';
+      this.map = new mapboxgl.Map({
+        container: this.$refs.map,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [69.3451, 30.3753],
+        zoom: 6,
+      });
+
+      this.marker = new mapboxgl.Marker({
+        color: '#FFFFFF',
+        draggable: true,
+      })
+        .setLngLat([30.5, 50.5])
+        .addTo(this.map);
+    },
+  },
+  mounted() {
+    this.initMapbox();
+  },
+};
+</script>
