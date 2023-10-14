@@ -12,9 +12,11 @@ import PageNotFound from '../router/PageNotFound.vue';
 import BuyPage from '../components/propertyListing/BuyPage.vue';
 import RentPage from '../components/propertyListing/RentPage.vue';
 import AgentRegister from '../components/auth/AgentRegister.vue';
-import NewProjectDetails from '../components/newProject/NewProjectDetails.vue'
+import NewProjectDetails from '../components/newProject/NewProjectDetails.vue';
+import BLogsListing from '../components/newsBlog/BLogsListing.vue';
+import BlogsDetailPage from '../components/newsBlog/BlogsDetailPage.vue'
 // agent panel 
-import AgentView from '../views/AgentView.vue'
+import AgentView from '../views/AgentView.vue';
 import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
 import AddAdvertisement from '../agentpanel/addAdvertisement/AddAdvertisement.vue';
 import UpdateAdvertisement from '../agentpanel/updateAdvertisement/UpdateAdvertisement.vue'
@@ -85,6 +87,16 @@ const router = createRouter({
       path: '/newProjectDetails/:id',
       name: 'NewProjectDetails',
       component: NewProjectDetails
+    },
+    {
+      path: '/bLogsListing',
+      name: 'BLogsListing',
+      component: BLogsListing
+    },
+    {
+      path: '/blogsDetailPage/:id',
+      name: 'BlogsDetailPage',
+      component: BlogsDetailPage
     },
     {
       path: '/login',

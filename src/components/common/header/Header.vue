@@ -36,7 +36,7 @@
                             <RouterLink class="nav-link" to="/agentsList">Find agent</RouterLink>
                         </li>
                         <li class="nav-item mx-md-1">
-                            <RouterLink class="nav-link" to="#">Blogs</RouterLink>
+                            <RouterLink class="nav-link" to="/bLogsListing">Blogs</RouterLink>
                         </li>
                         <li class="nav-item mx-md-1">
                             <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>

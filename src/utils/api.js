@@ -36,6 +36,10 @@ export const NewProject_END_POINT =() => {
     return `projects/`
 }
 
+export const BLOGS_END_POINT =() => {
+    return `news/`
+}
+
 export const changeUrl = () => {
     return 'http://127.0.0.1:8000/';
 }
