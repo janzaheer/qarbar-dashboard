@@ -42,34 +42,28 @@
                             <RouterLink class="nav-link" to="/aboutus">About Us</RouterLink>
                         </li>
                     </ul>
-                    <RouterLink class="addPropertyBtnColor mt-1 mx-2" v-if="isLoggedIn" to="/agentDashboard">Add Property
+                    <RouterLink class="addPropertyBtnColor mt-1 mx-2" v-if="isLoggedIn" to="/agentDashboard">Add Advertisement
                     </RouterLink>
-                    <router-link class="addPropertyBtnColor mt-1 mx-2" v-else to="/login">Add Property</router-link>
+                    <router-link class="addPropertyBtnColor mt-1 mx-2" v-else to="/login">Login</router-link>
 
                     <ul class="navbar-nav NV">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="fa-solid fa-circle-user fa-2xl"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-white">
-                                <li v-if="!isLoggedIn">
-                                    <RouterLink class="dropdown-item btn btn-outline-warning btn-sm mt-1" to="/login">Login
-                                    </RouterLink>
-                                </li>
-                                <li v-else>
-                                    <a class="dropdown-item" href="#" @click="logout">Logout</a>
-                                </li>
-
-                                <li><a class="dropdown-item" href="#">{{ user }}</a></li>
-                                <li><a class="dropdown-item" href="#">
-                                        <span v-if="agent_id !== null">{{ agent_id }}</span>
-                                        <span v-else>{{ user_id }}</span>
-                                        Add Property</a></li>
-                                <li><a class="dropdown-item" href="#"> {{ handleUser() }} Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                        <li v-if="isLoggedIn">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fa-solid fa-circle-user fa-2xl"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-white">
+                                 
+                                    <li>
+                                        <a class="dropdown-item" href="/" @click="logout">Logout</a>
+                                    </li>
+                                    <li class="dropdown-item">{{ user }}</li>
+                                    <li><RouterLink class="dropdown-item" to="#">My Profile</RouterLink></li>
+                                </ul>
+                            </li>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -112,7 +106,7 @@ export default {
             localStorage.removeItem('user');
             localStorage.removeItem('agent_id');
             localStorage.removeItem('id');
-            this.$router.push('/login');
+            this.$router.push('/');
         },
         handleUser() {
             // if (this.agent_id !==null) {

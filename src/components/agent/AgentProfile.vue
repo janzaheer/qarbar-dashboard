@@ -6,6 +6,8 @@ import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
 import { RouterLink } from 'vue-router';
 import axios from 'axios';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 import { BASE_URL, API_VERSION, AGENT_POINT, PROPERTY_END_POINT, changeUrl } from '../../utils/api';
 export default {
     name: 'AgentProfile',
@@ -53,6 +55,37 @@ export default {
                 })
                 .catch((err) => console.log(err))
         },
+        redirectToWhatsApp(number) {
+            const whatsappUrl = `https://wa.me/+92${number}`;
+            window.location.href = whatsappUrl;
+            console.log('click whatsapp', number)
+        },
+        redirectToGmail(email) {
+            const gmailUrl = `mailto:${email}`;
+            window.location.href = gmailUrl;
+        },
+        myFunction() {
+            // Get the text field using a ref
+            const copyText = this.$refs.myInput;
+            // Create a range and select the text
+            const range = document.createRange();
+            range.selectNode(copyText);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            // Copy the selected text to the clipboard
+            try {
+                document.execCommand('copy');
+                createToast('Copied Number: ' + copyText.textContent, {
+                            type: 'success',
+                            position: 'top-right',
+                            timeout: 8000,
+                        });
+            } catch (err) {
+                console.error('Unable to copy text: ', err);
+            }
+            // Clear the selection
+            window.getSelection().removeAllRanges();
+        },
     },
     mounted() {
         console.log('idddddd', this.$route.params.id)
@@ -80,7 +113,7 @@ export default {
                         </div>
                         <div class="col-md-8">
                             <div class="card-body mt-4 ms-5">
-                                <h4 class="card-title">{{ agentDetail?.user?.username }}</h4>
+                                <h4 class="card-title">{{ agentDetail?.name }}</h4>
                                 <p class="card-text">Property Consultant</p>
                                 <div>
                                     <span class="badge text-bg-secondary card-title">
@@ -106,10 +139,47 @@ export default {
                     <div class="card-body">
                         <h6 class="card-title">Contact our Agent</h6>
                         <div class="text-center p-2">
-                            <button class="btn btn-success">WhatsApp</button>
-                            <button class="btn btn-primary mx-2">Call</button>
-                            <button class="btn btn-danger">Email</button>
+                                <button @click="redirectToWhatsApp(agentDetail?.whatsapp_num)" class="mainBtnColor bg-white mt-1"><i class="fa-brands fa-whatsapp fa-xl"></i>
+                                    WhatsApp
+                                </button>
+
+                            <button type="button" class="mainBtnColor bg-white me-lg-2" data-bs-toggle="modal" data-bs-target="#modalId"><i class="fas fa-phone"></i>
+                                Call
+                            </button>
+                            <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTitleId">Contact us</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div>
+                                                <h6 class="me-2"><i class="fas fa-phone" style="color: coral;"></i></h6>
+                                            </div>
+                                            <div>
+                                                <h6 id="myInput" ref="myInput">{{ agentDetail?.phone_number }}</h6>
+                                            </div>
+                                            <div>
+                                                <h6 class="ms-2" v-on:click="myFunction()"><i class="fa-regular fa-copy" style="color: coral;"></i></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <div class="text-center">
+                                            <p>{{ agentDetail?.name }}</p>
+                                            <p>Pakistan Property Leaders</p>
+                                            <p>when calling us.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <button @click="redirectToGmail(agentDetail?.user?.email)"
+                            class=" mainBtnColor bg-white me-lg-2"><i class="fa-regular fa-envelope fa-xl"></i>
+                             Email</button>
+                        </div>  
                         <div>
                             <p class="card-text"><b>{{ agentDetail?.user?.username }}</b> usually respond within 10 minutes
                             </p>
