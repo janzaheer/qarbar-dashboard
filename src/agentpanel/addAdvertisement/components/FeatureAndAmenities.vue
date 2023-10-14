@@ -12,6 +12,138 @@ export default {
         errorBaths: String,
         errorKitchen: String,
         errorFloor: String,
+        initialBath: String,
+        initialBed: String,
+        initialKitchen: String,
+        initialFloor: String,
+        initialWard: String,
+        initialYear: String,
+        initialCommunity: String,
+        initialCover: String,
+        initialAirport: String,
+        initialDrawing: String,
+        initialElecBekup: String,
+        initialFarm: Boolean,
+        initialFur: Boolean,
+        initialGym: String,
+        initialInter: String,
+        initialKids: String,
+        initialKitApliance: String,
+        initialLaoundry: String,
+        initailLounge: String,
+        initialLower: String,
+        initialMaid: String,
+        initialMedical: String,
+        initialMos: String,
+        initialHos: String,
+        initialSchool: String,
+        initialMall: String,
+        initialODesc: String,
+        initialPlace: String,
+        initialParSpace: String,
+        initialSecu: String,
+        initialStore: String,
+        initialStudy: Boolean,
+        initialSwim: String,
+        initialLobby:String
+    },
+    watch: {
+        initialBath(newBath) {
+            this.bathRoom = newBath
+        },
+        initialBed(newBed) {
+            this.bedRoom = newBed
+        },
+        initialKitchen(n) {
+            this.kitchen = n
+        },
+        initialFloor(n) {
+            this.floor = n
+        },
+        initialWard(n) {
+            this.built_in_wardrobes = n
+        },
+        initialYear(n) {
+this.built_in_year = n
+        },
+        initialCommunity(n) {
+this.community_lawn_garden = n
+        },
+        initialCover(n) {
+this.covered_parking = n
+        },
+        initialAirport(n) {
+this.distance_from_airport = n
+        },
+        initialDrawing(n) {
+this.drawing_room = n
+        },
+        initialElecBekup(n) {
+this.electricity_backup = n
+        },
+        initialFarm(n) {
+this.Farmhouse = n
+        },
+        initialFur(n) {
+this.furnished_unfurnished = n
+        },
+        initialGym(n) {
+this.gym = n
+        },
+        initialInter(n) {
+this.internet = n
+        },
+        initialKids(n) {
+this.kids_play_area = n
+        },
+        initialKitApliance(n) {
+this.kitchen_appliances = n
+        },
+        initialLaoundry(n) {
+this.laundry_room = n
+        },
+        initailLounge(n) {
+            this.lounge_sitting_area = n
+        },
+        initialLower(n) {
+            this.lower_portion = n
+        },
+        initialMaid(n) {
+            this.maid_room = n
+        },
+        initialMedical(n) {
+            this.medical_center = n
+        },
+        initialMos(n) {
+            this.mosque = n
+        },
+        initialHos(n) {
+            this.near_by_hospital = n
+        },
+        initialODesc(n) {
+            this.other_description
+        },
+        initialPlace(n) {
+            this.other_nearby_palces = n
+        },
+        initialParSpace(n) {
+            this.parking_space = n
+        },
+        initialSecu(n) {
+            this.security = n
+        },
+        initialStore(n) {
+            this.store_room = n
+        },
+        initialStudy(n) {
+            this.study_room = n
+        },
+        initialSwim(n) {
+            this.swimming_pool = n
+        },
+        initialLobby(n){
+            this.lobby_in_building = n
+        }
     },
     data() {
         return {
@@ -142,6 +274,43 @@ export default {
             this.showFloorErrorMessage = false
         },
     },
+    mounted() {
+        this.bathRoom = this.initialBath
+        this.bedRoom = this.initialBed
+        this.kitchen = this.initialKitchen
+        this.floor = this.initialFloor
+        this.built_in_wardrobes = this.initialWard
+        this.built_in_year = this.initialYear
+        this.community_lawn_garden = this.initialCommunity
+        this.covered_parking = this.initialCover
+        this.distance_from_airport = this.initialAirport
+        this.drawing_room = this.initialDrawing
+        this.electricity_backup = this.initialElecBekup
+        this.Farmhouse = this.initialFarm
+        this.furnished_unfurnished = this.initialFur
+        this.gym = this.initialGym
+        this.internet = this.initialInter
+        this.kids_play_area = this.initialKids
+        this.kitchen_appliances = this.initialKitApliance
+        this.laundry_room = this.initialLaoundry
+        this.lobby_in_building = this.initialLobby
+        this.lounge_sitting_area = this.initailLounge
+        this.lower_portion = this.initialLower
+        this.maid_room = this.initialMaid
+        this.medical_center = this.initialMedical
+        this.mosque = this.initialMos
+        this.near_by_hospital = this.initialHos
+        this.near_by_school = this.initialSchool
+        this.near_by_shopping_mall = this.initialMall
+        this.other_description = this.initialODesc
+        this.other_nearby_palces = this.initialPlace
+        this.parking_space = this.initialParSpace
+        this.security = this.initialSecu
+        this.store_room = this.initialStore
+        this.study_room = this.initialStudy
+        this.swimming_pool = this.initialSwim
+
+    }
 }
 </script>
 
@@ -158,26 +327,26 @@ export default {
                 <div class="mb-2">
                     <label for="inputBedroom" class="form-label">Bedroom</label>
                     <input type="text" class="form-control" id="inputBedroom" v-model="bedRoom" @input="handleBedRoom"
-                       @focus="hideBedsError" placeholder="Enter number of BedRoom">
+                        @focus="hideBedsError" placeholder="Enter number of BedRoom">
                     <div v-if="showBedsErrorMessage" class="text-danger">{{ errorBeds }}</div>
                 </div>
                 <div class="mb-2">
                     <label for="inputBathroom" class="form-label">Bathroom</label>
                     <input type="text" class="form-control" id="inputBathroom" v-model="bathRoom" @input="handleBathRoom"
-                       @focus="hideBathsError" placeholder="Enter number of BathRoom">
-                        <div v-if="showBathsErrorMessage" class="text-danger">{{ errorBaths }}</div>
+                        @focus="hideBathsError" placeholder="Enter number of BathRoom">
+                    <div v-if="showBathsErrorMessage" class="text-danger">{{ errorBaths }}</div>
                 </div>
                 <div class="mb-2">
                     <label for="inputKitchen" class="form-label">Kitchen</label>
                     <input type="text" class="form-control" id="inputKitchen" placeholder="enter number of kitchen"
-                       @focus="hideKitchenError" v-model="kitchen" @input="handleKitchen">
-                        <div v-if="showKitchenErrorMessage" class="text-danger">{{ errorKitchen }}</div>
+                        @focus="hideKitchenError" v-model="kitchen" @input="handleKitchen">
+                    <div v-if="showKitchenErrorMessage" class="text-danger">{{ errorKitchen }}</div>
                 </div>
                 <div class="mb-3">
                     <label for="inputFloor" class="form-label">Floor</label>
                     <input type="text" class="form-control" id="inputFloor" placeholder="Enter Floor example 2"
-                       @focus="hideFloorError" v-model="floor" @input="handleFloor">
-                        <div v-if="showFloorErrorMessage" class="text-danger">{{ errorFloor }}</div>
+                        @focus="hideFloorError" v-model="floor" @input="handleFloor">
+                    <div v-if="showFloorErrorMessage" class="text-danger">{{ errorFloor }}</div>
                 </div>
 
                 <div class="">

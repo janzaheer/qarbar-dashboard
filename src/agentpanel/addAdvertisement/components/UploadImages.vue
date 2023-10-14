@@ -9,7 +9,13 @@ export default {
 
     },
     props: {
-
+        uploadedImages:Array
+    },
+    watch:{
+        uploadedImages(n){
+            this.ImageData = n
+            console.log('watch-image',n)
+        }
     },
     data() {
         return {
@@ -28,6 +34,10 @@ export default {
                 s3Url: "https://meditech-products.s3-ap-northeast-1.amazonaws.com/",
             },
         }
+    },
+    mounted(){
+        this.ImageData = this.uploadedImages
+        console.log('------------------')
     },
     methods: {
         async onChangeFiles(event) {
@@ -88,7 +98,7 @@ export default {
             }
         },
 
-    },
+    }
 }
 </script>
 

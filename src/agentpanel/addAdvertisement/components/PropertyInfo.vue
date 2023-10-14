@@ -5,7 +5,9 @@ export default {
     name: 'PropertyInfo',
     props: {
         titleError: String,
-        descError: String
+        descError: String,
+        initialTitle: String, // Define a prop to receive the initial title from the parent
+        initialDescription: String,
     },
     data() {
         return {
@@ -14,6 +16,14 @@ export default {
             showTitleError: true,
             showDescError: true,
         }
+    },
+    watch: {
+        initialTitle(newTitle) {
+            this.title = newTitle;
+        },
+        initialDescription(newDescription) {
+            this.description = newDescription;
+        },
     },
     setup() {
         return { v$: useVuelidate() }
@@ -48,12 +58,16 @@ export default {
             this.setTouched('all')
             this.$emit("ChildToParentDescData", this.description)
         },
-        hideMessageTitleError(){
+        hideMessageTitleError() {
             this.showTitleError = false
         },
-        hideMessageDescError(){
+        hideMessageDescError() {
             this.showDescError = false
         }
+    },
+    mounted(){
+        this.title = this.initialTitle
+        this.description = this.initialDescription
     }
 }
 </script>
@@ -72,7 +86,7 @@ export default {
                 <div class="mb-3">
                     <label for="inputTitle" class="form-label">Title</label>
                     <input type="text" class="form-control" id="inputTitle" v-model="title" @input="handleTitle"
-                      @focus="hideMessageTitleError"  :class="v$.title.$error ? 'is-invalid' : ''">
+                        @focus="hideMessageTitleError" :class="v$.title.$error ? 'is-invalid' : ''">
                     <div v-for="error of v$.title.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>
@@ -81,7 +95,8 @@ export default {
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="description"
-                       @focus="hideMessageDescError" @input="handleDesc" :class="v$.description.$error ? 'is-invalid' : ''"></textarea>
+                        @focus="hideMessageDescError" @input="handleDesc"
+                        :class="v$.description.$error ? 'is-invalid' : ''"></textarea>
                     <div v-for="error of v$.description.$errors" class="invalid-feedback" :key="error.$uid">
                         {{ error.$message }}
                     </div>

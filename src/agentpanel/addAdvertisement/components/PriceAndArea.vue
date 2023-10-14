@@ -8,7 +8,21 @@ export default {
     },
     props: {
         errorAreaSize: String,
-        errorPrice: String
+        errorPrice: String,
+        initialAreaTypeData:String,
+        initialAreaUnitData:String,
+        initialTotalPriceData:String
+    },
+    watch: {
+        initialAreaTypeData(newAreaType){
+            this.AreaType = newAreaType
+        },
+        initialAreaUnitData(newAreaUnit){
+            this.areaUnit = newAreaUnit
+        },
+        initialTotalPriceData(newPrice){
+            this.totalPrice = newPrice
+        }
     },
     setup() {
         return { v$: useVuelidate() }
@@ -73,7 +87,9 @@ export default {
         },
     },
     mounted() {
-
+        this.areaUnit = this.initialAreaUnitData
+        this.AreaType = this.initialAreaTypeData
+        this.totalPrice = this.initialTotalPriceData
     }
 }
 </script>
