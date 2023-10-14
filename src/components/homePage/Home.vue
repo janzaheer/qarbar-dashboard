@@ -86,6 +86,7 @@ import { RouterLink } from 'vue-router';
 import axios from 'axios';
 import moment from 'moment';
 import { BASE_URL, PROPERTY_END_POINT, API_VERSION } from '../../utils/api';
+import { RentPropertiesList, SalePropertiesList } from '../../utils/Properties_Service'
 export default {
     name: 'Home',
     data() {
@@ -99,14 +100,18 @@ export default {
     },
     methods: {
         async getPropertiesRent() {
-            let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?rent_sale_type=rent`;
-            let res = await axios.get(finalUrl)
-            this.propertiesList = res.data.results
+            let value = `?rent_sale_type=rent`
+            let respData = await RentPropertiesList(value)
+            this.propertiesList = respData.results
         },
         async getPropertiesSale() {
-            let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + `?rent_sale_type=sale`;
-            let res = await axios.get(finalUrl)
-            this.propertiesSaleList = res.data.results
+            let value = `?rent_sale_type=sale`
+            try {
+                const respData = await SalePropertiesList(value)
+                this.propertiesSaleList = respData.results
+            } catch (error) {
+                console.log(error)
+            }
         },
         handlePropertyType(home_types, plot_types, commercial_types) {
             if (home_types == 'flat') {
@@ -167,7 +172,7 @@ export default {
                 return 'Plot-Form'
             }
             return 'Unknown';
-        }
+        },
     },
     mounted() {
         this.getPropertiesSale();
