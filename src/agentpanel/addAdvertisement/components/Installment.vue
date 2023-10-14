@@ -6,7 +6,11 @@ export default {
     props: {
         errorAdvanceAmounts: String,
         errorNofInstallments: String,
-        errorMOinstallments: String
+        errorMOinstallments: String,
+        initialAdvance:String,
+        initialNoInst:String,
+        initialMonthly:String,
+        initialRtP:String
     },
     data() {
         return {
@@ -14,6 +18,20 @@ export default {
             NofInstallments: '',
             MonthlyInstallments: '',
             readyForPossession: false, // Initial value
+        }
+    },
+    watch:{
+        initialAdvance(newAdvance){
+            this.AdvanceAmount = newAdvance
+        },
+        initialNoInst(newNo){
+            this.NofInstallments = newNo
+        },
+        initialMonthly(newMonthly){
+            this.MonthlyInstallments = newMonthly
+        },
+        initialRtP(newRtP){
+            this.readyForPossession = newRtP
         }
     },
     setup() {
@@ -67,6 +85,12 @@ export default {
             this.readyForPossession
             this.$emit("ChildToParentReadyForPossessionData", this.readyForPossession)
         },
+    },
+    mounted(){
+        this.AdvanceAmount = this.initialAdvance
+        this.NofInstallments = this.initialNoInst
+        this.MonthlyInstallments = this.initialMonthly
+        this.readyForPossession = this.initialRtP
     }
 }
 </script>

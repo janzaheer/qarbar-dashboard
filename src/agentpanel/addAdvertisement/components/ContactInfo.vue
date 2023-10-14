@@ -7,7 +7,11 @@ export default {
         emailError: String,
         mobError: String,
         landError: String,
-        secError: String
+        secError: String,
+        initialEmail:String,
+        initialPhone:String,
+        initialLand:String,
+        initialSecondary:String
     },
     data() {
         return {
@@ -20,6 +24,20 @@ export default {
             showLandError: true,
             showSecError: true,
         }
+    },
+    watch: {
+        initialEmail(newEmail){
+            this.email = newEmail
+        },
+        initialPhone(newPhone){
+            this.MobNum = newPhone
+        },
+        initialLand(newLand){
+            this.LandNum = newLand
+        },
+        initialSecondary(newSecondNum){
+            this.SecondNum = newSecondNum
+        },
     },
     setup() {
         return { v$: useVuelidate() }
@@ -93,6 +111,12 @@ export default {
             this.showSecError = false;
         },
         
+    },
+    mounted(){
+        this.email = this.initialEmail
+        this.MobNum = this.initialPhone
+        this.LandNum = this.initialLand
+        this.SecondNum = this.initialSecondary
     }
 }
 </script>
