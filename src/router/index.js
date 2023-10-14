@@ -13,6 +13,7 @@ import BuyPage from '../components/propertyListing/BuyPage.vue';
 import RentPage from '../components/propertyListing/RentPage.vue';
 import AgentRegister from '../components/auth/AgentRegister.vue';
 import NewProjectDetails from '../components/newProject/NewProjectDetails.vue'
+import BlogsListing from '../components/newsBlog/BlogsListing.vue'
 // agent panel 
 import AgentView from '../views/AgentView.vue'
 import AgentDashboard from '../agentpanel/agentDashboard/AgentDashboard.vue';
@@ -85,6 +86,11 @@ const router = createRouter({
       path: '/newProjectDetails/:id',
       name: 'NewProjectDetails',
       component: NewProjectDetails
+    },
+    {
+      path: '/blogsListing',
+      name: 'BlogsListing',
+      component: BlogsListing
     },
     {
       path: '/login',
