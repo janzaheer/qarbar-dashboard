@@ -1,39 +1,51 @@
 <template>
-    <div class="container">
-        <h2 class="display-6 text-center mb-4">News from the Qarbar blog</h2>
-        <div class="table-responsive">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-start align-items-center">
-                    20 May
-                    <span class="rounded-pill ms-5">
-                        Living in Yas Island: All You Need to Know</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-start align-items-center">
-                    21 May
-                    <span class="rounded-pill ms-5">Your Move-in Checklist While Renting in Dubai</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-start align-items-center">
-                    22 May
-                    <span class="rounded-pill ms-5">
-                        Everything You Need to Know about Sayer Card</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-start align-items-center">
-                    23 May
-                    <span class="rounded-pill ms-5">
-                        Your Guide to Al Safa Commercial Complex</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-start align-items-center">
-                    24 May
-                    <span class="rounded-pill ms-5">
-                        The Ultimate Guide to Al Safa 1 Dubai</span>
-                </li>
+<div class="container detailPage">
+    <h2 class="display-6 text-center mb-4">News from the Qarbar blog</h2>
+    <div class="table-responsive">
+        <div class="'container col-md-4" v-for="details in blogs" :key="details.id">
+            <ul class="list-group d-flex">
+                <div class="card-body">
+                    <li class="list-group-item d-flex justify-content-start align-items-center">20 May <span class="rounded-pill ms-5"></span>
+                        <RouterLink :to="'/blogsDetailPage/' + details?.id" class="nav-link p-0 text-body-read-more-btn text-decoration-none">
+                            <p class="card-text">{{ details?.title }}.</p>
+                        </RouterLink>
+                    </li>
+                </div>
             </ul>
-            <table class="table text-center">
-            </table>
         </div>
     </div>
+</div>
 </template>
-<script>
 
+<script>
+import {
+    RouterLink
+} from 'vue-router';
+import {
+    BLogsList
+} from '../../utils/Blogs_service';
+export default {
+    name: 'blog',
+    data() {
+        return {
+            blogs: []
+        }
+    },
+    mounted() {
+        this.getBlogs()
+    },
+    methods: {
+        async getBlogs() {
+            let id = this.$route.params.id
+            try {
+                const repData = await BLogsList(id)
+                this.blogs = repData.results
+            } catch (error) {
+                console.log(error)
+            }
+        },
+    }
+}
 </script>
+
 <style></style>
