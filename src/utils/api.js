@@ -32,6 +32,14 @@ export const AGENT_POINT = () => {
     return `agent/`
 }
 
+export const AGENT_DETAIL_POINT = () => {
+    return `/detail_agent/`
+}
+
+export const AGENT_UPDATE_ENDPOINT = () => {
+    return `/update_agent/`
+}
+
 export const NewProject_END_POINT =() => {
     return `projects/`
 }

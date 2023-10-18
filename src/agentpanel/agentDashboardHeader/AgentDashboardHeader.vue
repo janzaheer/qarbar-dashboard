@@ -15,15 +15,8 @@ export default {
       localStorage.removeItem('user');
       localStorage.removeItem('agent_id');
       localStorage.removeItem('user_id');
-      this.$router.push('/login');
+      this.$router.push('/');
     },
-    // handleUser(){
-    //   if (this.agent_id) {
-    //     return console.log('agent-iddd',this.agent_id)
-    //   } else {
-    //     return console.log('user-idddddddd',this.user_id)
-    //   }
-    // }
   },
   mounted() {
     this.user = localStorage.getItem('user');
@@ -40,7 +33,6 @@ export default {
     <nav class="navbar bg-light">
       <div class="container">
         <RouterLink class="navbar-brand" to="/agentDashboard">
-          <!-- <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24"> -->
           <h4>Portfolio</h4>
         </RouterLink>
         <RouterLink class="nav-link text-decoration-underline" to="/">Go to Qarbar.com</RouterLink>
@@ -50,7 +42,7 @@ export default {
           </RouterLink>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">{{ this.user }}</a></li>
-            <li><a class="dropdown-item" href="#"> {{ this.user_id }}My Account & Profile {{ this.agent_id }}</a></li>
+            <li><RouterLink class="dropdown-item" to="/profile">My Account & Profile</RouterLink></li>
             <li><a class="dropdown-item" href="#" v-on:click="logout">Sign Out</a></li>
           </ul>
         </div>
