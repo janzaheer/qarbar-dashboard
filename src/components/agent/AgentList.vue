@@ -70,7 +70,9 @@
 
                 <RouterLink :to="'/agentprofile/' + agent.id" class="text-decoration-none">
                     <div class="card agentListBox">
-                        <img src="https://robohash.org/hicveldicta.png" class="card-img-top" alt="">
+                        <img v-if="agent.image" :src="agent.image"
+                                class="card-img-top w-100" style="height: 200px;  width: 200px;" alt="...">
+                        <img v-else src="../../assets/user1.png" class="card-img-top" style="height: 200px; width: 200px; margin-left: 40px;" alt="">
                         <div class="card-body">
                             <div class="text-center">
                                 <h5 class="card-title">{{ agent?.user.username }}</h5>
@@ -93,17 +95,11 @@
                                      <p>{{ agent?.sale_property_count }}</p>
                                     <small class="text-muted">For Sale</small>
                                 </div>
-                                <!-- <div>
-                                    <p>12</p>
-                                    <small class="text-muted">Commercial</small>
-                                </div> -->
                             </div>
                         </div>
                     </div>
                 </RouterLink>
-
             </div>
-
             <div class="text-center">
                 <button class="btn btn-primary me-2">Previous</button>
                 <button class="btn btn-primary">Next</button>
@@ -131,8 +127,7 @@
 import { RouterLink } from 'vue-router';
 import Header from '../common/header/Header.vue';
 import Footer from '../common/footer/Footer.vue';
-
-import axios from 'axios';
+import { AgentList } from '../../utils/Agent_Service';;
 export default {
     name: 'AgentList',
     components: {
@@ -142,17 +137,12 @@ export default {
     data() {
         return {
             AgentList: [],
-            // AgentListCount: [],
         };
     },
     methods: {
         async getUsers() {
-            let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
-             console.log('agents',res.data)
-            // this.list = res.data.products
-             this.AgentList = res.data
-            // console.log('agent',res.data.users)
-            // this.AgentListCount = res.data.count
+            let res = await AgentList()
+             this.AgentList = res
         },
     },
     mounted() {

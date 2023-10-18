@@ -4,12 +4,14 @@
         <p class="my-4">Learn more about Agent</p>
         <div class="row text-center g-1">
             <Carousel :autoplay="4000" :wrap-around="true" v-bind="settings" :breakpoints="breakpoints">
-                <Slide  v-for="user in userList" :key="user?.id">
+                <Slide v-for="user in userList" :key="user?.id">
                     <div class="carousel__item p-1">
                         <RouterLink :to="'/agentprofile/' + user.id" class="text-decoration-none">
                             <div class="card text-center border-0 agentBg">
                                 <div class="card-body">
-                                    <img src="../../assets/user.png" alt="" width="150" height="150"
+                                    <img v-if="user.image" :src="user.image" width="150" height="150"
+                                        class="rounded-circle border border-2 border-primary p-1">
+                                    <img v-else src="../../assets/user1.png" alt="" width="150" height="150"
                                         class="rounded-circle border border-2 border-primary p-1">
                                     <h6 class="card-title mt-2">{{ user?.user?.username }}</h6>
                                     <p class="card-text">{{ user?.bio?.substring(0, 20) }}</p>
@@ -29,9 +31,9 @@
 
 <script>
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
-import axios from 'axios';
 import 'vue3-carousel/dist/carousel.css'
 import { RouterLink } from 'vue-router';
+import { AgentList } from '../../utils/Agent_Service';
 export default {
     name: 'Agent',
     components: {
@@ -42,7 +44,6 @@ export default {
     data() {
         return {
             userList: [],
-            // userListCount: [],
             settings: {
                 itemsToShow: 1,
                 snapAlign: 'center',
@@ -70,8 +71,8 @@ export default {
     },
     methods: {
         async getUsers() {
-            let res = await axios.get('https://apidev.qarbar.com/api/v1/agent/')
-            this.userList = res.data
+            let res = await AgentList()
+            this.userList = res
         },
     },
     mounted() {

@@ -59,7 +59,7 @@
                                         <a class="dropdown-item" href="/" @click="logout">Logout</a>
                                     </li>
                                     <li class="dropdown-item">{{ user }}</li>
-                                    <li><RouterLink class="dropdown-item" to="#">My Profile</RouterLink></li>
+                                    <li><RouterLink class="dropdown-item" to="/profile">My Profile</RouterLink></li>
                                 </ul>
                             </li>
                         </li>
