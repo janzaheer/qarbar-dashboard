@@ -1,3 +1,141 @@
+<template>
+    <AgentDashboardHeader />
+    <div class="container-fluid AgentDashboardHeight">
+        <div class="my-2">
+            <img src="../../assets/webBanner1.jpg" class="img-thumbnail" alt="...">
+        </div>
+        <div class="container my-5">
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <div class="card-body ">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-4 text-center">
+                            <i class="fa-solid fa-house-circle-check fa-2xl" style="color: rgb(255, 69, 0);"></i>
+                            <h5 class="mt-2">Select Purpose And Location</h5>
+                        </div>
+                        <div class="col-6">
+                            <button
+                                :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
+                                v-on:click="handleSellView">
+                                <i class="fa-solid fa-house-circle-check"></i> Sell</button>
+                            <button
+                                :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
+                                v-on:click="handleRentView">
+                                <i class="fa-solid fa-house-lock"></i> Rent</button>
+
+                            <div class="my-3">
+                                <h4>Select Property Type</h4>
+                                <div>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#home-tab-pane" type="button" role="tab"
+                                                aria-controls="home-tab-pane" aria-selected="true"
+                                                @click="selectPropertyType('home')">
+                                                Home
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                                aria-controls="profile-tab-pane" aria-selected="false"
+                                                @click="selectPropertyType('plot')">
+                                                Plot
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                                data-bs-target="#contact-tab-pane" type="button" role="tab"
+                                                aria-controls="contact-tab-pane" aria-selected="false"
+                                                @click="selectPropertyType('commercial')">
+                                                Commercial
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content mt-4" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                            aria-labelledby="home-tab" tabIndex="0">
+                                            <HomePropertyType @childDataHomePropertyTypeVal="handleHomePropertyVal" />
+                                        </div>
+                                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+                                            aria-labelledby="profile-tab" tabIndex="0">
+                                            <div>
+                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal"
+                                                    :isCHecked="isCHecked" />
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
+                                            aria-labelledby="contact-tab" tabIndex="0">
+                                            <div>
+                                                <CommercialPropertyType
+                                                    @childDataCommercialPropertyTypeVal="handleCommercialPropertyVal" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
+                                    @ChildToParentSelectLocation="handleLocationData"
+                                    @ChildToParentSelectArea="handleAreaData" 
+                                    :errorLocation="this.errorLocation" :errorAreaNumber="this.errorAreaNumber" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
+                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData"
+                    :errorAreaSize="this.errorAreaSize" :errorPrice="this.errorPrice" />
+                <div class="" v-if="sellChecked == true">
+                    <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
+                        @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
+                        @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
+                        @ChildToParentReadyForPossessionData="handleRpData" :errorAdvanceAmounts="this.errorAdvanceAmount"
+                        :errorNofInstallments="this.errorNofInstallment" :errorMOinstallments="this.errorMOinstallment" />
+                </div>
+            </div>
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
+                    @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
+                    @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
+                    @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
+                    @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
+                    @childDataElectricityBackup="handleElectricityBackup" @childDataCoveredParking="handleCoveredParking"
+                    @childDataInternet="handleInternet" @childDataParkingSpace="handleParkingSpace"
+                    @childDataFurnished="handleFurnished" @childDataLobbyBuilding="handleLobbyBuilding"
+                    @childDataFloor="handleFloor" @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
+                    @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
+                    @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
+                    @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
+                    @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
+                    @childDataCommunityLawnGarden="handleCommunityLawnGarden" @childDataMedicalCenter="handleMedicalCenter"
+                    @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
+                    @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
+                    @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
+                    @childDataOtherDesc="handleOtherDesc" :errorBaths="this.errorBaths" :errorBeds="this.errorBeds" 
+                    :errorKitchen="this.errorKitchen" :errorFloor="this.errorFloor" />
+            </div>
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData"
+                    :titleError="this.errorMsg" :descError="this.errorDesc" />
+            </div>
+            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
+                <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" />
+            </div>
+            <div class="card shadow-sm p-3 mb-5 bg-body rounded">
+                <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
+                    @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData"
+                    :emailError="this.errorEmail" :mobError="this.errorMob" :landError="this.errorLand"
+                    :secError="this.errorSec" />
+            </div>
+            <div class="my-1 text-center">
+                <button v-on:click="logCheckboxValues" class="adversBtn">Add Submit Advertisement</button>
+            </div>
+        </div>
+    </div>
+    <AgentDashboardFooter />
+</template>
+
 <script>
 import AgentDashboardHeader from '../agentDashboardHeader/AgentDashboardHeader.vue';
 import AgentDashboardFooter from '../agentDashboardFooter/AgentDashboardFooter.vue';
@@ -520,141 +658,3 @@ export default {
 <style>
 @import './Advertisement.css';
 </style>
-
-<template>
-    <AgentDashboardHeader />
-    <div class="container-fluid AgentDashboardHeight">
-        <div class="my-2">
-            <img src="../../assets/webBanner1.jpg" class="img-thumbnail" alt="...">
-        </div>
-        <div class="container my-5">
-            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <div class="card-body ">
-                    <div class="row d-flex justify-content-around">
-                        <div class="col-4 text-center">
-                            <i class="fa-solid fa-house-circle-check fa-2xl" style="color: rgb(255, 69, 0);"></i>
-                            <h5 class="mt-2">Select Purpose And Location</h5>
-                        </div>
-                        <div class="col-6">
-                            <button
-                                :class="sellChecked ? 'selectedButtonColor ButtonColor me-2' : 'unSelectedButtonColor ButtonColor me-2'"
-                                v-on:click="handleSellView">
-                                <i class="fa-solid fa-house-circle-check"></i> Sell</button>
-                            <button
-                                :class="rentChecked ? 'selectedButtonColor ButtonColor' : 'unSelectedButtonColor ButtonColor'"
-                                v-on:click="handleRentView">
-                                <i class="fa-solid fa-house-lock"></i> Rent</button>
-
-                            <div class="my-3">
-                                <h4>Select Property Type</h4>
-                                <div>
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                                data-bs-target="#home-tab-pane" type="button" role="tab"
-                                                aria-controls="home-tab-pane" aria-selected="true"
-                                                @click="selectPropertyType('home')">
-                                                Home
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                                data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                                aria-controls="profile-tab-pane" aria-selected="false"
-                                                @click="selectPropertyType('plot')">
-                                                Plot
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                                                data-bs-target="#contact-tab-pane" type="button" role="tab"
-                                                aria-controls="contact-tab-pane" aria-selected="false"
-                                                @click="selectPropertyType('commercial')">
-                                                Commercial
-                                            </button>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content mt-4" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                            aria-labelledby="home-tab" tabIndex="0">
-                                            <HomePropertyType @childDataHomePropertyTypeVal="handleHomePropertyVal" />
-                                        </div>
-                                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
-                                            aria-labelledby="profile-tab" tabIndex="0">
-                                            <div>
-                                                <PlotPropertyType @childDataPlotPropertyTypeVal="handlePropertyVal"
-                                                    :isCHecked="isCHecked" />
-                                            </div>
-
-                                        </div>
-                                        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
-                                            aria-labelledby="contact-tab" tabIndex="0">
-                                            <div>
-                                                <CommercialPropertyType
-                                                    @childDataCommercialPropertyTypeVal="handleCommercialPropertyVal" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
-                                    @ChildToParentSelectLocation="handleLocationData"
-                                    @ChildToParentSelectArea="handleAreaData" 
-                                    :errorLocation="this.errorLocation" :errorAreaNumber="this.errorAreaNumber" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <PriceAndArea @ChildToParentAreaUnitData="handleAreaUnitData"
-                    @ChildToParentAreaTypeData="handleAreaTypeData" @ChildToParentTotalPriceData="handlePriceData"
-                    :errorAreaSize="this.errorAreaSize" :errorPrice="this.errorPrice" />
-                <div class="" v-if="sellChecked == true">
-                    <Installment @ChildToParentAdvanceAmountData="handleAdvanceAmount"
-                        @ChildToParentNofInstallmentsData="handleNoOfInstallmentData"
-                        @ChildToParentMonthlyInstallmentsData="handleMonthlyInstallment"
-                        @ChildToParentReadyForPossessionData="handleRpData" :errorAdvanceAmounts="this.errorAdvanceAmount"
-                        :errorNofInstallments="this.errorNofInstallment" :errorMOinstallments="this.errorMOinstallment" />
-                </div>
-            </div>
-            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <FeatureAndAmenities @ChildToParentBedRoomData="handleBedRoomData"
-                    @ChildToParentBathRoomData="handleBathRoomData" @childDataBuiltInYear="handleBuiltYear"
-                    @childDataBuiltInWhaedrobes="handleBuiltInWhaedrobes" @childDataSecurity="handleSecurity"
-                    @childDataKitchenAppliance="handleKitchenAppliance" @childDataBalcony="handleBalcony"
-                    @childDataFarmHouse="handleFarmHouse" @childDataLowerPortion="handleLowerPortion"
-                    @childDataElectricityBackup="handleElectricityBackup" @childDataCoveredParking="handleCoveredParking"
-                    @childDataInternet="handleInternet" @childDataParkingSpace="handleParkingSpace"
-                    @childDataFurnished="handleFurnished" @childDataLobbyBuilding="handleLobbyBuilding"
-                    @childDataFloor="handleFloor" @childDataKitchen="handleKitchen" @childDataStudyRoom="handleStoreRoom"
-                    @childDataLaundryRoom="handleLaundryRoom" @childDataMaidRoom="handleMaidRoom"
-                    @childDataStoreRoom="handleStoreRoom" @childDataDrawingRoom="handleDrawingRoom"
-                    @childDataLoungeArea="handleLoungeArea" @childDataGym="handleGym"
-                    @childDataKidsPlayArea="handleKidsPlayArea" @childDataMosque="handleMosque"
-                    @childDataCommunityLawnGarden="handleCommunityLawnGarden" @childDataMedicalCenter="handleMedicalCenter"
-                    @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
-                    @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
-                    @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
-                    @childDataOtherDesc="handleOtherDesc" :errorBaths="this.errorBaths" :errorBeds="this.errorBeds" 
-                    :errorKitchen="this.errorKitchen" :errorFloor="this.errorFloor" />
-            </div>
-            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <PropertyInfo @ChildToParentTitleData="handleTitleData" @ChildToParentDescData="handleDescData"
-                    :titleError="this.errorMsg" :descError="this.errorDesc" />
-            </div>
-            <div class="card shadow-sm p-3 mb-3 bg-body rounded">
-                <UploadImages @ChildToParentImageUploadedData="handleImageUploaded" />
-            </div>
-            <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-                <ContactInfo @ChildToParentEmailData="handleEmailData" @ChildToParentMobNumData="handleMobNumData"
-                    @ChildToParentLandNumData="handleLandNumData" @ChildToParentSecondNumData="handleSecondNumData"
-                    :emailError="this.errorEmail" :mobError="this.errorMob" :landError="this.errorLand"
-                    :secError="this.errorSec" />
-            </div>
-            <div class="my-1 text-center">
-                <button v-on:click="logCheckboxValues" class="adversBtn">Add Submit Advertisement</button>
-            </div>
-        </div>
-    </div>
-    <AgentDashboardFooter />
-</template>
