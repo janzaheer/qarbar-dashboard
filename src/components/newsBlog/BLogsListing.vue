@@ -1,9 +1,6 @@
 <template>
     <Header />
     <div class="container detailPage">
-        <div>
-            blogs <RouterLink to="/">home</RouterLink>
-        </div>
         <div class="row g-2 my-5">
             <h1 class="text-center text-muted my-2">Our Blogs</h1>
             <div class="col-md-4" v-for="data in blogs" :key="data.id">
