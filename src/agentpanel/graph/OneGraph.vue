@@ -82,44 +82,15 @@ export default {
                 <div class="card shadow">
                     <div class="card-body pb-0 d-flex justify-content-between">
                         <div>
-                            <h4 class="mb-1">Product Reports</h4>
-                            <!-- <p>Total Earnings of the Month</p>
-                            <h3 class="m-0">$ 12,555</h3> -->
+                            <h4 class="mb-1">Properties Reports</h4>
                         </div>
                         <div>
                             <ul>
-                                <!-- <li class="d-inline-block mr-3"><a class="text-dark" href="#">Day</a></li>
-                                <li class="d-inline-block mr-3"><a class="text-dark" href="#">Week</a></li> -->
                                 <li class="d-inline-block"><a class="text-dark" href="#">Monthly Reports</a></li>
                             </ul>
                         </div>
                     </div>
-                    <!-- <h6>{{ this.token }}</h6> -->
-                    <!-- <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="w-100 mr-2">
-                                <h6>Pixel 2</h6>
-                                <div class="progress" style="height: 6px">
-                                    <div class="progress-bar bg-danger" style="width: 40%"></div>
-                                </div>
-                            </div>
-                            <div class="ml-2 w-100">
-                                <h6>iPhone X</h6>
-                                <div class="progress" style="height: 6px">
-                                    <div class="progress-bar bg-primary" style="width: 80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="card-body">
-                        <!-- <graph-line width="100%" :height="400" :shape="'normal'" :axis-min="0" :axis-max="50"
-                            :axis-full-mode="true" :labels="['1', '2', '3', '1', '2', '3', '1', '2', '3']" :names="names"
-                            :values="values" :active-event="'click'">
-                            <note :text="'Line Chart'"></note>
-                            <tooltip :names="names"></tooltip>
-                            <legends :names="names"></legends>
-                            <guideline :tooltip-y="true"></guideline>
-                        </graph-line> -->
+                    <div class="">
                         <graph-line width="100%" :height="400" :shape="'normal'" :axis-min="0" :axis-max="50"
                             :axis-full-mode="true" :labels="names" :names="['Total', 'Rent', 'Sale']" :values="values"
                             :active-event="'click'">
