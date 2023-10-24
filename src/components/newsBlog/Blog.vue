@@ -1,46 +1,42 @@
 <template>
-
-<div class="container detailPage">
-    <h2 class="display-6 text-center mb-4">News from the Qarbar blog</h2>
-    <div class="table-responsive">
-        <ul class="list-group" v-for="details in blogs" :key="details.id">
-            <li class="list-group-item d-flex justify-content-start align-items-center"> 20 May <span class="rounded-pill ms-5"> <RouterLink :to="'/blogsDetailPage/'+ details?.id" class="nav-link p-0 text-body-read-more-btn text-decoration-none">
-                <p class="card-text">{{ details?.title }}.</p>
-            </RouterLink></span></li>
-        </ul>
-        <table class="table text-center"></table>
+    <div class="container">
+        <h2 class="display-6 text-center mb-4">News from the Qarbar blog</h2>
+        <div class="table-responsive">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-start align-items-center" v-for="items in blogData" :key="items.id">
+                    {{ moment(items?.created_at).startOf('days').fromNow()}}
+                  <RouterLink :to="'/blogsDetailPage/' + items.id" class="text-decoration-none text-dark">
+                    <span class="rounded-pill ms-5">{{ items?.title }}</span>
+                  </RouterLink>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
-import {
-    RouterLink
-} from 'vue-router';
-import {
-    BLogsList
-} from '../../utils/Blogs_service';
+import { RouterLink } from 'vue-router';
+import moment from 'moment';
+import { BLogsList } from '../../utils/Blogs_service';
 export default {
-    name: 'blog',
-    data() {
+    name: 'Blog',
+    data(){
         return {
-            blogs: []
+            blogData:[]
         }
     },
-    mounted() {
-        this.getBlogs()
+    mounted(){
+        this.getBlogs();
     },
-    methods: {
-        async getBlogs() {
-            let id = this.$route.params.id
-            try {
-                const repData = await BLogsList(id)
-                this.blogs = repData.results
-            } catch (error) {
-                console.log(error)
-            }
-        },
-    }
+    methods:{
+        async getBlogs(){
+            const repData = await BLogsList()
+            this.blogData = repData.results
+        }
+    },
+    created: function () {
+        this.moment = moment;
+    },
 }
 </script>
 
