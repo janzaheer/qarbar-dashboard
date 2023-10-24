@@ -1,61 +1,3 @@
-<script>
-import axios from 'axios';
-import { BASE_URL, API_VERSION, AGENT_POINT, PROPERTY_END_POINT } from '../../utils/api';
-import { RouterLink } from 'vue-router';
-export default {
-    name: 'AgentPropertyListing',
-    data() {
-        return {
-            agent_id: '',
-            user: '',
-            agentProperties: [],
-            error: null, // data not found check
-            status: true, // Initial value
-        }
-    },
-    methods: {
-        async getAgent() {
-            if (!this.agent_id) {
-                // Handle the case where agent_id is not set
-                return;
-            }
-            let finalUrl = BASE_URL + API_VERSION() + AGENT_POINT() + this.agent_id + `/detail_agent/`
-            let res = await axios.get(finalUrl)
-            // this.agentDetail = res.data.results
-            if (res.data.results.properties.length === 0) {
-                this.agentProperties = [],
-                    this.error = "Data not found.";
-            } else {
-                // this.status = res.data.results.properties.available
-                this.agentProperties = res.data.results.properties
-                // this.nextUrlPage = res?.data?.next
-                // this.preUrlPage = res?.data?.previous
-            }
-        },
-        async handleStatus(id) {
-
-            try {
-                let api = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + id + `/toggle-available/`;
-                let res = await axios.post(api)
-                this.getAgent();
-            } catch (error) {
-                console.log('status while error', error)
-            }
-        },
-    },
-    mounted: async function () {
-        // this.getAgent();
-        this.user = localStorage.getItem('user');
-        this.agent_id = localStorage.getItem('agent_id');
-        if (this.agent_id) {
-            await this.getAgent();
-        }
-    }
-}
-</script>
-
-<style></style>
-
 <template>
     <div>
         <div class="row">
@@ -80,19 +22,12 @@ export default {
                                             <td><img :src="data?.media[0]?.image_url" height="40" class="mr-3" alt=""></td>
                                             <td>{{ data?.title }}</td>
                                             <td><span>Pkr {{ data?.total_price }}</span></td>
-                                            <td>
-                                                <!-- <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" role="switch"
-                                                        id="flexSwitchCheckDefault" v-model="status"
-                                                        v-on:change="handleStatus(data?.id)">
-                                                </div> -->
-                                                <button class="btn btn-outline-success btn-sm"
+                                            <td><button class="btn btn-outline-success btn-sm"
                                                 v-on:click="handleStatus(data?.id)"
                                                     v-if="data.available === true">Available</button>
                                                 <button class="btn btn-outline-warning btn-sm"
                                                 v-on:click="handleStatus(data?.id)"
                                                 v-else>DisAvailable</button>
-                                                {{ data?.available }}
                                             </td>
                                             <td><i class="fa-regular fa-eye"></i> {{ data?.views_count }}</td>
                                             <td>
@@ -108,4 +43,59 @@ export default {
                 </div>
             </div>
     </div>
-</div></template>
+</div>
+</template>
+
+<script>
+import { RouterLink } from 'vue-router';
+import { AgentDetail } from '../../utils/Agent_Service';
+import { PropertyStatus } from '../../utils/Properties_Service';
+export default {
+    name: 'AgentPropertyListing',
+    data() {
+        return {
+            agent_id: '',
+            user: '',
+            agentProperties: [],
+            error: null, // data not found check
+            status: true, // Initial value
+        }
+    },
+    methods: {
+        async getAgent() {
+            if (!this.agent_id) {
+                // Handle the case where agent_id is not set
+                return;
+            }
+            let id = this.agent_id
+            let respData = await AgentDetail(id)
+            if (respData.results.properties.length === 0) {
+                this.agentProperties = [],
+                    this.error = "Data not found.";
+            } else {
+                this.agentProperties = respData.results.properties
+                // this.nextUrlPage = res?.data?.next
+                // this.preUrlPage = res?.data?.previous
+            }
+        },
+        async handleStatus(id) {
+            let ids = id
+            try {
+                let res = await PropertyStatus(ids)
+                this.getAgent();
+            } catch (error) {
+                console.log('status while error', error)
+            }
+        },
+    },
+    mounted: async function () {
+        this.user = localStorage.getItem('user');
+        this.agent_id = localStorage.getItem('agent_id');
+        if (this.agent_id) {
+            await this.getAgent();
+        }
+    }
+}
+</script>
+
+<style></style>

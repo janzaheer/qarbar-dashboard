@@ -16,6 +16,10 @@ export const PROPERTY_DETAIL_END_POINT = () => {
     return `/detail_property/`
 }
 
+export const PROPERTY_STATUS_END_POINT = () => {
+    return `/toggle-available/`
+}
+
 export const CITY_END_POINT = () => {
     return `cities/`
 }

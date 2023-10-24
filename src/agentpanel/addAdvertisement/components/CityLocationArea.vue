@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form-floating mb-3">
+    <div class="form-floating my-3">
       <input
         type="text"
         class="form-control"
@@ -18,7 +18,7 @@
     <div class="mb-3">
       <div class="card">
         <!-- Map container -->
-        <div ref="map" style="width: 100%; height: 400px; cursor: crosshair;"></div>
+        <div ref="map" style="width: 100%; height: 410px; cursor: crosshair;"></div>
       </div>
     </div>
   </div>
@@ -106,7 +106,7 @@ export default {
       });
 
       this.marker = new mapboxgl.Marker({
-        color: '#FFFFFF',
+        color: '#000000',
         draggable: true,
       })
         .setLngLat([30.5, 50.5])

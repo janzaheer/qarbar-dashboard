@@ -9,12 +9,12 @@ export default {
 
     },
     props: {
-        uploadedImages:Array
+        uploadedImages: Array
     },
-    watch:{
-        uploadedImages(n){
+    watch: {
+        uploadedImages(n) {
             this.ImageData = n
-            console.log('watch-image',n)
+            console.log('watch-image', n)
         }
     },
     data() {
@@ -35,7 +35,7 @@ export default {
             },
         }
     },
-    mounted(){
+    mounted() {
         this.ImageData = this.uploadedImages
         console.log('------------------')
     },
@@ -86,7 +86,7 @@ export default {
             try {
                 this.loading = true
                 await Promise.all(promises);
-                
+
                 this.ImageData = uploadedImages
                 console.log('Uploaded Images:', this.ImageData);
                 this.$emit('ChildToParentImageUploadedData', this.ImageData);
@@ -97,13 +97,15 @@ export default {
                 this.loading = false
             }
         },
+        cancelFile(index) {
+            this.filesSelected.splice(index, 1); // Remove the file at the given index
+        },
 
     }
 }
 </script>
 
-<style>
-</style>
+<style></style>
 
 <template>
     <div class="card-body ">
@@ -114,7 +116,8 @@ export default {
             </div>
             <div class="col-6">
                 <div class="text-center m-2" v-if="loading">
-                   wait plz media is uploading... <VueSpinnerFacebook size="50" color="rgb(255, 69, 0)" />
+                    wait plz media is uploading...
+                    <VueSpinnerFacebook size="50" color="rgb(255, 69, 0)" />
                 </div>
                 <button @click="handleSendFiles" class="uploadBtn me-1">Upload Files</button>
                 <input type="file" ref="imageInput" class="btn btn-outline-primary" multiple @change="onChangeFiles" />
@@ -125,6 +128,7 @@ export default {
                                 <img v-if="isImage(file.type)" :src="file.preview" alt="Image Preview" width="70" />
                                 <video v-else :src="file.preview" controls="controls" width="200"></video>
                             </div>
+                            <button @click="cancelFile(index)">Cancel</button>
                         </div>
                     </div>
                 </div>
