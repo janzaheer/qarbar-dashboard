@@ -369,7 +369,6 @@ export default {
             return propertyTypeObject;
         },
         selectPropertyType(type) {
-            // Set the selected property type
             this.selectedPropertyType = type;
         },
         async logCheckboxValues() {
