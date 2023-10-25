@@ -2,7 +2,7 @@
 export default {
     name: 'HomePropertyType',
     props: {
-        initialHome:String
+        initialHome: String
     },
     data() {
         return {
@@ -21,18 +21,10 @@ export default {
         }
     },
     watch: {
-  initialHome: {
-    immediate: true,
-    handler(newHomeValue) {
-      if (typeof newHomeValue === 'string') {
-        this.homePropertyVal = newHomeValue;
-        // console.log(`watch`, newHomeValue);
-      } else {
-        console.error(`initialHome is not a string:`, newHomeValue);
-      }
+        handler(newHomeValue) {
+            this.homePropertyVal = newHomeValue;
+        },
     },
-  },
-},
     methods: {
         handleHomeProperty(e) {
             Object.entries(this.homeProperty).forEach(([key, val]) => {
@@ -82,7 +74,7 @@ export default {
         },
 
     },
-    mounted(){
+    mounted() {
         // console.log('Mounted - initialHome:', this.initialHome);
         let data = this.homePropertyVal = this.initialHome
         // console.log('home-value',data)

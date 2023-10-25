@@ -79,8 +79,19 @@ export default {
         .then((response) => {
           if (response.data.features.length > 0) {
             const place = response.data.features[0];
-            console.log('Place:', place.text);
+            let placeData = place.text
+            console.log('--------------------------------')
+            let lat = response.data.features[0].geometry.coordinates[0]
+            let lng = response.data.features[0].geometry.coordinates[1]
+            console.log('lat',lat);
+            console.log('long',lng);
+            console.log('--------------------------------')
+            console.log('Place:', placeData);
             console.log('Coordinates:', coordinates);
+            this.$emit("childDataPlace", placeData)
+            this.$emit("childDataCoordinates", coordinates)
+            this.$emit("childDataLat", lat)
+            this.$emit("childDataLng", lng)
           }
         })
         .catch((error) => {

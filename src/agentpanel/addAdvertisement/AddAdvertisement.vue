@@ -7,6 +7,9 @@
         <div class="container my-5">
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
                 <div class="card-body ">
+                    <div>user {{ user_id }} & agent {{ agent_id }}</div>
+                    <div>area {{ receivedSelectedArea }} & Lat {{ receivedSelectedLat }} & lng {{ receivedSelectedLng }}
+                    </div>
                     <div class="row d-flex justify-content-around">
                         <div class="col-4 text-center">
                             <i class="fa-solid fa-house-circle-check fa-2xl" style="color: rgb(255, 69, 0);"></i>
@@ -73,9 +76,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <CityLocationArea @ChildToParentSelectedCity="handleCItyData"
-                                    @ChildToParentSelectLocation="handleLocationData"
-                                    @ChildToParentSelectArea="handleAreaData" 
+                                <CityLocationArea @childDataCoordinates="handleLocationData" @childDataLat="handleLatData"
+                                    @childDataLng="handleLngData" @childDataPlace="handleAreaData"
                                     :errorLocation="this.errorLocation" :errorAreaNumber="this.errorAreaNumber" />
                             </div>
                         </div>
@@ -112,7 +114,7 @@
                     @childDataSwimmingPool="handleSwimmingPool" @childDataNearSchool="handleNearSchool"
                     @childDataNearHospital="handleNearHospital" @childDataNearShoppingMall="handleNearShoppingMall"
                     @childDataOtherPalces="handleOtherPalces" @childDataDistanceAirport="handleDistanceAirport"
-                    @childDataOtherDesc="handleOtherDesc" :errorBaths="this.errorBaths" :errorBeds="this.errorBeds" 
+                    @childDataOtherDesc="handleOtherDesc" :errorBaths="this.errorBaths" :errorBeds="this.errorBeds"
                     :errorKitchen="this.errorKitchen" :errorFloor="this.errorFloor" />
             </div>
             <div class="card shadow-sm p-3 mb-3 bg-body rounded">
@@ -185,9 +187,10 @@ export default {
             buyCHecked: true,
             loanCHecked: false,
             //....................
-            receivedSelectedCity: '',
             receivedSelectedLocation: '',
             receivedSelectedArea: '',
+            receivedSelectedLat: '',
+            receivedSelectedLng: '',
             // Price and Area
             receivedAreaUnit: '',
             receivedAreaTypes: '',
@@ -268,7 +271,23 @@ export default {
             errorBaths: '',
             errorKitchen: '',
             errorFloor: '',
+            // user_id & agent_id
+            agent_id: '',
+            user_id: '',
         };
+    },
+    mounted() {
+        this.agent_id = localStorage.getItem('agent_id');
+        this.user_id = localStorage.getItem('user_id');
+        // Set user_id to null if it is not available
+        if (!this.user_id || this.user_id === "undefined") {
+            this.user_id = null;
+        }
+        // Set agent_id to null if it is not available
+        if (!this.agent_id || this.agent_id === "undefined") {
+            this.agent_id = null;
+        }
+
     },
     methods: {
         handleHomePropertyVal(data) {
@@ -280,18 +299,21 @@ export default {
         handleCommercialPropertyVal(data) {
             this.receivedCommercialPropertyVal = data
         },
-        handleCItyData(data) {
-            this.receivedSelectedCity = data
-        },
         handleAreaData(data) {
             this.receivedSelectedArea = data
+        },
+        handleLatData(data) {
+            this.receivedSelectedLat = data
+        },
+        handleLngData(data) {
+            this.receivedSelectedLng = data
         },
         handleLocationData(data) {
             this.receivedSelectedLocation = data
         },
         handleImageUploaded(data) {
             this.receivedUploadedImage = data;
-            console.log('img',this.receivedUploadedImage)
+            console.log('img', this.receivedUploadedImage)
         },
         handleBedRoomData(data) {
             this.receivedBedRooms = data
@@ -369,7 +391,6 @@ export default {
             return propertyTypeObject;
         },
         selectPropertyType(type) {
-            // Set the selected property type
             this.selectedPropertyType = type;
         },
         async logCheckboxValues() {
@@ -382,7 +403,8 @@ export default {
                 email: this.receivedEmailAddress,
                 rent_sale_type: this.R_S_Value(),
                 area: this.receivedSelectedCity, // area-id
-                agent: 1102, // remaining agent id is here after login agent
+                agent_id: this.agent_id, // remaining agent id is here after login agent
+                user_id: this.user_id,
                 amenties: {
                     other_nearby_palces: this.receivedOther_nearby_palces,
                     bedrooms: this.receivedBedRooms,
@@ -422,8 +444,9 @@ export default {
                 },
                 property_type: this.checkValueH(),
                 property_location: {
-                    latitude: 25.123456, // remaining
-                    longitude: 67.987654 // remaining
+                    city_area: this.receivedSelectedArea,
+                    latitude: this.receivedSelectedLat,
+                    longitude: this.receivedSelectedLng
                 },
                 installment: {
                     advance_amount: this.receivedAdvanceAmount,
