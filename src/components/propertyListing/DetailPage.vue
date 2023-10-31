@@ -44,6 +44,7 @@ export default {
         return {
             productDetail: [],
             singleImage: [],
+            propertyLocation: null,
             ThumbnailImages: this.productDetail?.media && this.productDetail?.media[0].image_url, // Replace with your data
         }
     },
@@ -70,12 +71,16 @@ export default {
                 let finalUrl = BASE_URL + API_VERSION() + PROPERTY_END_POINT() + this.$route.params.id + `/detail_property/`
                 let res = await axios.get(finalUrl)
                 this.productDetail = res.data
+                this.propertyLocation = res.data.property_location;
+
                 // this.singleImage = res.data.media
                 this.singleImage = res.data.media.map(item => ({
                     ...item,
                     mediaType: /\.(jpeg|jpg|png)$/i.test(item.image_url) ? 'image' : /\.(mp4|avi)$/i.test(item.image_url) ? 'video' : 'unknown',
                 }));
                 console.log(res.data)
+                 // Log the property location
+                console.log('Property Location:', this.propertyLocation);
             } catch (error) {
                 console.log(error)
             }
@@ -200,7 +205,7 @@ export default {
                     <div class="col-12">
                         <div class="row g-2 my-4">
                             <div class="col-12">
-                                <Location />
+                                <Location v-if="propertyLocation" :latitude="propertyLocation.latitude" :longitude="propertyLocation.longitude" />
                             </div>
                             <div class="col-12">
                                 <AgentInfo :productDetail="productDetail" />

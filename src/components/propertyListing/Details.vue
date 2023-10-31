@@ -24,7 +24,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Location</th>
-                                        <td>{{ productDetail?.area?.city?.city_name }}</td>
+                                        <td>{{ productDetail?.property_location?.city_area }}</td>
                                     </tr>
                                 </tbody>
                             </table>
